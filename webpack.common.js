@@ -1,6 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable import/no-extraneous-dependencies */
-// console.clear(); // TODO: watchFix => it doesn't work properly since VSCode-terminal has bug: https://github.com/microsoft/vscode/issues/75141
 const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CaseSensitivePathsPlugin = require("case-sensitive-paths-webpack-plugin");
@@ -8,10 +7,11 @@ const PreloadPlugin = require("preload-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 const MinifyCssNames = require("mini-css-class-name/css-loader");
-const ObsoleteWebpackPlugin = require("obsolete-webpack-plugin");
-const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
+// const ObsoleteWebpackPlugin = require("obsolete-webpack-plugin");
+// const ScriptExtHtmlWebpackPlugin = require("script-ext-html-webpack-plugin");
 const svgToMiniDataURI = require("mini-svg-data-uri");
 const path = require("path");
+const Dotenv = require("dotenv-webpack");
 const TsconfigPathsPlugin = require("tsconfig-paths-webpack-plugin");
 
 const srcPath = path.resolve(__dirname, "./src/");
@@ -92,11 +92,7 @@ module.exports = function (env, argv) {
         // rule for ts, tsx files
         {
           test: /\.(js|jsx)$/,
-          exclude: (() => {
-            // these packages must be included to change according to browserslist
-            const include = ["web-ui-pack", "ytech-js-extensions"];
-            return (v) => v.includes("node_modules") && !include.some((lib) => v.includes(lib));
-          })(),
+          exclude: /node_modules/,
           use: [
             "babel-loader", // transpile *.js, *.jsx, *.ts, *.tsx to result according to .browserlistrc and babel.config.js files
             // optional: "ifdef-loader" // prodives conditinal compilation: https://github.com/nippur72/ifdef-loader
@@ -188,7 +184,6 @@ module.exports = function (env, argv) {
                 },
               },
             },
-            "css-unicode-loader", // fixes weird issue when browser sometimes doesn't render font-icons (https://stackoverflow.com/questions/69466120/troubles-with-webpack-sass-and-fontawesome/73363510#73363510)
             {
               loader: "sass-loader", // it compiles Sass to CSS, using Node Sass by default
               options: {
@@ -204,18 +199,19 @@ module.exports = function (env, argv) {
       ],
     },
     plugins: [
+      new Dotenv(),
       new webpack.WatchIgnorePlugin({ paths: [/\.d\.ts$/] }), // ignore d.ts files in --watch mode
       new webpack.IgnorePlugin({ resourceRegExp: /^\.\/locale$/, contextRegExp: /moment$/ }), // it adds force-ignoring unused parts of modules like moment/locale/*.js
-      new webpack.DefinePlugin({
-        // it adds custom Global definition to the project like BASE_URL for index.html
-        "process.env": {
-          NODE_ENV: JSON.stringify(mode),
-          BASE_URL: '"/"',
-        },
-        "global.DEV": JSON.stringify(isDevMode),
-        "global.DEBUG": JSON.stringify(false),
-        "global.VERBOSE": JSON.stringify(false),
-      }),
+      // new webpack.DefinePlugin({
+      //   // it adds custom Global definition to the project like BASE_URL for index.html
+      //   "process.env": {
+      //     NODE_ENV: JSON.stringify(mode),
+      //     BASE_URL: '"/"',
+      //   },
+      //   "global.DEV": JSON.stringify(isDevMode),
+      //   "global.DEBUG": JSON.stringify(false),
+      //   "global.VERBOSE": JSON.stringify(false),
+      // }),
       new CaseSensitivePathsPlugin(), // it fixes bugs between OS in caseSensitivePaths (since Windows isn't CaseSensitive but Linux is)
       new HtmlWebpackPlugin({
         // it creates *.html with injecting js and css into template
@@ -261,16 +257,17 @@ module.exports = function (env, argv) {
       new webpack.ProvidePlugin({
         React: "react", // optional: react. it adds [import React from 'react'] as ES6 module to every file into the project
       }),
-      new ObsoleteWebpackPlugin({
-        // optional: browser: provides popup via alert-script if browser unsupported (according to .browserlistrc)
-        name: "obsolete",
-        promptOnNonTargetBrowser: true, // show popup if browser is not listed in .browserlistrc
-        // optional: browser: [template: 'html string here']
-      }),
-      new ScriptExtHtmlWebpackPlugin({
-        // it adds to obsolete-plugin-script 'async' tag (for perfomance puprpose)
-        async: "obsolete",
-      }),
+      // todo issue `rBrowser.exec is not a function`
+      // new ObsoleteWebpackPlugin({
+      //   // optional: browser: provides popup via alert-script if browser unsupported (according to .browserlistrc)
+      //   name: "obsolete",
+      //   promptOnNonTargetBrowser: true, // show popup if browser is not listed in .browserlistrc
+      //   // optional: browser: [template: 'html string here']
+      // }),
+      // new ScriptExtHtmlWebpackPlugin({
+      //   // it adds to obsolete-plugin-script 'async' tag (for perfomance puprpose)
+      //   async: "obsolete",
+      // }),
       // optional: new BundleAnalyzerPlugin() // creates bundles-map in browser https://github.com/webpack-contrib/webpack-bundle-analyzer
     ],
   };
