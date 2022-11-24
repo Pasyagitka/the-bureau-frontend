@@ -47,6 +47,8 @@ module.exports = {
 
     "prettier/prettier": ["error"],
 
+    "jsx-a11y/anchor-is-valid": 0,
+
     "no-shadow": "off",
     "no-use-before-define": "off",
     "require-await": "error",

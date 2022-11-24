@@ -161,40 +161,42 @@ module.exports = function (env, argv) {
         // rules for style-files
         {
           test: /\.css$|\.scss$/,
-          use: [
-            isDevServer
-              ? "style-loader" // it extracts style directly into html (MiniCssExtractPlugin works incorrect with hmr and modules architecture)
-              : MiniCssExtractPlugin.loader, // it extracts styles into file *.css
-            {
-              loader: "css-loader", // it interprets @import and url() like import/require() and it resolves them (you can use [import *.css] into *.js).
-              options: {
-                modules: {
-                  auto: /\.module\.\w+$/, // enable css-modules option for files *.module*.
-                  getLocalIdent: isDevMode
-                    ? (() => {
-                        // it simplifies classNames fo debug purpose
-                        const getHash = MinifyCssNames();
-                        return (context, localIdentName, localName, options) =>
-                          `${localName}_${getHash(context, localIdentName, localName, options)}`;
-                      })()
-                    : MinifyCssNames(
-                        // minify classNames for prod-build
-                        { excludePattern: /[_dD]/gi } // exclude '_','d','D' because Adblock blocks '%ad%' classNames
-                      ),
-                },
-              },
-            },
-            {
-              loader: "sass-loader", // it compiles Sass to CSS, using Node Sass by default
-              options: {
-                additionalData: '@import "variables";', // inject this import by default in each scss-file
-                sassOptions: {
-                  includePaths: [path.resolve(__dirname, "src/styles")], // using pathes as root
-                },
-              },
-            },
-            "postcss-loader", // it provides adding vendor prefixes to CSS rules using values from Can I Use (see postcss.config.js in the project)
-          ],
+          include: srcPath,
+          use: ["style-loader", "css-loader", "postcss-loader"],
+          // use: [
+          //   isDevServer
+          //     ? "style-loader" // it extracts style directly into html (MiniCssExtractPlugin works incorrect with hmr and modules architecture)
+          //     : MiniCssExtractPlugin.loader, // it extracts styles into file *.css
+          //   {
+          //     loader: "css-loader", // it interprets @import and url() like import/require() and it resolves them (you can use [import *.css] into *.js).
+          //     options: {
+          //       modules: {
+          //         auto: /\.module\.\w+$/, // enable css-modules option for files *.module*.
+          //         getLocalIdent: isDevMode
+          //           ? (() => {
+          //               // it simplifies classNames fo debug purpose
+          //               const getHash = MinifyCssNames();
+          //               return (context, localIdentName, localName, options) =>
+          //                 `${localName}_${getHash(context, localIdentName, localName, options)}`;
+          //             })()
+          //           : MinifyCssNames(
+          //               // minify classNames for prod-build
+          //               { excludePattern: /[_dD]/gi } // exclude '_','d','D' because Adblock blocks '%ad%' classNames
+          //             ),
+          //       },
+          //     },
+          //   },
+          //   {
+          //     loader: "sass-loader", // it compiles Sass to CSS, using Node Sass by default
+          //     options: {
+          //       additionalData: '@import "variables";', // inject this import by default in each scss-file
+          //       sassOptions: {
+          //         includePaths: [path.resolve(__dirname, "src/styles")], // using pathes as root
+          //       },
+          //     },
+          //   },
+          //   "postcss-loader", // it provides adding vendor prefixes to CSS rules using values from Can I Use (see postcss.config.js in the project)
+          // ],
         },
       ],
     },
