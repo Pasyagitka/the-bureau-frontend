@@ -3,6 +3,7 @@ import accessoriesReducer from "./accessoriesSlice";
 import authReducer from "./authSlice";
 import clientsSlice from "./clientsSlice";
 import equipmentReducer from "./equipmentSlice";
+import stagesSlice from "./stagesSlice";
 import toolsReducer from "./toolsSlice";
 // import appReducer from "./appSlice";
 
@@ -12,6 +13,7 @@ const rootReducer = combineReducers({
   equipment: equipmentReducer,
   auth: authReducer,
   clients: clientsSlice,
+  stages: stagesSlice,
   // movies: moviesReducer,
   // search: searchReducer,
   // app: appReducer,

@@ -1,7 +1,20 @@
 import StageBadge from "@/elements/stageBadge/StageBadge";
+import { Link } from "react-router-dom";
 
 /* eslint-disable jsx-a11y/anchor-is-valid */
-function ListItem({ id, name, quantity, stage }: { id: number; name: string; quantity: number; stage: number }) {
+function ListItem({
+  id,
+  name,
+  quantity,
+  stage,
+  handleRemove,
+}: {
+  id: number;
+  name: string;
+  quantity: number;
+  stage: number;
+  handleRemove: () => void;
+}) {
   return (
     <tr>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
@@ -23,14 +36,14 @@ function ListItem({ id, name, quantity, stage }: { id: number; name: string; qua
         </div>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <a href="#" className="text-lime-600 hover:text-lime-900">
+        <Link to={`update/${id}`} className="text-lime-600 hover:text-lime-900">
           Edit
-        </a>
+        </Link>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <a href="#" className="text-red-600 hover:text-red-900">
+        <button type="button" className="text-red-600 hover:text-red-900" onClick={() => handleRemove()}>
           Delete
-        </a>
+        </button>
       </td>
     </tr>
   );

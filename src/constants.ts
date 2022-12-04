@@ -54,6 +54,10 @@ export const clientLinks = {
   delete: (id: number) => `/api/client/${id}`,
 };
 
+export const stageLinks = {
+  getAll: "/api/stages",
+};
+
 export const requestLinks = {
   getAll: "/api/request",
   getAccessories: (id: number) => `/api/request/${id}/accessories`,
