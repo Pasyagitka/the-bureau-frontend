@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
+import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import { useState } from "react";
-import Datepicker from "react-tailwindcss-datepicker";
 import TextInput from "./TextInput";
 
 function LeaveRequestForm() {
@@ -57,12 +57,7 @@ function LeaveRequestForm() {
           </div>
           <hr />
           <div className="px-10n">
-            <Datepicker
-              placeholder="Set mounting date"
-              primaryColor="lime"
-              value={value}
-              onChange={handleValueChange}
-            />
+            <DatepickerRange value={value} handleValueChange={handleValueChange} />
           </div>
           <hr />
           <div className="items-center w-full p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
