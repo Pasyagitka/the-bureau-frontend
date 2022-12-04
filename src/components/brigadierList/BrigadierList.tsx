@@ -1,8 +1,18 @@
 import SearchInput from "@/elements/searchInput/SearchInput";
 import BrigadierItem from "./BrigadierItem";
 
-/* eslint-disable jsx-a11y/control-has-associated-label */
+const brigadierTest = {
+  id: 1,
+  surname: "string",
+  firstname: "string",
+  patronymic: "string",
+  email: "",
+  contactPhone: 123,
+};
+// { brigadiers = [] }: { brigadiers: Array<BrigadierDto> }
 function BrigadierList() {
+  // const listItems = brigadiers.map((brigadier) => <BrigadierItem key={brigadier.id} brigadier={brigadier} />);
+
   return (
     <div className="w-full bg-white p-12 container  rounded">
       <div className="header flex items-end justify-between mb-12">
@@ -15,12 +25,12 @@ function BrigadierList() {
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-        <BrigadierItem />
-        <BrigadierItem />
-        <BrigadierItem />
-        <BrigadierItem />
-        <BrigadierItem />
-        <BrigadierItem />
+        <BrigadierItem brigadier={brigadierTest} />
+        <BrigadierItem brigadier={brigadierTest} />
+        <BrigadierItem brigadier={brigadierTest} />
+        <BrigadierItem brigadier={brigadierTest} />
+        <BrigadierItem brigadier={brigadierTest} />
+        <BrigadierItem brigadier={brigadierTest} />
       </div>
     </div>
   );
