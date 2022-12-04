@@ -1,8 +1,12 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import PaginationButton from "@/elements/pagination/PaginationButton";
+import { EquipmentDto } from "@/types/dto/equipmentDto";
 import ListItem from "./ListItem";
 
-function EquipmentList() {
+function EquipmentList({ equipment = [] }: { equipment: EquipmentDto[] }) {
+  const listItems = equipment.map((item) => (
+    <ListItem key={item.id} id={item.id} type={item.type} mounting={item.mounting} />
+  ));
+
   return (
     <div className="container w-full">
       <div className="py-8">
@@ -59,12 +63,7 @@ function EquipmentList() {
                   />
                 </tr>
               </thead>
-              <tbody>
-                <ListItem id={0} type="1" mounting="floor" />
-                <ListItem id={0} type="1" mounting="floor" />
-                <ListItem id={0} type="1" mounting="floor" />
-                <ListItem id={0} type="1" mounting="floor" />
-              </tbody>
+              {equipment && <tbody>{listItems}</tbody>}
             </table>
             <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
               <div className="flex items-center">
@@ -83,10 +82,10 @@ function EquipmentList() {
                     <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z" />
                   </svg>
                 </button>
+                {/* <PaginationButton />
                 <PaginationButton />
                 <PaginationButton />
-                <PaginationButton />
-                <PaginationButton />
+                <PaginationButton /> */}
                 <button
                   type="button"
                   className="w-full p-4 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100"
