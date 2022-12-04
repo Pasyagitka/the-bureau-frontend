@@ -1,11 +1,17 @@
 import { combineReducers } from "redux";
-import moviesReducer from "./moviesSlice";
-import searchReducer from "./searchSlice";
+import accessoriesReducer from "./accessoriesSlice";
+import authReducer from "./authSlice";
+import equipmentReducer from "./equipmentSlice";
+import toolsReducer from "./toolsSlice";
 // import appReducer from "./appSlice";
 
 const rootReducer = combineReducers({
-  movies: moviesReducer,
-  search: searchReducer,
+  tools: toolsReducer,
+  accessories: accessoriesReducer,
+  equipment: equipmentReducer,
+  auth: authReducer,
+  // movies: moviesReducer,
+  // search: searchReducer,
   // app: appReducer,
 });
 
