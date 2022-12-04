@@ -2,7 +2,11 @@
 module.exports = {
   content: ["./src/**/*.{jsx,ts,tsx,js}", "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"],
   theme: {
-    extend: {},
+    extend: {
+      height: {
+        "80vh": "80vh",
+      },
+    },
   },
   plugins: [],
 };
