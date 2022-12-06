@@ -15,13 +15,18 @@ import { getToken } from "../auth";
 // }
 
 // eslint-disable-next-line import/prefer-default-export
-export const create = createAsyncThunk(ADD_TOOLS, async (createToolDto: CreateToolDto) => {
-  const request = await axios.post(toolsLinks.create, createToolDto, {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
-  return request.data;
+export const create = createAsyncThunk(ADD_TOOLS, async (createToolDto: CreateToolDto, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(toolsLinks.create, createToolDto, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    return response.data;
+  } catch (error) {
+    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    return rejectWithValue(error.response.data);
+  }
 });
 
 export const getAll = createAsyncThunk(GET_ALL_TOOLS, async () => {

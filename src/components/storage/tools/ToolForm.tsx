@@ -1,26 +1,29 @@
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { create } from "@/storage/actions/storage/tools";
-import { RootState } from "@react-three/fiber";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function ToolForm() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
 
   const [name, setName] = useState();
   const [stageId, setStageId] = useState(1);
 
-  const stages = useAppSelector((state: RootState) => state.stages);
-
+  const stages = useAppSelector((state) => state.stages);
+  // const error = useAppSelector((state) => state.tools.error);
   // function loadAll() { Stages?
   //   dispatch(getAll());
   // }
 
   // useEffect(loadAll, [dispatch]);
 
-  const handleSubmit = () => {
-    console.log("save");
-    dispatch(create({ name, stageId }));
+  const handleSubmit = async () => {
+    const res = await dispatch(create({ name, stageId }));
+    if (!res.error) {
+      navigate(-1);
+    }
   };
 
   return (
