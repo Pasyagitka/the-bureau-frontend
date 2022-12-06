@@ -1,7 +1,7 @@
 /* eslint-disable default-param-last */
 import { ToolsDto } from "@/types/dto/storage/tools/toolsDto";
 import { createReducer } from "@reduxjs/toolkit";
-import { create, get, getAll, remove } from "../actions/storage/tools";
+import { create, get, getAll, remove, update } from "../actions/storage/tools";
 
 type ToolsStateProps = {
   tools: ToolsDto[];
@@ -23,9 +23,13 @@ const toolsReducer = createReducer<ToolsStateProps>(initialState, (builder) => {
   builder.addCase(create.fulfilled, (state, action) => {
     state.tools.push(action.payload);
   });
-  // builder.addCase(create.rejected, (state, action) => {
-  //   state.error = action.payload;
-  // });
+  builder.addCase(update.fulfilled, (state, action) => {
+    const index = state.tools.findIndex((tutorial) => tutorial.id === action.payload.id);
+    state.tools[index] = {
+      ...state.tools[index],
+      ...action.payload,
+    };
+  });
   builder.addCase(remove.fulfilled, (state, action) => {
     state.tools = state.tools.filter((x) => x.id !== action.payload.id);
   });

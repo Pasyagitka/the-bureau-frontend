@@ -1,6 +1,6 @@
 import EquipmentList from "@/components/storage/equipment/EquipmentList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/storage/actions/storage/equipment";
+import { getAll } from "@/redux/actions/storage/equipment";
 import { RootState } from "@react-three/fiber";
 import { useEffect } from "react";
 

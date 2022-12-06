@@ -47,23 +47,33 @@ export const get = createAsyncThunk(GET_TOOL, async (id: number) => {
   return request.data;
 });
 
-export const remove = createAsyncThunk(DELETE_TOOLS, async (id: number) => {
-  const request = await axios.delete(toolsLinks.delete(id), {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
-  return request.data;
-});
-
-export const update = createAsyncThunk(
-  EDIT_TOOLS,
-  async ({ id, updateToolDto }: { id: number; updateToolDto: UpdateToolDto }) => {
-    const request = await axios.put(toolsLinks.update(id), updateToolDto, {
+export const remove = createAsyncThunk(DELETE_TOOLS, async (id: number, { rejectWithValue }) => {
+  try {
+    const request = await axios.delete(toolsLinks.delete(id), {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
     });
     return request.data;
+  } catch (error) {
+    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    return rejectWithValue(error.response.data);
+  }
+});
+
+export const update = createAsyncThunk(
+  EDIT_TOOLS,
+  async ({ id, updateToolDto }: { id: number; updateToolDto: UpdateToolDto }, { rejectWithValue }) => {
+    try {
+      const request = await axios.put(toolsLinks.update(id), updateToolDto, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      return request.data;
+    } catch (error) {
+      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
   }
 );

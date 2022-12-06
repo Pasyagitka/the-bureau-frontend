@@ -1,6 +1,6 @@
 import ToolsList from "@/components/storage/tools/ToolsList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll, remove } from "@/storage/actions/storage/tools";
+import { getAll, remove } from "@/redux/actions/storage/tools";
 import { RootState } from "@react-three/fiber";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";

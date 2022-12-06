@@ -1,7 +1,9 @@
 import SearchInput from "@/elements/searchInput/SearchInput";
+import { RequestDto } from "@/types/dto/requestDto";
 import RequestSmall from "./RequestSmall";
 
-function RequestList() {
+function RequestList({ requests = [] }: { requests: RequestDto[] }) {
+  const listItems = requests.map((request) => <RequestSmall key={request.id} request={request} />);
   return (
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">
@@ -13,11 +15,7 @@ function RequestList() {
           <SearchInput />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-        <RequestSmall />
-        <RequestSmall />
-        <RequestSmall />
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
     </div>
   );
 }

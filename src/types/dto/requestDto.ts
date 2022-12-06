@@ -1,4 +1,4 @@
-import { ClientDto } from "./clientDto";
+import { ClientDto } from "./client/clientDto";
 
 type AddressDto = {
   country: string;

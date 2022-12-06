@@ -1,5 +1,5 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import { GET_ALL_CLIENTS, GET_CLIENT, GET_CLIENT_REQUESTS } from "@/storage/actionTypes/clients";
+import { GET_ALL_CLIENTS, GET_CLIENT, GET_CLIENT_REQUESTS } from "@/redux/actionTypes/clients";
 import axios from "axios";
 import { clientLinks, requestLinks } from "@/constants";
 import { getToken } from "./auth";

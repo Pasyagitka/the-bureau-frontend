@@ -1,17 +1,17 @@
 import SearchInput from "@/elements/searchInput/SearchInput";
+import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import BrigadierItem from "./BrigadierItem";
 
-const brigadierTest = {
-  id: 1,
-  surname: "string",
-  firstname: "string",
-  patronymic: "string",
-  email: "",
-  contactPhone: 123,
-};
-// { brigadiers = [] }: { brigadiers: Array<BrigadierDto> }
-function BrigadierList() {
-  // const listItems = brigadiers.map((brigadier) => <BrigadierItem key={brigadier.id} brigadier={brigadier} />);
+function BrigadierList({
+  brigadiers = [],
+  handleRemove,
+}: {
+  brigadiers: Array<BrigadierDto>;
+  handleRemove: () => void;
+}) {
+  const listItems = brigadiers.map((brigadier) => (
+    <BrigadierItem key={brigadier.id} brigadier={brigadier} handleRemove={() => handleRemove(brigadier.id)} />
+  ));
 
   return (
     <div className="w-full bg-white p-12 container  rounded">
@@ -24,14 +24,7 @@ function BrigadierList() {
           <SearchInput />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
-        <BrigadierItem brigadier={brigadierTest} />
-        <BrigadierItem brigadier={brigadierTest} />
-        <BrigadierItem brigadier={brigadierTest} />
-        <BrigadierItem brigadier={brigadierTest} />
-        <BrigadierItem brigadier={brigadierTest} />
-        <BrigadierItem brigadier={brigadierTest} />
-      </div>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
     </div>
   );
 }

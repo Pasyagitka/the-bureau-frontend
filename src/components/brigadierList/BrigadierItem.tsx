@@ -1,10 +1,9 @@
-import Button from "@/elements/button/Button";
 import Rating from "@/elements/rating/Rating";
-import { BrigadierDto } from "@/types/dto/brigadierDto";
+import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 
 const url = "https://thumbs.dreamstime.com/b/construction-worker-11554512.jpg";
 
-function BrigadierItem({ brigadier }: { brigadier: BrigadierDto }) {
+function BrigadierItem({ brigadier, handleRemove }: { brigadier: BrigadierDto; handleRemove: () => void }) {
   return (
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-11/12 md:w-100 cursor-pointer m-auto">
       <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
@@ -21,7 +20,9 @@ function BrigadierItem({ brigadier }: { brigadier: BrigadierDto }) {
           <Rating />
           <div className="flex item-center justify-between mt-3">
             <h1 className="text-gray-700 font-bold text-xl">...</h1>
-            <Button text="Block" to="/" />
+            <button type="button" onClick={() => handleRemove()}>
+              Block
+            </button>
           </div>
         </div>
       </div>

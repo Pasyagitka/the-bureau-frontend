@@ -1,5 +1,5 @@
 import { useAppDispatch } from "@/hooks";
-import { loginUser } from "@/storage/actions/auth";
+import { loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";

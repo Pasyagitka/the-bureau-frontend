@@ -1,4 +1,4 @@
-import { ClientDto } from "@/types/dto/clientDto";
+import { ClientDto } from "@/types/dto/client/clientDto";
 import { Link } from "react-router-dom";
 
 function ClientSmall({ client }: { client: ClientDto }) {

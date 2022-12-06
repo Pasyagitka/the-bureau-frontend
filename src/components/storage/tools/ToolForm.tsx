@@ -1,6 +1,6 @@
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { create } from "@/storage/actions/storage/tools";
+import { create } from "@/redux/actions/storage/tools";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 

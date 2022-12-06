@@ -1,6 +1,6 @@
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
-import { ClientDto } from "@/types/dto/clientDto";
+import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/requestDto";
 import { getAll, get, getRequests } from "../actions/clients";
 

@@ -1,10 +1,9 @@
 import SearchInput from "@/elements/searchInput/SearchInput";
-import { ClientDto } from "@/types/dto/clientDto";
+import { ClientDto } from "@/types/dto/client/clientDto";
 import ClientItem from "./ClientItem";
 
 function ClientList({ clients = [] }: { clients: ClientDto[] }) {
   const listItems = clients.map((client) => <ClientItem key={client.id} client={client} />);
-  console.log(clients);
   return (
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">

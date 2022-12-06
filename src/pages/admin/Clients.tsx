@@ -1,6 +1,6 @@
 import ClientList from "@/components/clientList/ClientList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/storage/actions/clients";
+import { getAll } from "@/redux/actions/clients";
 import { RootState } from "@react-three/fiber";
 import { useEffect } from "react";
 

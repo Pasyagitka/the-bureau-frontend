@@ -1,11 +1,12 @@
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { update, get } from "@/storage/actions/storage/tools";
+import { update, get } from "@/redux/actions/storage/tools";
 import { RootState } from "@react-three/fiber";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 function UpdateToolForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
 
@@ -24,8 +25,11 @@ function UpdateToolForm() {
     setStageId(tool.stageId);
   }, [tool]);
 
-  const handleSubmit = () => {
-    dispatch(update({ id: params.id, updateToolDto: { name, stageId } }));
+  const handleSubmit = async () => {
+    const res = await dispatch(update({ id: params.id, updateToolDto: { name, stageId } }));
+    if (!res.error) {
+      navigate(-1);
+    }
   };
 
   return (

@@ -1,6 +1,6 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, getRequests } from "@/storage/actions/clients";
-import { ClientDto } from "@/types/dto/clientDto";
+import { get, getRequests } from "@/redux/actions/clients";
+import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/requestDto";
 import { RootState } from "@react-three/fiber";
 import { useEffect, useState } from "react";
