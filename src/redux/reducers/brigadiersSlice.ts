@@ -1,13 +1,13 @@
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
-import { RequestDto } from "@/types/dto/requestDto";
+import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 import { getAll, get, getRequests, remove } from "../actions/brigadiers";
 
 type BrigadiersStateProps = {
   brigadiers: BrigadierDto[];
   brigadier: BrigadierDto;
-  requests: RequestDto[];
+  requests: BrigadierRequestDto[];
 };
 
 const initialState = {

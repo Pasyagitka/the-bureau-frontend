@@ -1,7 +1,37 @@
 import Button from "@/elements/button/Button";
 import Select from "@/elements/select/Select";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { get } from "@/redux/actions/requests";
+import { useEffect, useState } from "react";
+import { useNavigate, useParams } from "react-router-dom";
 
 function EditRequestAdmin() {
+  const navigate = useNavigate();
+  const dispatch = useAppDispatch();
+  const params = useParams();
+
+  // const mountings = useAppSelector((state) => state.mounting);
+  const request = useAppSelector((state) => state.requests.request);
+
+  const [brigadierId, setBrigadier] = useState();
+  const [stageId, setStage] = useState();
+
+  useEffect(() => {
+    dispatch(get(params.id));
+  }, [dispatch]);
+
+  useEffect(() => {
+    setBrigadier(request.brigadier);
+    setStage(request.stage.id);
+  }, [request]);
+
+  const handleSubmit = async () => {
+    const res = await dispatch(update({ id: params.id, updateRequestByAdminDto: { brigadierId, stageId } }));
+    if (!res.error) {
+      navigate(-1);
+    }
+  };
+
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-80vh container p-4">
       <div className="px-4 py-5 sm:px-6">

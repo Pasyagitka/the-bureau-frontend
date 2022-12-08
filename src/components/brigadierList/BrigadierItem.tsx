@@ -16,7 +16,7 @@ function BrigadierItem({ brigadier, handleRemove }: { brigadier: BrigadierDto; h
         <div className="w-2/3 p-4">
           <h1 className="text-gray-900 font-bold text-2xl">{brigadier.surname}</h1>
           <p className="mt-2 text-gray-600 text-sm">{brigadier.email}</p>
-          <p className="mt-2 text-gray-600 text-sm">{brigadier.contactPhone}</p>
+          <p className="mt-2 text-gray-600 text-sm">{brigadier.contactNumber}</p>
           <Rating />
           <div className="flex item-center justify-between mt-3">
             <h1 className="text-gray-700 font-bold text-xl">...</h1>

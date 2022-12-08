@@ -4,5 +4,5 @@ export type BrigadierDto = {
   firstname: string;
   patronymic: string;
   email: string;
-  contactPhone: number;
+  contactNumber: number;
 };
