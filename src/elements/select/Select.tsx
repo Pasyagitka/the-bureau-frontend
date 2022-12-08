@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
@@ -6,18 +6,18 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Select({ title, values }) {
-  const [selected, setSelected] = useState(values[0]);
+function Select({ title, values, selected, onChange }) {
+  // const [selected, setSelected] = useState(values[0]);
 
   return (
-    <Listbox value={selected} onChange={setSelected}>
+    <Listbox value={selected} onChange={onChange}>
       {({ open }) => (
         <>
           <Listbox.Label className="block text-sm font-medium text-gray-700">{title}</Listbox.Label>
           <div className="relative mt-1">
             <Listbox.Button className="relative w-full cursor-default rounded-md border border-gray-300 bg-white py-2 pl-3 pr-10 text-left shadow-sm focus:border-lime-500 focus:outline-none focus:ring-1 focus:ring-lime-500 sm:text-sm">
               <span className="flex items-center">
-                <span className="ml-3 block truncate">{selected.name}</span>
+                <span className="ml-3 block truncate">{selected}</span>
               </span>
               <span className="pointer-events-none absolute inset-y-0 right-0 ml-3 flex items-center pr-2">
                 <ChevronUpDownIcon className="h-5 w-5 text-gray-400" aria-hidden="true" />
@@ -50,7 +50,7 @@ function Select({ title, values }) {
                           <span
                             className={classNames(selected ? "font-semibold" : "font-normal", "ml-3 block truncate")}
                           >
-                            {item.name}
+                            {item}
                           </span>
                         </div>
 

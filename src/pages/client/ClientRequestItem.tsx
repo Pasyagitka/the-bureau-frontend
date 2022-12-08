@@ -1,4 +1,4 @@
-import RequestEquipment from "@/components/requestEquipment/RequestEquipment";
+import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
 import BrigadierSmall from "@/elements/brigadierSmall/BrigadierSmall";
 import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";

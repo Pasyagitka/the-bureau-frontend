@@ -4,8 +4,8 @@ import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/requestDto";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import DetailsItem from "../requestDetails/DetailsItem";
-import RequestSmall from "../requestList/RequestSmall";
+import DetailsItem from "../request/requestDetails/DetailsItem";
+import RequestSmall from "../request/requestList/RequestSmall";
 
 function ClientDetails() {
   const params = useParams();

@@ -1,4 +1,4 @@
-import BrigadierRequest from "@/components/brigadierRequest/BrigadierRequest";
+import BrigadierRequest from "@/components/brigadier/brigadierRequest/BrigadierRequest";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 
 function BrigadierRequests({ requests }: { requests: BrigadierRequestDto[] }) {

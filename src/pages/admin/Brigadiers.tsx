@@ -1,4 +1,4 @@
-import BrigadierList from "@/components/brigadierList/BrigadierList";
+import BrigadierList from "@/components/admin/brigadierList/BrigadierList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";

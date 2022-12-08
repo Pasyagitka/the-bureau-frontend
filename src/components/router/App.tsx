@@ -1,5 +1,4 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
-import { useAppSelector } from "@/hooks";
 import Login from "@/pages/common/Login";
 import NotFound from "@/pages/common/NotFound";
 import Home from "@/pages/common/Home";
@@ -17,18 +16,16 @@ import BrigadierHome from "@/pages/brigadier/BrigadierHome";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
-import LeaveRequestForm from "../leaveRequestForm/LeaveRequestForm";
-import RequestDetails from "../requestDetails/RequestDetails";
-import EditRequestAdmin from "../editRequestAdmin/EditRequestAdmin";
+import LeaveRequestForm from "../client/leaveRequestForm/LeaveRequestForm";
+import RequestDetails from "../request/requestDetails/RequestDetails";
+import EditRequestAdmin from "../admin/editRequestAdmin/EditRequestAdmin";
 import ClientDetails from "../clientDetails/ClientDetails";
-import ToolForm from "../storage/tools/ToolForm";
-import UpdateToolForm from "../storage/tools/UpdateToolForm";
-import EditBrigadierDetails from "../editBrigadierDetails/EditBrigadierDetails";
-import EditRequestBrigadier from "../editRequestBrigadier/EditRequestBrigadier";
+import ToolForm from "../admin/storage/tools/ToolForm";
+import UpdateToolForm from "../admin/storage/tools/UpdateToolForm";
+import EditBrigadierDetails from "../brigadier/editBrigadierDetails/EditBrigadierDetails";
+import EditRequestBrigadier from "../brigadier/editRequestBrigadier/EditRequestBrigadier";
 
 function App() {
-  const app = useAppSelector((state) => state.app);
-
   return (
     <BrowserRouter>
       <Routes>

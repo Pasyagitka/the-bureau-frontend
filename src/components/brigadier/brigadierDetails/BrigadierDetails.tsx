@@ -1,6 +1,6 @@
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import { Link } from "react-router-dom";
-import DetailsItem from "../requestDetails/DetailsItem";
+import DetailsItem from "../../request/requestDetails/DetailsItem";
 
 function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
   return (

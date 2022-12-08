@@ -2,7 +2,7 @@ import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 import { Link } from "react-router-dom";
-import RequestEquipment from "../requestEquipment/RequestEquipment";
+import RequestEquipment from "../../request/requestEquipment/RequestEquipment";
 
 function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
   return (

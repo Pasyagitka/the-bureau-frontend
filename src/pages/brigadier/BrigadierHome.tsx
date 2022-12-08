@@ -1,4 +1,4 @@
-import BrigadierDetails from "@/components/brigadierDetails/BrigadierDetails";
+import BrigadierDetails from "@/components/brigadier/brigadierDetails/BrigadierDetails";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";

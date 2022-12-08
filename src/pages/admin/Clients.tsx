@@ -1,4 +1,4 @@
-import ClientList from "@/components/clientList/ClientList";
+import ClientList from "@/components/admin/clientList/ClientList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/clients";
 import { useEffect } from "react";

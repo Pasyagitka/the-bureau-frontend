@@ -1,4 +1,4 @@
-import AccessoriesList from "@/components/storage/accessoriesList/AccessoriesList";
+import AccessoriesList from "@/components/admin/storage/accessoriesList/AccessoriesList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/storage/accessories";
 import { useEffect } from "react";

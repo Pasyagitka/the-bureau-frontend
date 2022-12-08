@@ -1,4 +1,4 @@
-import RequestList from "@/components/requestList/RequestList";
+import RequestList from "@/components/request/requestList/RequestList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/requests";
 import { useEffect } from "react";

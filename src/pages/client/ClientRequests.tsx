@@ -1,4 +1,4 @@
-import RequestCTA from "@/components/requestCTA/RequestCTA";
+import RequestCTA from "@/components/request/requestCTA/RequestCTA";
 import ClientRequestItem from "./ClientRequestItem";
 
 function ClientRequests() {

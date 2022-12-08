@@ -1,4 +1,4 @@
-import ToolsList from "@/components/storage/tools/ToolsList";
+import ToolsList from "@/components/admin/storage/tools/ToolsList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/storage/tools";
 import { useEffect } from "react";
