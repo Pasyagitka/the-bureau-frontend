@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function Requests() {
   const dispatch = useAppDispatch();
 
-  const requests = useAppSelector((state: RootState) => state.requests.requests);
+  const requests = useAppSelector((state) => state.requests.requests);
 
   function loadAll() {
     dispatch(getAll());

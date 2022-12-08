@@ -1,7 +1,6 @@
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { update, get } from "@/redux/actions/storage/tools";
-import { RootState } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -10,8 +9,8 @@ function UpdateToolForm() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const stages = useAppSelector((state: RootState) => state.stages);
-  const tool = useAppSelector((state: RootState) => state.tools.tool);
+  const stages = useAppSelector((state) => state.stages);
+  const tool = useAppSelector((state) => state.tools.tool);
 
   const [name, setName] = useState();
   const [stageId, setStageId] = useState();

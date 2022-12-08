@@ -23,6 +23,8 @@ import EditRequestAdmin from "../editRequestAdmin/EditRequestAdmin";
 import ClientDetails from "../clientDetails/ClientDetails";
 import ToolForm from "../storage/tools/ToolForm";
 import UpdateToolForm from "../storage/tools/UpdateToolForm";
+import EditBrigadierDetails from "../editBrigadierDetails/EditBrigadierDetails";
+import EditRequestBrigadier from "../editRequestBrigadier/EditRequestBrigadier";
 
 function App() {
   const app = useAppSelector((state) => state.app);
@@ -63,8 +65,10 @@ function App() {
           </Route>
 
           <Route path="/brigadier">
-            <Route path="" element={<Navigate to="home" />} />
-            <Route path="home" element={<BrigadierHome />} />
+            <Route path="" element={<BrigadierHome />} />
+            {/* <Route path="home" element={<BrigadierHome />} /> */}
+            <Route path="update/:id" element={<EditBrigadierDetails />} />
+            <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
           </Route>
         </Route>
         <Route path="*" element={<NotFound />} />

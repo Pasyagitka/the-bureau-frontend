@@ -1,13 +1,12 @@
 import ClientList from "@/components/clientList/ClientList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/clients";
-import { RootState } from "@react-three/fiber";
 import { useEffect } from "react";
 
 function Clients() {
   const dispatch = useAppDispatch();
 
-  const clients = useAppSelector((state: RootState) => state.clients.clients);
+  const clients = useAppSelector((state) => state.clients.clients);
 
   function loadAll() {
     dispatch(getAll());

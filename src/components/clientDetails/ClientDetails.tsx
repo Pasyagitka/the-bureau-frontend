@@ -2,7 +2,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/clients";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/requestDto";
-import { RootState } from "@react-three/fiber";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import DetailsItem from "../requestDetails/DetailsItem";
@@ -12,8 +11,8 @@ function ClientDetails() {
   const params = useParams();
   const dispatch = useAppDispatch();
 
-  const client: ClientDto = useAppSelector((state: RootState) => state.clients.client);
-  const requests: RequestDto = useAppSelector((state: RootState) => state.clients.requests);
+  const client: ClientDto = useAppSelector((state) => state.clients.client);
+  const requests: RequestDto = useAppSelector((state) => state.clients.requests);
 
   function load() {
     dispatch(get(params.id));

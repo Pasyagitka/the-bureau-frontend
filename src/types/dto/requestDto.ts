@@ -15,4 +15,5 @@ export type RequestDto = {
   brigadier: ClientDto;
   address: AddressDto;
   status: string;
+  comment: string;
 };

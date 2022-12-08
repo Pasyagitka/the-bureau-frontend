@@ -1,14 +1,13 @@
 import ToolsList from "@/components/storage/tools/ToolsList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/storage/tools";
-import { RootState } from "@react-three/fiber";
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Tools() {
   const dispatch = useAppDispatch();
 
-  const tools = useAppSelector((state: RootState) => state.tools.tools);
+  const tools = useAppSelector((state) => state.tools.tools);
 
   function loadTools() {
     dispatch(getAll());

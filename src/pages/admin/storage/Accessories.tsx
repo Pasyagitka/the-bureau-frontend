@@ -6,7 +6,7 @@ import { useEffect } from "react";
 function Accessories() {
   const dispatch = useAppDispatch();
 
-  const accessories = useAppSelector((state: RootState) => state.accessories.accessories);
+  const accessories = useAppSelector((state) => state.accessories.accessories);
 
   function loadAccessories() {
     dispatch(getAll());
