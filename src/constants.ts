@@ -1,14 +1,3 @@
-export const apiLinks = {
-  apiBaseUrl: "https://api.themoviedb.org/3",
-  imageBaseUrl: "https://image.tmdb.org/t/p/w500",
-  imageFullHDBaseUrl: "https://image.tmdb.org/t/p/original",
-};
-
-export const detailsLink = () => {
-  // console.log(mediaType, "!!");
-  // return `${apiLinks.apiBaseUrl}/${mediaType ?? "movie"}/${mediaId}?api_key=${process.env.REACT_APP_API_KEY}`;
-};
-
 export const authLinks = {
   login: "/api/auth/login",
   registerClient: "/api/auth/registration",
@@ -68,8 +57,8 @@ export const requestLinks = {
   get: (id: number) => `/api/request/${id}`,
   create: "/api/request",
   update: (id: number) => `/api/request/${id}`,
-  changeStatusByBrigadier: (id: number) => `/api/request/status/${id}`,
-  changeBrigadier: (brigadierId: number) => `/api/request/brigadier/${brigadierId}`,
+  updateByBrigadier: (id: number) => `/api/request/brigadier/update/${id}`,
+  updateByAdmin: (id: number) => `/api/request/admin/update/${id}`,
   delete: (id: number) => `/api/request/${id}`,
 };
 
