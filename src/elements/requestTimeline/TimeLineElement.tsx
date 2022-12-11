@@ -1,10 +1,20 @@
-function TimeLineElement({ text, date, isActive }: { text: string; date: string; isActive?: boolean }) {
+function TimeLineElement({
+  text,
+  date,
+  isActive,
+  isLast,
+}: {
+  text: string;
+  date: string;
+  isActive?: boolean;
+  isLast?: boolean;
+}) {
   return (
     <li className="relative mb-6 sm:mb-0">
       <div className="flex items-center">
         <div
           className={`flex z-10 justify-center items-center w-6 h-6 rounded-full ring-0 ring-white sm:ring-8 shrink-0 ${
-            isActive ? "bg-gray-300" : "bg-lime-300"
+            isActive ? "bg-lime-300" : "bg-gray-300"
           }`}
         >
           <svg
@@ -18,7 +28,7 @@ function TimeLineElement({ text, date, isActive }: { text: string; date: string;
         <div
           className="hidden sm:flex w-full bg-gray-200 h-0.5"
           style={{
-            display: isActive ? "none" : "initial",
+            display: isLast ? "none" : "initial",
           }}
         />
       </div>
@@ -32,6 +42,7 @@ function TimeLineElement({ text, date, isActive }: { text: string; date: string;
 
 TimeLineElement.defaultProps = {
   isActive: false,
+  isLast: false,
 };
 
 export default TimeLineElement;

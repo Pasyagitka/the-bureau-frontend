@@ -1,6 +1,9 @@
-let image = "https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0";
+import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 
-function BrigadierSmall() {
+const image =
+  "https://play-lh.googleusercontent.com/AmKSpZt_rynhOO0ID1eS0gqeW3DFzoH6KNZkAAgepQ0t9MDRQTmil-nlY5GqkZ_7El0";
+
+function BrigadierSmall({ brigadier }: { brigadier: BrigadierDto }) {
   return (
     <div className="shadow-lg rounded-2xl bg-white p-4 w-36">
       <div className="flex-col  flex justify-center items-center">
@@ -10,7 +13,9 @@ function BrigadierSmall() {
           </a>
         </div>
         <div className="mt-2 text-center flex flex-col">
-          <span className="text-gray-600 text-sm font-medium">S.A. Siarheyeu</span>
+          <span className="text-gray-600 text-sm font-medium">
+            {`${brigadier?.surname} ${brigadier?.firstname} ${brigadier?.patronymic}`}
+          </span>
           <span className="text-gray-400 text-xs">Your brigadier</span>
         </div>
       </div>
