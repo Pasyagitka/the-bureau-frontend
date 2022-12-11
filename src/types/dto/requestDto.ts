@@ -1,3 +1,4 @@
+import { BrigadierDto } from "./brigadier/brigadierDto";
 import { ClientDto } from "./client/clientDto";
 
 type AddressDto = {
@@ -12,7 +13,7 @@ type AddressDto = {
 export type RequestDto = {
   id: number;
   client: ClientDto;
-  brigadier: ClientDto;
+  brigadier: BrigadierDto;
   address: AddressDto;
   status: string;
   comment: string;
