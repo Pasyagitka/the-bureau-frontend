@@ -13,6 +13,9 @@ import Clients from "@/pages/admin/Clients";
 import Requests from "@/pages/admin/Requests";
 import ClientHome from "@/pages/client/ClientHome";
 import BrigadierHome from "@/pages/brigadier/BrigadierHome";
+import { useEffect } from "react";
+import { useAppDispatch } from "@/hooks";
+import { getToken } from "@/redux/actions/auth";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -20,16 +23,28 @@ import LeaveRequestForm from "../client/leaveRequestForm/LeaveRequestForm";
 import RequestDetails from "../request/requestDetails/RequestDetails";
 import EditRequestAdmin from "../admin/editRequestAdmin/EditRequestAdmin";
 import ClientDetails from "../clientDetails/ClientDetails";
-import ToolForm from "../admin/storage/tools/ToolForm";
-import UpdateToolForm from "../admin/storage/tools/UpdateToolForm";
+import CreateToolForm from "../admin/storage/tools/CreateToolForm";
+import EditToolForm from "../admin/storage/tools/EditToolForm";
 import EditBrigadierDetails from "../brigadier/editBrigadierDetails/EditBrigadierDetails";
 import EditRequestBrigadier from "../brigadier/editRequestBrigadier/EditRequestBrigadier";
+import CreateEquipmentForm from "../admin/storage/equipment/CreateEquipmentForm";
+import CreateAccessoryForm from "../admin/storage/accessoriesList/CreateAccessoryForm";
+import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryForm";
+import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const token = getToken();
+
+  useEffect(() => {
+    // dispatch();
+  }, [token]);
+
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/regiter" element={<Login />} />
         <Route path="/register" element={<RegisterClient />} />
         <Route element={<HeaderLayout />}>
           <Route path="/" element={<Navigate to="/home" />} />
@@ -48,10 +63,14 @@ function App() {
             <Route path="storage" element={<Storage />}>
               <Route path="" element={<Navigate to="accessories" />} />
               <Route path="accessories" element={<Accessories />} />
+              <Route path="accessories/create" element={<CreateAccessoryForm />} />
+              <Route path="accessories/update/:id" element={<EditAccessoryForm />} />
               <Route path="tools" element={<Tools />} />
-              <Route path="tools/create" element={<ToolForm />} />
-              <Route path="tools/update/:id" element={<UpdateToolForm />} />
+              <Route path="tools/create" element={<CreateToolForm />} />
+              <Route path="tools/update/:id" element={<EditToolForm />} />
               <Route path="equipment" element={<Equipment />} />
+              <Route path="equipment/create" element={<CreateEquipmentForm />} />
+              <Route path="equipment/update/:id" element={<EditEquipmentForm />} />
             </Route>
           </Route>
 

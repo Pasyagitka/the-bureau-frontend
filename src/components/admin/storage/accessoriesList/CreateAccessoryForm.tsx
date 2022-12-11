@@ -1,26 +1,24 @@
-import Select from "@/elements/select/Select";
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { create } from "@/redux/actions/storage/tools";
+import { useAppDispatch } from "@/hooks";
+import { create } from "@/redux/actions/storage/accessories";
+import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccessoryDto";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function ToolForm() {
+function CreateAccessoryForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
   const [name, setName] = useState();
-  const [stageId, setStageId] = useState(1);
-
-  const stages = useAppSelector((state) => state.stages);
-  // const error = useAppSelector((state) => state.tools.error);
-  // function loadAll() { Stages?
-  //   dispatch(getAll());
-  // }
-
-  // useEffect(loadAll, [dispatch]);
+  const [equipmentId, setEquipmentId] = useState();
+  const [sku, setSku] = useState();
 
   const handleSubmit = async () => {
-    const res = await dispatch(create({ name, stageId }));
+    const item: CreateAccessoryDto = {
+      sku,
+      name,
+      equipmentId,
+    };
+    const res = await dispatch(create(item));
     if (!res.error) {
       navigate(-1);
     }
@@ -32,7 +30,7 @@ function ToolForm() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Create tool</h1>
+              <h1 className="text-gray-600">Create accessory</h1>
             </div>
           </div>
         </div>
@@ -45,19 +43,33 @@ function ToolForm() {
                     type="text"
                     id="user-info-name"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
+                    placeholder="sku"
+                    onChange={(e) => setSku(event.target.value)}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    id="user-info-name"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                     placeholder="Name"
                     onChange={(e) => setName(event.target.value)}
                   />
                 </div>
               </div>
-              <Select
-                title="Stage"
-                values={[
-                  { id: 1, name: "Clean" },
-                  { id: 2, name: "Rough" },
-                  { id: 3, name: "Both" },
-                ]}
-              />
+              <div>
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    id="user-info-name"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
+                    placeholder="Equipment Id"
+                    onChange={(e) => setEquipmentId(event.target.value)}
+                  />
+                </div>
+              </div>
             </div>
           </div>
           <hr />
@@ -76,4 +88,4 @@ function ToolForm() {
   );
 }
 
-export default ToolForm;
+export default CreateAccessoryForm;

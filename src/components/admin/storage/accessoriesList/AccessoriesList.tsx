@@ -1,9 +1,25 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
+import { Link } from "react-router-dom";
 import ListItem from "./ListItem";
 
-function AccessoriesList({ accessories = [] }: { accessories: AccessoriesDto[] }) {
-  const listItems = accessories.map((item) => <ListItem key={item.id} id={item.id} sku={item.sku} name={item.name} />);
+function AccessoriesList({
+  accessories = [],
+  handleRemove,
+}: {
+  accessories: AccessoriesDto[];
+  handleRemove: () => void;
+}) {
+  const listItems = accessories.map((item) => (
+    <ListItem
+      key={item.id}
+      id={item.id}
+      sku={item.sku}
+      name={item.name}
+      equipmentId={item.equipment.id}
+      handleRemove={() => handleRemove(item.id)}
+    />
+  ));
 
   return (
     <div className="container w-full">
@@ -25,6 +41,12 @@ function AccessoriesList({ accessories = [] }: { accessories: AccessoriesDto[] }
               >
                 Filter
               </button>
+              <Link
+                to="create"
+                className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
+              >
+                Add
+              </Link>
             </form>
           </div>
         </div>
@@ -54,6 +76,12 @@ function AccessoriesList({ accessories = [] }: { accessories: AccessoriesDto[] }
                   <th
                     scope="col"
                     className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                  >
+                    EquipmentId
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
                   />
                   <th
                     scope="col"
@@ -64,41 +92,7 @@ function AccessoriesList({ accessories = [] }: { accessories: AccessoriesDto[] }
               {accessories && <tbody>{listItems}</tbody>}
             </table>
             <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
-              <div className="flex items-center">
-                <button
-                  type="button"
-                  className="w-full p-4 border text-base rounded-l-xl text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  <svg
-                    width="9"
-                    fill="currentColor"
-                    height="8"
-                    className=""
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1427 301l-531 531 531 531q19 19 19 45t-19 45l-166 166q-19 19-45 19t-45-19l-742-742q-19-19-19-45t19-45l742-742q19-19 45-19t45 19l166 166q19 19 19 45t-19 45z" />
-                  </svg>
-                </button>
-                {/* <PaginationButton />
-                <PaginationButton />
-                <PaginationButton />
-                <PaginationButton /> */}
-                <button
-                  type="button"
-                  className="w-full p-4 border-t border-b border-r text-base  rounded-r-xl text-gray-600 bg-white hover:bg-gray-100"
-                >
-                  <svg
-                    width="9"
-                    fill="currentColor"
-                    height="8"
-                    viewBox="0 0 1792 1792"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M1363 877l-742 742q-19 19-45 19t-45-19l-166-166q-19-19-19-45t19-45l531-531-531-531q-19-19-19-45t19-45l166-166q19-19 45-19t45 19l742 742q19 19 19 45t-19 45z" />
-                  </svg>
-                </button>
-              </div>
+              <div className="flex items-center" />
             </div>
           </div>
         </div>

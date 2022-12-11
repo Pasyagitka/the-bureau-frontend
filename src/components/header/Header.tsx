@@ -13,12 +13,7 @@ function Header() {
         <span className="">Name...</span>
       </a>
       <Navbar />
-      <a
-        className="hidden bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-lime-300 text-gray-500 active:text-gray-700 text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3 md:text-base lg:inline-block lg:px-[16px] lg:py-[8px] lg:font-normal"
-        href="#"
-      >
-        Login
-      </a>
+
       <button
         type="button"
         id="ACjlgb"

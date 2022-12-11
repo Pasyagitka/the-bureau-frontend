@@ -1,2 +1,3 @@
 export const AUTHENTICATED = "AUTHENTICATED";
 export const NOT_AUTHENTICATED = "NOT_AUTHENTICATED";
+export const GET_USER = "GET_USER";

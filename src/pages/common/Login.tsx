@@ -1,19 +1,23 @@
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
 export default function Login() {
-  const loggedIn = useSelector((state) => state.auth.loggedIn);
   const dispatch = useAppDispatch();
+  const authState = useAppSelector((state) => state.auth);
+  const { loggedIn, role } = authState;
   const navigate = useNavigate();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
   const [error, setError] = useState();
 
   useEffect(() => {
+    if (loggedIn && role === "Admin") {
+      navigate("/admin");
+      return;
+    }
     if (loggedIn) {
       navigate("/");
     }

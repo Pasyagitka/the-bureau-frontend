@@ -5,13 +5,15 @@ import { useEffect } from "react";
 import ClientRequests from "./ClientRequests";
 
 function ClientHome() {
-  const id = 3;
+  const id = 5;
   const dispatch = useAppDispatch();
 
   const requests = useAppSelector((state) => state.clients.requests);
+  // const client = useAppSelector((state) => state.auth);
 
   function loadAll() {
-    dispatch(getRequests(id));
+    // dispatch()
+    dispatch(getRequests(5));
   }
 
   useEffect(loadAll, [dispatch]);

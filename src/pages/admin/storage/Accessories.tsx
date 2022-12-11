@@ -1,6 +1,6 @@
 import AccessoriesList from "@/components/admin/storage/accessoriesList/AccessoriesList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/storage/accessories";
+import { getAll, remove } from "@/redux/actions/storage/accessories";
 import { useEffect } from "react";
 
 function Accessories() {
@@ -13,7 +13,12 @@ function Accessories() {
   }
 
   useEffect(loadAccessories, [dispatch]);
-  return <AccessoriesList accessories={accessories} />;
+
+  const handleRemove = (id: number) => {
+    dispatch(remove(id));
+  };
+
+  return <AccessoriesList accessories={accessories} handleRemove={(id) => handleRemove(id)} />;
 }
 
 export default Accessories;

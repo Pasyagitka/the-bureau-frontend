@@ -1,6 +1,7 @@
 import { authLinks } from "@/constants";
 import axios from "axios";
 import { Dispatch } from "redux";
+import jwtDecode from "jwt-decode";
 import { AUTHENTICATED, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
 const setToken = (token) => {
@@ -51,7 +52,9 @@ export function loginUser({ username, password }: { username: string; password: 
       .then((response) => {
         const token = response.data.access_token;
         setToken(token);
-        dispatch({ type: AUTHENTICATED, payload: token });
+        const tokenPayload: { role: "Admin" | "Client" | "Brigadier" } = jwtDecode(token);
+        console.log(tokenPayload);
+        dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
         alert(error.response.data.message);
@@ -80,7 +83,7 @@ export const logoutUser = () => (dispatch) =>
   });
 
 export const checkAuth = () => (dispatch) =>
-  fetch("http://localhost:5000/api/auth/current_user", {
+  fetch("http://localhost:5000/api/auth/userinfo", {
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",

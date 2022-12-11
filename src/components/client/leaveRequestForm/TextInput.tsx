@@ -1,4 +1,12 @@
-function TextInput({ placeholder, value, onChange }: { placeholder: string; value: string; onChange: () => void }) {
+function TextInput({
+  placeholder,
+  value,
+  onChange,
+}: {
+  placeholder: string;
+  value: string;
+  onChange: (e: unknown) => void;
+}) {
   return (
     <div>
       <div className=" relative ">
@@ -7,7 +15,7 @@ function TextInput({ placeholder, value, onChange }: { placeholder: string; valu
           id="user-info-name"
           className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
           placeholder={placeholder}
-          value={value}
+          defaultValue={value}
           onChange={onChange}
         />
       </div>

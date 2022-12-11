@@ -14,7 +14,11 @@ function Equipment() {
 
   useEffect(loadAll, [dispatch]);
 
-  return <EquipmentList equipment={equipment} />;
+  const handleRemove = (id: number) => {
+    dispatch(remove(id));
+  };
+
+  return <EquipmentList equipment={equipment} handleRemove={(id) => handleRemove(id)} />;
 }
 
 export default Equipment;
