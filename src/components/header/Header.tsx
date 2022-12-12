@@ -10,7 +10,7 @@ function Header() {
             <img src={logo} alt="" width="100%" />
           </div>
         </span>
-        <span className="">Name...</span>
+        <span className="">LeBrama</span>
       </a>
       <Navbar />
 

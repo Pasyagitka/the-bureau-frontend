@@ -16,6 +16,8 @@ import BrigadierHome from "@/pages/brigadier/BrigadierHome";
 import { useEffect } from "react";
 import { useAppDispatch } from "@/hooks";
 import { getToken } from "@/redux/actions/auth";
+import BrigadierLayout from "@/layouts/BrigadierLayout";
+import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -44,8 +46,9 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/regiter" element={<Login />} />
         <Route path="/register" element={<RegisterClient />} />
+        <Route path="/register/brigadier" element={<RegisterBrigadier />} />
+
         <Route element={<HeaderLayout />}>
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
@@ -75,14 +78,12 @@ function App() {
           </Route>
 
           <Route path="/client" element={<ClientLayout />}>
-            <Route path="" element={<Navigate to="client-home" />} />
-            <Route path="client-home" element={<ClientHome />} />
+            <Route path="" element={<ClientHome />} />
             <Route path="leave-request" element={<LeaveRequestForm />} />
           </Route>
 
-          <Route path="/brigadier">
+          <Route path="/brigadier" element={<BrigadierLayout />}>
             <Route path="" element={<BrigadierHome />} />
-            {/* <Route path="home" element={<BrigadierHome />} /> */}
             <Route path="update/:id" element={<EditBrigadierDetails />} />
             <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
           </Route>

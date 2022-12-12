@@ -2,6 +2,7 @@ import { authLinks } from "@/constants";
 import axios from "axios";
 import { Dispatch } from "redux";
 import jwtDecode from "jwt-decode";
+import { Role } from "@/types/enum/role.enum";
 import { AUTHENTICATED, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
 const setToken = (token) => {
@@ -23,14 +24,33 @@ const deleteToken = () => {
   localStorage.removeItem("lastLoginTime");
 };
 
-export const signupUser = (credentials) => (dispatch) =>
+export const signupUser = (registerUserDto) => (dispatch) =>
   fetch(authLinks.registerClient, {
     method: "POST",
     headers: {
       Accept: "application/json",
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ user: credentials }),
+    body: JSON.stringify(registerUserDto),
+  }).then((res) => {
+    if (res.ok) {
+      setToken(res.headers.get("Authorization"));
+      return res.json().then((userJson) => dispatch({ type: AUTHENTICATED, payload: userJson }));
+    }
+    return res.json().then((errors) => {
+      dispatch({ type: NOT_AUTHENTICATED });
+      return Promise.reject(errors);
+    });
+  });
+
+export const signupBrigadier = (registerBrigadierDto) => (dispatch) =>
+  fetch(authLinks.registerBrigadier, {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(registerBrigadierDto),
   }).then((res) => {
     if (res.ok) {
       setToken(res.headers.get("Authorization"));
@@ -52,7 +72,7 @@ export function loginUser({ username, password }: { username: string; password: 
       .then((response) => {
         const token = response.data.access_token;
         setToken(token);
-        const tokenPayload: { role: "Admin" | "Client" | "Brigadier" } = jwtDecode(token);
+        const tokenPayload: { role: Role.Admin | Role.Client | Role.Brigadier } = jwtDecode(token);
         console.log(tokenPayload);
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })

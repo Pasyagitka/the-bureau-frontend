@@ -3,4 +3,8 @@ export type CreateBrigadierDto = {
   surname: string;
   patronymic: string;
   contactNumber: string;
+  email: string;
+  login: string;
+  password: string;
+  role: string;
 };

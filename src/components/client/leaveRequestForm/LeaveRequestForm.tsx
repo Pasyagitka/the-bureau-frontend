@@ -29,7 +29,7 @@ function LeaveRequestForm() {
   const [dates, setValue] = useState({
     startDate: new Date(),
     // endDate: new Date(),
-    endDate: new Date().setMonth(11),
+    // endDate: new Date().setMonth(11),
   });
 
   function loadAll() {
@@ -44,6 +44,7 @@ function LeaveRequestForm() {
       placeholder={item.type}
       defaultValue={0}
       onChange={(e) => {
+        if (!Number(e.target.value)) return;
         requestEquipmentList.set(item.id, e.target.value);
         if (e.target.value === "") requestEquipmentList.delete(item.id);
         console.log(requestEquipmentList);
@@ -60,8 +61,9 @@ function LeaveRequestForm() {
     const requestEquipment = Array.from(requestEquipmentList, (item) => ({ equipment: item[0], quantity: +item[1] }));
     console.log(requestEquipment);
     const request: CreateRequestDto = {
-      clientDateStart: dates.startDate,
-      clientDateEnd: dates.endDate,
+      mountingDate: dates.startDate,
+      // clientDateStart: dates.startDate,
+      // clientDateEnd: dates.endDate,
       comment: comment || null,
       stage,
       address: {
@@ -133,6 +135,7 @@ function LeaveRequestForm() {
                 placeholder="House"
                 value=""
                 onChange={(e) => {
+                  if (!Number(e.target.value)) return;
                   setHouse(e.target.value);
                 }}
               />
@@ -147,6 +150,7 @@ function LeaveRequestForm() {
                 placeholder="Flat"
                 value=""
                 onChange={(e) => {
+                  if (!Number(e.target.value)) return;
                   setFlat(e.target.value);
                 }}
               />

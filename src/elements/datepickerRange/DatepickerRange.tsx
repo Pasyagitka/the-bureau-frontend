@@ -9,6 +9,7 @@ function DatepickerRange({ value, handleValueChange }) {
       onChange={handleValueChange}
       startFrom={new Date()}
       useRange={false}
+      asSingle
     />
   );
 }
