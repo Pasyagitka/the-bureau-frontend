@@ -12,6 +12,8 @@ import {
   EDIT_REQUESTS_BY_ADMIN,
   EDIT_REQUESTS_BY_BRIGADIER,
 } from "../actionTypes/requests";
+import { GET_ALL_ACCESSORIES } from "../actionTypes/storage/accessories";
+import { GET_ALL_TOOLS } from "../actionTypes/storage/tools";
 import { getToken } from "./auth";
 
 export const create = createAsyncThunk(
@@ -33,6 +35,24 @@ export const create = createAsyncThunk(
 
 export const getAll = createAsyncThunk(GET_ALL_REQUESTS, async () => {
   const request = await axios.get(requestLinks.getAll, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getAccessories = createAsyncThunk(GET_ALL_ACCESSORIES, async (id: number) => {
+  const request = await axios.get(requestLinks.getAccessories(id), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getTools = createAsyncThunk(GET_ALL_TOOLS, async (id: number) => {
+  const request = await axios.get(requestLinks.getTools(id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

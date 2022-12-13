@@ -13,7 +13,13 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
           to={`update/${brigadier.id}`}
           className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
         >
-          Edit
+          <img
+            src="https://img.icons8.com/3d-fluency/512/edit.png"
+            width="30px"
+            height="30px"
+            alt="Edit"
+            className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+          />
         </Link>
       </div>
       <div className="border-t border-gray-200 mt-4">

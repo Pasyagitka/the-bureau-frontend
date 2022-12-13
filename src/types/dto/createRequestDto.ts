@@ -4,8 +4,7 @@ type RequestEquipmentDto = {
 };
 
 export type CreateRequestDto = {
-  clientDateStart: Date;
-  clientDateEnd: Date;
+  mountingDate: Date;
   comment: string | null;
   stage: number;
   address: {

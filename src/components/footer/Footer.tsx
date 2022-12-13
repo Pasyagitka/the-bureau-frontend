@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <footer className="px-3 py-8 mt-8 bg-white dark:bg-gray-800 text-2 text-gray-500 dark:text-gray-200 transition-colors duration-200 relative left-0 bottom-0">
+    <footer className="w-full px-3 py-8 mt-8 relative bg-white dark:bg-gray-800 text-2 text-gray-500 dark:text-gray-200 transition-colors duration-200 left-0 bottom-0">
       <div className="flex flex-col">
         <div className="md:hidden mt-7 mx-auto w-11 h-px rounded-full" />
         <div className="mt-4 md:mt-0 flex flex-col md:flex-row">
@@ -48,7 +48,7 @@ function Footer() {
           <div className="mt-7 md:mt-0 flex-1 flex flex-col items-center justify-center md:items-start md:pl-5">
             <span className="">© 2022</span>
             <span className="mt-7 md:mt-1">
-              Created by
+              Created by&nbsp
               <a className="underline hover:text-primary-gray-20" href="https://www.linkedin.com/in/crabiller/">
                 pasyagitka
               </a>

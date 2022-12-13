@@ -5,12 +5,12 @@ import Header from "../components/header/Header";
 
 function HeaderLayout() {
   return (
-    <>
+    <div className="h-screen">
       <Header />
       <GradientBackground />
       <Outlet />
       <Footer />
-    </>
+    </div>
   );
 }
 

@@ -1,14 +1,32 @@
 import BrigadierSmall from "@/elements/brigadierSmall/BrigadierSmall";
-import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import StageBadge from "@/elements/stageBadge/StageBadge";
-import { useState } from "react";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { get, getAccessories, getTools } from "@/redux/actions/requests";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import RequestAccessories from "../requestAccessories/RequestAccessories";
 import RequestEquipment from "../requestEquipment/RequestEquipment";
+import RequestTools from "../requestTools/RequestTools";
 import DetailsItem from "./DetailsItem";
 
 function RequestDetails() {
+  const dispatch = useAppDispatch();
   const params = useParams();
-  console.log("params.id", params.id);
+
+  useEffect(() => {
+    dispatch(get(params.id));
+    dispatch(getAccessories(params.id));
+    dispatch(getTools(params.id));
+  }, [dispatch]);
+
+  const request = useAppSelector((state) => state.requests.request);
+  const requestAccessories = useAppSelector((state) => state.requests.requestAccessories);
+  const requestTools = useAppSelector((state) => state.requests.requestTools);
+
+  // useEffect(() => {
+  //   dispatch(getAccessories(params.id));
+  //   dispatch(getTools(params.id));
+  // }, [request]);
 
   const [value, setValue] = useState({
     startDate: new Date(),
@@ -28,34 +46,49 @@ function RequestDetails() {
       </div>
       <div className="border-t border-gray-200">
         <dl>
-          <DetailsItem title="Full name" value="Surname Firstname Patronymic" isDark />
+          <DetailsItem
+            title="Cleint full name"
+            value={`${request?.client?.surname} ${request?.client?.firstname} ${request?.client?.patronymic}`}
+            isDark
+          />
           <DetailsItem title="Address" value="Country, City, Street, House, Corpus, Flat" />
-          <DetailsItem title="Email address" value="email@email.com" isDark />
-          <DetailsItem title="Contact phone" value="+375445634337" />
-          <DetailsItem title="Comment" value="Comment...Comment" isDark />
+          <DetailsItem title="Email address" value={request.client?.user?.email} isDark />
+          <DetailsItem title="Contact phone" value={`+${request.client?.contactNumber}`} />
+          <DetailsItem title="Comment" value={request.comment} isDark />
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Stage</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
-              <StageBadge stage={3} />
+              <StageBadge stage={request.stage?.id} />
             </dd>
           </div>
+          <DetailsItem title="Mounting date" value={request.mountingDate} />
         </dl>
       </div>
-      <div>
-        <DatepickerRange value={value} handleValueChange={handleValueChange} />
-      </div>
-      <div>
-        <dt className="text-sm font-medium text-gray-500">Mounting date</dt>
-        <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
-          <input type="date" />
-        </dd>
-      </div>
+      <div />
       <hr />
-      <div className="my-5">
-        <RequestEquipment equipmentList={[]} />
+      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+        <h2 className="w-full md:w-1/3">Request equipment</h2>
+        <div className="w-full md:w-2/3">
+          <RequestEquipment equipmentList={request?.requestEquipment} />
+          <div />
+        </div>
+      </div>
+      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+        <h2 className="w-full md:w-1/3">Request accessories</h2>
+        <div className="w-full space-y-5 md:w-2/3">
+          <RequestAccessories accessories={requestAccessories} />
+          <div />
+        </div>
+      </div>
+      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+        <h2 className="w-full md:w-1/3">Request tools</h2>
+        <div className="w-full md:w-2/3">
+          <RequestTools tools={requestTools} />
+          <div />
+        </div>
       </div>
       <div className="flex justify-center">
-        <BrigadierSmall />
+        <BrigadierSmall brigadier={request?.brigadier || { surname: "No", firstname: "brigadier", patronymic: "" }} />
       </div>
     </div>
   );
