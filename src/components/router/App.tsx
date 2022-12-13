@@ -13,11 +13,10 @@ import Clients from "@/pages/admin/Clients";
 import Requests from "@/pages/admin/Requests";
 import ClientHome from "@/pages/client/ClientHome";
 import BrigadierHome from "@/pages/brigadier/BrigadierHome";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/hooks";
-import { getToken } from "@/redux/actions/auth";
+import { useAppSelector } from "@/hooks";
 import BrigadierLayout from "@/layouts/BrigadierLayout";
 import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
+import ProtectedRoute from "@/layouts/ProtectedRoute";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -35,12 +34,9 @@ import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryFor
 import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
 
 function App() {
-  const dispatch = useAppDispatch();
-  const token = getToken();
+  const user = useAppSelector((state) => state.auth.user);
 
-  useEffect(() => {
-    // dispatch();
-  }, [token]);
+  const checkAllowed = (rolename: string) => !!user && user.role === rolename;
 
   return (
     <BrowserRouter>
@@ -53,10 +49,18 @@ function App() {
           <Route path="/" element={<Navigate to="/home" />} />
           <Route path="/home" element={<Home />} />
 
-          <Route path="/admin" element={<AdminLayout />}>
+          <Route
+            path="/admin"
+            element={
+              <ProtectedRoute isAllowed={checkAllowed("Admin")}>
+                <AdminLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="" element={<Navigate to="requests" />} />
             <Route path="home" element={<Dashboard />} />
             <Route path="brigadiers" element={<Brigadiers />} />
+            {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}
             <Route path="clients" element={<Clients />} />
             <Route path="clients/:id" element={<ClientDetails />} />
             <Route path="requests" element={<Requests />} />
@@ -77,12 +81,26 @@ function App() {
             </Route>
           </Route>
 
-          <Route path="/client" element={<ClientLayout />}>
+          <Route
+            path="/client"
+            element={
+              <ProtectedRoute isAllowed={checkAllowed("Client")}>
+                <ClientLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="" element={<ClientHome />} />
             <Route path="leave-request" element={<LeaveRequestForm />} />
           </Route>
 
-          <Route path="/brigadier" element={<BrigadierLayout />}>
+          <Route
+            path="/brigadier"
+            element={
+              <ProtectedRoute isAllowed={checkAllowed("Brigadier")}>
+                <BrigadierLayout />
+              </ProtectedRoute>
+            }
+          >
             <Route path="" element={<BrigadierHome />} />
             <Route path="update/:id" element={<EditBrigadierDetails />} />
             <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />

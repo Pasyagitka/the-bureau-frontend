@@ -3,7 +3,9 @@ import axios from "axios";
 import { Dispatch } from "redux";
 import jwtDecode from "jwt-decode";
 import { Role } from "@/types/enum/role.enum";
-import { AUTHENTICATED, NOT_AUTHENTICATED } from "../actionTypes/auth";
+import { CreateClientDto } from "@/types/dto/client/createClientDto";
+import { CreateBrigadierDto } from "@/types/dto/brigadier/createBrigadierDto";
+import { AUTHENTICATED, GET_USER, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
 const setToken = (token) => {
   localStorage.setItem("token", token);
@@ -19,12 +21,12 @@ export const getToken = () => {
   }
 };
 
-const deleteToken = () => {
+export const deleteToken = () => {
   localStorage.removeItem("token");
   localStorage.removeItem("lastLoginTime");
 };
 
-export const signupUser = (registerUserDto) => (dispatch) =>
+export const signupClient = (registerUserDto: CreateClientDto) => (dispatch) =>
   fetch(authLinks.registerClient, {
     method: "POST",
     headers: {
@@ -43,24 +45,23 @@ export const signupUser = (registerUserDto) => (dispatch) =>
     });
   });
 
-export const signupBrigadier = (registerBrigadierDto) => (dispatch) =>
-  fetch(authLinks.registerBrigadier, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(registerBrigadierDto),
-  }).then((res) => {
-    if (res.ok) {
-      setToken(res.headers.get("Authorization"));
-      return res.json().then((userJson) => dispatch({ type: AUTHENTICATED, payload: userJson }));
-    }
-    return res.json().then((errors) => {
-      dispatch({ type: NOT_AUTHENTICATED });
-      return Promise.reject(errors);
-    });
-  });
+export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
+  // regirect to login
+  return async (dispatch: Dispatch) => {
+    await axios
+      .post(authLinks.registerBrigadier, JSON.stringify(registerBrigadierDto))
+      .then((response) => {
+        const token = response.data.access_token;
+        setToken(token);
+        const tokenPayload: { role: Role.Admin | Role.Client | Role.Brigadier; sub: number } = jwtDecode(token);
+        dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+        dispatch({ type: NOT_AUTHENTICATED });
+      });
+  };
+}
 
 export function loginUser({ username, password }: { username: string; password: string }) {
   return async (dispatch: Dispatch) => {
@@ -72,8 +73,7 @@ export function loginUser({ username, password }: { username: string; password: 
       .then((response) => {
         const token = response.data.access_token;
         setToken(token);
-        const tokenPayload: { role: Role.Admin | Role.Client | Role.Brigadier } = jwtDecode(token);
-        console.log(tokenPayload);
+        const tokenPayload: { role: Role.Admin | Role.Client | Role.Brigadier; sub: number } = jwtDecode(token);
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
@@ -83,37 +83,17 @@ export function loginUser({ username, password }: { username: string; password: 
   };
 }
 
-export const logoutUser = () => (dispatch) =>
-  fetch("http://localhost:5000/api/auth/logout", {
-    method: "DELETE",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: getToken(),
-    },
-  }).then((res) => {
-    deleteToken();
-    if (res.ok) {
-      return res.json().then(() => dispatch({ type: NOT_AUTHENTICATED }));
-    }
-    return res.json().then((errors) => {
-      dispatch({ type: NOT_AUTHENTICATED });
-      return Promise.reject(errors);
-    });
-  });
-
-export const checkAuth = () => (dispatch) =>
-  fetch("http://localhost:5000/api/auth/userinfo", {
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      Authorization: `Bearer ${getToken()}`,
-    },
-  }).then((res) => {
-    if (res.ok) {
-      return res.json().then((user) => {
-        user.data ? dispatch({ type: AUTHENTICATED, payload: user }) : dispatch({ type: NOT_AUTHENTICATED });
+export function getInfo() {
+  return async (dispatch: Dispatch) => {
+    await axios
+      .get("/api/auth/userinfo", {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      })
+      .then((response) => {
+        const user = response.data;
+        dispatch({ type: GET_USER, payload: { user } });
       });
-    }
-    return Promise.reject(dispatch({ type: NOT_AUTHENTICATED }));
-  });
+  };
+}

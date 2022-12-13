@@ -5,17 +5,17 @@ import { useEffect } from "react";
 import BrigadierRequests from "./BrigadierRequests";
 
 function BrigadierHome() {
-  const id = 3;
   const dispatch = useAppDispatch();
 
+  const user = useAppSelector((state) => state.auth.user);
   const requests = useAppSelector((state) => state.brigadiers.requests);
   const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
 
   function loadAll() {
-    dispatch(getRequests(id)); // todo get current user id
-    dispatch(get(id));
+    dispatch(getRequests(user?.brigadier?.id));
+    dispatch(get(user?.brigadier?.id));
   }
-  useEffect(loadAll, [dispatch]);
+  useEffect(loadAll, [user]);
 
   return (
     <>

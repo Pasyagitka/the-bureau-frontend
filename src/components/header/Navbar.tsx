@@ -1,16 +1,17 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { deleteToken } from "@/redux/actions/auth";
 import { NOT_AUTHENTICATED } from "@/redux/actionTypes/auth";
-import { NavLink, useNavigate } from "react-router-dom";
+import { persistor } from "@/redux/store";
+import { NavLink } from "react-router-dom";
 
 function Navbar() {
   const { auth } = useAppSelector((state) => state);
-
-  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    await persistor.purge();
+    deleteToken();
     dispatch({ type: NOT_AUTHENTICATED, payload: "" });
-    navigate("/");
   };
 
   return (
@@ -39,7 +40,7 @@ function Navbar() {
         </NavLink>
       </div>
       <div className="flex gap-3">
-        {auth.loggedIn ? (
+        {auth.user ? (
           <button
             type="button"
             className="hidden bg-gray-200 hover:bg-gray-300 focus-visible:ring ring-lime-300 text-gray-500 active:text-gray-700 text-sm font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3 md:text-base lg:inline-block lg:px-[16px] lg:py-[8px] lg:font-normal"

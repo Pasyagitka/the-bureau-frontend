@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { loginUser } from "@/redux/actions/auth";
+import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -11,17 +11,26 @@ export default function Login() {
   const navigate = useNavigate();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [error, setError] = useState();
 
   useEffect(() => {
-    if (loggedIn && role === "Admin") {
+    dispatch(getInfo());
+  }, [loggedIn]);
+
+  const user = useAppSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    if (user && user.role === "Admin") {
       navigate("/admin");
       return;
     }
-    if (loggedIn) {
-      navigate("/");
+    if (user && user.role === "Brigadier") {
+      navigate("/brigadier");
+      return;
     }
-  }, [loggedIn]);
+    if (user) {
+      navigate("/client");
+    }
+  }, [user]);
 
   const handleSubmit = () => {
     dispatch(loginUser({ username, password }));
@@ -46,24 +55,6 @@ export default function Login() {
                   <div className="text-center mb-3">
                     <h6 className="text-gray-600 text-sm font-bold">Sign in</h6>
                   </div>
-                  {/* <div className="btn-wrapper text-center">
-                    <button
-                      className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style={{ transition: "all .15s ease" }}
-                    >
-                      <img alt="..." className="w-5 mr-1" src={logo} />
-                      Github
-                    </button>
-                    <button
-                      className="bg-white active:bg-gray-100 text-gray-800 font-normal px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs"
-                      type="button"
-                      style={{ transition: "all .15s ease" }}
-                    >
-                      <img alt="..." className="w-5 mr-1" src={logo} />
-                      Google
-                    </button>
-                  </div> */}
                   <hr className="mt-6 border-b-1 border-gray-400" />
                 </div>
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
@@ -83,7 +74,6 @@ export default function Login() {
                         }}
                       />
                     </div>
-
                     <div className="relative w-full mb-3">
                       <label className="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
                         Password

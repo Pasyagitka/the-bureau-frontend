@@ -138,6 +138,7 @@
     "react-use": "^17.4.0",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
+    "redux-persist": "^6.0.0",
     "redux-thunk": "^2.4.1",
     "sass": "^1.56.2",
     "three": "^0.145.0",

@@ -1,5 +1,4 @@
 /* eslint-disable default-param-last */
-import { PayloadAction } from "@reduxjs/toolkit";
 import { AUTHENTICATED, GET_USER, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
 const initialState = {
@@ -7,15 +6,12 @@ const initialState = {
   loggedIn: false,
   role: "",
   id: null,
+  user: null,
 };
 
-export default function authReducer(
-  state = initialState,
-  action: PayloadAction<{ role: "Admin" | "Client" | "Brigadier"; id: number }>
-) {
+export default function authReducer(state = initialState, action) {
   switch (action.type) {
     case AUTHENTICATED:
-      console.log(action.payload);
       return {
         ...state,
         authChecked: true,
@@ -30,11 +26,12 @@ export default function authReducer(
         loggedIn: false,
         role: "",
         id: null,
+        user: null,
       };
     case GET_USER:
       return {
         ...state,
-        id: action.payload.id,
+        user: action.payload.user,
       };
     default:
       return state;

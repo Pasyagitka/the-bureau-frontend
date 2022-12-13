@@ -1,5 +1,4 @@
 import Button from "@/elements/button/Button";
-import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
@@ -22,7 +21,7 @@ function EditRequestAdmin() {
 
   useEffect(() => {
     setBrigadier(request.brigadier);
-    setStage(request.stage.id);
+    setStage(request?.stage?.id);
   }, [request]);
 
   const handleSubmit = async () => {
@@ -44,9 +43,7 @@ function EditRequestAdmin() {
           <input type="date" />
         </dd>
       </div>
-      <div className="px-4 py-5 sm:px-6">
-        <Select />
-      </div>
+      <div className="px-4 py-5 sm:px-6">{/* <Select /> */}</div>
       <div className="flex justify-evenly">
         <Button text="Save" />
         <Button text="Cancel" />
