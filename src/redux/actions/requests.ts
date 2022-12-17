@@ -85,9 +85,12 @@ export const remove = createAsyncThunk(DELETE_REQUESTS, async (id: number, { rej
 
 export const updateByAdmin = createAsyncThunk(
   EDIT_REQUESTS_BY_ADMIN,
-  async ({ id, updateRequestDto }: { id: number; updateRequestDto: UpdateRequestByAdminDto }, { rejectWithValue }) => {
+  async (
+    { id, updateRequestByAdminDto }: { id: number; updateRequestByAdminDto: UpdateRequestByAdminDto },
+    { rejectWithValue }
+  ) => {
     try {
-      const request = await axios.put(requestLinks.updateByAdmin(id), updateRequestDto, {
+      const request = await axios.put(requestLinks.updateByAdmin(id), updateRequestByAdminDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -103,11 +106,11 @@ export const updateByAdmin = createAsyncThunk(
 export const updateByBrigadier = createAsyncThunk(
   EDIT_REQUESTS_BY_BRIGADIER,
   async (
-    { id, updateRequestDto }: { id: number; updateRequestDto: UpdateRequestByBrigadierDto },
+    { id, updateRequestByBrigadierDto }: { id: number; updateRequestByBrigadierDto: UpdateRequestByBrigadierDto },
     { rejectWithValue }
   ) => {
     try {
-      const request = await axios.put(requestLinks.updateByBrigadier(id), updateRequestDto, {
+      const request = await axios.put(requestLinks.updateByBrigadier(id), updateRequestByBrigadierDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

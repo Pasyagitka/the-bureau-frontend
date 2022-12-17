@@ -1,7 +1,7 @@
 import { RequestToolDto } from "@/types/dto/requestToolsDto";
 import RequestToolsItem from "./RequestToolsItem";
 
-function RequestTools({ tools }: { tools: RequestToolDto[] }) {
+function RequestTools({ tools = [] }: { tools: RequestToolDto[] }) {
   const listItems = tools.map((item) => <RequestToolsItem key={item.id} tool={item} />);
 
   return (

@@ -1,6 +1,6 @@
 import BrigadierList from "@/components/admin/brigadierList/BrigadierList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll, remove } from "@/redux/actions/brigadiers";
+import { activate, deactivate, getAll } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 
 function Brigadiers() {
@@ -14,10 +14,20 @@ function Brigadiers() {
   useEffect(loadAll, [dispatch]);
 
   const handleRemove = (id: number) => {
-    dispatch(remove(id));
+    dispatch(deactivate(id));
   };
 
-  return <BrigadierList brigadiers={brigadiers} handleRemove={(id) => handleRemove(id)} />;
+  const handleApprove = (id: number) => {
+    dispatch(activate(id));
+  };
+
+  return (
+    <BrigadierList
+      brigadiers={brigadiers}
+      handleRemove={(id) => handleRemove(id)}
+      handleApprove={(id) => handleApprove(id)}
+    />
+  );
 }
 
 export default Brigadiers;

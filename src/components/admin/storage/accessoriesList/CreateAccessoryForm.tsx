@@ -41,7 +41,6 @@ function CreateAccessoryForm() {
                 <div className=" relative ">
                   <input
                     type="text"
-                    id="user-info-name"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                     placeholder="sku"
                     onChange={(e) => setSku(event.target.value)}
@@ -52,7 +51,6 @@ function CreateAccessoryForm() {
                 <div className=" relative ">
                   <input
                     type="text"
-                    id="user-info-name"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                     placeholder="Name"
                     onChange={(e) => setName(event.target.value)}
@@ -63,10 +61,12 @@ function CreateAccessoryForm() {
                 <div className=" relative ">
                   <input
                     type="text"
-                    id="user-info-name"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                     placeholder="Equipment Id"
-                    onChange={(e) => setEquipmentId(event.target.value)}
+                    value={equipmentId || ""}
+                    onChange={(e) => {
+                      setEquipmentId(e.target.value.replace(/\D/g, ""));
+                    }}
                   />
                 </div>
               </div>

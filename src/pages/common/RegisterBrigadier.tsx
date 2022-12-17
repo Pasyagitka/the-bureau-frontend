@@ -9,12 +9,13 @@ import RegisterTextInput from "./RegisterTextInput";
 
 function RegisterBrigadier() {
   const dispatch = useDispatch();
-  const [firstname, setFirstname] = useState();
-  const [surname, setSurname] = useState();
-  const [patronymic, setPatronymic] = useState();
-  const [contactNumber, setContactNumber] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const [firstname, setFirstname] = useState("");
+  const [surname, setSurname] = useState("");
+  const [patronymic, setPatronymic] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleSubmit = () => {
     const brigadierUser: CreateBrigadierDto = {
@@ -24,7 +25,7 @@ function RegisterBrigadier() {
       contactNumber,
       email,
       password,
-      login: `br${surname}`,
+      login,
       role: Role.Brigadier,
     };
     dispatch(signupBrigadier(brigadierUser));
@@ -77,6 +78,7 @@ function RegisterBrigadier() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <RegisterTextInput label="Login" value={login} onChange={(e) => setLogin(e.target.value)} />
                     <RegisterTextInput label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
                     <RegisterTextInput
                       label="First Name"
@@ -91,7 +93,9 @@ function RegisterBrigadier() {
                     <RegisterTextInput
                       label="Contact number"
                       value={contactNumber}
-                      onChange={(e) => setContactNumber(e.target.value)}
+                      onChange={(e) => {
+                        setContactNumber(e.target.value.replace(/\D/g, ""));
+                      }}
                     />
                     <div className="text-center mt-6">
                       <button

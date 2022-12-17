@@ -1,4 +1,4 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Listbox, Transition } from "@headlessui/react";
 import { CheckIcon, ChevronUpDownIcon } from "@heroicons/react/20/solid";
 
@@ -6,8 +6,8 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-function Select({ title, values, selected, onChange }) {
-  // const [selected, setSelected] = useState(values[0]);
+function Select({ title, values, onChange }) {
+  const [selected, setSelected] = useState(values[0]);
 
   return (
     <Listbox value={selected} onChange={onChange}>

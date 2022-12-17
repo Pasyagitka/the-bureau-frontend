@@ -1,16 +1,20 @@
 import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
+import { useState } from "react";
 import { Link } from "react-router-dom";
-import RequestEquipment from "../../request/requestEquipment/RequestEquipment";
+import { Collapse } from "react-collapse";
+import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
+import RequestTools from "@/components/request/requestTools/RequestTools";
+import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 
 function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
+  const [visible, setVisible] = useState(false);
+
   return (
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full cursor-pointer m-auto">
       <div className="flex w-full bg-white shadow-lg rounded-lg overflow-hidden justify-between">
-        <div className="w-1/3 p-4">
-          <RequestEquipment equipmentList={request.requestEquipment} />
-        </div>
+        <h1 className="text-gray-900 font-bold text-2xl m-5">{request.id}</h1>
         <div className="p-4 w-2/3">
           <h1 className="text-gray-900 font-bold text-2xl">
             {`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
@@ -25,7 +29,34 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
             <StageBadge stage={3} />
           </div>
           <div className="flex item-center justify-between mt-3">
-            <RequestTimeline />
+            <RequestTimeline status={request.status} />
+          </div>
+        </div>
+        <div className="w-full">
+          <div className="flex flex-col">
+            <button
+              type="button"
+              className="text-gray-900 font-bold text-2xl m-5"
+              onClick={(e) => setVisible(!visible)}
+            >
+              Details
+            </button>
+            <Collapse isOpened={visible}>
+              <div className="flex flex-row h-fit">
+                <div className="w-1/3">
+                  <p className="mt-2 text-gray-600 text-sm text-center">Equipment</p>
+                  <RequestEquipment equipmentList={request.requestEquipment} />
+                </div>
+                <div className="w-2/3">
+                  <p className="mt-2 text-gray-600 text-sm text-center">Accessories</p>
+                  <RequestAccessories accessories={request.requestAccessories} />
+                </div>
+                <div className="w-1/3">
+                  <p className="mt-2 text-gray-600 text-sm text-center">Tools</p>
+                  <RequestTools tools={request.requestTools} />
+                </div>
+              </div>
+            </Collapse>
           </div>
         </div>
         <Link

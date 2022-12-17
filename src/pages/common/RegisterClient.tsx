@@ -1,15 +1,38 @@
-import bg from "images/bg.jpg";
+import { signupClient } from "@/redux/actions/auth";
+import { CreateClientDto } from "@/types/dto/client/createClientDto";
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { Link, useNavigate } from "react-router-dom";
+import bg from "images/bg.jpg";
 import RegisterTextInput from "./RegisterTextInput";
 
 function RegisterClient() {
-  const [firstname, setFirstname] = useState();
-  const [surname, setSurname] = useState();
-  const [patronymic, setPatronymic] = useState();
-  const [contactNumber, setContactNumber] = useState();
-  const [email, setEmail] = useState();
-  const [password, setPassword] = useState();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [firstname, setFirstname] = useState("");
+  const [surname, setSurname] = useState("");
+  const [patronymic, setPatronymic] = useState("");
+  const [contactNumber, setContactNumber] = useState("");
+  const [email, setEmail] = useState("");
+  const [login, setLogin] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSubmit = () => {
+    const clientUser: CreateClientDto = {
+      firstname,
+      surname,
+      patronymic,
+      contactNumber,
+      email,
+      password,
+      login,
+    };
+    const res = dispatch(signupClient(clientUser));
+    // if (!res.error) {
+    //   //navigate(-1);
+    // }
+  };
 
   return (
     <main>
@@ -35,9 +58,7 @@ function RegisterClient() {
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                   <div>
                     <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                        Email
-                      </label>
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Email</label>
                       <input
                         type="email"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
@@ -47,9 +68,7 @@ function RegisterClient() {
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                        Password
-                      </label>
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Password</label>
                       <input
                         type="password"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
@@ -58,15 +77,33 @@ function RegisterClient() {
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
+                    <RegisterTextInput label="Login" value={login} onChange={(e) => setLogin(e.target.value)} />
                     <RegisterTextInput label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
-                    <RegisterTextInput label="First Name" onChange={(e) => setFirstname(e.target.value)} />
-                    <RegisterTextInput label="Patronymic" onChange={(e) => setPatronymic(e.target.value)} />
-                    <RegisterTextInput label="Contact number" onChange={(e) => setContactNumber(e.target.value)} />
+                    <RegisterTextInput
+                      label="First Name"
+                      value={firstname}
+                      onChange={(e) => setFirstname(e.target.value)}
+                    />
+                    <RegisterTextInput
+                      label="Patronymic"
+                      value={patronymic}
+                      onChange={(e) => setPatronymic(e.target.value)}
+                    />
+                    <RegisterTextInput
+                      label="Contact number"
+                      value={contactNumber || ""}
+                      onChange={(e) => {
+                        setContactNumber(e.target.value.replace(/\D/g, ""));
+                      }}
+                    />
                     <div className="text-center mt-6">
                       <button
                         className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                         type="button"
                         style={{ transition: "all .15s ease" }}
+                        onClick={() => {
+                          handleSubmit();
+                        }}
                       >
                         Sign Up
                       </button>

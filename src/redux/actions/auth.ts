@@ -26,34 +26,33 @@ export const deleteToken = () => {
   localStorage.removeItem("lastLoginTime");
 };
 
-export const signupClient = (registerUserDto: CreateClientDto) => (dispatch) =>
-  fetch(authLinks.registerClient, {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(registerUserDto),
-  }).then((res) => {
-    if (res.ok) {
-      setToken(res.headers.get("Authorization"));
-      return res.json().then((userJson) => dispatch({ type: AUTHENTICATED, payload: userJson }));
-    }
-    return res.json().then((errors) => {
-      dispatch({ type: NOT_AUTHENTICATED });
-      return Promise.reject(errors);
-    });
-  });
-
-export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
-  // regirect to login
+export function signupClient(registerClientDto: CreateClientDto) {
   return async (dispatch: Dispatch) => {
     await axios
-      .post(authLinks.registerBrigadier, JSON.stringify(registerBrigadierDto))
+      .post(authLinks.registerClient, registerClientDto)
       .then((response) => {
+        alert("Account created");
         const token = response.data.access_token;
         setToken(token);
-        const tokenPayload: { role: Role.Admin | Role.Client | Role.Brigadier; sub: number } = jwtDecode(token);
+        const tokenPayload: { role: Role.Client; sub: number } = jwtDecode(token);
+        dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
+      })
+      .catch((error) => {
+        alert(error.response.data.message);
+        dispatch({ type: NOT_AUTHENTICATED });
+      });
+  };
+}
+
+export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
+  return async (dispatch: Dispatch) => {
+    await axios
+      .post(authLinks.registerBrigadier, registerBrigadierDto)
+      .then((response) => {
+        alert("Brigadier`s account created");
+        const token = response.data.access_token;
+        setToken(token);
+        const tokenPayload: { role: Role.Brigadier; sub: number } = jwtDecode(token);
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {

@@ -133,10 +133,9 @@ function LeaveRequestForm() {
               />
               <TextInput
                 placeholder="House"
-                value=""
+                value={house || ""}
                 onChange={(e) => {
-                  if (!Number(e.target.value)) return;
-                  setHouse(e.target.value);
+                  setHouse(e.target.value.replace(/\D/g, ""));
                 }}
               />
               <TextInput
@@ -148,10 +147,9 @@ function LeaveRequestForm() {
               />
               <TextInput
                 placeholder="Flat"
-                value=""
+                value={flat || ""}
                 onChange={(e) => {
-                  if (!Number(e.target.value)) return;
-                  setFlat(e.target.value);
+                  setFlat(e.target.value.replace(/\D/g, ""));
                 }}
               />
             </div>

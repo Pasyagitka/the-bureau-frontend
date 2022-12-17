@@ -1,3 +1,3 @@
 export type UpdateRequestByBrigadierDto = {
-  status?: string;
+  status: string;
 };

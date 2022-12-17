@@ -32,6 +32,7 @@ import CreateEquipmentForm from "../admin/storage/equipment/CreateEquipmentForm"
 import CreateAccessoryForm from "../admin/storage/accessoriesList/CreateAccessoryForm";
 import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryForm";
 import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
+import EditClientDetails from "../client/editClientDetails/EditClientDetails";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -90,6 +91,7 @@ function App() {
             }
           >
             <Route path="" element={<ClientHome />} />
+            <Route path="update/:id" element={<EditClientDetails />} />
             <Route path="leave-request" element={<LeaveRequestForm />} />
           </Route>
 

@@ -30,6 +30,7 @@ export const equipmentLinks = {
 
 export const brigadierLinks = {
   getAll: "/api/brigadier",
+  getAlNotActivated: "/api/brigadier",
   get: (id: number) => `/api/brigadier/${id}`,
   update: (id: number) => `/api/brigadier/${id}`,
   delete: (id: number) => `/api/brigadier/${id}`,

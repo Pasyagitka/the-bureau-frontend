@@ -6,5 +6,4 @@ export type CreateClientDto = {
   email: string;
   login: string;
   password: string;
-  role: string;
 };

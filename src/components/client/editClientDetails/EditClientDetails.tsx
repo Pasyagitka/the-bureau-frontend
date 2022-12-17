@@ -1,38 +1,35 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, update } from "@/redux/actions/storage/accessories";
+import { get, update } from "@/redux/actions/clients";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
-function EditAccessoryForm() {
+function EditClientDetails() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const accessory = useAppSelector((state) => state.accessories.accessory);
+  const client = useAppSelector((state) => state.clients.client);
 
-  const [name, setName] = useState();
-  const [equipmentId, setEquipmentId] = useState();
-  const [sku, setSku] = useState();
+  const [firstname, setFirstname] = useState();
+  const [surname, setSurname] = useState();
+  const [patronymic, setPatronymic] = useState();
+  const [contactNumber, setContactNumber] = useState();
 
   useEffect(() => {
     dispatch(get(params.id));
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(accessory.equipment?.id, "equipment");
-    setName(accessory.name);
-    setEquipmentId(accessory.equipment?.id);
-    setSku(accessory.sku);
-  }, [accessory]);
+    setFirstname(client.firstname);
+    setSurname(client.surname);
+    setPatronymic(client.patronymic);
+    setContactNumber(client.contactNumber);
+  }, [client]);
 
   const handleSubmit = async () => {
-    const updateAccessoryDto: UpdateAccessoryDto = {
-      name,
-      equipmentId: +equipmentId,
-      sku,
-    };
-    console.log(updateAccessoryDto, "update");
-    const res = await dispatch(update({ id: params.id, updateAccessoryDto }));
+    const res = await dispatch(
+      update({ id: params.id, updateClientDto: { firstname, surname, patronymic, contactNumber } })
+    );
     if (!res.error) {
       navigate(-1);
     }
@@ -44,46 +41,61 @@ function EditAccessoryForm() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Update accessory</h1>
+              <h1 className="text-gray-600">Update client</h1>
             </div>
           </div>
         </div>
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+            <h2 className="max-w-sm mx-auto md:w-1/3">Personal info</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Firstname</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="Name"
-                    defaultValue={name}
-                    onChange={(e) => setName(e.target.value)}
+                    placeholder="firstname"
+                    defaultValue={firstname}
+                    onChange={(e) => setFirstname(e.target.value)}
                   />
                 </div>
               </div>
               <div>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Surname</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="sku"
-                    defaultValue={sku}
-                    onChange={(e) => setSku(e.target.value)}
+                    placeholder="surname"
+                    defaultValue={surname}
+                    onChange={(e) => setSurname(e.target.value)}
                   />
                 </div>
               </div>
               <div>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Patronymic</h2>
                 <div className=" relative ">
                   <input
                     type="text"
-                    id="user-info-name"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="Equipment Id"
-                    defaultValue={equipmentId}
-                    value={equipmentId || ""}
+                    placeholder="patronymic"
+                    defaultValue={patronymic}
+                    onChange={(e) => setPatronymic(e.target.value)}
+                  />
+                </div>
+              </div>
+              <div>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Contact number</h2>
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
+                    placeholder="contactNumber"
+                    defaultValue={contactNumber}
+                    value={contactNumber || ""}
                     onChange={(e) => {
-                      setEquipmentId(e.target.value.replace(/\D/g, ""));
+                      setContactNumber(e.target.value.replace(/\D/g, ""));
                     }}
                   />
                 </div>
@@ -106,4 +118,4 @@ function EditAccessoryForm() {
   );
 }
 
-export default EditAccessoryForm;
+export default EditClientDetails;
