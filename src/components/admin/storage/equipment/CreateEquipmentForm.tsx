@@ -10,9 +10,10 @@ function CreateEquipmentForm() {
   const navigate = useNavigate();
 
   const [type, setType] = useState();
-  const [mounting, setMounting] = useState();
 
   const mountingsList = Object.values(Mounting).map((i) => <option value={i} label={i} />);
+
+  const [mounting, setMounting] = useState(Mounting.FLOOR);
 
   const handleSubmit = async () => {
     const item: CreateEquipmentDto = {

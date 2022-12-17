@@ -9,6 +9,8 @@ function CreateAccessoryForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  const equipment = useAppSelector((state) => state.equipment.equipment);
+
   const [name, setName] = useState();
   const [equipmentId, setEquipmentId] = useState();
   const [sku, setSku] = useState();
@@ -17,9 +19,7 @@ function CreateAccessoryForm() {
     dispatch(getAll());
   }, [dispatch]);
 
-  const equipmentList = useAppSelector((state) => state.equipment.equipment).map((i) => (
-    <option selected value={i.id} label={i.type} />
-  ));
+  const equipmentList = equipment.map((i) => <option value={i.id} label={i.type} />);
 
   const handleSubmit = async () => {
     const item: CreateAccessoryDto = {
