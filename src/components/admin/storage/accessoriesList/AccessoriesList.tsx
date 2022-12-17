@@ -16,7 +16,7 @@ function AccessoriesList({
       id={item.id}
       sku={item.sku}
       name={item.name}
-      equipmentId={item?.equipment.id}
+      equipmentId={item?.equipment?.id}
       handleRemove={() => handleRemove(item.id)}
     />
   ));

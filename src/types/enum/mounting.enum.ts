@@ -1,4 +1,4 @@
 export enum Mounting {
-  FLOOR = "FLOOR",
-  WALL = "WALL",
+  FLOOR = "Пол",
+  WALL = "Стена",
 }

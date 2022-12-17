@@ -45,7 +45,7 @@ export const clientLinks = {
 };
 
 export const stageLinks = {
-  getAll: "/api/stages",
+  getAll: "/api/stage",
 };
 
 export const requestLinks = {

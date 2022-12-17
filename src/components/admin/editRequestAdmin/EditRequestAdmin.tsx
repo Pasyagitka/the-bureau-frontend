@@ -17,7 +17,7 @@ function EditRequestAdmin() {
   const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
     <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
   ));
-  brigadiersList.push(<option value={0} selected={!brigadierId} label="No brigadier" />);
+  brigadiersList.push(<option value={-1} selected={!brigadierId} label="No brigadier" />);
 
   const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
@@ -32,7 +32,10 @@ function EditRequestAdmin() {
   }, [request]);
 
   const handleSubmit = async () => {
-    const updateRequestByAdminDto = brigadierId ? { brigadier: brigadierId, status: statusId } : { status: statusId };
+    const updateRequestByAdminDto =
+      brigadierId === null || brigadierId === undefined
+        ? { status: statusId }
+        : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
     const updateDto = {
       id: params.id,
       updateRequestByAdminDto,
@@ -45,6 +48,7 @@ function EditRequestAdmin() {
 
   const handleBrigadierSelectChange = (e: number) => {
     setBrigadier(Number(e));
+    console.log(brigadierId);
   };
 
   const handleStatusSelectChange = (e: string) => {

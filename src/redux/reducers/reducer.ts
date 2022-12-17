@@ -18,9 +18,6 @@ const rootReducer = combineReducers({
   brigadiers: brigadiersSlice,
   stages: stagesSlice,
   requests: requestsSlice,
-  // movies: moviesReducer,
-  // search: searchReducer,
-  // app: appReducer,
 });
 
 export default rootReducer;

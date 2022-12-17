@@ -26,7 +26,7 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
           </p>
           <p className="mt-2 text-gray-600 text-sm">{request.comment}</p>
           <div className="flex flex-wrap items-center gap-2 my-5">
-            <StageBadge stage={3} />
+            <StageBadge stage={request.stage.id} />
           </div>
           <div className="flex item-center justify-between mt-3">
             <RequestTimeline status={request.status} />

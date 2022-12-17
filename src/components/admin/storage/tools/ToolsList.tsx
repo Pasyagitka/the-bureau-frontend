@@ -8,8 +8,7 @@ function ToolsList({ tools = [], handleRemove }: { tools: ToolsDto[]; handleRemo
       key={tool.id}
       id={tool.id}
       name={tool.name}
-      quantity={1}
-      stage={tool.stageId}
+      stage={tool?.stage?.id}
       handleRemove={() => handleRemove(tool.id)}
     />
   ));
@@ -30,12 +29,6 @@ function ToolsList({ tools = [], handleRemove }: { tools: ToolsDto[]; handleRemo
                 className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
               >
                 Name
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Quantity
               </th>
               <th
                 scope="col"

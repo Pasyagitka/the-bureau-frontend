@@ -19,20 +19,19 @@ function EditAccessoryForm() {
   }, [dispatch]);
 
   useEffect(() => {
-    console.log(accessory.equipment?.id, "equipment");
     setName(accessory.name);
     setEquipmentId(accessory.equipment?.id);
     setSku(accessory.sku);
   }, [accessory]);
 
   const handleSubmit = async () => {
-    const updateAccessoryDto: UpdateAccessoryDto = {
+    const updateAccessoriesDto: UpdateAccessoryDto = {
       name,
       equipmentId: +equipmentId,
-      sku,
+      sku: sku === "" ? null : sku,
     };
-    console.log(updateAccessoryDto, "update");
-    const res = await dispatch(update({ id: params.id, updateAccessoryDto }));
+    console.log(updateAccessoriesDto, "update");
+    const res = await dispatch(update({ id: params.id, updateAccessoriesDto }));
     if (!res.error) {
       navigate(-1);
     }
@@ -69,7 +68,10 @@ function EditAccessoryForm() {
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                     placeholder="sku"
                     defaultValue={sku}
-                    onChange={(e) => setSku(e.target.value)}
+                    onChange={(e) => {
+                      console.log(sku);
+                      setSku(e.target.value);
+                    }}
                   />
                 </div>
               </div>

@@ -1,5 +1,5 @@
-import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getAll } from "@/redux/actions/stage";
 import { update, get } from "@/redux/actions/storage/tools";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -9,13 +9,16 @@ function EditToolForm() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const stages = useAppSelector((state) => state.stages);
-  const tool = useAppSelector((state) => state.tools.tool);
-
   const [name, setName] = useState();
   const [stageId, setStageId] = useState();
 
+  const tool = useAppSelector((state) => state.tools.tool);
+
+  const stages = useAppSelector((state) => state.stages.stages).map((i) => (
+    <option selected value={i.id} label={i.stage} />
+  ));
   useEffect(() => {
+    dispatch(getAll());
     dispatch(get(params.id));
   }, [dispatch]);
 
@@ -29,6 +32,10 @@ function EditToolForm() {
     if (!res.error) {
       navigate(-1);
     }
+  };
+
+  const handleStageSelectChange = (e: number) => {
+    setStageId(Number(e));
   };
 
   return (
@@ -56,14 +63,14 @@ function EditToolForm() {
                   />
                 </div>
               </div>
-              <Select
-                title="Stage"
-                values={[
-                  { id: 1, name: "Clean" },
-                  { id: 2, name: "Rough" },
-                  { id: 3, name: "Both" },
-                ]}
-              />
+              <select
+                name="equipment"
+                defaultValue={stageId}
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
+                onChange={(e) => handleStageSelectChange(Number(e.currentTarget.value))}
+              >
+                {stages}
+              </select>
             </div>
           </div>
           <hr />

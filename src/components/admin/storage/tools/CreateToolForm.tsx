@@ -1,7 +1,7 @@
-import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getAll } from "@/redux/actions/stage";
 import { create } from "@/redux/actions/storage/tools";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateToolForm() {
@@ -11,13 +11,24 @@ function CreateToolForm() {
   const [name, setName] = useState();
   const [stageId, setStageId] = useState(1);
 
-  const stages = useAppSelector((state) => state.stages);
+  const stages = useAppSelector((state) => state.stages.stages).map((i) => (
+    <option selected value={i.id} label={i.stage} />
+  ));
+
+  useEffect(() => {
+    dispatch(getAll());
+  }, [dispatch]);
 
   const handleSubmit = async () => {
     const res = await dispatch(create({ name, stageId }));
     if (!res.error) {
       navigate(-1);
     }
+  };
+
+  const handleStageSelectChange = (e: number) => {
+    setStageId(Number(e));
+    console.log(stageId);
   };
 
   return (
@@ -44,14 +55,14 @@ function CreateToolForm() {
                   />
                 </div>
               </div>
-              <Select
-                title="Stage"
-                values={[
-                  { id: 1, name: "Clean" },
-                  { id: 2, name: "Rough" },
-                  { id: 3, name: "Both" },
-                ]}
-              />
+              <select
+                name="equipment"
+                defaultValue={stageId}
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
+                onChange={(e) => handleStageSelectChange(Number(e.currentTarget.value))}
+              >
+                {stages}
+              </select>
             </div>
           </div>
           <hr />

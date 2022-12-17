@@ -1,4 +1,3 @@
-import Select from "@/elements/select/Select";
 import { useAppDispatch } from "@/hooks";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
@@ -10,10 +9,10 @@ function CreateEquipmentForm() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const mountings = Object.values(Mounting);
-
   const [type, setType] = useState();
-  const [mounting, setMounting] = useState(mountings[0]);
+  const [mounting, setMounting] = useState();
+
+  const mountingsList = Object.values(Mounting).map((i) => <option value={i} label={i} />);
 
   const handleSubmit = async () => {
     const item: CreateEquipmentDto = {
@@ -50,12 +49,16 @@ function CreateEquipmentForm() {
                   />
                 </div>
               </div>
-              <Select
-                title="Mounting"
-                values={mountings}
-                onChange={(e) => setMounting(e.target.value)}
-                selected={mounting}
-              />
+              <select
+                name="Mounting"
+                defaultValue={mounting}
+                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
+                onChange={(e) => {
+                  setMounting(e.currentTarget.value);
+                }}
+              >
+                {mountingsList}
+              </select>
             </div>
           </div>
           <hr />

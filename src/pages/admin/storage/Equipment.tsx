@@ -1,6 +1,6 @@
 import EquipmentList from "@/components/admin/storage/equipment/EquipmentList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/storage/equipment";
+import { getAll, remove } from "@/redux/actions/storage/equipment";
 import { useEffect } from "react";
 
 function Equipment() {

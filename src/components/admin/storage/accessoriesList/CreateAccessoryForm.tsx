@@ -1,7 +1,8 @@
-import { useAppDispatch } from "@/hooks";
+import { useAppDispatch, useAppSelector } from "@/hooks";
 import { create } from "@/redux/actions/storage/accessories";
+import { getAll } from "@/redux/actions/storage/equipment";
 import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccessoryDto";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
 function CreateAccessoryForm() {
@@ -11,6 +12,14 @@ function CreateAccessoryForm() {
   const [name, setName] = useState();
   const [equipmentId, setEquipmentId] = useState();
   const [sku, setSku] = useState();
+
+  useEffect(() => {
+    dispatch(getAll());
+  }, [dispatch]);
+
+  const equipmentList = useAppSelector((state) => state.equipment.equipment).map((i) => (
+    <option selected value={i.id} label={i.type} />
+  ));
 
   const handleSubmit = async () => {
     const item: CreateAccessoryDto = {
@@ -22,6 +31,11 @@ function CreateAccessoryForm() {
     if (!res.error) {
       navigate(-1);
     }
+  };
+
+  const handleEquipmentSelectChange = (e: number) => {
+    setEquipmentId(Number(e));
+    console.log(equipmentId);
   };
 
   return (
@@ -59,15 +73,14 @@ function CreateAccessoryForm() {
               </div>
               <div>
                 <div className=" relative ">
-                  <input
-                    type="text"
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="Equipment Id"
-                    value={equipmentId || ""}
-                    onChange={(e) => {
-                      setEquipmentId(e.target.value.replace(/\D/g, ""));
-                    }}
-                  />
+                  <select
+                    name="equipment"
+                    defaultValue={equipmentId}
+                    className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
+                    onChange={(e) => handleEquipmentSelectChange(Number(e.currentTarget.value))}
+                  >
+                    {equipmentList}
+                  </select>
                 </div>
               </div>
             </div>
