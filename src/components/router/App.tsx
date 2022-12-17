@@ -59,6 +59,7 @@ function App() {
             }
           >
             <Route path="" element={<Navigate to="requests" />} />
+            <Route path="dashboard" element={<Dashboard />} />
             <Route path="home" element={<Dashboard />} />
             <Route path="brigadiers" element={<Brigadiers />} />
             {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}

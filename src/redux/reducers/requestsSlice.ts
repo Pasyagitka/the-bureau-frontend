@@ -9,6 +9,7 @@ import {
   getAccessories,
   getAll,
   getTools,
+  getWeeklyReport,
   remove,
   updateByAdmin,
   updateByBrigadier,
@@ -19,6 +20,7 @@ type RequestsStateProps = {
   request: RequestDto;
   requestTools: RequestToolDto[];
   requestAccessories: RequestAccessoryDto[];
+  weeklyReport: Array<unknown>;
 };
 
 const initialState = {
@@ -26,6 +28,7 @@ const initialState = {
   request: {},
   requestTools: [],
   requestAccessories: [],
+  weeklyReport: [],
 };
 
 const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder) => {
@@ -40,6 +43,9 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
   });
   builder.addCase(getTools.fulfilled, (state, action) => {
     state.requestTools = action.payload;
+  });
+  builder.addCase(getWeeklyReport.fulfilled, (state, action) => {
+    state.weeklyReport = action.payload;
   });
   builder.addCase(create.fulfilled, (state, action) => {
     state.requests.push(action.payload);

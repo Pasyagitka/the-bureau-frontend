@@ -50,6 +50,7 @@ export const stageLinks = {
 
 export const requestLinks = {
   getAll: "/api/request",
+  getWeeklyReport: "/api/request/weekly-report",
   getAccessories: (id: number) => `/api/request/${id}/accessories`,
   getTools: (id: number) => `/api/request/${id}/tools`,
   getEquipment: (id: number) => `/api/request/${id}/equipment`,

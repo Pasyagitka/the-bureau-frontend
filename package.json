@@ -115,6 +115,8 @@
   "dependencies": {
     "@headlessui/react": "^1.7.4",
     "@heroicons/react": "^2.0.13",
+    "@nivo/core": "^0.80.0",
+    "@nivo/heatmap": "^0.80.0",
     "@react-three/drei": "^9.34.3",
     "@react-three/fiber": "^8.8.9",
     "@reduxjs/toolkit": "^1.8.3",

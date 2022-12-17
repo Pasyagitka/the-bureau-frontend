@@ -1,7 +1,11 @@
 import Calendar from "./calendar/Calendar";
 
 function Schedule() {
-  return <Calendar />;
+  return (
+    <div className="w-full bg-white rounded-lg">
+      <Calendar />
+    </div>
+  );
 }
 
 export default Schedule;

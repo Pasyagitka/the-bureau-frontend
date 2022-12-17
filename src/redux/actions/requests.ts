@@ -11,6 +11,7 @@ import {
   DELETE_REQUESTS,
   EDIT_REQUESTS_BY_ADMIN,
   EDIT_REQUESTS_BY_BRIGADIER,
+  GET_WEEKLY_REPORT,
 } from "../actionTypes/requests";
 import { GET_ALL_ACCESSORIES } from "../actionTypes/storage/accessories";
 import { GET_ALL_TOOLS } from "../actionTypes/storage/tools";
@@ -35,6 +36,15 @@ export const create = createAsyncThunk(
 
 export const getAll = createAsyncThunk(GET_ALL_REQUESTS, async () => {
   const request = await axios.get(requestLinks.getAll, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getWeeklyReport = createAsyncThunk(GET_WEEKLY_REPORT, async () => {
+  const request = await axios.get(requestLinks.getWeeklyReport, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
