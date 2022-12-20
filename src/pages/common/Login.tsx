@@ -60,16 +60,13 @@ export default function Login() {
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                   <form>
                     <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2" htmlFor="grid-password">
-                        Login
-                      </label>
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Login</label>
                       <input
                         type="text"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                         placeholder="Login"
                         style={{ transition: "all .15s ease" }}
                         onChange={(e) => {
-                          console.log("login set");
                           setUsername(e.target.value);
                         }}
                       />
@@ -92,7 +89,6 @@ export default function Login() {
                         type="button"
                         style={{ transition: "all .15s ease" }}
                         onClick={() => {
-                          console.log("handler", username, password);
                           handleSubmit();
                         }}
                       >

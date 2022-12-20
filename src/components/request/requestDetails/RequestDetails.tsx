@@ -51,7 +51,12 @@ function RequestDetails() {
             value={`${request?.client?.surname} ${request?.client?.firstname} ${request?.client?.patronymic}`}
             isDark
           />
-          <DetailsItem title="Address" value="Country, City, Street, House, Corpus, Flat" />
+          <DetailsItem
+            title="Address"
+            value={`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
+              request.address?.house
+            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""} `}
+          />
           <DetailsItem title="Email address" value={request.client?.user?.email} isDark />
           <DetailsItem title="Contact phone" value={`+${request.client?.contactNumber}`} />
           <DetailsItem title="Comment" value={request.comment} isDark />

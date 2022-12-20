@@ -44,9 +44,9 @@ function LeaveRequestForm() {
       placeholder={item.type}
       defaultValue={0}
       onChange={(e) => {
+        if (e.target.value === "") requestEquipmentList.delete(item.id);
         if (!Number(e.target.value)) return;
         requestEquipmentList.set(item.id, e.target.value);
-        if (e.target.value === "") requestEquipmentList.delete(item.id);
         console.log(requestEquipmentList);
       }}
     />

@@ -19,7 +19,7 @@ function RequestSmall({ request }: { request: RequestDto }) {
           <p className="mt-2 text-gray-600 text-sm">
             {`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
               request.address?.house
-            }${request.address?.corpus ?? ""}, кв. ${request.address?.flat}`}
+            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""}`}
           </p>
           {/* <div className="flex flex-wrap items-center gap-2 my-5">
             <StageBadge stage={1} />
