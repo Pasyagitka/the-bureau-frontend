@@ -19,7 +19,6 @@ function BrigadierHome() {
 
   return (
     <>
-      {/* <Schedule /> */}
       <BrigadierDetails brigadier={brigadier} />
       <BrigadierRequests requests={requests} />
     </>

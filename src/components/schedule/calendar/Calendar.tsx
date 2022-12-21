@@ -53,6 +53,8 @@ function Calendar() {
     data: [{ x: "Mon" }, { x: "Tue" }, { x: "Wed" }, { x: "Thu" }, { x: "Fri" }, { x: "Sat" }, { x: "Sun" }],
   });
 
+  console.log(results, data);
+
   return (
     <div className="h-70vh w-4/5 mx-auto">
       <ResponsiveHeatMap
