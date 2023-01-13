@@ -80,7 +80,7 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/3d-fluency-worker-beard-short.png"
+                src="https://img.icons8.com/3d-fluency/512/worker-beard--v2.png"
                 width="30px"
                 height="30px"
                 alt=""
