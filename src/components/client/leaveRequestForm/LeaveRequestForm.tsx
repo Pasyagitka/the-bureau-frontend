@@ -98,14 +98,14 @@ function LeaveRequestForm() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Leave your request</h1>
+              <h1 className="text-gray-600">Оставьте свою заявку</h1>
             </div>
           </div>
         </div>
         <div className="space-y-6 bg-white">
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Address</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3">Адрес</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div className="col-span-6 sm:col-span-3">
                 <select
@@ -114,7 +114,7 @@ function LeaveRequestForm() {
                   autoComplete="country-name"
                   className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
                 >
-                  <option>Belarus</option>
+                  <option>Беларусь</option>
                 </select>
               </div>
               <TextInput
@@ -160,7 +160,7 @@ function LeaveRequestForm() {
           </div>
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Stage</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3">Стадия отделки</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div className="col-span-6 sm:col-span-3">
                 <select
@@ -170,16 +170,16 @@ function LeaveRequestForm() {
                   value={stage}
                   onChange={(e) => handleSelectChange(Number(e.currentTarget.value))}
                 >
-                  <option value={1}>Clean</option>
-                  <option value={2}>Rough</option>
-                  <option value={3}>Both</option>
+                  <option value={1}>Чистовая</option>
+                  <option value={2}>Черновя</option>
+                  <option value={3}>Чистовая + Черновая</option>
                 </select>
               </div>
             </div>
           </div>
           <hr />
           <div className="items-center w-full p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-4/12">Leave comment</h2>
+            <h2 className="max-w-sm mx-auto md:w-4/12">Комментарий к заявке</h2>
             <label className="text-gray-700" htmlFor="name">
               <textarea
                 className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
@@ -196,7 +196,7 @@ function LeaveRequestForm() {
           </div>
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Request equipment</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3">Монтируемое оборудование</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems}</div>
           </div>
           <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
@@ -211,7 +211,7 @@ function LeaveRequestForm() {
               onClick={() => handleSubmit()}
               className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
             >
-              Save
+              Сохранить
             </button>
           </div>
         </div>

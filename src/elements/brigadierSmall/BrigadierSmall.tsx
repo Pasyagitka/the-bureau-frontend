@@ -16,7 +16,7 @@ function BrigadierSmall({ brigadier }: { brigadier: BrigadierDto }) {
           <span className="text-gray-600 text-sm font-medium">
             {`${brigadier?.surname} ${brigadier?.firstname} ${brigadier?.patronymic}`}
           </span>
-          <span className="text-gray-400 text-xs">Your brigadier</span>
+          <span className="text-gray-400 text-xs">Ваш бригадир</span>
         </div>
       </div>
     </div>

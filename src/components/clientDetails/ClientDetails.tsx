@@ -24,14 +24,14 @@ function ClientDetails() {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Client Details</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">All client details.</p>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Информация о клиенте</h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о клиенте</p>
       </div>
       <div className="border-t border-gray-200">
         <dl>
-          <DetailsItem title="Full name" value={`${client.surname} ${client.firstname} ${client.patronymic}`} isDark />
-          <DetailsItem title="Email address" value={client.user?.email} />
-          <DetailsItem title="Contact phone" value={`+${client.contactNumber}`} isDark />
+          <DetailsItem title="ФИО" value={`${client.surname} ${client.firstname} ${client.patronymic}`} isDark />
+          <DetailsItem title="Email" value={client.user?.email} />
+          <DetailsItem title="Контактный номер" value={`+${client.contactNumber}`} isDark />
         </dl>
       </div>
       <div className="w-1/2 flex flex-col justify-center mx-auto gap-5 my-5">{listItems}</div>

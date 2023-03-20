@@ -27,7 +27,7 @@ function BrigadierItem({
           <p className="mt-2 text-gray-600 text-sm">{brigadier?.user?.email}</p>
           <p className="mt-2 text-gray-600 text-sm">+{brigadier.contactNumber}</p>
           <div className="flex item-center justify-between mt-3">
-            <h1 className="text-gray-700 font-bold text-xl">brigadier</h1>
+            <h1 className="text-gray-700 font-bold text-xl">бригадир</h1>
             <button type="button" onClick={() => handleClick()}>
               {clickTitle}
             </button>

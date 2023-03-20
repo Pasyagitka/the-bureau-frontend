@@ -1,5 +1,5 @@
 export enum RequestStatus {
-  INPROCESSING = "InProcessing",
-  COMPLETED = "Completed",
-  APPROVED = "Approved",
+  INPROCESSING = "В обработке",
+  COMPLETED = "Выполнена",
+  APPROVED = "Подтверждена",
 }

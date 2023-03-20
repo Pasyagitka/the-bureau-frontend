@@ -29,7 +29,7 @@ function NotFound() {
         <div className="container mx-auto px-6 flex flex-col-reverse lg:flex-row justify-between items-center relative">
           <div className="w-full mb-16 md:mb-8 text-center lg:text-left">
             <h1 className="font-light text-center lg:text-left text-5xl lg:text-8xl mt-12 md:mt-0 my-10 text-gray-700">
-              Page not found
+              Страница не найдена
             </h1>
             <Button text="Go home" to="/" />
           </div>

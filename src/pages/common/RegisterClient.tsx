@@ -51,7 +51,7 @@ function RegisterClient() {
               <div className="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-lg bg-gray-300 border-0">
                 <div className="rounded-t mb-0 px-6 py-6">
                   <div className="text-center mb-3">
-                    <h6 className="text-gray-600 text-sm font-bold">Sign up</h6>
+                    <h6 className="text-gray-600 text-sm font-bold">Зарегистироваться</h6>
                   </div>
                   <hr className="mt-3 border-b-1 border-gray-400" />
                 </div>
@@ -68,29 +68,29 @@ function RegisterClient() {
                       />
                     </div>
                     <div className="relative w-full mb-3">
-                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Password</label>
+                      <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Пароль</label>
                       <input
                         type="password"
                         className="border-0 px-3 py-3 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                        placeholder="Password"
+                        placeholder="Пароль"
                         style={{ transition: "all .15s ease" }}
                         onChange={(e) => setPassword(e.target.value)}
                       />
                     </div>
-                    <RegisterTextInput label="Login" value={login} onChange={(e) => setLogin(e.target.value)} />
-                    <RegisterTextInput label="Surname" value={surname} onChange={(e) => setSurname(e.target.value)} />
                     <RegisterTextInput
-                      label="First Name"
-                      value={firstname}
-                      onChange={(e) => setFirstname(e.target.value)}
+                      label="Имя пользователя"
+                      value={login}
+                      onChange={(e) => setLogin(e.target.value)}
                     />
+                    <RegisterTextInput label="Фамилия" value={surname} onChange={(e) => setSurname(e.target.value)} />
+                    <RegisterTextInput label="Имя" value={firstname} onChange={(e) => setFirstname(e.target.value)} />
                     <RegisterTextInput
-                      label="Patronymic"
+                      label="Отчество"
                       value={patronymic}
                       onChange={(e) => setPatronymic(e.target.value)}
                     />
                     <RegisterTextInput
-                      label="Contact number"
+                      label="Контактный номер"
                       value={contactNumber || ""}
                       onChange={(e) => {
                         setContactNumber(e.target.value.replace(/\D/g, ""));
@@ -105,12 +105,12 @@ function RegisterClient() {
                           handleSubmit();
                         }}
                       >
-                        Sign Up
+                        Зарегистироваться
                       </button>
                     </div>
                     <div className="w-1/2 text-center">
                       <Link to="/login" className="text-gray-900">
-                        <small>Already have an account? Sign In</small>
+                        <small>Уже есть аккаунт? Войдите</small>
                       </Link>
                     </div>
                   </div>

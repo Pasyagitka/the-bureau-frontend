@@ -17,7 +17,7 @@ function Sidebar() {
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span className="flex-1 ml-3 whitespace-nowrap">Dashboard</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Главная</span>
               {/* <span className="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
                 Pro
               </span> */}
@@ -35,7 +35,7 @@ function Sidebar() {
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span className="flex-1 ml-3 whitespace-nowrap">Requests</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Заявки</span>
               {/* <span className="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
                 Pro
               </span> */}
@@ -53,7 +53,7 @@ function Sidebar() {
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span className="flex-1 ml-3 whitespace-nowrap">Storage</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Склад</span>
               {/* <span className="inline-flex justify-center items-center p-3 ml-3 w-3 h-3 text-sm font-medium text-blue-600 bg-blue-200 rounded-full dark:bg-blue-900 dark:text-blue-200">
                 3
               </span> */}
@@ -71,7 +71,7 @@ function Sidebar() {
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span className="flex-1 ml-3 whitespace-nowrap">Clients</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Клиенты</span>
             </NavLink>
           </li>
           <li>
@@ -86,7 +86,7 @@ function Sidebar() {
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
-              <span className="flex-1 ml-3 whitespace-nowrap">Brigadiers</span>
+              <span className="flex-1 ml-3 whitespace-nowrap">Бригадиры</span>
             </NavLink>
           </li>
           {/* <li>

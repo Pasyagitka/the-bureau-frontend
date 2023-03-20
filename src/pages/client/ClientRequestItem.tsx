@@ -31,7 +31,7 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
           </div>
         ) : (
           <div className="w-1/6 p-4">
-            <BrigadierSmall brigadier={{ firstname: "brigadier", surname: "No", patronymic: "" }} />
+            <BrigadierSmall brigadier={{ firstname: "назначен", surname: "Не", patronymic: "" }} />
           </div>
         )}
       </div>

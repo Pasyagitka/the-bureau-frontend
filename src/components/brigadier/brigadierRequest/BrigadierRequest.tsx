@@ -22,7 +22,7 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
             }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""} `}
           </h1>
           <p className="mt-2 text-gray-600 text-sm">
-            {`Client: ${request.client?.surname} ${request.client?.firstname} ${request.client?.patronymic}`}
+            {`Клиент: ${request.client?.surname} ${request.client?.firstname} ${request.client?.patronymic}`}
           </p>
           <p className="mt-2 text-gray-600 text-sm">{request.comment}</p>
           <div className="flex flex-wrap items-center gap-2 my-5">
@@ -39,20 +39,20 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
               className="text-gray-900 font-bold text-2xl m-5"
               onClick={(e) => setVisible(!visible)}
             >
-              Details
+              Детали
             </button>
             <Collapse isOpened={visible}>
               <div className="flex flex-row h-fit">
                 <div className="w-1/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Equipment</p>
+                  <p className="mt-2 text-gray-600 text-sm text-center">Оборудование</p>
                   <RequestEquipment equipmentList={request.requestEquipment} />
                 </div>
                 <div className="w-2/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Accessories</p>
+                  <p className="mt-2 text-gray-600 text-sm text-center">Комплектующие</p>
                   <RequestAccessories accessories={request.requestAccessories} />
                 </div>
                 <div className="w-1/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Tools</p>
+                  <p className="mt-2 text-gray-600 text-sm text-center">Инструменты</p>
                   <RequestTools tools={request.requestTools} />
                 </div>
               </div>

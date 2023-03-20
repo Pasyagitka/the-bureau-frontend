@@ -11,7 +11,7 @@ function Header() {
           </div>
         </span>
         <span className="max-w-lg font-sans text-3xl font-bold tracking-tight text-neutral-900 sm:text-4xl sm:leading-none">
-          TheBureau
+          Mounting Bureau
         </span>
       </a>
       <Navbar />
@@ -30,7 +30,7 @@ function Header() {
             />
           </svg>
         </span>
-        <span className=""> Menu </span>
+        <span className=""> Меню </span>
       </button>
     </header>
   );

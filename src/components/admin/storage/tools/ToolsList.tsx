@@ -28,13 +28,13 @@ function ToolsList({ tools = [], handleRemove }: { tools: ToolsDto[]; handleRemo
                 scope="col"
                 className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
               >
-                Name
+                Наименование
               </th>
               <th
                 scope="col"
                 className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
               >
-                Stage
+                Стадия отделки
               </th>
               <th
                 scope="col"

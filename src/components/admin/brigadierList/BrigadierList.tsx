@@ -18,7 +18,7 @@ function BrigadierList({
         key={brigadier.id}
         brigadier={brigadier}
         handleClick={() => handleRemove(brigadier?.user?.id)}
-        clickTitle="Block"
+        clickTitle="Заблокировать"
       />
     );
   });
@@ -29,7 +29,7 @@ function BrigadierList({
         key={brigadier.id}
         brigadier={brigadier}
         handleClick={() => handleApprove(brigadier?.user?.id)}
-        clickTitle="Approve"
+        clickTitle="Подтвердить"
       />
     );
   });
@@ -37,8 +37,8 @@ function BrigadierList({
     <div className="w-full bg-white p-12 container  rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Brigadiers</p>
-          <p className="text-2xl font-light text-gray-400">Description...</p>
+          <p className="text-4xl font-bold text-gray-800 mb-4">Бригадир</p>
+          <p className="text-2xl font-light text-gray-400">Описание...</p>
         </div>
       </div>
       <div className="my-10">

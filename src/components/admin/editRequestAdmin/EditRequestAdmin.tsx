@@ -17,7 +17,7 @@ function EditRequestAdmin() {
   const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
     <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
   ));
-  brigadiersList.push(<option value={-1} selected={!brigadierId} label="No brigadier" />);
+  brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
 
   const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
@@ -58,11 +58,11 @@ function EditRequestAdmin() {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-80vh container p-4">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Edit request</h3>
-        <p className="mt-1 max-w-2xl text-sm text-gray-500">All request details.</p>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">Status</dt>
+        <dt className="text-sm font-medium text-gray-500">Статус</dt>
         <div className="col-span-6 sm:col-span-3">
           <select
             name="status"
@@ -75,7 +75,7 @@ function EditRequestAdmin() {
         </div>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">Brigadier</dt>
+        <dt className="text-sm font-medium text-gray-500">Бригадир</dt>
         <div className="col-span-6 sm:col-span-3">
           <select
             name="brigadier"
@@ -93,7 +93,7 @@ function EditRequestAdmin() {
           onClick={() => handleSubmit()}
           className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-1/3 transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
         >
-          Save
+          Сохранить
         </button>
       </div>
     </div>

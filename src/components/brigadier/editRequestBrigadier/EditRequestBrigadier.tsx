@@ -41,7 +41,7 @@ function EditRequestBrigadier() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Update request status</h1>
+              <h1 className="text-gray-600">Обновить статус заявки</h1>
             </div>
           </div>
         </div>
@@ -65,7 +65,7 @@ function EditRequestBrigadier() {
               onClick={() => handleSubmit()}
               className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
             >
-              Save
+              Сохранить
             </button>
           </div>
         </div>

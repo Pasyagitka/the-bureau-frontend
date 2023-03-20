@@ -41,57 +41,57 @@ function EditClientDetails() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Update client</h1>
+              <h1 className="text-gray-600">Редактировать клиента</h1>
             </div>
           </div>
         </div>
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Personal info</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3">Личная информация</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div>
-                <h2 className="max-w-sm mx-auto md:w-1/3">Firstname</h2>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Имя</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="firstname"
+                    placeholder="Имя"
                     defaultValue={firstname}
                     onChange={(e) => setFirstname(e.target.value)}
                   />
                 </div>
               </div>
               <div>
-                <h2 className="max-w-sm mx-auto md:w-1/3">Surname</h2>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Фамилия</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="surname"
+                    placeholder="Фамилия"
                     defaultValue={surname}
                     onChange={(e) => setSurname(e.target.value)}
                   />
                 </div>
               </div>
               <div>
-                <h2 className="max-w-sm mx-auto md:w-1/3">Patronymic</h2>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Отчество</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="patronymic"
+                    placeholder="Отчество"
                     defaultValue={patronymic}
                     onChange={(e) => setPatronymic(e.target.value)}
                   />
                 </div>
               </div>
               <div>
-                <h2 className="max-w-sm mx-auto md:w-1/3">Contact number</h2>
+                <h2 className="max-w-sm mx-auto md:w-1/3">Контактный телефон</h2>
                 <div className=" relative ">
                   <input
                     type="text"
                     className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="contactNumber"
+                    placeholder="Контактный номер"
                     defaultValue={contactNumber}
                     value={contactNumber || ""}
                     onChange={(e) => {
@@ -109,7 +109,7 @@ function EditClientDetails() {
               onClick={() => handleSubmit()}
               className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
             >
-              Save
+              Сохранить
             </button>
           </div>
         </div>

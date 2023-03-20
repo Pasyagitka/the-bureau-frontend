@@ -66,7 +66,7 @@ export function loginUser({ username, password }: { username: string; password: 
   return async (dispatch: Dispatch) => {
     await axios
       .post(authLinks.login, {
-        username,
+        login: username,
         password,
       })
       .then((response) => {

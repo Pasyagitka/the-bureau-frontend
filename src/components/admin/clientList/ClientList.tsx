@@ -8,8 +8,8 @@ function ClientList({ clients = [] }: { clients: ClientDto[] }) {
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Clients</p>
-          <p className="text-2xl font-light text-gray-400">Description...</p>
+          <p className="text-4xl font-bold text-gray-800 mb-4">Клиенты</p>
+          <p className="text-2xl font-light text-gray-400">Описание...</p>
         </div>
         <div className="text-end">
           <SearchInput />
