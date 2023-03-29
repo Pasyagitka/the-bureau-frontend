@@ -1,4 +1,10 @@
 import { NavLink } from "react-router-dom";
+import homeIcon from "icons/home.png";
+import documentIcon from "icons/document.png";
+import warehouseIcon from "icons/warehouse-1.png";
+import clientIcon from "icons/person-male.png";
+import brigadierIcon from "icons/worker-beard--v2.png";
+import invoiceIcon from "icons/invoice.png";
 
 function Sidebar() {
   return (
@@ -11,7 +17,7 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/home.png"
+                src={homeIcon}
                 width="30px"
                 height="30px"
                 alt=""
@@ -29,7 +35,7 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/document.png"
+                src={documentIcon}
                 width="30px"
                 height="30px"
                 alt=""
@@ -47,7 +53,7 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/fluency/512/warehouse-1.png"
+                src={warehouseIcon}
                 width="30px"
                 height="30px"
                 alt=""
@@ -65,7 +71,7 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/person-male.png"
+                src={clientIcon}
                 width="30px"
                 height="30px"
                 alt=""
@@ -80,13 +86,31 @@ function Sidebar() {
               className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/worker-beard--v2.png"
+                src={brigadierIcon}
                 width="30px"
                 height="30px"
                 alt=""
                 className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
               />
               <span className="flex-1 ml-3 whitespace-nowrap">Бригадиры</span>
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              to="/admin/invoices"
+              className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+            >
+              <img
+                src={invoiceIcon}
+                width="30px"
+                height="30px"
+                alt=""
+                className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              />
+              <span className="flex-1 ml-3 whitespace-nowrap">Счета</span>
+              {/* <span className="inline-flex justify-center items-center px-2 ml-3 text-sm font-medium text-gray-800 bg-gray-200 rounded-full dark:bg-gray-700 dark:text-gray-300">
+                Pro
+              </span> */}
             </NavLink>
           </li>
           {/* <li>

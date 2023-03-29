@@ -1,3 +1,5 @@
+import cancelIcon from "icons/cancel.png";
+
 function ConfirmationCard() {
   return (
     <div className="shadow-lg rounded-2xl p-4 bg-white dark:bg-gray-800 w-64 m-auto">
@@ -23,7 +25,7 @@ function ConfirmationCard() {
               className="py-2 px-4  bg-indigo-600 hover:bg-indigo-700 focus:ring-indigo-500 focus:ring-offset-indigo-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
             >
               <img
-                src="https://img.icons8.com/3d-fluency/512/cancel.png"
+                src={cancelIcon}
                 width="30px"
                 height="30px"
                 alt="Delete"

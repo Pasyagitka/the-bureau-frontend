@@ -7,6 +7,7 @@ import { Collapse } from "react-collapse";
 import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
 import RequestTools from "@/components/request/requestTools/RequestTools";
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
+import editIcon from "icons/edit.png";
 
 function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
   const [visible, setVisible] = useState(false);
@@ -64,7 +65,7 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
           className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
         >
           <img
-            src="https://img.icons8.com/3d-fluency/512/edit.png"
+            src={editIcon}
             width="30px"
             height="30px"
             alt="Edit"
