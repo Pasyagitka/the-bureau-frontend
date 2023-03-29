@@ -48,6 +48,13 @@ export const stageLinks = {
   getAll: "/api/stage",
 };
 
+export const invoiceLinks = {
+  getAll: "/api/invoice",
+  get: (id: number) => `/api/invoice/${id}`,
+  create: "/api/invoice",
+  getForBrigadier: (brigadierId: number) => `/api/invoice/brigadier/${brigadierId}`,
+};
+
 export const requestLinks = {
   getAll: "/api/request",
   getWeeklyReport: "/api/request/weekly-report",
@@ -70,6 +77,6 @@ export const scheduleLinks = {
 };
 
 export const userLinks = {
-  activate: (id: number) => `/api/user/activate/${id}`,
-  deactivate: (id: number) => `/api/user/deactivate/${id}`,
+  activate: (id: number) => `/api/user/${id}/activate`,
+  deactivate: (id: number) => `/api/user/${id}/deactivate`,
 };

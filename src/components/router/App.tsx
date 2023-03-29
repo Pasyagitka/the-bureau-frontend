@@ -17,6 +17,7 @@ import { useAppSelector } from "@/hooks";
 import BrigadierLayout from "@/layouts/BrigadierLayout";
 import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
 import ProtectedRoute from "@/layouts/ProtectedRoute";
+import Invoices from "@/pages/admin/Invoices";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -62,6 +63,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="home" element={<Dashboard />} />
             <Route path="brigadiers" element={<Brigadiers />} />
+            <Route path="invoices" element={<Invoices />} />
             {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}
             <Route path="clients" element={<Clients />} />
             <Route path="clients/:id" element={<ClientDetails />} />
