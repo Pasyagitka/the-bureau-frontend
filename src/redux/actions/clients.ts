@@ -28,7 +28,7 @@ export const update = createAsyncThunk(
   EDIT_CLIENTS,
   async ({ id, updateClientDto }: { id: number; updateClientDto: UpdateClientDto }, { rejectWithValue }) => {
     try {
-      const request = await axios.put(clientLinks.update(id), updateClientDto, {
+      const request = await axios.patch(clientLinks.update(id), updateClientDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

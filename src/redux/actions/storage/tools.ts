@@ -65,7 +65,7 @@ export const update = createAsyncThunk(
   EDIT_TOOLS,
   async ({ id, updateToolDto }: { id: number; updateToolDto: UpdateToolDto }, { rejectWithValue }) => {
     try {
-      const request = await axios.put(toolsLinks.update(id), updateToolDto, {
+      const request = await axios.patch(toolsLinks.update(id), updateToolDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

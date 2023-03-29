@@ -100,7 +100,7 @@ export const updateByAdmin = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const request = await axios.put(requestLinks.updateByAdmin(id), updateRequestByAdminDto, {
+      const request = await axios.patch(requestLinks.updateByAdmin(id), updateRequestByAdminDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -120,7 +120,7 @@ export const updateByBrigadier = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const request = await axios.put(requestLinks.updateByBrigadier(id), updateRequestByBrigadierDto, {
+      const request = await axios.patch(requestLinks.updateByBrigadier(id), updateRequestByBrigadierDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },

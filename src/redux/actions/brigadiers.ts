@@ -49,7 +49,7 @@ export const update = createAsyncThunk(
   EDIT_BRIGADIERS,
   async ({ id, updateBrigadierDto }: { id: number; updateBrigadierDto: UpdateBrigadierDto }, { rejectWithValue }) => {
     try {
-      const request = await axios.put(brigadierLinks.update(id), updateBrigadierDto, {
+      const request = await axios.patch(brigadierLinks.update(id), updateBrigadierDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
@@ -78,7 +78,7 @@ export const getRequests = createAsyncThunk(GET_BRIGADIER_REQUESTS, async (id: n
 
 export const activate = createAsyncThunk(ACTIVATE_BRIGADIER, async (id: number, { rejectWithValue }) => {
   try {
-    const request = await axios.put(userLinks.activate(id), null, {
+    const request = await axios.patch(userLinks.activate(id), null, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },
@@ -92,7 +92,7 @@ export const activate = createAsyncThunk(ACTIVATE_BRIGADIER, async (id: number, 
 
 export const deactivate = createAsyncThunk(DEACTIVATE_BRIGADIER, async (id: number, { rejectWithValue }) => {
   try {
-    const request = await axios.put(userLinks.deactivate(id), null, {
+    const request = await axios.patch(userLinks.deactivate(id), null, {
       headers: {
         Authorization: `Bearer ${getToken()}`,
       },

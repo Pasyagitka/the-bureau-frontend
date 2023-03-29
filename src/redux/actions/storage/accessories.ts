@@ -68,7 +68,7 @@ export const update = createAsyncThunk(
     { rejectWithValue }
   ) => {
     try {
-      const request = await axios.put(accessoriesLinks.update(id), updateAccessoriesDto, {
+      const request = await axios.patch(accessoriesLinks.update(id), updateAccessoriesDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
