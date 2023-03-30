@@ -14,7 +14,7 @@ function ListItem({
   handleRemove: () => void;
 }) {
   return (
-    <tr>
+    <tr className="h-12">
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-center">
           <div className="flex-shrink-0">

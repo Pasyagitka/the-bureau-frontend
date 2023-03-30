@@ -5,17 +5,20 @@ import { create, get, getAll, remove } from "../actions/storage/accessories";
 
 type AccessoriesStateProps = {
   accessories: AccessoriesDto[];
+  total: number;
   accessory: AccessoriesDto;
 };
 
 const initialState = {
   accessories: [],
+  total: 0,
   accessory: {},
 };
 
 const accessoriesReducer = createReducer<AccessoriesStateProps>(initialState, (builder) => {
   builder.addCase(getAll.fulfilled, (state, action) => {
-    state.accessories = action.payload;
+    state.accessories = action.payload.data;
+    state.total = action.payload.total;
   });
   builder.addCase(get.fulfilled, (state, action) => {
     state.accessory = action.payload;

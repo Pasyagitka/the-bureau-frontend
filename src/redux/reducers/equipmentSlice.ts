@@ -5,17 +5,20 @@ import { create, get, getAll, remove } from "../actions/storage/equipment";
 
 type EquipmentStateProps = {
   equipment: EquipmentDto[];
+  total: number;
   equipmentItem: EquipmentDto;
 };
 
 const initialState = {
   equipment: [],
+  total: 0,
   equipmentItem: {},
 };
 
 const equipmentReducer = createReducer<EquipmentStateProps>(initialState, (builder) => {
   builder.addCase(getAll.fulfilled, (state, action) => {
-    state.equipment = action.payload;
+    state.equipment = action.payload.data;
+    state.total = action.payload.total;
   });
   builder.addCase(get.fulfilled, (state, action) => {
     state.equipmentItem = action.payload;

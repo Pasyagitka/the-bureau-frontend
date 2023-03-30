@@ -4,12 +4,14 @@ import { get, getAll } from "@/redux/actions/invoices";
 import { useEffect } from "react";
 
 function Invoices() {
+  const limit = 10;
+  const offset = 0;
   const dispatch = useAppDispatch();
 
   const invoices = useAppSelector((state) => state.invoices.invoices);
 
   function loadAll() {
-    dispatch(getAll());
+    dispatch(getAll({ limit, offset }));
   }
   useEffect(loadAll, [dispatch]);
 

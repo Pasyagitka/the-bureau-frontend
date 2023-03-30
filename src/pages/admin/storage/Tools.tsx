@@ -5,12 +5,14 @@ import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 function Tools() {
+  const limit = 10;
+  const offset = 0;
   const dispatch = useAppDispatch();
 
   const tools = useAppSelector((state) => state.tools.tools);
 
   function loadTools() {
-    dispatch(getAll());
+    dispatch(getAll({ limit, offset }));
   }
 
   useEffect(loadTools, [dispatch]);

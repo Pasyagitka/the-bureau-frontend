@@ -5,17 +5,20 @@ import { create, get, getAll, remove, update } from "../actions/storage/tools";
 
 type ToolsStateProps = {
   tools: ToolsDto[];
+  total: number;
   tool: ToolsDto;
 };
 
 const initialState = {
   tools: [],
+  total: 0,
   tool: {},
 };
 
 const toolsReducer = createReducer<ToolsStateProps>(initialState, (builder) => {
   builder.addCase(getAll.fulfilled, (state, action) => {
-    state.tools = action.payload;
+    state.tools = action.payload.data;
+    state.total = action.payload.total;
   });
   builder.addCase(get.fulfilled, (state, action) => {
     state.tool = action.payload;

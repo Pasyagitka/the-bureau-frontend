@@ -5,6 +5,7 @@ import {
   EDIT_EQUIPMENT,
   GET_ALL_EQUIPMENT,
 } from "@/redux/actionTypes/storage/equipment";
+import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateEquipmentDto } from "@/types/dto/storage/equipment/createEquipmentDto";
 import { UpdateEquipmentDto } from "@/types/dto/storage/equipment/updateEquipmentDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -29,10 +30,14 @@ export const create = createAsyncThunk(
   }
 );
 
-export const getAll = createAsyncThunk(GET_ALL_EQUIPMENT, async () => {
+export const getAll = createAsyncThunk(GET_ALL_EQUIPMENT, async ({ offset = 0, limit = 10 }: PaginatedQueryDto) => {
   const request = await axios.get(equipmentLinks.getAll, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
+    },
+    params: {
+      offset,
+      limit,
     },
   });
   return request.data;

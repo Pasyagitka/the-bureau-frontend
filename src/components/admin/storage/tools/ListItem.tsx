@@ -16,7 +16,7 @@ function ListItem({
   handleRemove: () => void;
 }) {
   return (
-    <tr>
+    <tr className="h-12">
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-center">
           <div className="flex-shrink-0">
@@ -28,7 +28,7 @@ function ListItem({
         <p className="text-gray-900 whitespace-no-wrap">{name}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <div className="flex flex-wrap items-center gap-2 my-5">
+        <div className="flex flex-wrap items-center gap-2">
           <StageBadge stage={stage} />
         </div>
       </td>

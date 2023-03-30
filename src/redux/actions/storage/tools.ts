@@ -1,4 +1,5 @@
 import { toolsLinks } from "@/constants";
+import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateToolDto } from "@/types/dto/storage/tools/createToolDto";
 import { UpdateToolDto } from "@/types/dto/storage/tools/updateToolDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -29,10 +30,14 @@ export const create = createAsyncThunk(ADD_TOOLS, async (createToolDto: CreateTo
   }
 });
 
-export const getAll = createAsyncThunk(GET_ALL_TOOLS, async () => {
+export const getAll = createAsyncThunk(GET_ALL_TOOLS, async ({ offset = 0, limit = 10 }: PaginatedQueryDto) => {
   const request = await axios.get(toolsLinks.getAll, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
+    },
+    params: {
+      offset,
+      limit,
     },
   });
   return request.data;
