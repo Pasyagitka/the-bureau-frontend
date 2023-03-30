@@ -3,7 +3,7 @@ import { Outlet } from "react-router-dom";
 
 function Storage() {
   return (
-    <div className="container w-full bg-white p-12 flex-col flex">
+    <div className="container w-full h-full bg-white p-12 flex-col flex">
       <Tab />
       <Outlet />
     </div>

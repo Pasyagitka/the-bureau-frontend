@@ -3,7 +3,7 @@ import Navbar from "./Navbar";
 
 function Header() {
   return (
-    <header className="flex justify-between items-center py-4 px-8 md:mb-12 md:py-[12px] xl:mb-4 pos-sticky top-0 z-1 transition-all">
+    <header className="flex h-10vh backdrop-blur-md bg-white/50 justify-between items-center py-4 px-8 md:mb-12 md:py-[12px] xl:mb-4 pos-sticky top-0 z-1 transition-all">
       <a className="inline-flex items-center text-black-800 font-bold gap-2.5 text-xl md:text-2xl" href="#">
         <span className="w-12 h-auto text-primary">
           <div>
