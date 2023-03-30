@@ -53,9 +53,16 @@ function Calendar() {
     data: [{ x: "Mon" }, { x: "Tue" }, { x: "Wed" }, { x: "Thu" }, { x: "Fri" }, { x: "Sat" }, { x: "Sun" }],
   });
 
-  console.log(results, data);
+  // console.log(results, data);
 
-  return (
+  return reportData.length === 0 ? (
+    <div className="grid h-80vh place-items-center ">
+      <div className="text-center">
+        <h1 className="mt-4 text-3xl font-bold tracking-tight text-gray-900 sm:text-5xl">Недостаточно данных</h1>
+        <p className="mt-6 text-base leading-7 text-gray-600">Невозможно отобразить расписание</p>
+      </div>
+    </div>
+  ) : (
     <div className="h-70vh w-4/5 mx-auto">
       <ResponsiveHeatMap
         data={data}

@@ -15,7 +15,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="  flex w-full ">
+    <nav className="flex-1 flex w-full ">
       <div className="flex mx-auto gap-12">
         <NavLink className="text-lg font-semibold text-primary lg:font-medium lg:text-[16px]" to="/">
           Главная
