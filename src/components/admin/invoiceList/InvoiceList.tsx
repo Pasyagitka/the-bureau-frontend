@@ -1,15 +1,26 @@
+import PaginationRow from "@/elements/paginationRow/paginationRow";
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";
 import InvoiceItem from "./InvoiceItem";
 
-function InvoiceList({
-  invoices = [],
-  handleRemove,
-  handleDownload,
-}: {
+interface InvoiceListProps {
   invoices: Array<InvoiceDto>;
   handleRemove: () => void;
   handleDownload: () => void;
-}) {
+  handlePageChange: (page: number) => void;
+  page: number;
+  pageSize: number;
+  total: number;
+}
+
+function InvoiceList({
+  invoices = [],
+  handlePageChange,
+  handleRemove,
+  handleDownload,
+  page,
+  pageSize,
+  total,
+}: InvoiceListProps) {
   const listItems = invoices.map((invoice) => (
     <InvoiceItem
       key={invoice.id}
@@ -29,6 +40,7 @@ function InvoiceList({
       </div>
       <div className="my-10">
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
+        <PaginationRow activePage={page} handleActivePageChange={handlePageChange} total={total} pageSize={pageSize} />
       </div>
     </div>
   );
