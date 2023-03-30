@@ -2,12 +2,12 @@ import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 import { useState } from "react";
-import { Link } from "react-router-dom";
 import { Collapse } from "react-collapse";
 import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
 import RequestTools from "@/components/request/requestTools/RequestTools";
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 import editIcon from "icons/edit.png";
+import IconButton from "@/elements/buttons/IconButton";
 
 function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
   const [visible, setVisible] = useState(false);
@@ -60,18 +60,9 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
             </Collapse>
           </div>
         </div>
-        <Link
-          to={`requests/${request.id}/edit`}
-          className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
-        >
-          <img
-            src={editIcon}
-            width="30px"
-            height="30px"
-            alt="Edit"
-            className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-          />
-        </Link>
+        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+          <IconButton icon={editIcon} alt="Edit" isLink to={`requests/${request.id}/edit`} />
+        </td>
       </div>
     </div>
   );

@@ -1,6 +1,6 @@
-import { Link } from "react-router-dom";
 import editIcon from "icons/edit.png";
 import cancelIcon from "icons/cancel.png";
+import IconButton from "@/elements/buttons/IconButton";
 
 function ListItem({
   id,
@@ -34,26 +34,10 @@ function ListItem({
         <p className="text-gray-900 whitespace-no-wrap">{equipmentId}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <Link to={`update/${id}`} className="text-lime-600 hover:text-lime-900">
-          <img
-            src={editIcon}
-            width="30px"
-            height="30px"
-            alt="Edit"
-            className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-          />
-        </Link>
+        <IconButton icon={editIcon} alt="Edit" to={`update/${id}`} isLink />
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <button type="button" className="text-red-600 hover:text-red-900" onClick={() => handleRemove()}>
-          <img
-            src={cancelIcon}
-            width="30px"
-            height="30px"
-            alt="Delete"
-            className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-          />
-        </button>
+        <IconButton icon={cancelIcon} alt="Delete" isLink={false} onClick={() => handleRemove()} />
       </td>
     </tr>
   );
