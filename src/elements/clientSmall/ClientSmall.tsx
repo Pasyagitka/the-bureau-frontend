@@ -1,5 +1,5 @@
 import { ClientDto } from "@/types/dto/client/clientDto";
-import { Link } from "react-router-dom";
+import AccentButton from "../buttons/AccentButton";
 
 function ClientSmall({ client }: { client: ClientDto }) {
   return (
@@ -11,12 +11,7 @@ function ClientSmall({ client }: { client: ClientDto }) {
           </span>
           <span className="text-gray-400 text-xs">+{client.contactNumber}</span>
         </div>
-        <Link
-          to={`${client.id}`}
-          className="py-2 px-4 bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-lime-200 text-white  transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-        >
-          Больше
-        </Link>
+        <AccentButton to={`${client.id}`} title="Больше" />
       </div>
     </div>
   );

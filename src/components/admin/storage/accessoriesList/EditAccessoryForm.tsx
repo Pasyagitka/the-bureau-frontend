@@ -1,3 +1,4 @@
+import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, update } from "@/redux/actions/storage/accessories";
 import { useState, useEffect } from "react";
@@ -94,13 +95,7 @@ function EditAccessoryForm() {
           </div>
           <hr />
           <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
-            <button
-              type="button"
-              onClick={() => handleSubmit()}
-              className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-            >
-              Сохранить
-            </button>
+            <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
           </div>
         </div>
       </div>

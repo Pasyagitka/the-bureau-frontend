@@ -2,7 +2,9 @@ import AccessoriesList from "@/components/admin/storage/accessoriesList/Accessor
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/storage/accessories";
 import { useEffect } from "react";
-import { Link } from "react-router-dom";
+import importIcon from "icons/import.png";
+import AccentButton from "@/elements/buttons/AccentButton";
+import ButtonWithIcon from "@/elements/buttons/ButtonWithIcon";
 
 function Accessories() {
   const limit = 10;
@@ -35,18 +37,9 @@ function Accessories() {
                   placeholder="Наименование"
                 />
               </div>
-              <button
-                type="button"
-                className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
-              >
-                Фильтр
-              </button>
-              <Link
-                to="create"
-                className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
-              >
-                Добавить
-              </Link>
+              <ButtonWithIcon to="" alt="Импорт" icon={importIcon} />
+              <AccentButton to="" title="Фильтр" />
+              <AccentButton to="create" title="Добавить" />
             </form>
           </div>
         </div>

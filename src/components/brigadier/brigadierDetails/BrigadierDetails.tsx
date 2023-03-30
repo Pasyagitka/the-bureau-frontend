@@ -1,5 +1,5 @@
+import AccentButton from "@/elements/buttons/AccentButton";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
-import { Link } from "react-router-dom";
 import DetailsItem from "../../request/requestDetails/DetailsItem";
 
 function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
@@ -9,12 +9,7 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
       <div className="title">
         <p className="text-4xl font-bold text-gray-800 mb-4">Информация о бригадире</p>
         {/* <p className="text-2xl font-light text-gray-400">Description...</p> */}
-        <Link
-          to={`update/${brigadier.id}`}
-          className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
-        >
-          Редактировать
-        </Link>
+        <AccentButton to={`update/${brigadier.id}`} title="Редактировать" />
       </div>
       <div className="border-t border-gray-200 mt-4">
         <dl>
