@@ -10,7 +10,7 @@ import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccessoryDto";
 import { UpdateAccessoryDto } from "@/types/dto/storage/accessories/updateAccessoryDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../../api/middleware/api"; // TODO use axios custom instance or setup
+import axios from "axios"; // TODO use axios custom instance or setup
 import { getToken } from "../auth";
 
 // eslint-disable-next-line import/prefer-default-export
