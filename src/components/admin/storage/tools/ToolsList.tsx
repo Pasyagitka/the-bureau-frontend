@@ -1,8 +1,24 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { ToolsDto } from "@/types/dto/storage/tools/toolsDto";
+import { Pagination } from "@mui/material";
 import ListItem from "./ListItem";
 
-function ToolsList({ tools = [], handleRemove }: { tools: ToolsDto[]; handleRemove: () => void }) {
+function ToolsList({
+  tools = [],
+  handleRemove,
+  total,
+  page,
+  pageSize,
+  handlePageChange,
+}: {
+  tools: ToolsDto[];
+  handleRemove: () => void;
+  total: number;
+  page: number;
+  pageSize: number;
+  handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
+}) {
+  const numberOfPages = Math.ceil(total / pageSize);
   const listItems = tools.map((tool) => (
     <ListItem
       key={tool.id}
@@ -48,8 +64,8 @@ function ToolsList({ tools = [], handleRemove }: { tools: ToolsDto[]; handleRemo
           </thead>
           {tools && <tbody>{listItems}</tbody>}
         </table>
-        <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
-          <div className="flex items-center" />
+        <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
+          <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
         </div>
       </div>
     </div>

@@ -2,20 +2,28 @@ import ToolsList from "@/components/admin/storage/tools/ToolsList";
 import AccentButton from "@/elements/buttons/AccentButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/storage/tools";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 function Tools() {
-  const limit = 10;
-  const offset = 0;
   const dispatch = useAppDispatch();
 
-  const tools = useAppSelector((state) => state.tools.tools);
+  const [activePage, setActivePage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
+
+  const { tools, total } = useAppSelector((state) => state.tools);
 
   function loadTools() {
     dispatch(getAll({ limit, offset }));
   }
-
   useEffect(loadTools, [dispatch]);
+
+  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const newOffset = (value - 1) * limit;
+    setActivePage(value);
+    setOffset(newOffset);
+    dispatch(getAll({ limit, offset: newOffset }));
+  };
 
   const handleRemove = (id: number) => {
     dispatch(remove(id));
@@ -41,7 +49,14 @@ function Tools() {
           </div>
         </div>
       </div>
-      <ToolsList tools={tools} handleUpdate={(id) => handleUpdate(id)} handleRemove={(id) => handleRemove(id)} />
+      <ToolsList
+        tools={tools}
+        handleRemove={(id) => handleRemove(id)}
+        handlePageChange={handleChangePage}
+        total={total || 10}
+        pageSize={limit}
+        page={activePage}
+      />
     </div>
   );
 }
