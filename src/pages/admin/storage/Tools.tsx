@@ -34,7 +34,7 @@ function Tools() {
       <div className="py-8">
         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
           <div className="text-end">
-            <form className="flex flex-col md:flex-row w-3/4 md:w-full max-w-sm md:space-x-3 space-y-3 md:space-y-0 justify-center">
+            <form className="flex flex-col md:flex-row w-3/4 md:w-full max-w-full md:space-x-3 space-y-3 md:space-y-0 justify-center">
               <div className=" relative ">
                 <input
                   type="text"
