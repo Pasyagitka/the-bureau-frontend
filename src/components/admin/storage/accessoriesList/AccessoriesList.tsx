@@ -1,14 +1,24 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
+import { Pagination } from "@mui/material";
 import ListItem from "./ListItem";
 
 function AccessoriesList({
   accessories = [],
+  total,
+  page,
+  pageSize,
   handleRemove,
+  handlePageChange,
 }: {
   accessories: AccessoriesDto[];
+  total: number;
+  page: number;
+  pageSize: number;
   handleRemove: () => void;
+  handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }) {
+  const numberOfPages = Math.ceil(total / pageSize);
   const listItems = accessories.map((item) => (
     <ListItem
       key={item.id}
@@ -62,8 +72,8 @@ function AccessoriesList({
           </thead>
           {accessories && <tbody>{listItems}</tbody>}
         </table>
-        <div className="px-5 bg-white py-5 flex flex-col xs:flex-row items-center xs:justify-between">
-          <div className="flex items-center" />
+        <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
+          <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
         </div>
       </div>
     </div>

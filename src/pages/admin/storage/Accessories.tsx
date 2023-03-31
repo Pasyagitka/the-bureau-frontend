@@ -1,23 +1,29 @@
 import AccessoriesList from "@/components/admin/storage/accessoriesList/AccessoriesList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, remove } from "@/redux/actions/storage/accessories";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import importIcon from "icons/import.png";
 import AccentButton from "@/elements/buttons/AccentButton";
 import ButtonWithIcon from "@/elements/buttons/ButtonWithIcon";
 
 function Accessories() {
-  const limit = 10;
-  const offset = 0;
   const dispatch = useAppDispatch();
-
-  const accessories = useAppSelector((state) => state.accessories.accessories);
+  const [activePage, setActivePage] = useState(1);
+  const [limit, setLimit] = useState(10);
+  const [offset, setOffset] = useState(0);
+  const { accessories, total } = useAppSelector((state) => state.accessories);
 
   function loadAccessories() {
     dispatch(getAll({ limit, offset }));
   }
-
   useEffect(loadAccessories, [dispatch]);
+
+  const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
+    const newOffset = (value - 1) * limit;
+    setActivePage(value);
+    setOffset(newOffset);
+    dispatch(getAll({ limit, offset: newOffset }));
+  };
 
   const handleRemove = (id: number) => {
     dispatch(remove(id));
@@ -44,7 +50,14 @@ function Accessories() {
           </div>
         </div>
       </div>
-      <AccessoriesList accessories={accessories} handleRemove={(id) => handleRemove(id)} />
+      <AccessoriesList
+        accessories={accessories}
+        handleRemove={(id) => handleRemove(id)}
+        handlePageChange={handleChangePage}
+        total={total || 10}
+        pageSize={limit}
+        page={activePage}
+      />
     </div>
   );
 }
