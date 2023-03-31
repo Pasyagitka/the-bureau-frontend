@@ -7,7 +7,7 @@ function Invoices() {
   const limit = 10;
 
   const dispatch = useAppDispatch();
-  const [activePage, setactivePage] = useState(1);
+  const [activePage, setActivePage] = useState(1);
   const [offset, setOffset] = useState(0);
   const { invoices, total } = useAppSelector((state) => state.invoices);
 
@@ -16,17 +16,12 @@ function Invoices() {
   }
   useEffect(loadAll, [dispatch]);
 
-  function handlePaginationChange(pageNumber: number) {
-    // why not using getter value from useState (activePage|offset)
-    // setState is async and request goes to server jest when it will be updated
-
-    const newOffset = (pageNumber - 1) * limit;
-
-    setactivePage(pageNumber);
+  const handlePageChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    const newOffset = (value - 1) * limit;
+    setActivePage(value);
     setOffset(newOffset);
-
     dispatch(getAll({ limit, offset: newOffset }));
-  }
+  };
 
   const handleRemove = (id: number) => {
     // dispatch(deactivate(id));
@@ -42,7 +37,7 @@ function Invoices() {
       handleRemove={(id) => handleRemove(id)}
       handleDownload={(id) => handleDownload(id)}
       page={activePage}
-      handlePageChange={(x: number) => handlePaginationChange(x)}
+      handlePageChange={handlePageChange}
       pageSize={limit}
       total={total || 10}
     />
