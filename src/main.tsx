@@ -4,22 +4,23 @@ import "./main.css";
 import { createRoot } from "react-dom/client";
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
+import axios from "axios";
 import store, { persistor } from "./redux/store";
 import App from "./components/router/App";
+import { deleteToken } from "./redux/actions/auth";
 
-// axios.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response.status === 401) {
-//       await persistor.purge();
-//       console.log(error, "axios 401");
-//       deleteToken();
-//       // (window as Window).location = "/login";
-//     } else {
-//       return Promise.reject(error);
-//     }
-//   }
-// );
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response.status === 401) {
+      await persistor.purge();
+      deleteToken();
+      (window as Window).location = "/login";
+    } else {
+      return Promise.reject(error);
+    }
+  }
+);
 
 function AppContainer() {
   return (
