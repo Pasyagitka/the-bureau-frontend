@@ -3,7 +3,7 @@ import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateToolDto } from "@/types/dto/storage/tools/createToolDto";
 import { UpdateToolDto } from "@/types/dto/storage/tools/updateToolDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../../api/middleware/api";
+import axios from "axios";
 import { ADD_TOOLS, DELETE_TOOLS, EDIT_TOOLS, GET_ALL_TOOLS, GET_TOOL } from "../../actionTypes/storage/tools";
 import { getToken } from "../auth";
 

@@ -9,7 +9,7 @@ import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateEquipmentDto } from "@/types/dto/storage/equipment/createEquipmentDto";
 import { UpdateEquipmentDto } from "@/types/dto/storage/equipment/updateEquipmentDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "../../../api/middleware/api";
+import axios from "axios";
 import { getToken } from "../auth";
 
 // eslint-disable-next-line import/prefer-default-export
