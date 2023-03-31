@@ -1,6 +1,6 @@
 import RequestList from "@/components/request/requestList/RequestList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/requests";
+import { getAll, getFullReport } from "@/redux/actions/requests";
 import { useEffect } from "react";
 
 function Requests() {
@@ -11,9 +11,13 @@ function Requests() {
   function loadAll() {
     dispatch(getAll());
   }
-
   useEffect(loadAll, [dispatch]);
-  return <RequestList requests={requests} />;
+
+  const handleDownload = (id: number) => {
+    dispatch(getFullReport(id));
+  };
+
+  return <RequestList requests={requests} handleDownload={(id) => handleDownload(id)} />;
 }
 
 export default Requests;

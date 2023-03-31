@@ -3,7 +3,7 @@ import { RequestDto } from "@/types/dto/requestDto";
 import { useState } from "react";
 import RequestSmall from "./RequestSmall";
 
-function RequestList({ requests = [] }: { requests: RequestDto[] }) {
+function RequestList({ requests = [], handleDownload }: { requests: RequestDto[]; handleDownload: () => void }) {
   const [searchQuery, setSearchQuery] = useState("");
   const [filterQuery, setFilterQuery] = useState("");
 
@@ -60,7 +60,7 @@ function RequestList({ requests = [] }: { requests: RequestDto[] }) {
               item.status.toLowerCase().includes(filterQuery.toLowerCase())
           )
           .map((request) => (
-            <RequestSmall key={request.id} request={request} />
+            <RequestSmall key={request.id} request={request} handleDownload={() => handleDownload(request.id)} />
           ))}
       </div>
     </div>

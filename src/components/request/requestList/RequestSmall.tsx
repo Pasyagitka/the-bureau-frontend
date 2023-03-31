@@ -2,9 +2,9 @@ import IconButton from "@/elements/buttons/IconButton";
 import { RequestDto } from "@/types/dto/requestDto";
 import { Link } from "react-router-dom";
 import downloadIcon from "icons/download.png";
-import deleteIcon from "icons/delete.png";
+import editIcon from "icons/edit.png";
 
-function RequestSmall({ request }: { request: RequestDto }) {
+function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
   const colors = {
     InProcessing: "bg-lime-500",
     Completed: "bg-yellow-500",
@@ -50,14 +50,8 @@ function RequestSmall({ request }: { request: RequestDto }) {
           <span className={`px-2 py-1 h-fit m-1 text-xs rounded-full text-white text-end ${colors[request.status]} `}>
             {request.status}
           </span>
-          {/* <Link
-            to={`${request.id}/edit`}
-            className="flex-1 py-2 px-4 bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-lime-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-          >
-            Редактировать
-          </Link> */}
           <div className="flex items-end justify-end gap-3 m-3 h-full">
-            <IconButton icon={deleteIcon} alt="Delete" isLink={false} onClick={() => handleClick()} />
+            <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
             <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
           </div>
         </div>

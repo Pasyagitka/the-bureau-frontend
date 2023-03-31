@@ -4,6 +4,7 @@ import { UpdateRequestByAdminDto } from "@/types/dto/updateRequestByAdminDto";
 import { UpdateRequestByBrigadierDto } from "@/types/dto/updateRequestByBrigadierDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import fileDownload from "js-file-download";
 import {
   ADD_REQUESTS,
   GET_ALL_REQUESTS,
@@ -12,6 +13,7 @@ import {
   EDIT_REQUESTS_BY_ADMIN,
   EDIT_REQUESTS_BY_BRIGADIER,
   GET_WEEKLY_REPORT,
+  GET_FULL_REPORT,
 } from "../actionTypes/requests";
 import { GET_ALL_ACCESSORIES } from "../actionTypes/storage/accessories";
 import { GET_ALL_TOOLS } from "../actionTypes/storage/tools";
@@ -132,3 +134,13 @@ export const updateByBrigadier = createAsyncThunk(
     }
   }
 );
+
+export const getFullReport = createAsyncThunk(GET_FULL_REPORT, async (id: number) => {
+  const request = await axios.get(requestLinks.getFullReport(id), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+    responseType: "blob",
+  });
+  fileDownload(request.data, `request${id}.docx`);
+});
