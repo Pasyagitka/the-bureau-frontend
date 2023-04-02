@@ -18,6 +18,7 @@ import BrigadierLayout from "@/layouts/BrigadierLayout";
 import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
 import ProtectedRoute from "@/layouts/ProtectedRoute";
 import Invoices from "@/pages/admin/Invoices";
+import GatewayTimeout from "@/pages/common/GatewayTimeout";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -111,6 +112,7 @@ function App() {
             <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
           </Route>
         </Route>
+        <Route path="/gatewayTimeout" element={<GatewayTimeout />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </BrowserRouter>

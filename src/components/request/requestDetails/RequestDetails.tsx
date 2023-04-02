@@ -14,14 +14,19 @@ function RequestDetails() {
   const params = useParams();
 
   useEffect(() => {
-    dispatch(get(params.id));
-    dispatch(getAccessories(params.id));
-    dispatch(getTools(params.id));
+    async function fetchData() {
+      await dispatch(get(params.id));
+      await dispatch(getAccessories(params.id));
+      await dispatch(getTools(params.id));
+    }
+    fetchData();
   }, [dispatch]);
 
   const request = useAppSelector((state) => state.requests.request);
   const requestAccessories = useAppSelector((state) => state.requests.requestAccessories);
   const requestTools = useAppSelector((state) => state.requests.requestTools);
+
+  console.log("requestAccessories", requestAccessories);
 
   // useEffect(() => {
   //   dispatch(getAccessories(params.id));
@@ -74,21 +79,21 @@ function RequestDetails() {
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
         <h2 className="w-full md:w-1/3">Монтируемое оборудование</h2>
         <div className="w-full md:w-2/3">
-          <RequestEquipment equipmentList={request?.requestEquipment} />
+          {request?.requestEquipment && <RequestEquipment equipmentList={request?.requestEquipment} />}
           <div />
         </div>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
         <h2 className="w-full md:w-1/3">Необходимые комплектующие</h2>
         <div className="w-full space-y-5 md:w-2/3">
-          <RequestAccessories accessories={requestAccessories} />
+          {requestAccessories && <RequestAccessories accessories={requestAccessories} />}
           <div />
         </div>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
         <h2 className="w-full md:w-1/3">Необходимые инструменты</h2>
         <div className="w-full md:w-2/3">
-          <RequestTools tools={requestTools} />
+          {requestTools && <RequestTools tools={requestTools} />}
           <div />
         </div>
       </div>

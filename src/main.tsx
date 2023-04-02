@@ -16,6 +16,8 @@ axios.interceptors.response.use(
       await persistor.purge();
       deleteToken();
       (window as Window).location = "/login";
+    } else if (error.response.status === 504) {
+      (window as Window).location = "/gatewayTimeout";
     } else {
       return Promise.reject(error);
     }

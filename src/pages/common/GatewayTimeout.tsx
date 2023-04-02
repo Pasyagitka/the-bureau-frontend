@@ -1,7 +1,7 @@
 import Button from "@/elements/button/Button";
-import notFoundImage from "images/notfound.webp";
+import gatewayTimeoutImage from "images/gatewayTimeout.jpg";
 
-function NotFound() {
+function GatewayTimeout() {
   return (
     <main className="bg-white relative overflow-hidden h-screen">
       <header className="absolute top-0 left-0 right-0 z-20">
@@ -29,12 +29,12 @@ function NotFound() {
         <div className="container mx-auto px-6 flex flex-col-reverse lg:flex-row justify-between items-center relative">
           <div className="w-full mb-16 md:mb-8 text-center lg:text-left">
             <h1 className="font-light text-center lg:text-left text-5xl lg:text-8xl mt-12 md:mt-0 my-10 text-gray-700">
-              Страница не найдена
+              Превышен лимит ожидания
             </h1>
             <Button text="Вернуться" to="/" />
           </div>
           <div className="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
-            <img src={notFoundImage} alt="" />
+            <img src={gatewayTimeoutImage} alt="" />
           </div>
         </div>
       </div>
@@ -42,4 +42,4 @@ function NotFound() {
   );
 }
 
-export default NotFound;
+export default GatewayTimeout;
