@@ -4,7 +4,7 @@ import { get, getAll } from "@/redux/actions/invoices";
 import { useEffect, useState } from "react";
 
 function Invoices() {
-  const limit = 10;
+  const limit = 12;
 
   const dispatch = useAppDispatch();
   const [activePage, setActivePage] = useState(1);
