@@ -10,6 +10,11 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
     Completed: "bg-yellow-500",
     Approved: "bg-blue-500",
   };
+  const requestStatuses = {
+    InProcessing: "В обработке",
+    Completed: "Выполнена",
+    Approved: "Подтверждена",
+  };
   return (
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full cursor-pointer m-auto">
       {/* <Link to={`${request.id}`} > */}
@@ -48,7 +53,7 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
         </Link>
         <div className="flex flex-col w-1/3">
           <span className={`px-2 py-1 h-fit m-1 text-xs rounded-full text-white text-end ${colors[request.status]} `}>
-            {request.status}
+            {requestStatuses[request.status]}
           </span>
           <div className="flex items-end justify-end gap-3 m-3 h-full">
             <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
