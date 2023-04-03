@@ -2,19 +2,20 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/clients";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import DetailsItem from "../request/requestDetails/DetailsItem";
 import RequestSmall from "../request/requestList/RequestSmall";
 
 function ClientDetails() {
   const dispatch = useAppDispatch();
+  const { id } = useParams();
 
-  const user = useAppSelector((state) => state.auth.user);
   const client: ClientDto = useAppSelector((state) => state.clients.client);
   const requests = useAppSelector((state) => state.clients.requests);
 
   function load() {
-    dispatch(get(user.client.id));
-    dispatch(getRequests(user.client.id));
+    dispatch(get(id));
+    dispatch(getRequests(id));
   }
   useEffect(load, [dispatch]);
 
