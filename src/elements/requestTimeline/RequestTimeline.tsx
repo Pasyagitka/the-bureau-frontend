@@ -3,13 +3,19 @@ import TimeLineElement from "./TimeLineElement";
 
 function RequestTimeline({ status }: { status: string }) {
   let elements;
+  const requestStatuses = {
+    InProcessing: "В обработке",
+    Completed: "Выполнена",
+    Approved: "Подтверждена",
+  };
+  // TODO request statuses hardcoded
   switch (status) {
     case RequestStatus.INPROCESSING: {
       elements = (
         <>
-          <TimeLineElement text="In processing" date="December 23, 2021" isActive />
-          <TimeLineElement text="Completed" date="December 23, 2021" />
-          <TimeLineElement text="Approved" date="December 23, 2021" isLast />
+          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
+          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" />
+          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isLast />
         </>
       );
       break;
@@ -17,9 +23,9 @@ function RequestTimeline({ status }: { status: string }) {
     case RequestStatus.COMPLETED: {
       elements = (
         <>
-          <TimeLineElement text="In processing" date="December 23, 2021" isActive />
-          <TimeLineElement text="Completed" date="December 23, 2021" isActive />
-          <TimeLineElement text="Approved" date="December 23, 2021" isLast />
+          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
+          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" isActive />
+          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isLast />
         </>
       );
       break;
@@ -27,9 +33,9 @@ function RequestTimeline({ status }: { status: string }) {
     default: {
       elements = (
         <>
-          <TimeLineElement text="In processing" date="December 23, 2021" isActive />
-          <TimeLineElement text="Completed" date="December 23, 2021" isActive />
-          <TimeLineElement text="Approved" date="December 23, 2021" isActive isLast />
+          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
+          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" isActive />
+          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isActive isLast />
         </>
       );
       break;

@@ -1,5 +1,4 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import useDidMountEffect from "@/hooks/useDidMountEffect";
 import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
@@ -13,11 +12,11 @@ export default function Login() {
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
 
-  useDidMountEffect(() => {
+  const user = useAppSelector((state) => state.auth.user);
+
+  useEffect(() => {
     dispatch(getInfo());
   }, [loggedIn]);
-
-  const user = useAppSelector((state) => state.auth.user);
 
   useEffect(() => {
     if (user && user.role === "Admin") {

@@ -1,7 +1,12 @@
-import Button from "@/elements/button/Button";
+import SecondaryButton from "@/elements/buttons/SecondaryButton";
 import notFoundImage from "images/notfound.webp";
+import { useNavigate } from "react-router-dom";
 
 function NotFound() {
+  const navigate = useNavigate();
+
+  const returnBack = () => navigate(-1);
+
   return (
     <main className="bg-white relative overflow-hidden h-screen">
       <header className="absolute top-0 left-0 right-0 z-20">
@@ -31,7 +36,8 @@ function NotFound() {
             <h1 className="font-light text-center lg:text-left text-5xl lg:text-8xl mt-12 md:mt-0 my-10 text-gray-700">
               Страница не найдена
             </h1>
-            <Button text="Вернуться" to="/" />
+            {/* <Button text="Вернуться" to="/" /> */}
+            <SecondaryButton title="Вернуться" isLink={false} onClick={returnBack} />
           </div>
           <div className="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
             <img src={notFoundImage} alt="" />

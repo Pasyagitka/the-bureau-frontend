@@ -52,26 +52,26 @@ function RequestDetails() {
       <div className="border-t border-gray-200">
         <dl>
           <DetailsItem
-            title="Cleint full name"
+            title="ФИО заказчика"
             value={`${request?.client?.surname} ${request?.client?.firstname} ${request?.client?.patronymic}`}
             isDark
           />
           <DetailsItem
-            title="Address"
+            title="Адрес исполнения работ"
             value={`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
               request.address?.house
             }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""} `}
           />
-          <DetailsItem title="Email address" value={request.client?.user?.email} isDark />
-          <DetailsItem title="Contact phone" value={`+${request.client?.contactNumber}`} />
-          <DetailsItem title="Comment" value={request.comment} isDark />
+          <DetailsItem title="Email" value={request.client?.email} isDark />
+          <DetailsItem title="Контактный номер" value={`+${request.client?.contactNumber}`} />
+          <DetailsItem title="Комментарий к заявке" value={request.comment} isDark />
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm font-medium text-gray-500">Стадия отделки</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
               <StageBadge stage={request.stage?.id} />
             </dd>
           </div>
-          <DetailsItem title="Mounting date" value={request.mountingDate} />
+          <DetailsItem title="Дата выполнения работ" value={request.mountingDate} />
         </dl>
       </div>
       <div />

@@ -95,7 +95,7 @@ function App() {
             }
           >
             <Route path="" element={<ClientHome />} />
-            <Route path="update/:id" element={<EditClientDetails />} />
+            <Route path="update" element={<EditClientDetails />} />
             <Route path="leave-request" element={<LeaveRequestForm />} />
           </Route>
 
@@ -108,7 +108,7 @@ function App() {
             }
           >
             <Route path="" element={<BrigadierHome />} />
-            <Route path="update/:id" element={<EditBrigadierDetails />} />
+            <Route path="update" element={<EditBrigadierDetails />} />
             <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
           </Route>
         </Route>

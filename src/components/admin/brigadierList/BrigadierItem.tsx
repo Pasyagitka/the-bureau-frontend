@@ -12,8 +12,8 @@ function BrigadierItem({
   handleClick: () => void;
 }) {
   return (
-    <div className="overflow-hidden shadow-lg rounded-lg h-90 w-11/12 md:w-100 cursor-pointer m-auto">
-      <div className="flex max-w-md bg-white shadow-lg rounded-lg overflow-hidden">
+    <div className="overflow-hidden shadow-lg rounded-lg h-full w-11/12 md:w-100 cursor-pointer m-auto">
+      <div className="flex max-w-md bg-white shadow-lg h-full rounded-lg overflow-hidden">
         <div
           className="w-1/3 bg-cover bg-center"
           style={{

@@ -2,20 +2,19 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/clients";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { useEffect } from "react";
-import { useParams } from "react-router-dom";
 import DetailsItem from "../request/requestDetails/DetailsItem";
 import RequestSmall from "../request/requestList/RequestSmall";
 
 function ClientDetails() {
-  const params = useParams();
   const dispatch = useAppDispatch();
 
+  const user = useAppSelector((state) => state.auth.user);
   const client: ClientDto = useAppSelector((state) => state.clients.client);
   const requests = useAppSelector((state) => state.clients.requests);
 
   function load() {
-    dispatch(get(params.id));
-    dispatch(getRequests(params.id));
+    dispatch(get(user.client.id));
+    dispatch(getRequests(user.client.id));
   }
   useEffect(load, [dispatch]);
 
@@ -30,7 +29,7 @@ function ClientDetails() {
       <div className="border-t border-gray-200">
         <dl>
           <DetailsItem title="ФИО" value={`${client.surname} ${client.firstname} ${client.patronymic}`} isDark />
-          <DetailsItem title="Email" value={client.user?.email} />
+          <DetailsItem title="Email" value={client.email} />
           <DetailsItem title="Контактный номер" value={`+${client.contactNumber}`} isDark />
         </dl>
       </div>

@@ -2,14 +2,15 @@ import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, update } from "@/redux/actions/brigadiers";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function EditBrigadierDetails() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const params = useParams();
 
   const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
+
+  const user = useAppSelector((state) => state.auth.user);
 
   const [firstname, setFirstname] = useState();
   const [surname, setSurname] = useState();
@@ -18,7 +19,7 @@ function EditBrigadierDetails() {
   const [email, setEmail] = useState();
 
   useEffect(() => {
-    dispatch(get(params.id));
+    dispatch(get(user?.brigadier?.id));
   }, [dispatch]);
 
   useEffect(() => {
@@ -30,7 +31,7 @@ function EditBrigadierDetails() {
 
   const handleSubmit = async () => {
     const res = await dispatch(
-      update({ id: params.id, updateBrigadierDto: { firstname, surname, patronymic, contactNumber } })
+      update({ id: user?.brigadier?.id, updateBrigadierDto: { firstname, surname, patronymic, contactNumber } })
     );
     if (!res.error) {
       navigate(-1);

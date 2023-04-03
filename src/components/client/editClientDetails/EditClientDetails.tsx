@@ -2,14 +2,14 @@ import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, update } from "@/redux/actions/clients";
 import { useState, useEffect } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 function EditClientDetails() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const params = useParams();
 
   const client = useAppSelector((state) => state.clients.client);
+  const user = useAppSelector((state) => state.auth.user);
 
   const [firstname, setFirstname] = useState();
   const [surname, setSurname] = useState();
@@ -17,7 +17,7 @@ function EditClientDetails() {
   const [contactNumber, setContactNumber] = useState();
 
   useEffect(() => {
-    dispatch(get(params.id));
+    dispatch(get(user.client.id));
   }, [dispatch]);
 
   useEffect(() => {
@@ -29,7 +29,7 @@ function EditClientDetails() {
 
   const handleSubmit = async () => {
     const res = await dispatch(
-      update({ id: params.id, updateClientDto: { firstname, surname, patronymic, contactNumber } })
+      update({ id: user.client.id, updateClientDto: { firstname, surname, patronymic, contactNumber } })
     );
     if (!res.error) {
       navigate(-1);
@@ -42,7 +42,7 @@ function EditClientDetails() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Редактировать клиента</h1>
+              <h1 className="text-gray-600">Редактировать заказчика</h1>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
       <div className="title">
         <p className="text-4xl font-bold text-gray-800 mb-4">Информация о бригадире</p>
         {/* <p className="text-2xl font-light text-gray-400">Description...</p> */}
-        <AccentButton to={`update/${brigadier.id}`} title="Редактировать" />
+        <AccentButton to="update" title="Редактировать" />
       </div>
       <div className="border-t border-gray-200 mt-4">
         <dl>
@@ -18,7 +18,8 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
             value={`${brigadier.surname} ${brigadier.firstname} ${brigadier.patronymic}`}
             isDark
           />
-          <DetailsItem title="Контактный номер" value={`+${brigadier.contactNumber}`} />
+          <DetailsItem title="Email" value={brigadier.email} />
+          <DetailsItem title="Контактный номер" value={`+${brigadier.contactNumber}`} isDark />
         </dl>
       </div>
     </div>
