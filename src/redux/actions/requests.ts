@@ -14,9 +14,9 @@ import {
   EDIT_REQUESTS_BY_BRIGADIER,
   GET_WEEKLY_REPORT,
   GET_FULL_REPORT,
+  GET_REQUEST_ACCESSORIES,
+  GET_REQUEST_TOOLS,
 } from "../actionTypes/requests";
-import { GET_ALL_ACCESSORIES } from "../actionTypes/storage/accessories";
-import { GET_ALL_TOOLS } from "../actionTypes/storage/tools";
 import { getToken } from "./auth";
 
 export const create = createAsyncThunk(
@@ -54,7 +54,7 @@ export const getWeeklyReport = createAsyncThunk(GET_WEEKLY_REPORT, async () => {
   return request.data;
 });
 
-export const getAccessories = createAsyncThunk(GET_ALL_ACCESSORIES, async (id: number) => {
+export const getAccessories = createAsyncThunk(GET_REQUEST_ACCESSORIES, async (id: number) => {
   const request = await axios.get(requestLinks.getAccessories(id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
@@ -63,7 +63,7 @@ export const getAccessories = createAsyncThunk(GET_ALL_ACCESSORIES, async (id: n
   return request.data;
 });
 
-export const getTools = createAsyncThunk(GET_ALL_TOOLS, async (id: number) => {
+export const getTools = createAsyncThunk(GET_REQUEST_TOOLS, async (id: number) => {
   const request = await axios.get(requestLinks.getTools(id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
