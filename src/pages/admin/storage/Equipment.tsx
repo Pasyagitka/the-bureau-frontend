@@ -7,14 +7,12 @@ import AccentButton from "@/elements/buttons/AccentButton";
 import ButtonWithIcon from "@/elements/buttons/ButtonWithIcon";
 
 function Equipment() {
-  const limit = 10;
-  const offset = 0;
   const dispatch = useAppDispatch();
 
   const equipment = useAppSelector((state) => state.equipment.equipment);
 
   function loadAll() {
-    dispatch(getAll({ limit, offset }));
+    dispatch(getAll());
   }
 
   useEffect(loadAll, [dispatch]);

@@ -17,8 +17,7 @@ const initialState = {
 
 const equipmentReducer = createReducer<EquipmentStateProps>(initialState, (builder) => {
   builder.addCase(getAll.fulfilled, (state, action) => {
-    state.equipment = action.payload.data;
-    state.total = action.payload.total;
+    state.equipment = action.payload;
   });
   builder.addCase(get.fulfilled, (state, action) => {
     state.equipmentItem = action.payload;

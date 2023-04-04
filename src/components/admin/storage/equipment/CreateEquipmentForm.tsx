@@ -5,6 +5,7 @@ import { create } from "@/redux/actions/storage/equipment";
 import { CreateEquipmentDto } from "@/types/dto/storage/equipment/createEquipmentDto";
 import { Mounting } from "@/types/enum/mounting.enum";
 import SubmitButton from "@/elements/buttons/SubmitButton";
+import Input from "@/elements/inputs/Input";
 
 function CreateEquipmentForm() {
   const dispatch = useAppDispatch();
@@ -40,17 +41,7 @@ function CreateEquipmentForm() {
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <div>
-                <div className=" relative ">
-                  <input
-                    type="text"
-                    id="user-info-name"
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="Name"
-                    onChange={(e) => setType(event.target.value)}
-                  />
-                </div>
-              </div>
+              <Input placeholder="наименование" onChange={(e) => setType(event.target.value)} />
               <select
                 name="Mounting"
                 defaultValue={mounting}

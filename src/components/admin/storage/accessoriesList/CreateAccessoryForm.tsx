@@ -1,4 +1,5 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
+import Input from "@/elements/inputs/Input";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { create } from "@/redux/actions/storage/accessories";
 import { getAll } from "@/redux/actions/storage/equipment";
@@ -15,6 +16,7 @@ function CreateAccessoryForm() {
   const [name, setName] = useState();
   const [equipmentId, setEquipmentId] = useState();
   const [sku, setSku] = useState();
+  const [price, setPrice] = useState();
 
   useEffect(() => {
     dispatch(getAll());
@@ -26,6 +28,7 @@ function CreateAccessoryForm() {
     const item: CreateAccessoryDto = {
       sku,
       name,
+      price,
       equipmentId,
     };
     const res = await dispatch(create(item));
@@ -52,26 +55,9 @@ function CreateAccessoryForm() {
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <div>
-                <div className=" relative ">
-                  <input
-                    type="text"
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="sku"
-                    onChange={(e) => setSku(event.target.value)}
-                  />
-                </div>
-              </div>
-              <div>
-                <div className=" relative ">
-                  <input
-                    type="text"
-                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
-                    placeholder="Name"
-                    onChange={(e) => setName(event.target.value)}
-                  />
-                </div>
-              </div>
+              <Input placeholder="артикул" onChange={(e) => setSku(event.target.value)} />
+              <Input placeholder="наименование" onChange={(e) => setName(event.target.value)} />
+              <Input placeholder="цена за единицу" onChange={(e) => setPrice(event.target.value)} />
               <div>
                 <div className=" relative ">
                   <select

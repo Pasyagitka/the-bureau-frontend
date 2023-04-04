@@ -1,11 +1,19 @@
+import { useState } from "react";
 import { NavLink } from "react-router-dom";
 
 function SidebarItem({ title, icon, to }: { icon: string; title: string; to: string }) {
+  const [tabActive, setActive] = useState(false);
+  const activeStyle = {
+    borderRight: "2px solid #aacd4f",
+    backgroundColor: "#f3f4f6",
+  };
+
   return (
-    <li>
+    <li style={tabActive ? activeStyle : undefined}>
       <NavLink
         to={to}
         className="flex items-center p-2 text-base font-normal text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700"
+        style={({ isActive }) => (isActive ? setActive(true) : setActive(false))}
       >
         <img
           src={icon}

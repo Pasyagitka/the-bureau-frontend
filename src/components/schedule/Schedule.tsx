@@ -2,7 +2,7 @@ import Calendar from "./calendar/Calendar";
 
 function Schedule() {
   return (
-    <div className="w-full bg-white rounded-lg">
+    <div className="container w-full h-full bg-white p-12 flex-col flex rounded">
       <Calendar />
     </div>
   );
