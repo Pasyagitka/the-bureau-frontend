@@ -1,4 +1,6 @@
-import Calendar from "./calendar/Calendar";
+// import Calendar from "./calendar/Calendar";
+
+import Calendar from "@/elements/calendar/Calendar";
 
 function Schedule() {
   return (
