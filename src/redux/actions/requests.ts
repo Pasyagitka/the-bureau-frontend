@@ -16,6 +16,7 @@ import {
   GET_FULL_REPORT,
   GET_REQUEST_ACCESSORIES,
   GET_REQUEST_TOOLS,
+  GET_CALENDAR,
 } from "../actionTypes/requests";
 import { getToken } from "./auth";
 
@@ -47,6 +48,15 @@ export const getAll = createAsyncThunk(GET_ALL_REQUESTS, async () => {
 
 export const getWeeklyReport = createAsyncThunk(GET_WEEKLY_REPORT, async () => {
   const request = await axios.get(requestLinks.getWeeklyReport, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getCalendar = createAsyncThunk(GET_CALENDAR, async () => {
+  const request = await axios.get(requestLinks.getCalendar, {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

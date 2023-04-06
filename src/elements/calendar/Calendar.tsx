@@ -3,6 +3,7 @@ import { getCalendar } from "@/redux/actions/requests";
 import { useEffect } from "react";
 import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
+import dayjs from "dayjs";
 
 // const locale = {
 //   sunday: "Воскресенье",
@@ -46,6 +47,10 @@ function getTodoList(date) {
   }
 }
 
+// funtion getSheduleList(date) {
+//   return
+// }
+
 function Calendar() {
   const dispatch = useAppDispatch();
 
@@ -54,9 +59,12 @@ function Calendar() {
   }, [dispatch]);
 
   const { calendar } = useAppSelector((state) => state.requests);
+  console.log(calendar);
 
   function renderCell(date) {
-    const list = getTodoList(date);
+    // const list = getTodoList(date);
+    const list = calendar.filter((item) => dayjs(date).isSame(item.mountingDate, "day"));
+
     const displayList = list.filter((item, index) => index < 2);
 
     if (list.length) {
@@ -98,7 +106,7 @@ function Calendar() {
 
   return (
     <CustomProvider locale={ruRU}>
-      <RSCalendar bordered renderCell={renderCell} className="text-sm" />
+      <RSCalendar bordered renderCell={renderCell} className="text-sm" value={} />
     </CustomProvider>
   );
 }
