@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getCalendar } from "@/redux/actions/requests";
-import { useEffect } from "react";
 import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
+import { useEffect } from "react";
+import { getCalendar } from "@/redux/actions/requests";
 import dayjs from "dayjs";
 
 // const locale = {
@@ -23,6 +23,12 @@ import dayjs from "dayjs";
 //   formattedDayPattern: "dd.mm.yyyy",
 //   dateLocale: ru,
 // };
+
+const colors = {
+  InProcessing: "bg-lime-500",
+  Completed: "bg-yellow-500",
+  Approved: "bg-blue-500",
+};
 
 function getTodoList(date) {
   const day = date.getDate();
@@ -63,7 +69,8 @@ function Calendar() {
 
   function renderCell(date) {
     // const list = getTodoList(date);
-    const list = calendar.filter((item) => dayjs(date).isSame(item.mountingDate, "day"));
+    const list = calendar.filter((item) => dayjs(date).isSame(dayjs(item.mountingDate).toDate(), "day"));
+    console.log(list, "list");
 
     const displayList = list.filter((item, index) => index < 2);
 
@@ -78,13 +85,13 @@ function Calendar() {
               <Popover>
                 {list.map((item, index) => (
                   <p key={index}>
-                    <b>{item.requestId}</b> - {item.brigadierId}
+                    <b>Заявка №{item.requestId}</b> - {item.brigadier}
                   </p>
                 ))}
               </Popover>
             }
           >
-            <a>{moreCount} more</a>
+            <a>и еще {moreCount}</a>
           </Whisper>
         </li>
       );
@@ -93,7 +100,7 @@ function Calendar() {
         <ul className="calendar-todo-list">
           {displayList.map((item, index) => (
             <li key={index}>
-              <Badge /> <b>{item.requestId}</b> - {item.brigadierId}
+              <Badge /> <b>Заявка №{item.requestId}</b> - {item.brigadier}
             </li>
           ))}
           {moreCount ? moreItem : null}
@@ -106,7 +113,7 @@ function Calendar() {
 
   return (
     <CustomProvider locale={ruRU}>
-      <RSCalendar bordered renderCell={renderCell} className="text-sm" value={} />
+      <RSCalendar bordered renderCell={renderCell} className="text-sm" />
     </CustomProvider>
   );
 }

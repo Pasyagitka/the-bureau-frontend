@@ -34,7 +34,7 @@ function Requests() {
           <p className="text-2xl font-light text-gray-400">Описание...</p>
         </div>
       </div>
-      <Map />
+      <Map requests={requests} />
       <div className="flex items-end justify-between mb-12">
         <div className="flex gap-5">
           <button

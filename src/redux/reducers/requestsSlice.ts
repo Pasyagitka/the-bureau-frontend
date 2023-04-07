@@ -14,6 +14,7 @@ import {
   remove,
   updateByAdmin,
   updateByBrigadier,
+  getRequestGeocodeYandex,
 } from "../actions/requests";
 
 type RequestsStateProps = {
@@ -23,6 +24,7 @@ type RequestsStateProps = {
   requestAccessories: RequestAccessoryDto[];
   weeklyReport: Array<unknown>;
   calendar: Array<unknown>;
+  coords: string;
 };
 
 const initialState = {
@@ -32,6 +34,7 @@ const initialState = {
   requestAccessories: [],
   weeklyReport: [],
   calendar: [],
+  coords: "53.86286 27.530309",
 };
 
 const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder) => {
@@ -72,6 +75,9 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
   });
   builder.addCase(remove.fulfilled, (state, action) => {
     state.requests = state.requests.filter((x) => x.id !== action.payload.id);
+  });
+  builder.addCase(getRequestGeocodeYandex.fulfilled, (state, action) => {
+    state.coords = action.payload?.response?.GeoObjectCollection?.featureMember[0]?.GeoObject?.Point.pos;
   });
 });
 

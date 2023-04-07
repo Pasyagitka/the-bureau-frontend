@@ -1,6 +1,21 @@
-import { FullscreenControl, YMaps, Map as YandexMap } from "@pbe/react-yandex-maps";
+import { useAppDispatch, useAppSelector } from "@/hooks";
+import { getRequestGeocodeYandex } from "@/redux/actions/requests";
+import { FullscreenControl, Placemark, YMaps, Map as YandexMap } from "@pbe/react-yandex-maps";
 
-function Map() {
+function Map({ requests }: { requests: Array }) {
+  const dispatch = useAppDispatch();
+
+  function getGeocode() {
+    dispatch(getRequestGeocodeYandex(searchQuery));
+  }
+  // useEffect(getGeocode, [requests]);
+
+  const { coords } = useAppSelector((state) => state.requests);
+
+  const placemarks = requests?.map((request) => {
+    const [y, x] = coords.split(" ");
+    <Placemark geometry={[x, y]} />;
+  });
   return (
     <div className="container w-full my-6">
       <YMaps>
@@ -14,6 +29,12 @@ function Map() {
               ref && ref.behaviors.disable("scrollZoom");
             }}
           >
+            <Placemark
+              geometry={[53.86286, 27.530309]}
+              properties={{ iconContent: "№25" }}
+              options={{ preset: "islands#darkGreenStretchyIcon" }}
+            />
+            ;{placemarks}
             <FullscreenControl />
           </YandexMap>
         </div>

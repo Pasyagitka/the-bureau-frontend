@@ -17,6 +17,7 @@ import {
   GET_REQUEST_ACCESSORIES,
   GET_REQUEST_TOOLS,
   GET_CALENDAR,
+  GET_REQUEST_GEOCODE_YANDEX,
 } from "../actionTypes/requests";
 import { getToken } from "./auth";
 
@@ -153,4 +154,13 @@ export const getFullReport = createAsyncThunk(GET_FULL_REPORT, async (id: number
     responseType: "blob",
   });
   fileDownload(request.data, `request${id}.docx`);
+});
+
+export const getRequestGeocodeYandex = createAsyncThunk(GET_REQUEST_GEOCODE_YANDEX, async (searchQuery: string) => {
+  const request = await axios.get(requestLinks.getRequestGeocodeYandex(process.env.YANDEX_GEO_API_KEY, searchQuery), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
 });

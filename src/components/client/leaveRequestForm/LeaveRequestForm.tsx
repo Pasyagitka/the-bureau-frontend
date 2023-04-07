@@ -7,6 +7,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/storage/equipment";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "@/elements/buttons/SubmitButton";
+import { AddressSuggestions } from "react-dadata";
 import TextInput from "./TextInput";
 
 function LeaveRequestForm() {
@@ -17,6 +18,8 @@ function LeaveRequestForm() {
   const [corpus, setCorpus] = useState();
   const [flat, setFlat] = useState();
   const [stage, setStage] = useState(1);
+  const [citySuggest, setCitySuggest] = useState();
+  const [streetSuggest, setStreetSuggest] = useState();
 
   const navigate = useNavigate();
 
@@ -93,6 +96,8 @@ function LeaveRequestForm() {
     console.log(stage);
   };
 
+  console.log("token", process.env.GEOCODER_API_KEY);
+
   return (
     <section className="w-full">
       <div className="container max-w-2xl mx-auto shadow-md md:w-3/4">
@@ -118,6 +123,32 @@ function LeaveRequestForm() {
                   <option>Беларусь</option>
                 </select>
               </div>
+              <AddressSuggestions
+                token={process.env.GEOCODER_API_KEY}
+                value={citySuggest}
+                onChange={setCitySuggest}
+                filterLocations={[
+                  {
+                    country: "Беларусь",
+                  },
+                ]}
+                filterFromBound="region"
+                filterToBound="house"
+              />
+              <AddressSuggestions
+                token={process.env.GEOCODER_API_KEY}
+                value={streetSuggest}
+                onChange={setStreetSuggest}
+                filterLocations={[
+                  {
+                    country: "Беларусь",
+                    city: citySuggest,
+                  },
+                ]}
+                filterFromBound="street"
+                filterToBound="street"
+              />
+              ;
               <TextInput
                 placeholder="City"
                 value=""
