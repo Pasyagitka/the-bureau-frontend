@@ -34,7 +34,7 @@ function Map({ requests }: { requests: Array }) {
               properties={{ iconContent: "№25" }}
               options={{ preset: "islands#darkGreenStretchyIcon" }}
             />
-            ;{placemarks}
+            {placemarks}
             <FullscreenControl />
           </YandexMap>
         </div>

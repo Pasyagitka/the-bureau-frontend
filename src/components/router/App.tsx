@@ -35,6 +35,7 @@ import CreateAccessoryForm from "../admin/storage/accessoriesList/CreateAccessor
 import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryForm";
 import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
 import EditClientDetails from "../client/editClientDetails/EditClientDetails";
+import ApproveRequestStatusAdmin from "../admin/editRequestAdmin/ApproveRequestStatusAdmin";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -71,6 +72,7 @@ function App() {
             <Route path="requests" element={<Requests />} />
             <Route path="requests/:id" element={<RequestDetails />} />
             <Route path="requests/:id/edit" element={<EditRequestAdmin />} />
+            <Route path="requests/:id/approve" element={<ApproveRequestStatusAdmin />} />
 
             <Route path="storage" element={<Storage />}>
               <Route path="" element={<Navigate to="accessories" />} />

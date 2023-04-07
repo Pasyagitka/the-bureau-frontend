@@ -3,6 +3,7 @@ import { RequestDto } from "@/types/dto/requestDto";
 import { Link } from "react-router-dom";
 import downloadIcon from "icons/download.png";
 import editIcon from "icons/edit.png";
+import approveIcon from "icons/approve.png";
 
 function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
   const colors = {
@@ -57,6 +58,7 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
           </span>
           <div className="flex items-end justify-end gap-3 m-3 h-full">
             <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
+            <IconButton icon={approveIcon} alt="Approve" isLink to={`${request.id}/approve`} />
             <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
           </div>
         </div>

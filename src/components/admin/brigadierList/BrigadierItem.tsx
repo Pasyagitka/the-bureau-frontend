@@ -12,7 +12,7 @@ function BrigadierItem({
   handleClick: () => void;
 }) {
   return (
-    <div className="overflow-hidden shadow-lg rounded-lg h-full w-11/12 md:w-100 cursor-pointer m-auto">
+    <div className="overflow-hidden shadow-lg rounded-lg h-full w-11/12 md:w-100 cursor-pointer">
       <div className="flex max-w-md bg-white shadow-lg h-full rounded-lg overflow-hidden">
         <div
           className="w-1/3 bg-cover bg-center"
@@ -27,7 +27,7 @@ function BrigadierItem({
           <p className="mt-2 text-gray-600 text-sm">{brigadier?.user?.email}</p>
           <p className="mt-2 text-gray-600 text-sm">+{brigadier.contactNumber}</p>
           <div className="flex item-center justify-between mt-3">
-            <h1 className="text-gray-700 font-bold text-xl">бригадир</h1>
+            {/* <h1 className="text-gray-700 font-bold text-xl">бригадир</h1> */}
             <button type="button" onClick={() => handleClick()}>
               {clickTitle}
             </button>

@@ -34,7 +34,6 @@ function Requests() {
           <p className="text-2xl font-light text-gray-400">Описание...</p>
         </div>
       </div>
-      <Map requests={requests} />
       <div className="flex items-end justify-between mb-12">
         <div className="flex gap-5">
           <button
@@ -76,6 +75,7 @@ function Requests() {
         searchQuery={searchQuery}
         filterQuery={filterQuery}
       />
+      <Map requests={requests} />
     </div>
   );
 }
