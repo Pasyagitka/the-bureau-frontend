@@ -4,7 +4,6 @@ import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 import { useState } from "react";
 import { Collapse } from "react-collapse";
 import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
-import RequestTools from "@/components/request/requestTools/RequestTools";
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 import editIcon from "icons/edit.png";
 import IconButton from "@/elements/buttons/IconButton";
@@ -52,10 +51,10 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
                   <p className="mt-2 text-gray-600 text-sm text-center">Комплектующие</p>
                   <RequestAccessories accessories={request.requestAccessories} />
                 </div>
-                <div className="w-1/3">
+                {/* <div className="w-1/3">
                   <p className="mt-2 text-gray-600 text-sm text-center">Инструменты</p>
                   <RequestTools tools={request.requestTools} />
-                </div>
+                </div> */}
               </div>
             </Collapse>
           </div>

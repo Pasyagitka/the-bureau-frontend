@@ -6,7 +6,6 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RequestAccessories from "../requestAccessories/RequestAccessories";
 import RequestEquipment from "../requestEquipment/RequestEquipment";
-import RequestTools from "../requestTools/RequestTools";
 import DetailsItem from "./DetailsItem";
 
 function RequestDetails() {
@@ -90,13 +89,13 @@ function RequestDetails() {
           <div />
         </div>
       </div>
-      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+      {/* <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
         <h2 className="w-full md:w-1/3">Необходимые инструменты</h2>
         <div className="w-full md:w-2/3">
           {requestTools && <RequestTools tools={requestTools} />}
           <div />
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-center">
         <BrigadierSmall brigadier={request?.brigadier || { surname: "Не", firstname: "назначен", patronymic: "" }} />
       </div>
