@@ -6,12 +6,14 @@ function ListItem({
   id,
   sku,
   name,
+  quantity,
   equipmentId,
   handleRemove,
 }: {
   id: number;
   sku: string;
   name: string;
+  quantity: number;
   equipmentId: number;
   handleRemove: () => void;
 }) {
@@ -29,6 +31,9 @@ function ListItem({
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{name}</p>
+      </td>
+      <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <p className="text-gray-900 whitespace-no-wrap">{quantity}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <p className="text-gray-900 whitespace-no-wrap">{equipmentId}</p>

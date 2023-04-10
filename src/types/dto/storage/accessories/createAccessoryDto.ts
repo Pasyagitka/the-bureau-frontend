@@ -3,4 +3,5 @@ export type CreateAccessoryDto = {
   name: string;
   price: number;
   equipmentId: number;
+  quantity: number;
 };

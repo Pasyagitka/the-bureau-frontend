@@ -13,6 +13,7 @@ function EditAccessoryForm() {
 
   const [name, setName] = useState();
   const [equipmentId, setEquipmentId] = useState();
+  const [quantity, setQuantity] = useState();
   const [sku, setSku] = useState();
 
   useEffect(() => {
@@ -22,6 +23,7 @@ function EditAccessoryForm() {
   useEffect(() => {
     setName(accessory.name);
     setEquipmentId(accessory.equipment?.id);
+    setQuantity(accessory.quantity_in_stock);
     setSku(accessory.sku);
   }, [accessory]);
 
@@ -29,6 +31,7 @@ function EditAccessoryForm() {
     const updateAccessoriesDto: UpdateAccessoryDto = {
       name,
       equipmentId: +equipmentId,
+      quantity: Number(quantity),
       sku: sku === "" ? null : sku,
     };
     console.log(updateAccessoriesDto, "update");
@@ -72,6 +75,20 @@ function EditAccessoryForm() {
                     onChange={(e) => {
                       console.log(sku);
                       setSku(e.target.value);
+                    }}
+                  />
+                </div>
+              </div>
+              <div>
+                <div className=" relative ">
+                  <input
+                    type="text"
+                    className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
+                    placeholder="quantity"
+                    defaultValue={quantity}
+                    value={quantity}
+                    onChange={(e) => {
+                      setQuantity(e.target.value.replace(/\D/g, ""));
                     }}
                   />
                 </div>
