@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 import BrigadierRequests from "./BrigadierRequests";
+import BrigadierSchedule from "./BrigadierSchedule";
 
 function BrigadierHome() {
   const dispatch = useAppDispatch();
@@ -19,7 +20,10 @@ function BrigadierHome() {
 
   return (
     <>
-      <BrigadierDetails brigadier={brigadier} />
+      <div className="flex w-full">
+        <BrigadierDetails brigadier={brigadier} />
+        <BrigadierSchedule />
+      </div>
       <BrigadierRequests requests={requests} />
     </>
   );

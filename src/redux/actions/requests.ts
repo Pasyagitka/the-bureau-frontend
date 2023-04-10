@@ -18,6 +18,7 @@ import {
   GET_REQUEST_TOOLS,
   GET_CALENDAR,
   GET_REQUEST_GEOCODE_YANDEX,
+  GET_CALENDAR_FOR_BRIGADIER,
 } from "../actionTypes/requests";
 import { getToken } from "./auth";
 
@@ -58,6 +59,15 @@ export const getWeeklyReport = createAsyncThunk(GET_WEEKLY_REPORT, async () => {
 
 export const getCalendar = createAsyncThunk(GET_CALENDAR, async () => {
   const request = await axios.get(requestLinks.getCalendar, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getCalendarForBrigadier = createAsyncThunk(GET_CALENDAR_FOR_BRIGADIER, async (brigadierId: number) => {
+  const request = await axios.get(requestLinks.getCalendarForBrigadier(brigadierId), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },

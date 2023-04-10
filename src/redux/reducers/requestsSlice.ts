@@ -15,6 +15,7 @@ import {
   updateByAdmin,
   updateByBrigadier,
   getRequestGeocodeYandex,
+  getCalendarForBrigadier,
 } from "../actions/requests";
 
 type RequestsStateProps = {
@@ -54,6 +55,9 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
     state.weeklyReport = action.payload;
   });
   builder.addCase(getCalendar.fulfilled, (state, action) => {
+    state.calendar = action.payload;
+  });
+  builder.addCase(getCalendarForBrigadier.fulfilled, (state, action) => {
     state.calendar = action.payload;
   });
   builder.addCase(create.fulfilled, (state, action) => {

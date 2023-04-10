@@ -1,8 +1,5 @@
-import { useAppDispatch, useAppSelector } from "@/hooks";
 import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
-import { useEffect } from "react";
-import { getCalendar } from "@/redux/actions/requests";
 import dayjs from "dayjs";
 
 const colors = {
@@ -11,15 +8,7 @@ const colors = {
   Approved: "blue",
 };
 
-function Calendar() {
-  const dispatch = useAppDispatch();
-
-  useEffect(() => {
-    dispatch(getCalendar());
-  }, [dispatch]);
-
-  const { calendar } = useAppSelector((state) => state.requests);
-
+function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unknown> }) {
   function renderCell(date) {
     const list = calendar.filter((item) => dayjs(date).isSame(dayjs(item.mountingDate).toDate(), "day"));
 
@@ -49,11 +38,17 @@ function Calendar() {
 
       return (
         <ul className="calendar-todo-list">
-          {displayList.map((item, index) => (
-            <li key={index}>
-              <Badge color={colors[item.status]} content={`№${item.requestId}`} /> - {item.brigadier}
-            </li>
-          ))}
+          {displayList.map((item, index) =>
+            compact ? (
+              <li key={index}>
+                <Badge color={colors[item.status]} content={`${item.requestId}`} />
+              </li>
+            ) : (
+              <li key={index}>
+                <Badge color={colors[item.status]} content={`№${item.requestId}`} /> - {item.brigadier}
+              </li>
+            )
+          )}
           {moreCount ? moreItem : null}
         </ul>
       );
@@ -64,7 +59,7 @@ function Calendar() {
 
   return (
     <CustomProvider locale={ruRU}>
-      <RSCalendar bordered renderCell={renderCell} className="text-sm" />
+      <RSCalendar compact={compact} bordered renderCell={renderCell} className="text-sm" />
     </CustomProvider>
   );
 }

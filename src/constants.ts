@@ -49,9 +49,8 @@ export const invoiceLinks = {
 
 export const requestLinks = {
   getAll: "/api/request",
-  getCalendar: "/api/request/calendar/admin",
-  getWeeklyReport: "/api/request/weekly-report",
-  getWeeklyReportForBrigadier: (brigadierId: number) => `/api/request/weekly-report/${brigadierId}`,
+  getCalendar: "/api/request/calendar",
+  getCalendarForBrigadier: (brigadierId: number) => `/api/request/calendar/${brigadierId}`,
   getAccessories: (id: number) => `/api/request/${id}/accessories`,
   getTools: (id: number) => `/api/request/${id}/tools`,
   getBrigadierRequests: (brigadierId: number) => `/api/request/brigadier/${brigadierId}`,
