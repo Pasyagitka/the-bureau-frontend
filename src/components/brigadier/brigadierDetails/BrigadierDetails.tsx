@@ -7,7 +7,7 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
     <div className="w-full bg-white p-12 rounded">
       <div className="header flex items-end justify-between mb-12" />
       <div className="title">
-        <p className="text-4xl font-bold text-gray-800 mb-4">Информация о бригадире</p>
+        <p className="text-4xl font-bold text-gray-800 mb-4">Личная информация</p>
         {/* <p className="text-2xl font-light text-gray-400">Description...</p> */}
         <AccentButton to="update" title="Редактировать" />
       </div>

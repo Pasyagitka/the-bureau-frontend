@@ -66,7 +66,7 @@ function EditRequestAdmin() {
         <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
-      <div className="px-4 py-5 sm:px-6">
+      {/* <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Статус</dt>
         <div className="col-span-6 sm:col-span-3">
           <select
@@ -78,7 +78,7 @@ function EditRequestAdmin() {
             {statuses}
           </select>
         </div>
-      </div>
+      </div> */}
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Бригадир</dt>
         <div className="col-span-6 sm:col-span-3">
