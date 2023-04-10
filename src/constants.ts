@@ -70,9 +70,8 @@ export const requestReportLinks = {
 };
 
 export const scheduleLinks = {
-  // TODO ???
-  getAll: "/api/schedule",
-  getByBrigadierId: (brigadierId: number) => `/api/schedule/${brigadierId}`,
+  getByBrigadierId: (brigadierId: number) => `/api/schedule/brigadier/${brigadierId}`,
+  getByRequestId: (requestId: number) => `/api/schedule/${requestId}`,
 };
 
 export const stageLinks = {

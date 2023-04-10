@@ -1,10 +1,11 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/brigadiers";
-import { get, updateByAdmin } from "@/redux/actions/requests";
+import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
 import { RequestStatus } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import BrigadierHistory from "./BrigadierHistory";
 
 function EditRequestAdmin() {
   const navigate = useNavigate();
@@ -14,6 +15,7 @@ function EditRequestAdmin() {
   const [brigadierId, setBrigadier] = useState();
   const [statusId, setStatus] = useState();
 
+  const history = useAppSelector((state) => state.requests.brigadierHistory);
   const request = useAppSelector((state) => state.requests.request);
   const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
     <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
@@ -30,6 +32,7 @@ function EditRequestAdmin() {
   useEffect(() => {
     setBrigadier(request?.brigadier?.id);
     setStatus(request?.status);
+    dispatch(getScheduleForRequest(request?.id));
   }, [request]);
 
   const handleSubmit = async () => {
@@ -91,6 +94,10 @@ function EditRequestAdmin() {
             {brigadiersList}
           </select>
         </div>
+      </div>
+      <div className="px-4 py-5 sm:px-6">
+        <dt className="text-sm font-medium text-gray-500">История работы над заявкой</dt>
+        <BrigadierHistory history={history} />
       </div>
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Свободные бригадиры</dt>

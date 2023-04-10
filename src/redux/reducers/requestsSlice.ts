@@ -16,6 +16,7 @@ import {
   updateByBrigadier,
   getRequestGeocodeYandex,
   getCalendarForBrigadier,
+  getScheduleForRequest,
 } from "../actions/requests";
 
 type RequestsStateProps = {
@@ -25,6 +26,7 @@ type RequestsStateProps = {
   requestAccessories: RequestAccessoryDto[];
   weeklyReport: Array<unknown>;
   calendar: Array<unknown>;
+  brigadierHistory: Array<unknown>;
   coords: string;
 };
 
@@ -35,6 +37,7 @@ const initialState = {
   requestAccessories: [],
   weeklyReport: [],
   calendar: [],
+  brigadierHistory: [],
   coords: "53.86286 27.530309",
 };
 
@@ -59,6 +62,9 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
   });
   builder.addCase(getCalendarForBrigadier.fulfilled, (state, action) => {
     state.calendar = action.payload;
+  });
+  builder.addCase(getScheduleForRequest.fulfilled, (state, action) => {
+    state.brigadierHistory = action.payload;
   });
   builder.addCase(create.fulfilled, (state, action) => {
     state.requests.push(action.payload);

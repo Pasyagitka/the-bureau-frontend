@@ -1,4 +1,4 @@
-import { requestLinks } from "@/constants";
+import { requestLinks, scheduleLinks } from "@/constants";
 import { CreateRequestDto } from "@/types/dto/createRequestDto";
 import { UpdateRequestByAdminDto } from "@/types/dto/updateRequestByAdminDto";
 import { UpdateRequestByBrigadierDto } from "@/types/dto/updateRequestByBrigadierDto";
@@ -19,6 +19,7 @@ import {
   GET_CALENDAR,
   GET_REQUEST_GEOCODE_YANDEX,
   GET_CALENDAR_FOR_BRIGADIER,
+  GET_SCHEDULE_FOR_REQUEST,
 } from "../actionTypes/requests";
 import { getToken } from "./auth";
 
@@ -68,6 +69,15 @@ export const getCalendar = createAsyncThunk(GET_CALENDAR, async () => {
 
 export const getCalendarForBrigadier = createAsyncThunk(GET_CALENDAR_FOR_BRIGADIER, async (brigadierId: number) => {
   const request = await axios.get(requestLinks.getCalendarForBrigadier(brigadierId), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
+export const getScheduleForRequest = createAsyncThunk(GET_SCHEDULE_FOR_REQUEST, async (requestId: number) => {
+  const request = await axios.get(scheduleLinks.getByRequestId(requestId), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
