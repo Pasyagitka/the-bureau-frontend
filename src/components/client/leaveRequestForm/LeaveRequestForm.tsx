@@ -15,11 +15,11 @@ function LeaveRequestForm() {
   const [city, setCity] = useState();
   const [street, setStreet] = useState();
   const [house, setHouse] = useState();
-  const [corpus, setCorpus] = useState();
   const [flat, setFlat] = useState();
   const [stage, setStage] = useState(1);
-  const [citySuggest, setCitySuggest] = useState();
-  const [streetSuggest, setStreetSuggest] = useState();
+  const [addressSuggest, setAddressSuggest] = useState();
+  const [lat, setLat] = useState();
+  const [lon, setLon] = useState();
 
   const navigate = useNavigate();
 
@@ -71,12 +71,13 @@ function LeaveRequestForm() {
       comment: comment || null,
       stage,
       address: {
-        country: "Belarus",
         city,
         street,
-        house: +house,
-        corpus: corpus || null,
-        flat: +flat || null,
+        house,
+        corpus: null,
+        flat: Number(flat) || null,
+        lat,
+        lon,
       },
       client: {
         client,
@@ -90,13 +91,47 @@ function LeaveRequestForm() {
     }
   };
 
+  const join = (arr) => {
+    const separator = arguments.length > 1 ? arguments[1] : ", ";
+    return arr.filter((n) => n).join(separator);
+  };
+
+  function geoQuality(qc_geo) {
+    const localization = {
+      "0": "точные",
+      "1": "ближайший дом",
+      "2": "улица",
+      "3": "населенный пункт",
+      "4": "город",
+    };
+    return localization[qc_geo] || qc_geo;
+  }
+
+  function geoLink(address) {
+    return join(
+      [
+        '<a target="_blank" href="',
+        "https://maps.yandex.ru/?text=",
+        address.geo_lat,
+        ",",
+        address.geo_lon,
+        '">',
+        address.geo_lat,
+        ", ",
+        address.geo_lon,
+        "</a>",
+      ],
+      ""
+    );
+  }
+
   const handleSelectChange = (e: number) => {
     // console.log(Number(e.currentTarget.value));
     setStage(Number(e));
     console.log(stage);
   };
 
-  console.log("token", process.env.GEOCODER_API_KEY);
+  // console.log("address", addressSuggest);
 
   return (
     <section className="w-full">
@@ -113,72 +148,30 @@ function LeaveRequestForm() {
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <h2 className="max-w-sm mx-auto md:w-1/3">Адрес</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <div className="col-span-6 sm:col-span-3">
-                <select
-                  id="country"
-                  name="country"
-                  autoComplete="country-name"
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                >
-                  <option>Беларусь</option>
-                </select>
-              </div>
               <AddressSuggestions
                 token={process.env.GEOCODER_API_KEY}
-                value={citySuggest}
-                onChange={setCitySuggest}
+                value={addressSuggest}
                 filterLocations={[
                   {
                     country: "Беларусь",
+                    city: "Минск",
                   },
                 ]}
-                filterFromBound="region"
-                filterToBound="house"
-              />
-              <AddressSuggestions
-                token={process.env.GEOCODER_API_KEY}
-                value={streetSuggest}
-                onChange={setStreetSuggest}
-                filterLocations={[
-                  {
-                    country: "Беларусь",
-                    city: citySuggest,
-                  },
-                ]}
-                filterFromBound="street"
-                filterToBound="street"
-              />
-              ;
-              <TextInput
-                placeholder="City"
-                value=""
                 onChange={(e) => {
-                  setCity(e.target.value);
+                  console.log(e.data);
+                  setAddressSuggest(e.data);
+                  setCity(e?.data.city);
+                  setStreet(e?.data.street);
+                  setHouse(e?.data.house);
+                  setLat(e?.data.geo_lat);
+                  setLon(e?.data.geo_lon);
                 }}
               />
+              <TextInput placeholder="Город" value={city} disabled />
+              <TextInput placeholder="Улица" value={street} disabled />
+              <TextInput placeholder="Дом" value={house || ""} disabled />
               <TextInput
-                placeholder="Street"
-                value=""
-                onChange={(e) => {
-                  setStreet(e.target.value);
-                }}
-              />
-              <TextInput
-                placeholder="House"
-                value={house || ""}
-                onChange={(e) => {
-                  setHouse(e.target.value.replace(/\D/g, ""));
-                }}
-              />
-              <TextInput
-                placeholder="Corpus"
-                value=""
-                onChange={(e) => {
-                  setCorpus(e.target.value);
-                }}
-              />
-              <TextInput
-                placeholder="Flat"
+                placeholder="Квартира"
                 value={flat || ""}
                 onChange={(e) => {
                   setFlat(e.target.value.replace(/\D/g, ""));
@@ -197,7 +190,6 @@ function LeaveRequestForm() {
               <div className="col-span-6 sm:col-span-3">
                 <select
                   name="stage"
-                  autoComplete="country-name"
                   className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
                   value={stage}
                   onChange={(e) => handleSelectChange(Number(e.currentTarget.value))}

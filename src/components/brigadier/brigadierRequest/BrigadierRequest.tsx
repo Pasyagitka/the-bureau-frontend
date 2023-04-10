@@ -17,9 +17,9 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
         <h1 className="text-gray-900 font-bold text-2xl m-5">{request.id}</h1>
         <div className="p-4 w-2/3">
           <h1 className="text-gray-900 font-bold text-2xl">
-            {`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
-              request.address?.house
-            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""} `}
+            {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
+              request.address?.flat ?? ""
+            } `}
           </h1>
           <p className="mt-2 text-gray-600 text-sm">
             {`Клиент: ${request.client?.surname} ${request.client?.firstname} ${request.client?.patronymic}`}

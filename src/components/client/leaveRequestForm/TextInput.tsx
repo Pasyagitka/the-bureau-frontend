@@ -2,10 +2,12 @@ function TextInput({
   placeholder,
   value,
   onChange,
+  disabled,
 }: {
   placeholder: string;
   value: string;
-  onChange: (e: unknown) => void;
+  onChange?: (e: unknown) => void;
+  disabled: boolean;
 }) {
   return (
     <div>
@@ -17,6 +19,7 @@ function TextInput({
           placeholder={placeholder}
           defaultValue={value}
           onChange={onChange}
+          readOnly={disabled}
         />
       </div>
     </div>

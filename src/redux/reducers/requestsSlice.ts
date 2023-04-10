@@ -14,7 +14,6 @@ import {
   remove,
   updateByAdmin,
   updateByBrigadier,
-  getRequestGeocodeYandex,
   getCalendarForBrigadier,
   getScheduleForRequest,
 } from "../actions/requests";
@@ -85,9 +84,6 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
   });
   builder.addCase(remove.fulfilled, (state, action) => {
     state.requests = state.requests.filter((x) => x.id !== action.payload.id);
-  });
-  builder.addCase(getRequestGeocodeYandex.fulfilled, (state, action) => {
-    state.coords = action.payload?.response?.GeoObjectCollection?.featureMember[0]?.GeoObject?.Point.pos;
   });
 });
 

@@ -1,21 +1,16 @@
-import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getRequestGeocodeYandex } from "@/redux/actions/requests";
-import { FullscreenControl, Placemark, YMaps, Map as YandexMap } from "@pbe/react-yandex-maps";
+import { RequestDto } from "@/types/dto/requestDto";
+import { FullscreenControl, Placemark, YMaps, Map as YandexMap, ZoomControl } from "@pbe/react-yandex-maps";
+import { colors } from "@/elements/calendar/Calendar";
 
-function Map({ requests }: { requests: Array }) {
-  const dispatch = useAppDispatch();
-
-  function getGeocode() {
-    dispatch(getRequestGeocodeYandex(searchQuery));
-  }
-  // useEffect(getGeocode, [requests]);
-
-  const { coords } = useAppSelector((state) => state.requests);
-
-  const placemarks = requests?.map((request) => {
-    const [y, x] = coords.split(" ");
-    <Placemark geometry={[x, y]} />;
-  });
+function Map({ requests }: { requests: Array<RequestDto> }) {
+  const placemarks = requests?.map((request) => (
+    <Placemark
+      key={request.id}
+      geometry={[request.address.lat, request.address.lon]}
+      properties={{ iconContent: `№${request.id}` }}
+      options={{ preset: `islands#${colors[request.status]}StretchyIcon` }}
+    />
+  ));
   return (
     <div className="container w-full my-6">
       <YMaps>
@@ -29,13 +24,9 @@ function Map({ requests }: { requests: Array }) {
               ref && ref.behaviors.disable("scrollZoom");
             }}
           >
-            <Placemark
-              geometry={[53.86286, 27.530309]}
-              properties={{ iconContent: "№25" }}
-              options={{ preset: "islands#darkGreenStretchyIcon" }}
-            />
             {placemarks}
             <FullscreenControl />
+            <ZoomControl />
           </YandexMap>
         </div>
       </YMaps>

@@ -26,6 +26,13 @@ function Requests() {
     setSearchQuery(e.target.value);
   };
 
+  const filteredRequests = requests.filter(
+    (item) =>
+      (item.client.surname.toLowerCase().includes(searchQuery.toLowerCase()) ||
+        item.address.street.toLowerCase().includes(searchQuery.toLowerCase())) &&
+      item.status.toLowerCase().includes(filterQuery.toLowerCase())
+  );
+
   return (
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between">
@@ -69,13 +76,8 @@ function Requests() {
           <SearchInput searchQuery={searchQuery} commitInputChanges={commitInputChanges} />
         </div>
       </div>
-      <RequestList
-        requests={requests}
-        handleDownload={(id) => handleDownload(id)}
-        searchQuery={searchQuery}
-        filterQuery={filterQuery}
-      />
-      <Map requests={requests} />
+      <RequestList requests={filteredRequests} handleDownload={(id) => handleDownload(id)} />
+      <Map requests={filteredRequests} />
     </div>
   );
 }

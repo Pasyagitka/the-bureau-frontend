@@ -3,12 +3,12 @@ import { RequestEquipmentDto } from "../requestEquipmentDto";
 import { StageDto } from "../stageDto";
 
 type AddressDto = {
-  country: string;
   city: string;
   street: string;
   house: number;
-  corpus: string;
   flat: string;
+  lat: string;
+  lon: string;
 };
 
 export type ClientRequestDto = {

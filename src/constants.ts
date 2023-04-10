@@ -60,8 +60,6 @@ export const requestLinks = {
   create: "/api/request",
   updateByBrigadier: (id: number) => `/api/request/brigadier/${id}`,
   updateByAdmin: (id: number) => `/api/request/admin/${id}`,
-  getRequestGeocodeYandex: (key: string, searchQuery: string) =>
-    `https://geocode-maps.yandex.ru/1.x/?apikey=${key}&format=json&geocode=${searchQuery}&lang=ru_RU`,
 };
 
 export const requestReportLinks = {

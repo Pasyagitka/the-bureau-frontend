@@ -57,9 +57,9 @@ function RequestDetails() {
           />
           <DetailsItem
             title="Адрес исполнения работ"
-            value={`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
-              request.address?.house
-            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""} `}
+            value={`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
+              request.address?.flat ?? ""
+            } `}
           />
           <DetailsItem title="Email" value={request.client?.email} isDark />
           <DetailsItem title="Контактный номер" value={`+${request.client?.contactNumber}`} />

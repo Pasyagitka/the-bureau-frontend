@@ -6,12 +6,12 @@ import { RequestToolDto } from "./requestToolsDto";
 import { StageDto } from "./stageDto";
 
 type AddressDto = {
-  country: string;
   city: string;
   street: string;
-  house: number;
-  corpus: string;
+  house: string;
   flat: string;
+  lat: string;
+  lon: string;
 };
 
 export type RequestDto = {

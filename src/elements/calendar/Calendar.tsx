@@ -2,7 +2,7 @@ import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from 
 import { ruRU } from "rsuite/esm/locales";
 import dayjs from "dayjs";
 
-const colors = {
+export const colors = {
   InProcessing: "yellow",
   Completed: "green",
   Approved: "blue",

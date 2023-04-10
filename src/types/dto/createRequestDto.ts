@@ -8,12 +8,12 @@ export type CreateRequestDto = {
   comment: string | null;
   stage: number;
   address: {
-    country: string;
     city: string;
     street: string;
-    house: number;
-    corpus: string | null;
+    house: string;
     flat: number | null;
+    lat: string;
+    lon: string;
   };
   requestEquipment: RequestEquipmentDto[];
 };

@@ -13,9 +13,9 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
         </div>
         <div className="p-4">
           <h1 className="text-gray-900 font-bold text-2xl">
-            {`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
-              request.address?.house
-            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""}`}
+            {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house}${
+              request.address?.flat ?? ""
+            }`}
           </h1>
           <p className="mt-2 text-gray-600 text-sm">{request.comment}</p>
           <div className="flex flex-wrap items-center gap-2 my-5">

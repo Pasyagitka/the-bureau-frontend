@@ -17,7 +17,6 @@ import {
   GET_REQUEST_ACCESSORIES,
   GET_REQUEST_TOOLS,
   GET_CALENDAR,
-  GET_REQUEST_GEOCODE_YANDEX,
   GET_CALENDAR_FOR_BRIGADIER,
   GET_SCHEDULE_FOR_REQUEST,
 } from "../actionTypes/requests";
@@ -174,13 +173,4 @@ export const getFullReport = createAsyncThunk(GET_FULL_REPORT, async (id: number
     responseType: "blob",
   });
   fileDownload(request.data, `request${id}.docx`);
-});
-
-export const getRequestGeocodeYandex = createAsyncThunk(GET_REQUEST_GEOCODE_YANDEX, async (searchQuery: string) => {
-  const request = await axios.get(requestLinks.getRequestGeocodeYandex(process.env.YANDEX_GEO_API_KEY, searchQuery), {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
-  return request.data;
 });

@@ -26,9 +26,9 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
         <Link to={`${request.id}`} className="p-2 w-2/3">
           <h1 className="text-gray-900 font-bold text-2xl">Заявка №{request.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">
-            {`${request.address?.country}, г. ${request.address?.city}, ул.${request.address?.street}, дом ${
-              request.address?.house
-            }${request.address?.corpus ?? ""} ${request.address?.flat ?? ""}`}
+            {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
+              request.address?.flat ?? ""
+            }`}
           </p>
           {/* <div className="flex flex-wrap items-center gap-2 my-5">
             <StageBadge stage={1} />
