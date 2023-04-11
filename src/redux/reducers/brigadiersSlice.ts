@@ -2,13 +2,14 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
-import { getAll, get, getRequests, remove, activate, deactivate } from "../actions/brigadiers";
+import { getAll, get, getRequests, remove, activate, deactivate, getRecommended } from "../actions/brigadiers";
 
 type BrigadiersStateProps = {
   brigadiers: BrigadierDto[];
   notApproved: BrigadierDto[];
   brigadier: BrigadierDto;
   requests: BrigadierRequestDto[];
+  recommended: Array<unknown>;
 };
 
 const initialState = {
@@ -16,6 +17,7 @@ const initialState = {
   notApproved: [],
   brigadier: {},
   requests: [],
+  recommended: [],
 };
 
 const brigadiersReducer = createReducer<BrigadiersStateProps>(initialState, (builder) => {
@@ -48,6 +50,9 @@ const brigadiersReducer = createReducer<BrigadiersStateProps>(initialState, (bui
   });
   builder.addCase(getRequests.fulfilled, (state, action) => {
     state.requests = action.payload;
+  });
+  builder.addCase(getRecommended.fulfilled, (state, action) => {
+    state.recommended = action.payload;
   });
 });
 
