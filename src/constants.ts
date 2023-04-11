@@ -64,8 +64,8 @@ export const requestLinks = {
 };
 
 export const requestReportLinks = {
-  get: (requestId: number) => `/api/${requestId}/request-report`,
-  create: (requestId: number) => `/api/${requestId}/request-report`,
+  get: (requestId: number) => `/api/request-report/${requestId}`,
+  create: (requestId: number) => `/api/request-report/${requestId}`,
 };
 
 export const scheduleLinks = {

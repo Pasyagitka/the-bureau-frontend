@@ -26,7 +26,6 @@ type RequestsStateProps = {
   weeklyReport: Array<unknown>;
   calendar: Array<unknown>;
   brigadierHistory: Array<unknown>;
-  coords: string;
 };
 
 const initialState = {
@@ -37,7 +36,6 @@ const initialState = {
   weeklyReport: [],
   calendar: [],
   brigadierHistory: [],
-  coords: "53.86286 27.530309",
 };
 
 const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder) => {
