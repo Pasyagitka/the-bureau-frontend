@@ -20,8 +20,11 @@ function EditRequestAdmin() {
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
   const request = useAppSelector((state) => state.requests.request);
-  const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
-    <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
+  // const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
+  //   <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
+  // ));
+  const brigadiersList = recommended.map((i) => (
+    <option selected={brigadierId === i.id} value={i.id} label={i.full_name} />
   ));
   brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
 
@@ -70,17 +73,17 @@ function EditRequestAdmin() {
     startDate: new Date(),
   });
 
-  // const availableBrigadiers = recommended?.map((item) => (
-  //   <li className="flex flex-row h-full">
-  //     <div className="flex justify-between p-2 gap-5 w-full">
-  //       <div className="text-sm">{item.id}</div>
-  //       <div className="text-sm">{item.full_name}</div>
-  //       <div className="text-gray-600 text-sm">заявок на этой неделе: {item.week_request_count}</div>
-  //     </div>
-  //   </li>
-  // ));
+  const availableBrigadiers = recommended?.map((item) => (
+    <li className="flex flex-row h-full">
+      <div className="flex justify-between p-2 gap-5 w-full">
+        <div className="text-sm">{item.id}</div>
+        <div className="text-sm">{item.full_name}</div>
+        <div className="text-gray-600 text-sm">заявок на этой неделе: {item.week_request_count}</div>
+      </div>
+    </li>
+  ));
 
-  const availableBrigadiers = [];
+  // const availableBrigadiers = [];
 
   const handleDateChange = (newValue) => {
     setValue(newValue);
@@ -89,24 +92,11 @@ function EditRequestAdmin() {
   // TODO расписание подходящих бригадиров неа это время -- а что если нет подходящих?? попросить перенести, изменить mounting date, оставить контакты клиента тут же, типа перенести
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-80vh container p-4">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
-      {/* <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">Статус</dt>
-        <div className="col-span-6 sm:col-span-3">
-          <select
-            name="status"
-            defaultValue={statusId}
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-            onChange={(e) => handleStatusSelectChange(e.currentTarget.value)}
-          >
-            {statuses}
-          </select>
-        </div>
-      </div> */}
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Бригадир</dt>
         <div className="col-span-6 sm:col-span-3">
