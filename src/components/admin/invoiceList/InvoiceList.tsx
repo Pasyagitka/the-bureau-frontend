@@ -36,7 +36,7 @@ function InvoiceList({
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Выставленные чета</p>
+          <p className="text-4xl font-bold text-gray-800 mb-4">Выставленные cчета</p>
           <p className="text-2xl font-light text-gray-400">Скачать счета в формате .docx</p>
         </div>
       </div>

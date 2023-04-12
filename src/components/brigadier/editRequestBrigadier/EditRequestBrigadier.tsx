@@ -63,13 +63,17 @@ function EditRequestBrigadier() {
             </div>
           </div>
           <hr />
-          <div className="inline-flex items-center space-x-4">
-            <h1 className="text-gray-600">Добавить отчетность</h1>
-            <Uploader multiple listType="picture" fileList={files} onChange={setFiles}>
-              <button>
-                <CameraRetroIcon />
-              </button>
-            </Uploader>
+          <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
+            <h1 className="text-gray-600 w-full text-center">Добавить отчетность</h1>
+            <div className="flex">
+              <div className="inline-flex items-center space-x-4">
+                <Uploader multiple listType="picture" fileList={files} onChange={setFiles}>
+                  <button>
+                    <CameraRetroIcon />
+                  </button>
+                </Uploader>
+              </div>
+            </div>
           </div>
           <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
             <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />

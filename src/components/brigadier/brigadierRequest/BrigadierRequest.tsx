@@ -7,6 +7,7 @@ import RequestEquipment from "@/components/request/requestEquipment/RequestEquip
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 import editIcon from "icons/edit.png";
 import IconButton from "@/elements/buttons/IconButton";
+import AccentButton from "@/elements/buttons/AccentButton";
 
 function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
   const [visible, setVisible] = useState(false);
@@ -59,8 +60,9 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
             </Collapse>
           </div>
         </div>
-        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
+        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/4">
           <IconButton icon={editIcon} alt="Edit" isLink to={`requests/${request.id}/edit`} />
+          <AccentButton to="/invoice/create" title="Запросить счет" />
         </td>
       </div>
     </div>

@@ -19,6 +19,7 @@ import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
 import ProtectedRoute from "@/layouts/ProtectedRoute";
 import Invoices from "@/pages/admin/Invoices";
 import GatewayTimeout from "@/pages/common/GatewayTimeout";
+import CreateInvoiceForm from "@/elements/createInvoiceForm/CreateInvoiceForm";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -112,6 +113,7 @@ function App() {
             <Route path="" element={<BrigadierHome />} />
             <Route path="update" element={<EditBrigadierDetails />} />
             <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
+            <Route path="invoice/create" element={<CreateInvoiceForm />} />
           </Route>
         </Route>
         <Route path="/gatewayTimeout" element={<GatewayTimeout />} />
