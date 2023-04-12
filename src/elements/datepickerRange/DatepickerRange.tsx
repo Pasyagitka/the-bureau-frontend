@@ -3,7 +3,7 @@ import Datepicker from "react-tailwindcss-datepicker";
 function DatepickerRange({ value, handleValueChange }) {
   return (
     <Datepicker
-      placeholder="Set mounting date"
+      placeholder="Дата монтажа"
       primaryColor="lime"
       value={value}
       onChange={handleValueChange}

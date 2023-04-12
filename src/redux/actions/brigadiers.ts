@@ -10,6 +10,7 @@ import {
   GET_BRIGADIER_REQUESTS,
   ACTIVATE_BRIGADIER,
   DEACTIVATE_BRIGADIER,
+  GET_RECOMMENDED_BRIGADIERS,
 } from "../actionTypes/brigadiers";
 import { getToken } from "./auth";
 
@@ -74,6 +75,16 @@ export const getRequests = createAsyncThunk(GET_BRIGADIER_REQUESTS, async (id: n
     alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
+});
+
+export const getRecommended = createAsyncThunk(GET_RECOMMENDED_BRIGADIERS, async (date: Date) => {
+  const request = await axios.get(brigadierLinks.getRecommended, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+    params: { date },
+  });
+  return request.data;
 });
 
 export const activate = createAsyncThunk(ACTIVATE_BRIGADIER, async (id: number, { rejectWithValue }) => {

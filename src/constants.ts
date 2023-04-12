@@ -21,6 +21,7 @@ export const brigadierLinks = {
   getAll: "/api/brigadier",
   getAllNotActivated: "/api/brigadier",
   get: (id: number) => `/api/brigadier/${id}`,
+  getRecommended: "/api/brigadier/recommended",
   update: (id: number) => `/api/brigadier/${id}`,
   delete: (id: number) => `/api/brigadier/${id}`,
 };
@@ -63,8 +64,8 @@ export const requestLinks = {
 };
 
 export const requestReportLinks = {
-  get: (requestId: number) => `/api/${requestId}/request-report`,
-  create: (requestId: number) => `/api/${requestId}/request-report`,
+  get: (requestId: number) => `/api/request-report/${requestId}`,
+  create: (requestId: number) => `/api/request-report/${requestId}`,
 };
 
 export const scheduleLinks = {

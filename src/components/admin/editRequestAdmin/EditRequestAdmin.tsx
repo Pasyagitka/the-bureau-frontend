@@ -1,10 +1,12 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/brigadiers";
+import { getAll, getRecommended } from "@/redux/actions/brigadiers";
 import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
 import { RequestStatus } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import DayJs from "react-dayjs";
+import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import BrigadierHistory from "./BrigadierHistory";
 
 function EditRequestAdmin() {
@@ -16,6 +18,7 @@ function EditRequestAdmin() {
   const [statusId, setStatus] = useState();
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
+  const { recommended } = useAppSelector((state) => state.brigadiers);
   const request = useAppSelector((state) => state.requests.request);
   const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
     <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
@@ -25,14 +28,18 @@ function EditRequestAdmin() {
   const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
   useEffect(() => {
-    dispatch(get(params.id));
-    dispatch(getAll());
+    async function fetchData() {
+      await dispatch(get(params.id));
+      await dispatch(getAll());
+      await dispatch(getRecommended(request?.mountingDate));
+      await dispatch(getScheduleForRequest(request?.id));
+    }
+    fetchData();
   }, [dispatch]);
 
   useEffect(() => {
     setBrigadier(request?.brigadier?.id);
     setStatus(request?.status);
-    dispatch(getScheduleForRequest(request?.id));
   }, [request]);
 
   const handleSubmit = async () => {
@@ -59,8 +66,26 @@ function EditRequestAdmin() {
     setStatus(e);
   };
 
-  // TODO лог работы бригадиров над заявками
-  // TODO подходящий бригадир (свободный и тд)
+  const [dates, setValue] = useState({
+    startDate: new Date(),
+  });
+
+  // const availableBrigadiers = recommended?.map((item) => (
+  //   <li className="flex flex-row h-full">
+  //     <div className="flex justify-between p-2 gap-5 w-full">
+  //       <div className="text-sm">{item.id}</div>
+  //       <div className="text-sm">{item.full_name}</div>
+  //       <div className="text-gray-600 text-sm">заявок на этой неделе: {item.week_request_count}</div>
+  //     </div>
+  //   </li>
+  // ));
+
+  const availableBrigadiers = [];
+
+  const handleDateChange = (newValue) => {
+    setValue(newValue);
+  };
+
   // TODO расписание подходящих бригадиров неа это время -- а что если нет подходящих?? попросить перенести, изменить mounting date, оставить контакты клиента тут же, типа перенести
 
   return (
@@ -95,12 +120,33 @@ function EditRequestAdmin() {
           </select>
         </div>
       </div>
+      {history && history.length > 0 && (
+        <div className="px-4 py-5 sm:px-6">
+          <dt className="text-sm font-medium text-gray-500">История работы над заявкой</dt>
+          <BrigadierHistory history={history} />
+        </div>
+      )}
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">История работы над заявкой</dt>
-        <BrigadierHistory history={history} />
-      </div>
-      <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">Свободные бригадиры</dt>
+        {availableBrigadiers && availableBrigadiers.length > 0 ? (
+          <>
+            <dt className="text-sm font-medium text-gray-500">
+              Свободные бригадиры на дату монтажа (<DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>):
+            </dt>
+            <div className="container flex flex-col w-1/2 items-center justify-center bg-white rounded-lg shadow p-2 my-2">
+              <ul className="flex flex-col divide divide-y w-full">{availableBrigadiers}</ul>
+            </div>
+          </>
+        ) : (
+          <dt className="text-sm font-medium text-gray-500">
+            Свободных бригадиров на дату монтажа (<DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>) нет,
+            необходимо перенести дату монтажа:
+            <div className="px-10n w-1/4 my-4">
+              <DatepickerRange value={dates} handleValueChange={handleDateChange} />
+            </div>
+            Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
+            {request?.client?.firstname} {request?.client?.patronymic} {request?.client?.surname}
+          </dt>
+        )}
       </div>
       <div className="flex justify-evenly">
         <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />

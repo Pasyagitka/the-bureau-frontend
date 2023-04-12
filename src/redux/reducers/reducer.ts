@@ -5,6 +5,7 @@ import brigadiersSlice from "./brigadiersSlice";
 import clientsSlice from "./clientsSlice";
 import equipmentReducer from "./equipmentSlice";
 import invoicesSlice from "./invoicesSlice";
+import requestReportSlice from "./requestReportSlice";
 import requestsSlice from "./requestsSlice";
 import stagesSlice from "./stagesSlice";
 import toolsReducer from "./toolsSlice";
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
   brigadiers: brigadiersSlice,
   stages: stagesSlice,
   requests: requestsSlice,
+  requestReports: requestReportSlice,
   invoices: invoicesSlice,
 });
 

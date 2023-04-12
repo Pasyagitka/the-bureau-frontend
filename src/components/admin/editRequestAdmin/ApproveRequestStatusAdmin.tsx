@@ -3,6 +3,7 @@ import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/brigadiers";
 import { get, updateByAdmin } from "@/redux/actions/requests";
+import { getAll as getAllReports } from "@/redux/actions/requestReports";
 import { RequestStatus } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -17,20 +18,22 @@ function ApproveRequestStatusAdmin() {
   const [statusId, setStatus] = useState();
 
   const request = useAppSelector((state) => state.requests.request);
+  const { requestReports } = useAppSelector((state) => state.requestReports);
   const { brigadier } = request;
   // const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
   const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
-  const requestReportImages = [
-    { src: "images/bg.jpg" },
-    { src: "images/bg.jpg" },
-    { src: "images/bg.jpg" },
-    { src: "images/bg.jpg" },
-  ];
+  // const requestReportImages = [
+  //   { file: "images/bg.jpg" },
+  //   { file: "images/bg.jpg" },
+  //   { file: "images/bg.jpg" },
+  //   { file: "images/bg1.jpg" },
+  // ];
 
   useEffect(() => {
     dispatch(get(params.id));
     dispatch(getAll());
+    dispatch(getAllReports(params.id));
   }, [dispatch]);
 
   useEffect(() => {
@@ -85,8 +88,8 @@ function ApproveRequestStatusAdmin() {
       </div>
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 pb-2">Отчетность по заявке</h3>
-        {requestReportImages && requestReportImages.length > 0 ? (
-          <PhotoGallery images={requestReportImages} />
+        {requestReports && requestReports.length > 0 ? (
+          <PhotoGallery images={requestReports} />
         ) : (
           <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
         )}

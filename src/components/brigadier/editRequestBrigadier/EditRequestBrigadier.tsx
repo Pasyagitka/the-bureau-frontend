@@ -4,6 +4,8 @@ import { get, updateByBrigadier } from "@/redux/actions/requests";
 import { RequestStatus } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { Uploader } from "rsuite";
+import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 
 function EditRequestBrigadier() {
   const navigate = useNavigate();
@@ -13,6 +15,7 @@ function EditRequestBrigadier() {
   const request = useAppSelector((state) => state.requests.request);
 
   const [statusId, setStatus] = useState();
+  const [files, setFiles] = useState([]);
 
   const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
@@ -60,6 +63,14 @@ function EditRequestBrigadier() {
             </div>
           </div>
           <hr />
+          <div className="inline-flex items-center space-x-4">
+            <h1 className="text-gray-600">Добавить отчетность</h1>
+            <Uploader multiple listType="picture" fileList={files} onChange={setFiles}>
+              <button>
+                <CameraRetroIcon />
+              </button>
+            </Uploader>
+          </div>
           <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
             <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
           </div>
