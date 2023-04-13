@@ -19,7 +19,7 @@ function Map({ requests }: { requests: Array<RequestDto> }) {
           <YandexMap
             defaultState={{ center: [53.902284, 27.561831], zoom: 12 }}
             width="100%"
-            height="500px"
+            height="750px"
             instanceRef={(ref) => {
               ref && ref.behaviors.disable("scrollZoom");
             }}

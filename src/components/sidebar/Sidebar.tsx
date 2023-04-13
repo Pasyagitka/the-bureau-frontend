@@ -4,6 +4,7 @@ import warehouseIcon from "icons/warehouse-1.png";
 import clientIcon from "icons/person-male.png";
 import brigadierIcon from "icons/worker-beard--v2.png";
 import invoiceIcon from "icons/invoice.png";
+import settingsIcon from "icons/settings.png";
 import SidebarItem from "./SidebarItem";
 
 function Sidebar() {
@@ -17,6 +18,7 @@ function Sidebar() {
           <SidebarItem title="Клиенты" to="/admin/clients" icon={clientIcon} />
           <SidebarItem title="Бригадиры" to="/admin/brigadiers" icon={brigadierIcon} />
           <SidebarItem title="Счета" to="/admin/invoices" icon={invoiceIcon} />
+          <SidebarItem title="Настройки" to="/admin/settings" icon={settingsIcon} />
         </ul>
       </div>
     </aside>

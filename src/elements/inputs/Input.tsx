@@ -1,7 +1,9 @@
-function Input({ placeholder, onChange }: { placeholder: string; onChange: () => void }) {
+/* eslint-disable jsx-a11y/label-has-associated-control */
+function Input({ placeholder, label, onChange }: { placeholder: string; label: string; onChange: () => void }) {
   return (
     <div>
       <div className="relative">
+        <label className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{label || placeholder}</label>
         <input
           type="text"
           className="rounded-lg border-transparent flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 shadow-sm text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"

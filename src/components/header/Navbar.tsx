@@ -3,8 +3,6 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { deleteToken } from "@/redux/actions/auth";
 import { NOT_AUTHENTICATED } from "@/redux/actionTypes/auth";
 import { persistor } from "@/redux/store";
-import { NavLink } from "react-router-dom";
-import NavbarItem from "./NavbarItem";
 
 function Navbar() {
   const { auth } = useAppSelector((state) => state);
@@ -28,14 +26,7 @@ function Navbar() {
 
   return (
     <nav className="flex-1 flex w-full ">
-      <div className="flex mx-auto gap-12">
-        <NavLink className="text-lg font-semibold text-primary lg:font-medium lg:text-[16px]" to="/">
-          Главная
-        </NavLink>
-        <NavbarItem title="Проектирование" />
-        <NavbarItem title="Изготовление" />
-        <NavbarItem title="Монтаж" />
-      </div>
+      <div className="flex mx-auto gap-12" />
       <div className="flex gap-3">
         {auth.user ? (
           <>

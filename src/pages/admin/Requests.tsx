@@ -1,9 +1,12 @@
 import RequestList from "@/components/request/requestList/RequestList";
-import Map from "@/elements/map/Map";
 import SearchInput from "@/elements/searchInput/SearchInput";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, getFullReport } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
+import { Drawer } from "rsuite";
+import Map from "@/elements/map/Map";
+import { Fab } from "@mui/material";
+import mapIcon from "icons/map.png";
 
 function Requests() {
   const dispatch = useAppDispatch();
@@ -32,6 +35,8 @@ function Requests() {
         item.address.street.toLowerCase().includes(searchQuery.toLowerCase())) &&
       item.status.toLowerCase().includes(filterQuery.toLowerCase())
   );
+
+  const [isOpen, setOpen] = useState(true);
 
   return (
     <div className="w-full bg-white p-12 container rounded">
@@ -71,13 +76,28 @@ function Requests() {
           >
             Все
           </button>
+          {/* <Button>Открыть карту</Button> */}
+
+          <div className="fixed bottom-0 right-0 mx-12 my-6">
+            <Fab variant="extended" onClick={() => setOpen(true)}>
+              Показать карту с заявками
+              <img src={mapIcon} width="30px" />
+            </Fab>
+          </div>
         </div>
         <div className="text-end">
           <SearchInput searchQuery={searchQuery} commitInputChanges={commitInputChanges} />
         </div>
       </div>
       <RequestList requests={filteredRequests} handleDownload={(id) => handleDownload(id)} />
-      <Map requests={filteredRequests} />
+      {/* <Input onClick={setOpen(true)} /> */}
+      {/* <Map requests={filteredRequests} /> */}
+      {/* <SlideOver content={<Map requests={filteredRequests} />} isOpen={isOpen} setOpen={setOpen} /> */}
+      <Drawer open={isOpen} onClose={() => setOpen(false)} size="lg">
+        <Drawer.Body>
+          <Map requests={filteredRequests} />
+        </Drawer.Body>
+      </Drawer>
     </div>
   );
 }
