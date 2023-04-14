@@ -1,8 +1,16 @@
 import BrigadierRequest from "@/components/brigadier/brigadierRequest/BrigadierRequest";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 
-function BrigadierRequests({ requests }: { requests: BrigadierRequestDto[] }) {
-  const listItems = requests.map((request) => <BrigadierRequest key={request.id} request={request} />);
+function BrigadierRequests({
+  requests,
+  handleDownload,
+}: {
+  requests: BrigadierRequestDto[];
+  handleDownload: () => void;
+}) {
+  const listItems = requests.map((request) => (
+    <BrigadierRequest key={request.id} request={request} handleDownload={() => handleDownload(request.id)} />
+  ));
 
   return (
     <div className="w-full bg-white p-12 rounded">

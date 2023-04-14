@@ -6,9 +6,10 @@ import { Collapse } from "react-collapse";
 import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 import editIcon from "icons/edit.png";
+import downloadIcon from "icons/download.png";
 import IconButton from "@/elements/buttons/IconButton";
 
-function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
+function BrigadierRequest({ request, handleDownload }: { request: BrigadierRequestDto; handleDownload: () => void }) {
   const [visible, setVisible] = useState(false);
 
   return (
@@ -59,9 +60,10 @@ function BrigadierRequest({ request }: { request: BrigadierRequestDto }) {
             </Collapse>
           </div>
         </div>
-        <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm w-1/4">
+        <div className="flex flex-col gap-5 px-5 py-5 border-b border-gray-200 bg-white text-sm w-32">
           <IconButton icon={editIcon} alt="Edit" isLink to={`requests/${request.id}/edit`} />
-        </td>
+          <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
+        </div>
       </div>
     </div>
   );

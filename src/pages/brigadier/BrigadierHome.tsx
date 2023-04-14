@@ -3,6 +3,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 import AccentButton from "@/elements/buttons/AccentButton";
+import { getFullReport } from "@/redux/actions/requests";
 import BrigadierRequests from "./BrigadierRequests";
 import BrigadierSchedule from "./BrigadierSchedule";
 
@@ -19,6 +20,10 @@ function BrigadierHome() {
   }
   useEffect(loadAll, [user]);
 
+  const handleDownload = (id: number) => {
+    dispatch(getFullReport(id));
+  };
+
   return (
     <>
       <div className="flex w-full">
@@ -30,7 +35,7 @@ function BrigadierHome() {
         </div>
         <BrigadierSchedule />
       </div>
-      <BrigadierRequests requests={requests} />
+      <BrigadierRequests requests={requests} handleDownload={(id) => handleDownload(id)} />
     </>
   );
 }
