@@ -3,6 +3,7 @@ import { createReducer } from "@reduxjs/toolkit";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/requestDto";
 import { getAll, get, getRequests } from "../actions/clients";
+import { activate, deactivate } from "../actions/users";
 
 type ClientsStateProps = {
   clients: ClientDto[];
@@ -25,6 +26,24 @@ const clientsReducer = createReducer<ClientsStateProps>(initialState, (builder) 
   });
   builder.addCase(getRequests.fulfilled, (state, action) => {
     state.requests = action.payload;
+  });
+  builder.addCase(activate.fulfilled, (state, action) => {
+    const index = state.clients.findIndex((i) => i.user?.id === action.payload.id);
+    state.clients[index] = {
+      ...state.clients[index],
+      user: {
+        ...action.payload,
+      },
+    };
+  });
+  builder.addCase(deactivate.fulfilled, (state, action) => {
+    const index = state.clients.findIndex((i) => i.user?.id === action.payload.id);
+    state.clients[index] = {
+      ...state.clients[index],
+      user: {
+        ...action.payload,
+      },
+    };
   });
 });
 

@@ -1,4 +1,4 @@
-import { brigadierLinks, requestLinks, userLinks } from "@/constants";
+import { brigadierLinks, requestLinks } from "@/constants";
 import { UpdateBrigadierDto } from "@/types/dto/brigadier/updateBrigadierDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
@@ -8,8 +8,6 @@ import {
   DELETE_BRIGADIERS,
   EDIT_BRIGADIERS,
   GET_BRIGADIER_REQUESTS,
-  ACTIVATE_BRIGADIER,
-  DEACTIVATE_BRIGADIER,
   GET_RECOMMENDED_BRIGADIERS,
 } from "../actionTypes/brigadiers";
 import { getToken } from "./auth";
@@ -85,32 +83,4 @@ export const getRecommended = createAsyncThunk(GET_RECOMMENDED_BRIGADIERS, async
     params: { date },
   });
   return request.data;
-});
-
-export const activate = createAsyncThunk(ACTIVATE_BRIGADIER, async (id: number, { rejectWithValue }) => {
-  try {
-    const request = await axios.patch(userLinks.activate(id), null, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    return request.data;
-  } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
-    return rejectWithValue(error.response.data);
-  }
-});
-
-export const deactivate = createAsyncThunk(DEACTIVATE_BRIGADIER, async (id: number, { rejectWithValue }) => {
-  try {
-    const request = await axios.patch(userLinks.deactivate(id), null, {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    return request.data;
-  } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
-    return rejectWithValue(error.response.data);
-  }
 });

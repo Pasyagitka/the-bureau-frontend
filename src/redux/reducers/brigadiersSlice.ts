@@ -2,7 +2,8 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
-import { getAll, get, getRequests, remove, activate, deactivate, getRecommended } from "../actions/brigadiers";
+import { getAll, get, getRequests, remove, getRecommended } from "../actions/brigadiers";
+import { activate, deactivate } from "../actions/users";
 
 type BrigadiersStateProps = {
   brigadiers: BrigadierDto[];

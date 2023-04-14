@@ -1,6 +1,7 @@
 import BrigadierList from "@/components/admin/brigadierList/BrigadierList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { activate, deactivate, getAll } from "@/redux/actions/brigadiers";
+import { getAll } from "@/redux/actions/brigadiers";
+import { activate, deactivate } from "@/redux/actions/users";
 import { useEffect } from "react";
 
 function Brigadiers() {

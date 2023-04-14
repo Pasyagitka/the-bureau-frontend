@@ -1,9 +1,40 @@
+/* eslint-disable consistent-return */
 import SearchInput from "@/elements/searchInput/SearchInput";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import ClientItem from "./ClientItem";
 
-function ClientList({ clients = [] }: { clients: ClientDto[] }) {
-  const listItems = clients.map((client) => <ClientItem key={client.id} client={client} />);
+function ClientList({
+  clients = [],
+  handleRemove,
+  handleApprove,
+}: {
+  clients: ClientDto[];
+  handleRemove: () => void;
+  handleApprove: () => void;
+}) {
+  const listItems = clients.map((client) => {
+    if (!client?.user?.isActivated) return;
+    return (
+      <ClientItem
+        key={client.id}
+        client={client}
+        handleClick={() => handleRemove(client?.user?.id)}
+        clickTitle="Заблокировать"
+      />
+    );
+  });
+  const notApprovedlistItems = clients.map((client) => {
+    if (client?.user?.isActivated) return;
+    return (
+      <ClientItem
+        key={client.id}
+        client={client}
+        handleClick={() => handleApprove(client?.user?.id)}
+        clickTitle="Подтвердить"
+      />
+    );
+  });
+
   return (
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">
@@ -15,7 +46,13 @@ function ClientList({ clients = [] }: { clients: ClientDto[] }) {
           <SearchInput />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
+      <div className="my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{notApprovedlistItems}</div>
+      </div>
+      <hr />
+      <div className="my-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
+      </div>
     </div>
   );
 }

@@ -7,5 +7,6 @@ export type ClientDto = {
 
   user: {
     email: string;
+    isActivated: boolean;
   };
 };
