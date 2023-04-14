@@ -18,7 +18,7 @@ function BrigadierInfo({ brigadier }: { brigadier: BrigadierDto }) {
             value={`${brigadier.surname} ${brigadier.firstname} ${brigadier.patronymic}`}
             isDark
           />
-          <DetailsItem title="Email" value={brigadier.email} />
+          <DetailsItem title="Email" value={brigadier?.user?.email} />
           <DetailsItem title="Контактный номер" value={`+${brigadier.contactNumber}`} isDark />
         </dl>
       </div>

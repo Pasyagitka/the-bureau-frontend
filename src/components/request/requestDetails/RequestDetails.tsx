@@ -61,7 +61,7 @@ function RequestDetails() {
               request.address?.flat ?? ""
             } `}
           />
-          <DetailsItem title="Email" value={request.client?.email} isDark />
+          <DetailsItem title="Email" value={request.client?.user?.email} isDark />
           <DetailsItem title="Контактный номер" value={`+${request.client?.contactNumber}`} />
           <DetailsItem title="Комментарий к заявке" value={request.comment} isDark />
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">

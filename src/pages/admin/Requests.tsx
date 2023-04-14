@@ -36,7 +36,7 @@ function Requests() {
       item.status.toLowerCase().includes(filterQuery.toLowerCase())
   );
 
-  const [isOpen, setOpen] = useState(true);
+  const [isOpen, setOpen] = useState(false);
 
   return (
     <div className="w-full bg-white p-12 container rounded">

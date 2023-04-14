@@ -13,7 +13,7 @@ function Schedule() {
   const { calendar } = useAppSelector((state) => state.requests);
 
   return (
-    <div className="w-2/3">
+    <div className="w-full">
       <Calendar calendar={calendar} compact={false} />
     </div>
   );

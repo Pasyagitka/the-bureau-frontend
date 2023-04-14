@@ -30,7 +30,7 @@ function ClientDetails() {
       <div className="border-t border-gray-200">
         <dl>
           <DetailsItem title="ФИО" value={`${client.surname} ${client.firstname} ${client.patronymic}`} isDark />
-          <DetailsItem title="Email" value={client.email} />
+          <DetailsItem title="Email" value={client.user?.email} />
           <DetailsItem title="Контактный номер" value={`+${client.contactNumber}`} isDark />
         </dl>
       </div>

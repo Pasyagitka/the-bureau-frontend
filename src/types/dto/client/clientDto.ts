@@ -4,5 +4,8 @@ export type ClientDto = {
   firstname: string;
   patronymic: string;
   contactNumber: number;
-  email: string;
+
+  user: {
+    email: string;
+  };
 };
