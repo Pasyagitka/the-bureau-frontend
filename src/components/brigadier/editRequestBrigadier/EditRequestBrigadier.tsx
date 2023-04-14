@@ -6,6 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
+import { patch } from "@/redux/actions/requestReports";
 
 function EditRequestBrigadier() {
   const navigate = useNavigate();
@@ -29,10 +30,17 @@ function EditRequestBrigadier() {
 
   const handleSubmit = async () => {
     const updateDto = { id: params.id, updateRequestByBrigadierDto: { status: statusId } };
-    const res = await dispatch(updateByBrigadier(updateDto));
-    if (!res.error) {
-      navigate(-1);
+    const statusRes = await dispatch(updateByBrigadier(updateDto));
+    console.log(files);
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("images", files[i]);
     }
+    console.log(formData);
+    const statusRes2 = await dispatch(patch({ requestId: params.id, formData }));
+    // if (!statusRes.error) {
+    //   navigate(-1);
+    // }
   };
 
   const handleStatusSelectChange = (e: string) => {
@@ -56,7 +64,7 @@ function EditRequestBrigadier() {
                 name="status"
                 defaultValue={statusId}
                 className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                onChange={(e) => handleStatusSelectChange(e.currentTarget.value)}
+                onChange={() => handleStatusSelectChange(e.currentTarget.value)}
               >
                 {statuses}
               </select>
@@ -67,7 +75,15 @@ function EditRequestBrigadier() {
             <h1 className="text-gray-600 w-full text-center">Добавить отчетность</h1>
             <div className="flex">
               <div className="inline-flex items-center space-x-4">
-                <Uploader multiple listType="picture" fileList={files} onChange={setFiles}>
+                <Uploader
+                  multiple
+                  listType="picture"
+                  fileList={files}
+                  onChange={setFiles}
+                  action=""
+                  autoUpload={false}
+                  draggable
+                >
                   <button>
                     <CameraRetroIcon />
                   </button>
