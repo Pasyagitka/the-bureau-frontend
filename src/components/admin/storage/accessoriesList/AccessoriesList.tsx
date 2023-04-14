@@ -25,6 +25,7 @@ function AccessoriesList({
       id={item.id}
       sku={item.sku}
       name={item.name}
+      price={item.price}
       quantity={item.quantity_in_stock}
       equipmentId={item?.equipment?.id}
       handleRemove={() => handleRemove(item.id)}
@@ -60,6 +61,12 @@ function AccessoriesList({
                 className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
               >
                 Количество на складе
+              </th>
+              <th
+                scope="col"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+              >
+                Цена за штуку (р)
               </th>
               <th
                 scope="col"

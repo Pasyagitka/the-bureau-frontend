@@ -17,6 +17,7 @@ function CreateAccessoryForm() {
   const [equipmentId, setEquipmentId] = useState();
   const [sku, setSku] = useState();
   const [price, setPrice] = useState();
+  const [quantity, setQuantity] = useState();
 
   useEffect(() => {
     dispatch(getAll());
@@ -29,6 +30,7 @@ function CreateAccessoryForm() {
       sku,
       name,
       price,
+      quantity,
       equipmentId,
     };
     const res = await dispatch(create(item));
@@ -58,6 +60,7 @@ function CreateAccessoryForm() {
               <Input placeholder="артикул" onChange={(e) => setSku(event.target.value)} />
               <Input placeholder="наименование" onChange={(e) => setName(event.target.value)} />
               <Input placeholder="цена за единицу" onChange={(e) => setPrice(event.target.value)} />
+              <Input placeholder="количество" onChange={(e) => setQuantity(event.target.value)} />
               <div>
                 <div className=" relative ">
                   <select
