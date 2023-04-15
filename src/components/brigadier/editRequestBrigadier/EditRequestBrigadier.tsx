@@ -6,7 +6,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
-import { patch } from "@/redux/actions/requestReports";
+import { getAll as getAllRequestReports, patch } from "@/redux/actions/requestReports";
 
 function EditRequestBrigadier() {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ function EditRequestBrigadier() {
   const params = useParams();
 
   const request = useAppSelector((state) => state.requests.request);
+  const existingRequestReports = useAppSelector((state) => state.requestReports.requestReports);
 
   const [statusId, setStatus] = useState();
   const [files, setFiles] = useState([]);
@@ -22,22 +23,27 @@ function EditRequestBrigadier() {
 
   useEffect(() => {
     dispatch(get(params.id));
+    dispatch(getAllRequestReports(params.id));
   }, [dispatch]);
 
   useEffect(() => {
     setStatus(request?.status);
   }, [request]);
 
+  useEffect(() => {
+    setFiles(existingRequestReports.map((i) => ({ ...i })));
+  }, [existingRequestReports]);
+
   const handleSubmit = async () => {
     const updateDto = { id: params.id, updateRequestByBrigadierDto: { status: statusId } };
     const statusRes = await dispatch(updateByBrigadier(updateDto));
     console.log(files);
     const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("images", files[i]);
-    }
+    files.forEach((file, i) => {
+      formData.append(`files`, file.blobFile, file.name);
+    });
     console.log(formData);
-    const statusRes2 = await dispatch(patch({ requestId: params.id, formData }));
+    const statusRes2 = await dispatch(patch({ requestId: params.id, files: formData }));
     // if (!statusRes.error) {
     //   navigate(-1);
     // }
@@ -81,6 +87,7 @@ function EditRequestBrigadier() {
                   fileList={files}
                   onChange={setFiles}
                   action=""
+                  defaultFileList={files}
                   autoUpload={false}
                   draggable
                 >

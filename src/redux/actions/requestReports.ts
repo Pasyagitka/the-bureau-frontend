@@ -15,11 +15,12 @@ export const getAll = createAsyncThunk(GET_REQUEST_REPORTS, async (requestId: nu
 
 export const patch = createAsyncThunk(
   PATCH_REQUEST_REPORTS,
-  async ({ requestId, files }: { requestId: number; files: Array<unknown> }, { rejectWithValue }) => {
+  async ({ requestId, files }: { requestId: number; files: unknown }, { rejectWithValue }) => {
     try {
       const response = await axios.post(requestReportLinks.create(requestId), files, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       return response.data;
