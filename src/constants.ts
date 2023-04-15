@@ -23,6 +23,7 @@ export const brigadierLinks = {
   get: (id: number) => `/api/brigadier/${id}`,
   getRecommended: "/api/brigadier/recommended",
   update: (id: number) => `/api/brigadier/${id}`,
+  uploadAvatar: (id: number) => `/api/brigadier/avatar/${id}`,
   delete: (id: number) => `/api/brigadier/${id}`,
 };
 

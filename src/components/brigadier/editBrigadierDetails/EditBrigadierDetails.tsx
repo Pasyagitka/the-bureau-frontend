@@ -1,6 +1,7 @@
+import Avatar from "@/elements/avatar/Avatar";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, update } from "@/redux/actions/brigadiers";
+import { get, update, uploadAvatar } from "@/redux/actions/brigadiers";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -18,6 +19,8 @@ function EditBrigadierDetails() {
   const [contactNumber, setContactNumber] = useState();
   const [email, setEmail] = useState();
 
+  const [fileInfo, setFileInfo] = useState(null);
+
   useEffect(() => {
     dispatch(get(user?.brigadier?.id));
   }, [dispatch]);
@@ -30,12 +33,16 @@ function EditBrigadierDetails() {
   }, [brigadier]);
 
   const handleSubmit = async () => {
-    const res = await dispatch(
+    const formData = new FormData();
+    formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);
+    const res1 = dispatch(
       update({ id: user?.brigadier?.id, updateBrigadierDto: { firstname, surname, patronymic, contactNumber } })
     );
-    if (!res.error) {
-      navigate(-1);
-    }
+    const res2 = dispatch(uploadAvatar({ id: user?.brigadier?.id, file: formData }));
+    await Promise.all([res1, res2]);
+    // if (!res1.error) {
+    //   navigate(-1);
+    // }
   };
 
   return (
@@ -44,13 +51,14 @@ function EditBrigadierDetails() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Редактировать бригадира</h1>
+              <h1 className="text-gray-600">Редактировать профиль</h1>
             </div>
           </div>
         </div>
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Личная информация</h2>
+            <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
+
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div>
                 <h2 className="max-w-sm mx-auto md:w-1/3">Имя</h2>

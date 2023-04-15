@@ -1,6 +1,5 @@
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
-
-const url = "https://thumbs.dreamstime.com/b/construction-worker-11554512.jpg";
+import noImage from "images/noImage.png";
 
 function BrigadierItem({
   brigadier,
@@ -17,7 +16,7 @@ function BrigadierItem({
         <div
           className="w-1/3 bg-cover bg-center"
           style={{
-            backgroundImage: `url(${url})`,
+            backgroundImage: `url(${brigadier.avatarUrl || noImage})`,
           }}
         />
         <div className="w-2/3 p-4">

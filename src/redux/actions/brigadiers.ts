@@ -9,6 +9,7 @@ import {
   EDIT_BRIGADIERS,
   GET_BRIGADIER_REQUESTS,
   GET_RECOMMENDED_BRIGADIERS,
+  UPLOAD_AVATAR,
 } from "../actionTypes/brigadiers";
 import { getToken } from "./auth";
 
@@ -51,6 +52,24 @@ export const update = createAsyncThunk(
       const request = await axios.patch(brigadierLinks.update(id), updateBrigadierDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      return request.data;
+    } catch (error) {
+      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const uploadAvatar = createAsyncThunk(
+  UPLOAD_AVATAR,
+  async ({ id, file }: { id: number; file: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.patch(brigadierLinks.uploadAvatar(id), file, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "multipart/form-data",
         },
       });
       return request.data;
