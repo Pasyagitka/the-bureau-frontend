@@ -1,6 +1,6 @@
 import { RequestDto } from "@/types/dto/requestDto";
 import { FullscreenControl, Placemark, YMaps, Map as YandexMap, ZoomControl } from "@pbe/react-yandex-maps";
-import { colors } from "@/elements/calendar/Calendar";
+import { requestStatusesColorsTable } from "@/types/enum/request-statuses.enum";
 
 function Map({ requests }: { requests: Array<RequestDto> }) {
   const placemarks = requests?.map((request) => (
@@ -8,7 +8,7 @@ function Map({ requests }: { requests: Array<RequestDto> }) {
       key={request.id}
       geometry={[request.address.lat, request.address.lon]}
       properties={{ iconContent: `№${request.id}` }}
-      options={{ preset: `islands#${colors[request.status]}StretchyIcon` }}
+      options={{ preset: `islands#${requestStatusesColorsTable[request.status]}StretchyIcon` }}
     />
   ));
   return (

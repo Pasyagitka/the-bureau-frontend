@@ -7,6 +7,7 @@ import { Drawer } from "rsuite";
 import Map from "@/elements/map/Map";
 import { Fab } from "@mui/material";
 import mapIcon from "icons/map.png";
+import { RequestStatus } from "@/types/enum/request-statuses.enum";
 
 function Requests() {
   const dispatch = useAppDispatch();
@@ -51,21 +52,28 @@ function Requests() {
           <button
             className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
             type="button"
-            onClick={() => setFilterQuery("InProcessing")}
+            onClick={() => setFilterQuery(RequestStatus.INPROCESSING)}
           >
             В обработке
           </button>
           <button
             className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
             type="button"
-            onClick={() => setFilterQuery("Completed")}
+            onClick={() => setFilterQuery(RequestStatus.ACCEPTED)}
+          >
+            Принята бригадиром
+          </button>
+          <button
+            className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
+            type="button"
+            onClick={() => setFilterQuery(RequestStatus.COMPLETED)}
           >
             Выполнена
           </button>
           <button
             className="flex-shrink-0 px-4 py-2 text-base font-semibold text-white bg-lime-600 rounded-lg shadow-md hover:bg-lime-700 focus:outline-none focus:ring-2 focus:ring-lime-500 focus:ring-offset-2 focus:ring-offset-lime-200"
             type="button"
-            onClick={() => setFilterQuery("Approved")}
+            onClick={() => setFilterQuery(RequestStatus.APPROVED)}
           >
             Подтверждена
           </button>

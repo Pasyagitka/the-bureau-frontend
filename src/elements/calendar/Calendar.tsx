@@ -1,12 +1,7 @@
 import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
 import dayjs from "dayjs";
-
-export const colors = {
-  InProcessing: "yellow",
-  Completed: "green",
-  Approved: "blue",
-};
+import { RequestStatus, requestStatusesColorsTable } from "@/types/enum/request-statuses.enum";
 
 function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unknown> }) {
   function renderCell(date) {
@@ -38,17 +33,28 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
 
       return (
         <ul className="calendar-todo-list">
-          {displayList.map((item, index) =>
-            compact ? (
+          {displayList.map((item, index) => {
+            const isExpired =
+              dayjs(item.mountingDate).startOf("day") < dayjs().startOf("day") &&
+              item.status !== RequestStatus.APPROVED &&
+              item.status !== RequestStatus.COMPLETED;
+            return compact ? (
               <li key={index}>
-                <Badge color={colors[item.status]} content={`${item.requestId}`} />
+                <Badge
+                  color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
+                  content={`${item.requestId}`}
+                />
               </li>
             ) : (
               <li key={index}>
-                <Badge color={colors[item.status]} content={`№${item.requestId}`} /> - {item.brigadier}
+                <Badge
+                  color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
+                  content={`№${item.requestId}`}
+                />{" "}
+                - {item.brigadier}
               </li>
-            )
-          )}
+            );
+          })}
           {moreCount ? moreItem : null}
         </ul>
       );

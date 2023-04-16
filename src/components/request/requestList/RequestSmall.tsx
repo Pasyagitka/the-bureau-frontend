@@ -4,22 +4,19 @@ import { Link } from "react-router-dom";
 import downloadIcon from "icons/download.png";
 import editIcon from "icons/edit.png";
 import approveIcon from "icons/approve.png";
+import { requestStatusesTitles, requestStatusesColors, RequestStatus } from "@/types/enum/request-statuses.enum";
+import dayjs from "dayjs";
+import DayJs from "react-dayjs";
 
 function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
-  const colors = {
-    InProcessing: "bg-lime-500",
-    Completed: "bg-yellow-500",
-    Approved: "bg-blue-500",
-  };
-  const requestStatuses = {
-    InProcessing: "В обработке",
-    Completed: "Выполнена",
-    Approved: "Подтверждена",
-  };
+  const isExpired =
+    dayjs(request.mountingDate).startOf("day") < dayjs().startOf("day") &&
+    request.status !== RequestStatus.APPROVED &&
+    request.status !== RequestStatus.COMPLETED;
   return (
-    <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full cursor-pointer m-auto">
+    <div className="overflow-hidden shadow-lg rounded-lg w-full h-full cursor-pointer m-auto">
       {/* <Link to={`${request.id}`} > */}
-      <div className="flex w-full bg-white shadow-lg rounded-lg overflow-hidden justify-between">
+      <div className="flex w-full h-full bg-white shadow-lg rounded-lg overflow-hidden justify-between">
         {/* <div className="w-2/6 p-4">
           <RequestEquipment />
         </div> */}
@@ -51,11 +48,24 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
                 : "Нет"
             }`}
           </p>
+          <p className="mt-2 text-gray-600 text-sm">
+            Дата монтажа: <DayJs format="DD.MM.YYYY">{request.mountingDate}</DayJs>
+            {isExpired && (
+              <span className={`px-2 py-1 h-fit m-1 text-xs rounded-full text-white text-end bg-red-300 `}>
+                Просрочена
+              </span>
+            )}
+          </p>
         </Link>
         <div className="flex flex-col w-1/3">
-          <span className={`px-2 py-1 h-fit m-1 text-xs rounded-full text-white text-end ${colors[request.status]} `}>
-            {requestStatuses[request.status]}
+          <span
+            className={`px-2 py-1 h-fit m-1 text-xs rounded-full text-white text-end ${
+              requestStatusesColors[request.status]
+            } `}
+          >
+            {requestStatusesTitles[request.status]}
           </span>
+
           <div className="flex items-end justify-end gap-3 m-3 h-full">
             <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
             <IconButton icon={approveIcon} alt="Approve" isLink to={`${request.id}/approve`} />

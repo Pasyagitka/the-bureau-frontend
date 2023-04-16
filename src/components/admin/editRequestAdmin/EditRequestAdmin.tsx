@@ -2,11 +2,11 @@ import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, getRecommended } from "@/redux/actions/brigadiers";
 import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
-import { RequestStatus } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DayJs from "react-dayjs";
 import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
+import dayjs from "dayjs";
 import BrigadierHistory from "./BrigadierHistory";
 
 function EditRequestAdmin() {
@@ -16,6 +16,9 @@ function EditRequestAdmin() {
 
   const [brigadierId, setBrigadier] = useState();
   const [statusId, setStatus] = useState();
+  const [dates, setValue] = useState({
+    startDate: new Date(),
+  });
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
@@ -27,8 +30,6 @@ function EditRequestAdmin() {
     <option selected={brigadierId === i.id} value={i.id} label={i.full_name} />
   ));
   brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
-
-  const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
 
   useEffect(() => {
     async function fetchData() {
@@ -43,7 +44,12 @@ function EditRequestAdmin() {
   useEffect(() => {
     setBrigadier(request?.brigadier?.id);
     setStatus(request?.status);
+    setValue(request?.mountingDate);
   }, [request]);
+
+  useEffect(() => {
+    dispatch(getRecommended(dates?.startDate || request?.mountingDate));
+  }, [dates]);
 
   const handleSubmit = async () => {
     const updateRequestByAdminDto =
@@ -52,8 +58,20 @@ function EditRequestAdmin() {
         : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
     const updateDto = {
       id: params.id,
-      updateRequestByAdminDto,
+      updateRequestByAdminDto: {
+        ...updateRequestByAdminDto,
+        mountingDate:
+          dayjs(dates.startDate).startOf("date") === dayjs(request.mountingDate).startOf("date")
+            ? null
+            : dates.startDate,
+      },
     };
+    console.log(
+      dayjs(dates.startDate).startOf("date"),
+      dayjs(request.mountingDate).startOf("date"),
+      dayjs(dates.startDate).startOf("date") === dayjs(request.mountingDate).startOf("date"),
+      updateDto.mountingDate
+    );
     const res = await dispatch(updateByAdmin(updateDto));
     if (!res.error) {
       navigate(-1);
@@ -69,10 +87,6 @@ function EditRequestAdmin() {
     setStatus(e);
   };
 
-  const [dates, setValue] = useState({
-    startDate: new Date(),
-  });
-
   const availableBrigadiers = recommended?.map((item) => (
     <li className="flex flex-row h-full">
       <div className="flex justify-between p-2 gap-5 w-full">
@@ -83,19 +97,27 @@ function EditRequestAdmin() {
     </li>
   ));
 
-  // const availableBrigadiers = [];
-
   const handleDateChange = (newValue) => {
     setValue(newValue);
   };
 
-  // TODO расписание подходящих бригадиров неа это время -- а что если нет подходящих?? попросить перенести, изменить mounting date, оставить контакты клиента тут же, типа перенести
-
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-80vh">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
+      </div>
+      <div className="px-4 py-5 sm:px-6">
+        <dt className="text-sm font-medium text-gray-500">
+          Перенести дату монтажа (с <DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>)
+        </dt>
+        <div className="px-10n w-1/4 my-4">
+          <DatepickerRange value={dates} handleValueChange={handleDateChange} />
+        </div>
+        <dt className="text-sm font-medium text-gray-500">
+          Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
+          {request?.client?.firstname} {request?.client?.patronymic} {request?.client?.surname}
+        </dt>
       </div>
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Бригадир</dt>
@@ -119,25 +141,18 @@ function EditRequestAdmin() {
       <div className="px-4 py-5 sm:px-6">
         {availableBrigadiers && availableBrigadiers.length > 0 ? (
           <>
-            <dt className="text-sm font-medium text-gray-500">
-              Свободные бригадиры на дату монтажа (<DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>):
-            </dt>
+            <dt className="text-sm font-medium text-gray-500">Свободные бригадиры на выбранную дату монтажа:</dt>
             <div className="container flex flex-col w-1/2 items-center justify-center bg-white rounded-lg shadow p-2 my-2">
               <ul className="flex flex-col divide divide-y w-full">{availableBrigadiers}</ul>
             </div>
           </>
         ) : (
           <dt className="text-sm font-medium text-gray-500">
-            Свободных бригадиров на дату монтажа (<DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>) нет,
-            необходимо перенести дату монтажа:
-            <div className="px-10n w-1/4 my-4">
-              <DatepickerRange value={dates} handleValueChange={handleDateChange} />
-            </div>
-            Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
-            {request?.client?.firstname} {request?.client?.patronymic} {request?.client?.surname}
+            Свободных бригадиров на дату монтажа нет, необходимо выбрать другую дату монтажа.
           </dt>
         )}
       </div>
+
       <div className="flex justify-evenly">
         <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
       </div>

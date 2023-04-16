@@ -1,21 +1,28 @@
-import { RequestStatus } from "@/types/enum/request-statuses.enum";
+import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import TimeLineElement from "./TimeLineElement";
 
 function RequestTimeline({ status }: { status: string }) {
   let elements;
-  const requestStatuses = {
-    InProcessing: "В обработке",
-    Completed: "Выполнена",
-    Approved: "Подтверждена",
-  };
   // TODO request statuses hardcoded
   switch (status) {
     case RequestStatus.INPROCESSING: {
       elements = (
         <>
-          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
-          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" />
-          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isLast />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
+        </>
+      );
+      break;
+    }
+    case RequestStatus.ACCEPTED: {
+      elements = (
+        <>
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
         </>
       );
       break;
@@ -23,9 +30,10 @@ function RequestTimeline({ status }: { status: string }) {
     case RequestStatus.COMPLETED: {
       elements = (
         <>
-          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
-          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" isActive />
-          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isLast />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
         </>
       );
       break;
@@ -33,15 +41,16 @@ function RequestTimeline({ status }: { status: string }) {
     default: {
       elements = (
         <>
-          <TimeLineElement text={requestStatuses[RequestStatus.INPROCESSING]} date="December 23, 2021" isActive />
-          <TimeLineElement text={requestStatuses[RequestStatus.COMPLETED]} date="December 23, 2021" isActive />
-          <TimeLineElement text={requestStatuses[RequestStatus.APPROVED]} date="December 23, 2021" isActive isLast />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isActive isLast />
         </>
       );
       break;
     }
   }
-  return <ol className="items-center sm:flex">{elements}</ol>;
+  return <ol className="items-start sm:flex">{elements}</ol>;
 }
 
 export default RequestTimeline;

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/brigadiers";
 import { get, updateByAdmin } from "@/redux/actions/requests";
 import { getAll as getAllReports } from "@/redux/actions/requestReports";
-import { RequestStatus } from "@/types/enum/request-statuses.enum";
+import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import BrigadierItem from "../brigadierList/BrigadierItem";
@@ -21,14 +21,9 @@ function ApproveRequestStatusAdmin() {
   const { requestReports } = useAppSelector((state) => state.requestReports);
   const { brigadier } = request;
   // const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
-  const statuses = Object.values(RequestStatus).map((i) => <option selected={statusId === i} value={i} label={i} />);
-
-  // const requestReportImages = [
-  //   { file: "images/bg.jpg" },
-  //   { file: "images/bg.jpg" },
-  //   { file: "images/bg.jpg" },
-  //   { file: "images/bg1.jpg" },
-  // ];
+  const statuses = Object.values(RequestStatus).map((i) => (
+    <option selected={statusId === i} value={i} label={requestStatusesTitles[i]} />
+  ));
 
   useEffect(() => {
     dispatch(get(params.id));

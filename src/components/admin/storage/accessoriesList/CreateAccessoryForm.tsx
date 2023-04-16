@@ -30,8 +30,8 @@ function CreateAccessoryForm() {
       sku,
       name,
       price,
-      quantity,
-      equipmentId,
+      quantity: Number(quantity),
+      equipmentId: Number(equipmentId),
     };
     const res = await dispatch(create(item));
     if (!res.error) {
