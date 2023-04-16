@@ -1,2 +1,4 @@
 export const GET_ALL_INVOICES = "GET_ALL_INVOICES";
+export const GET_FOR_BRIGADIER = "GET_FOR_BRIGADIER";
 export const GET_INVOICE = "GET_INVOICE";
+export const CREATE_INVOICE = "CREATE_INVOICE";

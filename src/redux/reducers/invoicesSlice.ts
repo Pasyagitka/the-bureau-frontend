@@ -1,7 +1,7 @@
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";
-import { getAll, get } from "../actions/invoices";
+import { getAll, get, getForBrigadier } from "../actions/invoices";
 
 type InvoicesStateProps = {
   invoices: InvoiceDto[];
@@ -17,6 +17,10 @@ const initialState = {
 
 const invoicesReducer = createReducer<InvoicesStateProps>(initialState, (builder) => {
   builder.addCase(getAll.fulfilled, (state, action) => {
+    state.invoices = action.payload.data;
+    state.total = action.payload.total;
+  });
+  builder.addCase(getForBrigadier.fulfilled, (state, action) => {
     state.invoices = action.payload.data;
     state.total = action.payload.total;
   });

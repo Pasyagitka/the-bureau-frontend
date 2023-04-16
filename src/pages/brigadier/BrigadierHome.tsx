@@ -4,8 +4,10 @@ import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 import AccentButton from "@/elements/buttons/AccentButton";
 import { getFullReport } from "@/redux/actions/requests";
+import { get as getInvoice, getForBrigadier } from "@/redux/actions/invoices";
 import BrigadierRequests from "./BrigadierRequests";
 import BrigadierSchedule from "./BrigadierSchedule";
+import BrigadierInvoices from "./BrigadierInvoices";
 
 function BrigadierHome() {
   const dispatch = useAppDispatch();
@@ -13,15 +15,21 @@ function BrigadierHome() {
   const user = useAppSelector((state) => state.auth.user);
   const requests = useAppSelector((state) => state.brigadiers.requests);
   const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
+  const invoices = useAppSelector((state) => state.invoices.invoices);
 
   function loadAll() {
     dispatch(getRequests(user?.brigadier?.id));
     dispatch(get(user?.brigadier?.id));
+    dispatch(getForBrigadier({ limit: 10, offset: 0, brigadierId: user?.brigadier?.id }));
   }
   useEffect(loadAll, [user]);
 
-  const handleDownload = (id: number) => {
+  const handleRequestDownload = (id: number) => {
     dispatch(getFullReport(id));
+  };
+
+  const handleInvoiceDownload = (id: number) => {
+    dispatch(getInvoice(id));
   };
 
   return (
@@ -35,7 +43,8 @@ function BrigadierHome() {
         </div>
         <BrigadierSchedule />
       </div>
-      <BrigadierRequests requests={requests} handleDownload={(id) => handleDownload(id)} />
+      <BrigadierInvoices invoices={invoices} handleDownload={(id) => handleInvoiceDownload(id)} />
+      <BrigadierRequests requests={requests} handleDownload={(id) => handleRequestDownload(id)} />
     </>
   );
 }
