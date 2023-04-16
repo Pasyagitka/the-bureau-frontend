@@ -1,32 +1,58 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useState, useEffect } from "react";
-import TextInput from "@/components/client/leaveRequestForm/TextInput";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/storage/accessories";
+import { getAvailableForInvoice } from "@/redux/actions/storage/accessories";
+import { InputNumber } from "rsuite";
+import { create } from "@/redux/actions/invoices";
+import { useNavigate } from "react-router-dom";
 import SubmitButton from "../buttons/SubmitButton";
 
 function CreateInvoiceForm() {
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
 
   function loadAll() {
-    dispatch(getAll({ limit: 10, offset: 0 }));
+    dispatch(getAvailableForInvoice());
   }
   useEffect(loadAll, [dispatch]);
 
   const [invoiceAccessoryList] = useState(new Map());
   const accessoryList = useAppSelector((state) => state.accessories.accessories);
   const listItems = accessoryList.map((item) => (
-    <TextInput
-      key={item.id}
-      placeholder={item.name}
-      defaultValue={0}
-      onChange={(e) => {
-        if (e.target.value === "") invoiceAccessoryList.delete(item.id);
-        if (!Number(e.target.value)) return;
-        invoiceAccessoryList.set(item.id, e.target.value);
-        console.log(invoiceAccessoryList);
-      }}
-    />
+    <>
+      <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{`${item.name} ${
+        item.sku ? `(${item.sku})` : ""
+      }`}</h1>
+      <InputNumber
+        key={item.id}
+        placeholder={item.name}
+        defaultValue={0}
+        max={item.quantity_in_stock}
+        min={0}
+        onChange={(value) => {
+          console.log(value);
+          if (Number(value) === 0) invoiceAccessoryList.delete(item.id);
+          // if (!Number(e.target.value)) return;
+          else invoiceAccessoryList.set(item.id, value);
+          console.log(invoiceAccessoryList);
+        }}
+      />
+    </>
   ));
+
+  const handleSubmit = async () => {
+    const invoiceItems = Array.from(invoiceAccessoryList, (item) => ({ accessoryId: item[0], quantity: +item[1] }));
+    console.log(invoiceItems);
+    const invoice = {
+      items: invoiceItems,
+    };
+
+    const res = await dispatch(create(invoice));
+    if (!res.error) {
+      navigate(-1);
+    }
+  };
+
   return (
     <section className="w-full">
       <div className="container max-w-2xl mx-auto shadow-md md:w-3/4">
@@ -39,7 +65,7 @@ function CreateInvoiceForm() {
         </div>
         <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
           <h2 className="max-w-sm mx-auto md:w-1/3">Доступные для заказа комплектующие</h2>
-          <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems}</div>
+          <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems?.length > 0 ? listItems : "Нет"}</div>
         </div>
         <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3" />
         <div className="space-y-6 bg-white">

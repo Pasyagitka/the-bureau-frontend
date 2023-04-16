@@ -11,6 +11,7 @@ export const authLinks = {
 export const accessoriesLinks = {
   getAll: "/api/accessory",
   get: (id: number) => `/api/accessory/${id}`,
+  getAvaliableForInvoice: "/api/accessory/available",
   create: "/api/accessory",
   import: "/api/accessory/import",
   update: (id: number) => `/api/accessory/${id}`,
@@ -76,6 +77,7 @@ export const scheduleLinks = {
 
 export const stageLinks = {
   getAll: "/api/stage",
+  update: (id: number) => `/api/stage/${id}`,
 };
 
 export const toolsLinks = {

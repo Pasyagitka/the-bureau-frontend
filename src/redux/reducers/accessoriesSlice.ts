@@ -1,7 +1,7 @@
 /* eslint-disable default-param-last */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
 import { createReducer } from "@reduxjs/toolkit";
-import { create, get, getAll, remove } from "../actions/storage/accessories";
+import { create, get, getAll, getAvailableForInvoice, remove } from "../actions/storage/accessories";
 
 type AccessoriesStateProps = {
   accessories: AccessoriesDto[];
@@ -19,6 +19,9 @@ const accessoriesReducer = createReducer<AccessoriesStateProps>(initialState, (b
   builder.addCase(getAll.fulfilled, (state, action) => {
     state.accessories = action.payload.data;
     state.total = action.payload.total;
+  });
+  builder.addCase(getAvailableForInvoice.fulfilled, (state, action) => {
+    state.accessories = action.payload;
   });
   builder.addCase(get.fulfilled, (state, action) => {
     state.accessory = action.payload;
