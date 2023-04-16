@@ -1,1 +1,2 @@
-export const GET_ALL_STAGES = "GET_ALL_CLIENTS";
+export const GET_ALL_STAGES = "GET_ALL_STAGES";
+export const UPDATE_STAGE_PRICE = "UPDATE_STAGE_PRICE";
