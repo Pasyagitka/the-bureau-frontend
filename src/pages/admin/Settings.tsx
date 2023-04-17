@@ -52,19 +52,19 @@ function Settings() {
         <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
           <Input
             placeholder={mountingSettings[0]?.stage}
-            label={`${mountingSettings[0]?.stage} (цена за монтаж одгого прибора)`}
+            label={`${mountingSettings[0]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={clean}
             onChange={(e) => setClean(e.target.value)}
           />
           <Input
             placeholder={mountingSettings[1]?.stage}
-            label={`${mountingSettings[1]?.stage} (цена за монтаж одгого прибора)`}
+            label={`${mountingSettings[1]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={rough}
             onChange={(e) => setRough(e.target.value)}
           />
           <Input
             placeholder={mountingSettings[2]?.stage}
-            label={`${mountingSettings[2]?.stage} (цена за монтаж одгого прибора)`}
+            label={`${mountingSettings[2]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={both}
             onChange={(e) => setBoth(e.target.value)}
           />
