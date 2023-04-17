@@ -4,7 +4,6 @@ import { getAll, getRecommended } from "@/redux/actions/brigadiers";
 import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DayJs from "react-dayjs";
 import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import dayjs from "dayjs";
 import BrigadierHistory from "./BrigadierHistory";
@@ -17,7 +16,7 @@ function EditRequestAdmin() {
   const [brigadierId, setBrigadier] = useState();
   const [statusId, setStatus] = useState();
   const [dates, setValue] = useState({
-    startDate: new Date(),
+    startDate: null,
   });
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
@@ -32,19 +31,17 @@ function EditRequestAdmin() {
   brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
 
   useEffect(() => {
-    async function fetchData() {
-      await dispatch(get(params.id));
-      await dispatch(getAll());
-      await dispatch(getRecommended(request?.mountingDate));
-      await dispatch(getScheduleForRequest(request?.id));
-    }
-    fetchData();
+    dispatch(get(params.id));
+    dispatch(getAll());
+    dispatch(getRecommended(request?.mountingDate));
   }, [dispatch]);
 
   useEffect(() => {
     setBrigadier(request?.brigadier?.id);
     setStatus(request?.status);
-    setValue(request?.mountingDate);
+    setValue({ startDate: request?.mountingDate });
+    dispatch(getRecommended(request?.mountingDate));
+    dispatch(getScheduleForRequest(request?.id));
   }, [request]);
 
   useEffect(() => {
@@ -108,9 +105,7 @@ function EditRequestAdmin() {
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">
-          Перенести дату монтажа (с <DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>)
-        </dt>
+        <dt className="text-sm font-medium text-gray-500">Перенести дату монтажа</dt>
         <div className="px-10n w-1/4 my-4">
           <DatepickerRange value={dates} handleValueChange={handleDateChange} />
         </div>
