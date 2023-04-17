@@ -1,7 +1,6 @@
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";
 import invoiceIcon from "icons/invoice-outline.png";
 import downloadIcon from "icons/download.png";
-import deleteIcon from "icons/delete.png";
 import IconButton from "@/elements/buttons/IconButton";
 
 function InvoiceItem({
@@ -29,7 +28,7 @@ function InvoiceItem({
           <p className="mt-2 text-gray-600 text-sm">{invoice.customer}</p>
           <p className="mt-2 text-gray-600 text-sm">{invoice.total}</p>
           <div className="flex item-center justify-end gap-3 mt-3">
-            <IconButton icon={deleteIcon} alt="Delete" isLink={false} onClick={() => handleClick()} />
+            {/* <IconButton icon={deleteIcon} alt="Delete" isLink={false} onClick={() => handleClick()} /> */}
             <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
           </div>
         </div>
