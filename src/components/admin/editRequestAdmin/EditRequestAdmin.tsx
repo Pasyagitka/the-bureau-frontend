@@ -5,8 +5,10 @@ import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/reque
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import DayJs from "react-dayjs";
-import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import dayjs from "dayjs";
+import Loader from "@/elements/loader/Loader";
+import useDidMountEffect from "@/hooks/useDidMountEffect";
+import DatepickerRange from "@/elements/datepickerRange/DatepickerRange";
 import BrigadierHistory from "./BrigadierHistory";
 
 function EditRequestAdmin() {
@@ -14,15 +16,19 @@ function EditRequestAdmin() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
+  const request = useAppSelector((state) => state.requests.request);
+
+  const [isLoading, setLoading] = useState(true);
+
   const [brigadierId, setBrigadier] = useState();
   const [statusId, setStatus] = useState();
-  const [dates, setValue] = useState({
-    startDate: new Date(),
-  });
+  // const [dates, setValue] = useState({
+  //   startDate: new Date(),
+  // });
+  const [newMountingDate, setNewMountingDate] = useState(new Date());
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
-  const request = useAppSelector((state) => state.requests.request);
   // const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
   //   <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
   // ));
@@ -33,23 +39,26 @@ function EditRequestAdmin() {
 
   useEffect(() => {
     async function fetchData() {
-      await dispatch(get(params.id));
-      await dispatch(getAll());
-      await dispatch(getRecommended(request?.mountingDate));
-      await dispatch(getScheduleForRequest(request?.id));
+      dispatch(get(params.id));
+      dispatch(getAll());
+      dispatch(getScheduleForRequest(params.id));
+      // await dispatch(getRecommended(request?.mountingDate));
+      // setLoading(false);
     }
     fetchData();
   }, [dispatch]);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
+    dispatch(getRecommended(request?.mountingDate));
     setBrigadier(request?.brigadier?.id);
     setStatus(request?.status);
-    setValue(request?.mountingDate);
+    setNewMountingDate(dayjs(request?.mountingDate).toDate());
+    setLoading(false);
   }, [request]);
 
-  useEffect(() => {
-    dispatch(getRecommended(dates?.startDate || request?.mountingDate));
-  }, [dates]);
+  // useEffect(() => {
+  //   dispatch(getRecommended(dates || request?.mountingDate));
+  // }, [dates]);
 
   const handleSubmit = async () => {
     const updateRequestByAdminDto =
@@ -61,15 +70,15 @@ function EditRequestAdmin() {
       updateRequestByAdminDto: {
         ...updateRequestByAdminDto,
         mountingDate:
-          dayjs(dates.startDate).startOf("date") === dayjs(request.mountingDate).startOf("date")
+          dayjs(newMountingDate).startOf("date") === dayjs(request.mountingDate).startOf("date")
             ? null
-            : dates.startDate,
+            : newMountingDate,
       },
     };
     console.log(
-      dayjs(dates.startDate).startOf("date"),
+      dayjs(newMountingDate).startOf("date"),
       dayjs(request.mountingDate).startOf("date"),
-      dayjs(dates.startDate).startOf("date") === dayjs(request.mountingDate).startOf("date"),
+      dayjs(newMountingDate).startOf("date") === dayjs(request.mountingDate).startOf("date"),
       updateDto.mountingDate
     );
     const res = await dispatch(updateByAdmin(updateDto));
@@ -98,10 +107,13 @@ function EditRequestAdmin() {
   ));
 
   const handleDateChange = (newValue) => {
-    setValue(newValue);
+    console.log(newValue);
+    setNewMountingDate(newValue);
   };
 
-  return (
+  return isLoading ? (
+    <Loader />
+  ) : (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-80vh">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
@@ -112,7 +124,8 @@ function EditRequestAdmin() {
           Перенести дату монтажа (с <DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>)
         </dt>
         <div className="px-10n w-1/4 my-4">
-          <DatepickerRange value={dates} handleValueChange={handleDateChange} />
+          <DatepickerRange value={newMountingDate} handleValueChange={handleDateChange} />
+          {/* <DatePicker style={{ width: 200 }} isoWeek value={dates} onChange={handleDateChange} /> */}
         </div>
         <dt className="text-sm font-medium text-gray-500">
           Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
