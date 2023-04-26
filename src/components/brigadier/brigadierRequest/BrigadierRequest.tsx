@@ -2,7 +2,6 @@ import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
 import { useState } from "react";
-import { Collapse } from "react-collapse";
 import RequestEquipment from "@/components/request/requestEquipment/RequestEquipment";
 import RequestAccessories from "@/components/request/requestAccessories/RequestAccessories";
 import editIcon from "icons/edit.png";
@@ -49,29 +48,16 @@ function BrigadierRequest({ request, handleDownload }: { request: BrigadierReque
         </div>
         <div className="w-full">
           <div className="flex flex-col">
-            <button
-              type="button"
-              className="text-gray-900 font-bold text-2xl m-5"
-              onClick={(e) => setVisible(!visible)}
-            >
-              Детали
-            </button>
-            <Collapse isOpened={visible}>
-              <div className="flex flex-row h-fit">
-                <div className="w-1/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Оборудование</p>
-                  <RequestEquipment equipmentList={request.requestEquipment} />
-                </div>
-                <div className="w-2/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Комплектующие</p>
-                  <RequestAccessories accessories={request.requestAccessories} />
-                </div>
-                {/* <div className="w-1/3">
-                  <p className="mt-2 text-gray-600 text-sm text-center">Инструменты</p>
-                  <RequestTools tools={request.requestTools} />
-                </div> */}
+            <div className="flex flex-row h-fit">
+              <div className="w-1/3">
+                <p className="mt-2 text-gray-600 text-sm text-center">Оборудование</p>
+                <RequestEquipment equipmentList={request.requestEquipment} />
               </div>
-            </Collapse>
+              <div className="w-2/3">
+                <p className="mt-2 text-gray-600 text-sm text-center">Комплектующие</p>
+                <RequestAccessories accessories={request.requestAccessories} />
+              </div>
+            </div>
           </div>
         </div>
         <div className="flex flex-col gap-5 px-5 py-5 border-b border-gray-200 bg-white text-sm w-32">
