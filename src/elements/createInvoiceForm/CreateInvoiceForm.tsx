@@ -22,7 +22,7 @@ function CreateInvoiceForm() {
     <>
       <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{`${item.name} ${
         item.sku ? `(${item.sku})` : ""
-      }`}</h1>
+      } (${item.price} р/ед)`}</h1>
       <InputNumber
         key={item.id}
         placeholder={item.name}

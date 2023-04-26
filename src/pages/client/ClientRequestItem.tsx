@@ -13,7 +13,7 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
         </div>
         <div className="p-4">
           <h1 className="text-gray-900 font-bold text-2xl">
-            {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house}${
+            {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
               request.address?.flat ?? ""
             }`}
           </h1>

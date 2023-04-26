@@ -111,6 +111,8 @@ function EditRequestAdmin() {
     setNewMountingDate(newValue);
   };
 
+  return (
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-100vh">
   return isLoading ? (
     <Loader />
   ) : (
@@ -120,9 +122,7 @@ function EditRequestAdmin() {
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">
-          Перенести дату монтажа (с <DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>)
-        </dt>
+        <dt className="text-sm font-medium text-gray-500">Перенести дату монтажа</dt>
         <div className="px-10n w-1/4 my-4">
           <DatepickerRange value={newMountingDate} handleValueChange={handleDateChange} />
           {/* <DatePicker style={{ width: 200 }} isoWeek value={dates} onChange={handleDateChange} /> */}
