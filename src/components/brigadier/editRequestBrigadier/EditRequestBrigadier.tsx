@@ -53,8 +53,8 @@ function EditRequestBrigadier() {
   const getBlob = async (url: string) => (await fetch(url)).blob();
 
   const handleSubmit = async () => {
-    console.log(statusId);
-    if (statusId !== RequestStatus.APPROVED && statusId !== RequestStatus.INPROCESSING) {
+    console.log("statusId", statusId);
+    if (statusId !== RequestStatus.APPROVED) {
       const updateDto = {
         id: params.id,
         updateRequestByBrigadierDto: {
@@ -64,19 +64,21 @@ function EditRequestBrigadier() {
       const statusRes = await dispatch(updateByBrigadier(updateDto));
     }
     console.log(files);
-    const formData = new FormData();
-    files.forEach((file, i) => {
-      formData.append(`files`, file.blobFile, file.name);
-    });
-    console.log(formData);
-    const statusRes2 = await dispatch(patch({ requestId: params.id, files: formData }));
-    // if (!statusRes.error) {
-    //   navigate(-1);
-    // }
+    if (files?.length > 0) {
+      const formData = new FormData();
+      files.forEach((file, i) => {
+        formData.append(`files`, file.blobFile, file.name);
+      });
+      console.log(formData);
+      const statusRes2 = await dispatch(patch({ requestId: params.id, files: formData }));
+      // if (!statusRes.error) {
+      //   navigate(-1);
+      // }
+    }
   };
 
   const handleStatusSelectChange = (e: string) => {
-    setStatus(e);
+    setStatus(e.currentTarget.value);
   };
 
   return (
@@ -90,7 +92,7 @@ function EditRequestBrigadier() {
           </div>
         </div>
         <div className="space-y-6 bg-white">
-          {statusId === RequestStatus.APPROVED || statusId === RequestStatus.INPROCESSING ? (
+          {statusId === RequestStatus.APPROVED ? (
             <h1 className="text-gray-600 w-full text-center">Нельзя сменить статус заявки</h1>
           ) : (
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">

@@ -4,7 +4,6 @@ import { getAll, getRecommended } from "@/redux/actions/brigadiers";
 import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import DayJs from "react-dayjs";
 import dayjs from "dayjs";
 import Loader from "@/elements/loader/Loader";
 import useDidMountEffect from "@/hooks/useDidMountEffect";
@@ -114,15 +113,13 @@ function EditRequestAdmin() {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-80vh">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-100vh">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">
-          Перенести дату монтажа (с <DayJs format="DD.MM.YYYY">{request?.mountingDate}</DayJs>)
-        </dt>
+        <dt className="text-sm font-medium text-gray-500">Перенести дату монтажа</dt>
         <div className="px-10n w-1/4 my-4">
           <DatepickerRange value={newMountingDate} handleValueChange={handleDateChange} />
           {/* <DatePicker style={{ width: 200 }} isoWeek value={dates} onChange={handleDateChange} /> */}

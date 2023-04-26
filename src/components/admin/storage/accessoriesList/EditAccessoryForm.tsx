@@ -16,6 +16,7 @@ function EditAccessoryForm() {
   const [equipmentId, setEquipmentId] = useState();
   const [quantity, setQuantity] = useState();
   const [sku, setSku] = useState();
+  const [price, setPrice] = useState();
 
   useEffect(() => {
     dispatch(get(params.id));
@@ -26,6 +27,7 @@ function EditAccessoryForm() {
     setEquipmentId(accessory.equipment?.id);
     setQuantity(accessory.quantity_in_stock);
     setSku(accessory.sku);
+    setPrice(accessory.price);
   }, [accessory]);
 
   const handleSubmit = async () => {
@@ -34,6 +36,7 @@ function EditAccessoryForm() {
       equipmentId: +equipmentId,
       quantity: Number(quantity),
       sku: sku === "" ? null : sku,
+      price,
     };
     console.log(updateAccessoriesDto, "update");
     const res = await dispatch(update({ id: params.id, updateAccessoriesDto }));
@@ -57,6 +60,11 @@ function EditAccessoryForm() {
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <Input placeholder="наименование" defaultValue={name} onChange={(e) => setName(e.target.value)} />
               <Input placeholder="артикул" defaultValue={sku} onChange={(e) => setSku(e.target.value)} />
+              <Input
+                placeholder="цена за единицу"
+                defaultValue={price}
+                onChange={(e) => setPrice(event.target.value)}
+              />
               <Input
                 placeholder="количество"
                 defaultValue={quantity}

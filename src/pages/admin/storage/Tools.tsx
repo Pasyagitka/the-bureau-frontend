@@ -35,7 +35,7 @@ function Tools() {
         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
           <div className="text-end">
             <form className="flex flex-col md:flex-row w-3/4 md:w-full max-w-full md:space-x-3 space-y-3 md:space-y-0 justify-center">
-              <div className=" relative ">
+              {/* <div className=" relative ">
                 <input
                   type="text"
                   id='"form-subscribe-Filter'
@@ -43,7 +43,7 @@ function Tools() {
                   placeholder="Наименование"
                 />
               </div>
-              <AccentButton to="" title="Фильтр" />
+              <AccentButton to="" title="Фильтр" /> */}
               <AccentButton to="create" title="Добавить" />
             </form>
           </div>

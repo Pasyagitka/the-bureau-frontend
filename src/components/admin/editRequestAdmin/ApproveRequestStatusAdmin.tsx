@@ -74,7 +74,7 @@ function ApproveRequestStatusAdmin() {
           {brigadier ? (
             <>
               <BrigadierItem key={brigadier?.id} brigadier={brigadier} clickTitle="" />
-              <dt className="text-sm font-medium text-gray-500 py-5">Примечание бригадира:</dt>
+              {/* <dt className="text-sm font-medium text-gray-500 py-5">Примечание бригадира:</dt> */}
             </>
           ) : (
             <dt className="text-sm font-medium text-gray-500">Исполнитель не назначен</dt>
