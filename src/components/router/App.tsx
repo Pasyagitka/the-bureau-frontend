@@ -21,6 +21,7 @@ import Invoices from "@/pages/admin/Invoices";
 import GatewayTimeout from "@/pages/common/GatewayTimeout";
 import CreateInvoiceForm from "@/elements/createInvoiceForm/CreateInvoiceForm";
 import Settings from "@/pages/admin/Settings";
+import ApproveInvoices from "@/pages/admin/ApproveInvoices";
 import HeaderLayout from "../../layouts/HeaderLayout";
 import AdminLayout from "../../layouts/AdminLayout";
 import ClientLayout from "../../layouts/ClientLayout";
@@ -68,6 +69,7 @@ function App() {
             <Route path="home" element={<Dashboard />} />
             <Route path="brigadiers" element={<Brigadiers />} />
             <Route path="invoices" element={<Invoices />} />
+            <Route path="invoices/:id/approve" element={<ApproveInvoices />} />
             <Route path="settings" element={<Settings />} />
             {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}
             <Route path="clients" element={<Clients />} />

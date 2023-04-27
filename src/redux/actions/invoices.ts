@@ -3,7 +3,13 @@ import { PaginatedForBrigadierQueryDto, PaginatedQueryDto } from "@/types/dto/qu
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import fileDownload from "js-file-download";
-import { CREATE_INVOICE, GET_ALL_INVOICES, GET_FOR_BRIGADIER, GET_INVOICE } from "../actionTypes/invoices";
+import {
+  CREATE_INVOICE,
+  GET_ALL_INVOICES,
+  GET_FOR_BRIGADIER,
+  GET_INVOICE_ITEMS,
+  GET_INVOICE_FILE,
+} from "../actionTypes/invoices";
 import { getToken } from "./auth";
 
 export const getAll = createAsyncThunk(GET_ALL_INVOICES, async ({ offset = 0, limit = 10 }: PaginatedQueryDto) => {
@@ -35,8 +41,8 @@ export const getForBrigadier = createAsyncThunk(
   }
 );
 
-export const get = createAsyncThunk(GET_INVOICE, async (id: number) => {
-  const request = await axios.get(invoiceLinks.get(id), {
+export const getFile = createAsyncThunk(GET_INVOICE_FILE, async (id: number) => {
+  const request = await axios.get(invoiceLinks.getFile(id), {
     headers: {
       Authorization: `Bearer ${getToken()}`,
     },
@@ -44,6 +50,15 @@ export const get = createAsyncThunk(GET_INVOICE, async (id: number) => {
   });
   // return request.data;
   fileDownload(request.data, `invoice${id}.docx`);
+});
+
+export const getItems = createAsyncThunk(GET_INVOICE_ITEMS, async (id: number) => {
+  const request = await axios.get(invoiceLinks.getItems(id), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
 });
 
 export const create = createAsyncThunk(CREATE_INVOICE, async (data: unknown) => {

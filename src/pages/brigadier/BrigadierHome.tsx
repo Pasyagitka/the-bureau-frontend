@@ -4,7 +4,7 @@ import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 import AccentButton from "@/elements/buttons/AccentButton";
 import { getFullReport } from "@/redux/actions/requests";
-import { get as getInvoice, getForBrigadier } from "@/redux/actions/invoices";
+import { getFile as getInvoice, getForBrigadier } from "@/redux/actions/invoices";
 import BrigadierRequests from "./BrigadierRequests";
 import BrigadierSchedule from "./BrigadierSchedule";
 import BrigadierInvoices from "./BrigadierInvoices";

@@ -45,7 +45,8 @@ export const equipmentLinks = {
 
 export const invoiceLinks = {
   getAll: "/api/invoice",
-  get: (id: number) => `/api/invoice/${id}`,
+  getFile: (id: number) => `/api/invoice/${id}/file`,
+  getItems: (id: number) => `/api/invoice/${id}/items`,
   create: "/api/invoice",
   getForBrigadier: (brigadierId: number) => `/api/invoice/brigadier/${brigadierId}`,
 };

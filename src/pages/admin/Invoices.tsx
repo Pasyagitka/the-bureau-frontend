@@ -1,6 +1,6 @@
 import InvoiceList from "@/components/admin/invoiceList/InvoiceList";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, getAll } from "@/redux/actions/invoices";
+import { getFile, getAll } from "@/redux/actions/invoices";
 import { useEffect, useState } from "react";
 
 function Invoices() {
@@ -28,7 +28,7 @@ function Invoices() {
   };
 
   const handleDownload = (id: number) => {
-    dispatch(get(id));
+    dispatch(getFile(id));
   };
 
   return (
