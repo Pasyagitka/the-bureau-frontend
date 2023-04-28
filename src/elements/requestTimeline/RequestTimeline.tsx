@@ -50,7 +50,7 @@ function RequestTimeline({ status }: { status: string }) {
       break;
     }
   }
-  return <ol className="items-start sm:flex">{elements}</ol>;
+  return <ol className="items-start sm:flex md:border-none border-l border-gray-200">{elements}</ol>;
 }
 
 export default RequestTimeline;

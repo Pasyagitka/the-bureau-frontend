@@ -13,10 +13,10 @@ function BrigadierRequests({
   ));
 
   return (
-    <div className="w-full bg-white p-12 rounded">
-      <div className="header flex items-end justify-between mb-12">
+    <div className="w-full bg-white p-2 md:p-12 rounded">
+      <div className="header flex items-end justify-between md:mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Заявки</p>
+          <p className="md:text-4xl text-xl font-bold text-gray-800 mb-4">Заявки</p>
           {/* <p className="text-2xl font-light text-gray-400">Описание...</p> */}
         </div>
       </div>

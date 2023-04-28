@@ -75,6 +75,15 @@ function ApproveInvoices() {
     </>
   ));
 
+  // const [invoiceAccessoryList] = useState(
+  //   new Map(
+  //     invoiceItems.map((x) => {
+  //       x.id;
+  //       x;
+  //     })
+  //   )
+  // );
+
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-full container p-4">
       <div className="px-4 py-5 sm:px-6">
@@ -109,6 +118,11 @@ function ApproveInvoices() {
                   defaultValue={rowData.quantity}
                   max={rowData.accessory.quantity_in_stock}
                   min={0}
+                  // onChange={(value) => {
+                  //   if (Number(value) === 0) invoiceAccessoryList.delete(rowData.id);
+                  //   else invoiceAccessoryList.set(rowData.id, value);
+                  //   console.log(invoiceAccessoryList);
+                  // }}
                 />
               )}
             </Cell>

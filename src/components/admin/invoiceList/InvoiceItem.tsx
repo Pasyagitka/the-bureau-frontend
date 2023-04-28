@@ -26,7 +26,7 @@ function InvoiceItem({
           }}
         />
         <div className="w-2/3 p-4">
-          <h1 className="text-gray-900 font-bold text-2xl">Счет №{invoice.id}</h1>
+          <h1 className="text-gray-900 font-bold md:text-2xl">Счет №{invoice.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">{invoice.customer}</p>
           <p className="mt-2 text-gray-600 text-sm">{invoice.total}</p>
           <div className="flex item-center justify-end gap-3 mt-3">

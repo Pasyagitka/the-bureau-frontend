@@ -34,10 +34,10 @@ function BrigadierHome() {
 
   return (
     <>
-      <div className="flex w-full">
-        <div className="flex flex-col w-4/5">
+      <div className="flex w-full flex-col md:flex-row sm:flex-col">
+        <div className="flex flex-col w-full md:w-4/5">
           <BrigadierDetails brigadier={brigadier} />
-          <div className="w-full h-16 mx-12">
+          <div className="w-full h-16 md:mx-12 mx-2">
             <AccentButton to="invoice/create" title="Запросить счет на комплектующие" />
           </div>
         </div>

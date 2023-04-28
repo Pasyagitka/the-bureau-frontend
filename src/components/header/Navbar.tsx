@@ -24,23 +24,23 @@ function Navbar() {
     return <SecondaryButton title="Личный кабинет" to="/client" isLink />;
   };
 
+  const menuItems = auth.user ? (
+    <>
+      {returnButton()}
+      <SecondaryButton title="Выход" onClick={handleLogout} isLink={false} />
+    </>
+  ) : (
+    <>
+      <SecondaryButton to="/login" title="Вход" isLink />
+      <SecondaryButton to="/register" title="Создать аккаунт" isLink />
+      <SecondaryButton to="/register/brigadier" title="Стать партнером" isLink />
+    </>
+  );
+
   return (
     <nav className="flex-1 flex w-full ">
       <div className="flex mx-auto gap-12" />
-      <div className="flex gap-3">
-        {auth.user ? (
-          <>
-            {returnButton()}
-            <SecondaryButton title="Выход" onClick={handleLogout} isLink={false} />
-          </>
-        ) : (
-          <>
-            <SecondaryButton to="/login" title="Вход" isLink />
-            <SecondaryButton to="/register" title="Создать аккаунт" isLink />
-            <SecondaryButton to="/register/brigadier" title="Стать партнером" isLink />
-          </>
-        )}
-      </div>
+      <div className="flex gap-3">{menuItems}</div>
     </nav>
   );
 }

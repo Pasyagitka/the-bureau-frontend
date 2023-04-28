@@ -20,9 +20,12 @@ function CreateInvoiceForm() {
   const accessoryList = useAppSelector((state) => state.accessories.accessories);
   const listItems = accessoryList.map((item) => (
     <>
-      <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{`${item.name} ${
-        item.sku ? `(${item.sku})` : ""
-      } (${item.price} р/ед)`}</h1>
+      <div className="flex justify-between">
+        <p className="block mb-2 text-sm font-medium text-gray-900">{`${item.name} ${
+          item.sku ? `(арт. ${item.sku})` : ""
+        }`}</p>
+        <p className="text-right text-sm font-medium text-gray-900">{item.price}р/ед</p>
+      </div>
       <InputNumber
         key={item.id}
         placeholder={item.name}
@@ -36,7 +39,11 @@ function CreateInvoiceForm() {
           else invoiceAccessoryList.set(item.id, value);
           console.log(invoiceAccessoryList);
         }}
+        style={{ marginTop: 0 }}
       />
+      <p className="text-right text-sm" style={{ margin: 0 }}>
+        на складе {item.quantity_in_stock}ед
+      </p>
     </>
   ));
 

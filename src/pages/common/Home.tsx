@@ -3,7 +3,7 @@ import phHome from "images/bg.jpg";
 function Home() {
   return (
     <section className="relative py-24 px-4 h-80vh">
-      <div className="z-20 relative text-white container mx-12 w-1/3">
+      <div className="z-20 relative text-white container md:mx-12 md:w-1/3 w-full mx-auto">
         <h1 className="mb-4 text-5xl font-bold">Организация заявок на монтаж</h1>
         <p className="leading-normal text-2xl">Более 3000 реализованных объектов</p>
         <p className="leading-normal text-2xl">

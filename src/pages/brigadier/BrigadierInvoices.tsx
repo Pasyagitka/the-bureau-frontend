@@ -21,11 +21,11 @@ function BrigadierInvoices({
   ));
 
   return (
-    <div className="w-full bg-white p-12 rounded">
+    <div className="w-full bg-white p-2 md:p-12 rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Мои счета</p>
-          <p className="text-2xl font-light text-gray-400">Запрошенные мной счета</p>
+          <p className="md:text-4xl text-xl font-bold text-gray-800 mb-4">Мои счета</p>
+          <p className="md:text-xl text-sm font-light text-gray-400">Запрошенные мной счета</p>
         </div>
       </div>
       <div className="grid grid-cols-1 gap-10">
