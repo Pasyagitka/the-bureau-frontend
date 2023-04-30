@@ -47,7 +47,7 @@ function ApproveInvoices() {
 
   const listItems = invoiceItems?.map((item) => (
     <>
-      <h1 className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">{`${item.accessory.name} ${
+      <h1 className="block mb-2 text-sm font-medium text-gray-900">{`${item.accessory.name} ${
         item.sku ? `(${item.sku})` : ""
       } (${item.price} р/ед)`}</h1>
       <InputNumber
