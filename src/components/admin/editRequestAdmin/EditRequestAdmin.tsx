@@ -24,7 +24,7 @@ function EditRequestAdmin() {
   // const [dates, setValue] = useState({
   //   startDate: new Date(),
   // });
-  const [newMountingDate, setNewMountingDate] = useState(new Date());
+  const [newMountingDate, setNewMountingDate] = useState(null);
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
@@ -121,7 +121,11 @@ function EditRequestAdmin() {
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Перенести дату монтажа</dt>
         <div className="px-10n w-1/4 my-4">
-          <DatepickerRange value={newMountingDate} handleValueChange={handleDateChange} />
+          <DatepickerRange
+            value={newMountingDate}
+            defaultValue={newMountingDate}
+            handleValueChange={handleDateChange}
+          />
           {/* <DatePicker style={{ width: 200 }} isoWeek value={dates} onChange={handleDateChange} /> */}
         </div>
         <dt className="text-sm font-medium text-gray-500">

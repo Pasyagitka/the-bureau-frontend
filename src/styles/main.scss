@@ -3,7 +3,41 @@
 @import "fontface";
 @import "rsuite/dist/rsuite-no-reset.min.css";
 @import "react-dadata/dist/react-dadata.css";
-@import 'react-photo-view/dist/react-photo-view.css';
+
+:root {
+  // @H100~@H900
+  --rs-primary-50: #ddecb9;
+  --rs-primary-100: #d3e99f;
+  --rs-primary-200: #cdea88;
+  --rs-primary-300: #93c611d6;
+  --rs-primary-400: #83cc16de;
+  --rs-primary-500: #84cc16;
+  --rs-primary-600: #91bf19;
+  --rs-primary-700: #86b414;
+  --rs-primary-800: #71b511;
+  --rs-primary-900: #65a30d;
+
+  --rs-bg-active: #71b511;
+
+  --rs-picker-value: #86b414;
+  --rs-picker-count-bg: #86b414;
+  --rs-picker-count-text: #fff;
+  --rs-calendar-today-bg: #0a1a2b;
+  --rs-calendar-today-text: #fff;
+  --rs-calendar-range-bg: rgba(221, 236, 185, 0.5);
+  --rs-calendar-time-unit-bg: #f7f7fa;
+  --rs-calendar-date-selected-text: #fff;
+  --rs-calendar-cell-selected-hover-bg: #86b414;
+
+  --rs-listbox-option-hover-bg:rgba(221, 236, 185, 0.5);
+  --rs-listbox-option-hover-text:#86b414;
+  --rs-input-focus-border: #86b414;
+
+  --rs-state-focus-shadow: 0 0 0 3px rgba(221, 236, 185, 0.25);
+  --rs-state-focus-outline: 3px solid rgba(221, 236, 185, 0.25);
+
+  --rs-btn-primary-hover-bg: #86b414;
+}
 
 *, *::before, *::after {
   box-sizing: inherit;
@@ -25,4 +59,8 @@ body {
 
 .calendar-todo-list {
   font-size: 0.8rem;
+}
+
+.rs-btn-primary {
+  background-color: var(--rs-btn-primary-hover-bg) !important;
 }

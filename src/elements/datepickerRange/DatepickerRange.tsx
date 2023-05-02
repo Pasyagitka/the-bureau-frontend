@@ -1,8 +1,9 @@
 // import Datepicker from "react-tailwindcss-datepicker";
 
+import dayjs from "dayjs";
 import { DatePicker } from "rsuite";
 
-function DatepickerRange({ value, handleValueChange }) {
+function DatepickerRange({ value, defaultValue, handleValueChange }) {
   return (
     // <Datepicker
     //   placeholder="Дата монтажа"
@@ -13,7 +14,19 @@ function DatepickerRange({ value, handleValueChange }) {
     //   useRange={false}
     //   asSingle
     // />
-    <DatePicker style={{ width: 200 }} isoWeek value={value} onChange={handleValueChange} />
+    <DatePicker
+      appearance="default"
+      style={{ width: 200 }}
+      shouldDisableDate={(date) => dayjs(date).isBefore(new Date())}
+      isoWeek
+      value={value}
+      defaultValue={defaultValue}
+      onChange={handleValueChange}
+      format="dd MMM yyyy"
+      placeholder="Дата монтажа"
+      editable={false}
+      oneTap
+    />
   );
 }
 
