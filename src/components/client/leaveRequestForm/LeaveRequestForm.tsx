@@ -30,11 +30,13 @@ function LeaveRequestForm() {
   const [comment, setComment] = useState();
   const [requestEquipmentList] = useState(new Map());
 
-  const [dates, setValue] = useState({
-    startDate: new Date(),
-    // endDate: new Date(),
-    // endDate: new Date().setMonth(11),
-  });
+  // const [dates, setValue] = useState({
+  //   startDate: new Date(),
+  //   // endDate: new Date(),
+  //   // endDate: new Date().setMonth(11),
+  // });
+
+  const [dates, setValue] = useState(null);
 
   function loadAll() {
     dispatch(getAll());
@@ -145,7 +147,7 @@ function LeaveRequestForm() {
         </div>
         <div className="space-y-6 bg-white">
           <hr />
-          <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+          <div className="items-center w-full md:p-4 px-2 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <h2 className="max-w-sm mx-auto md:w-1/3">Адрес</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <AddressSuggestions
@@ -180,9 +182,16 @@ function LeaveRequestForm() {
             </div>
           </div>
           <hr />
-          <div className="px-10n">
-            <DatepickerRange value={dates} handleValueChange={handleDateChange} />
+          <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+            <h2 className="max-w-sm mx-auto md:w-1/3">Дата монтажа</h2>
+            <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
+              <DatepickerRange value={dates} handleValueChange={handleDateChange} />
+            </div>
           </div>
+          {/* <div className="px-10n mx-auto flex justify-center">
+            <h2 className="max-w-sm mx-auto md:w-1/3">Дата монтажа</h2>
+            
+          </div> */}
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <h2 className="max-w-sm mx-auto md:w-1/3">Стадия отделки</h2>
@@ -202,13 +211,13 @@ function LeaveRequestForm() {
             </div>
           </div>
           <hr />
-          <div className="items-center w-full p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+          <div className="items-center w-full p-2 md:p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <h2 className="max-w-sm mx-auto md:w-4/12">Комментарий к заявке</h2>
             <label className="text-gray-700" htmlFor="name">
               <textarea
                 className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                 id="comment"
-                placeholder="Enter your comment"
+                placeholder="Введите комментарий"
                 name="comment"
                 rows="5"
                 cols="40"
@@ -219,7 +228,7 @@ function LeaveRequestForm() {
             </label>
           </div>
           <hr />
-          <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
+          <div className="items-center w-full p-2 md:p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <h2 className="max-w-sm mx-auto md:w-1/3">Монтируемое оборудование</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems}</div>
           </div>

@@ -4,9 +4,9 @@ import DetailsItem from "../request/requestDetails/DetailsItem";
 
 function ClientDetailsShort({ client }: { client: ClientDto }) {
   return (
-    <div className="w-full bg-white p-12 rounded">
+    <div className="w-full bg-white md:p-12 p-2 rounded">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-4xl font-bold text-gray-800 mb-4">Информация о заказчике</h3>
+        <h3 className="md:text-4xl text-xl font-bold text-gray-800 mb-4">Личная информация</h3>
         <AccentButton to="update" title="Редактировать" />
       </div>
       <div className="border-t border-gray-200">

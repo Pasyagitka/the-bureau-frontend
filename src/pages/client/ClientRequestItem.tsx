@@ -7,12 +7,12 @@ import { ClientRequestDto } from "@/types/dto/client/clientRequestDto";
 function ClientRequestItem({ request }: { request: ClientRequestDto }) {
   return (
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full cursor-pointer m-auto">
-      <div className="flex w-full bg-white shadow-lg rounded-lg overflow-hidden justify-between">
-        <div className="w-2/6 p-4">
+      <div className="flex w-full bg-white shadow-lg rounded-lg flex-col md:flex-row overflow-hidden justify-between">
+        <div className="w-full md:w-2/6 p-4">
           <RequestEquipment equipmentList={request.requestEquipment} />
         </div>
         <div className="p-4">
-          <h1 className="text-gray-900 font-bold text-2xl">
+          <h1 className="text-gray-900 font-bold md:text-2xl">
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
               request.address?.flat ?? ""
             }`}
@@ -26,11 +26,11 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
           </div>
         </div>
         {request.brigadier ? (
-          <div className="w-1/6 p-4">
+          <div className="w-full md:w-1/6 p-4">
             <BrigadierSmall brigadier={request.brigadier} />
           </div>
         ) : (
-          <div className="w-1/6 p-4">
+          <div className="w-full md:w-1/6 p-4">
             <BrigadierSmall brigadier={{ firstname: "назначен", surname: "Не", patronymic: "" }} />
           </div>
         )}

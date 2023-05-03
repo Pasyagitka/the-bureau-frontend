@@ -3,7 +3,7 @@ import noImage from "images/noImage.png";
 
 function BrigadierSmall({ brigadier }: { brigadier: BrigadierDto }) {
   return (
-    <div className="shadow-lg rounded-2xl bg-white p-4 w-36">
+    <div className="shadow-lg rounded-2xl bg-white p-4 w-36 mx-auto">
       <div className="flex-col  flex justify-center items-center">
         <div className="flex-shrink-0">
           <a href="/" className="block relative">
