@@ -8,7 +8,7 @@ function ListItem({
   name,
   quantity,
   price,
-  equipmentId,
+  equipment,
   handleRemove,
 }: {
   id: number;
@@ -16,7 +16,7 @@ function ListItem({
   name: string;
   quantity: number;
   price: number;
-  equipmentId: number;
+  equipment: unknown;
   handleRemove: () => void;
 }) {
   return (
@@ -41,7 +41,9 @@ function ListItem({
         <p className="text-gray-900 whitespace-no-wrap">{price}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{equipmentId}</p>
+        <p className="text-gray-900 whitespace-no-wrap">
+          {equipment.type} (№{equipment.id})
+        </p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <IconButton icon={editIcon} alt="Edit" to={`update/${id}`} isLink />

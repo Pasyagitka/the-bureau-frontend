@@ -7,7 +7,6 @@ import {
   GET_ALL_ACCESSORIES,
   GET_AVAILABLE_FOR_INVOICE,
 } from "@/redux/actionTypes/storage/accessories";
-import { PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
 import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccessoryDto";
 import { UpdateAccessoryDto } from "@/types/dto/storage/accessories/updateAccessoryDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
@@ -32,18 +31,23 @@ export const create = createAsyncThunk(
   }
 );
 
-export const getAll = createAsyncThunk(GET_ALL_ACCESSORIES, async ({ offset = 0, limit = 10 }: PaginatedQueryDto) => {
-  const request = await axios.get(accessoriesLinks.getAll, {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-    params: {
-      offset,
-      limit,
-    },
-  });
-  return request.data;
-});
+export const getAll = createAsyncThunk(
+  GET_ALL_ACCESSORIES,
+  async ({ offset = 0, limit = 10, searchQuery, filterQuery }) => {
+    const request = await axios.get(accessoriesLinks.getAll, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      params: {
+        offset,
+        limit,
+        search: searchQuery || null,
+        equipmentId: filterQuery || null,
+      },
+    });
+    return request.data;
+  }
+);
 
 export const getAvailableForInvoice = createAsyncThunk(GET_AVAILABLE_FOR_INVOICE, async () => {
   const request = await axios.get(accessoriesLinks.getAvaliableForInvoice, {

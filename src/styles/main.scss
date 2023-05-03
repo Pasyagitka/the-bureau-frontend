@@ -22,7 +22,7 @@
   --rs-picker-value: #86b414;
   --rs-picker-count-bg: #86b414;
   --rs-picker-count-text: #fff;
-  --rs-calendar-today-bg: #0a1a2b;
+  --rs-calendar-today-bg: #466f1b;
   --rs-calendar-today-text: #fff;
   --rs-calendar-range-bg: rgba(221, 236, 185, 0.5);
   --rs-calendar-time-unit-bg: #f7f7fa;
@@ -37,6 +37,7 @@
   --rs-state-focus-outline: 3px solid rgba(221, 236, 185, 0.25);
 
   --rs-btn-primary-hover-bg: #86b414;
+  --rs-state-hover-bg: rgba(221, 236, 185, 0.25);
 }
 
 *, *::before, *::after {

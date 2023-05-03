@@ -27,7 +27,7 @@ function AccessoriesList({
       name={item.name}
       price={item.price}
       quantity={item.quantity_in_stock}
-      equipmentId={item?.equipment?.id}
+      equipment={item?.equipment}
       handleRemove={() => handleRemove(item.id)}
     />
   ));
@@ -72,7 +72,7 @@ function AccessoriesList({
                 scope="col"
                 className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
               >
-                ID оборудования
+                Оборудование
               </th>
               <th
                 scope="col"
