@@ -1,7 +1,13 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
 import { TablePagination } from "@mui/material";
-import ListItem from "./ListItem";
+import { Table } from "rsuite";
+import { useState } from "react";
+import editIcon from "icons/edit.png";
+import cancelIcon from "icons/cancel.png";
+import IconButton from "@/elements/buttons/IconButton";
+
+const { Column, HeaderCell, Cell } = Table;
 
 function AccessoriesList({
   accessories = [],
@@ -19,76 +25,98 @@ function AccessoriesList({
   handlePageChange: (event: React.ChangeEvent<unknown>, value: number) => void;
 }) {
   const numberOfPages = Math.ceil(total / pageSize);
-  const listItems = accessories.map((item) => (
-    <ListItem
-      key={item.id}
-      id={item.id}
-      sku={item.sku}
-      name={item.name}
-      price={item.price}
-      quantity={item.quantity_in_stock}
-      equipment={item?.equipment}
-      handleRemove={() => handleRemove(item.id)}
-    />
-  ));
+  const [sortColumn, setSortColumn] = useState();
+  const [sortType, setSortType] = useState();
+
+  const getData = () => {
+    console.log(sortColumn, sortType);
+    if (sortColumn && sortType) {
+      const arr = accessories.slice();
+      return arr.sort((a, b) => {
+        let x = a[sortColumn];
+        let y = b[sortColumn];
+        if (typeof x === "string") {
+          x = x.charCodeAt();
+        }
+        if (typeof y === "string") {
+          y = y.charCodeAt();
+        }
+        if (sortType === "asc") {
+          return x - y;
+        }
+        return y - x;
+      });
+    }
+    return accessories;
+  };
+
+  const handleSortColumn = (sortColumn, sortType) => {
+    setSortColumn(sortColumn);
+    setSortType(sortType);
+  };
 
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-        <table className="min-w-full leading-normal">
-          <thead>
-            <tr>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                ID
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Артикул
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Наименование
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Количество на складе
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Цена за штуку (р)
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              >
-                Оборудование
-              </th>
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              />
-              <th
-                scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
-              />
-            </tr>
-          </thead>
-          {accessories && <tbody>{listItems}</tbody>}
-        </table>
+        <Table
+          height={500}
+          data={getData()}
+          sortColumn={sortColumn}
+          sortType={sortType}
+          onSortColumn={handleSortColumn}
+          className="font-sm w-full"
+          style={{ fontSize: "0.875rem" }}
+        >
+          <Column width={70} align="center" fixed sortable>
+            <HeaderCell>Id</HeaderCell>
+            <Cell dataKey="id" />
+          </Column>
+
+          <Column flexGrow={1} fixed sortable>
+            <HeaderCell>Артикул</HeaderCell>
+            <Cell dataKey="sku" />
+          </Column>
+
+          <Column flexGrow={2} sortable>
+            <HeaderCell>Наименование</HeaderCell>
+            <Cell dataKey="name" />
+          </Column>
+
+          <Column flexGrow={1} sortable>
+            <HeaderCell>Цена за штуку (р)</HeaderCell>
+            <Cell dataKey="price" />
+          </Column>
+
+          <Column flexGrow={1} sortable>
+            <HeaderCell>Количество на складе</HeaderCell>
+            <Cell dataKey="quantity_in_stock" />
+          </Column>
+
+          <Column flexGrow={2}>
+            <HeaderCell>Оборудование</HeaderCell>
+            <Cell style={{ padding: "6px" }}>
+              {(rowData) => (
+                <p>
+                  {rowData.equipment.type} (№{rowData.equipment.id})
+                </p>
+              )}
+            </Cell>
+          </Column>
+          <Column flexGrow={1}>
+            <HeaderCell />
+            <Cell>{(rowData) => <IconButton icon={editIcon} alt="Edit" to={`update/${rowData.id}`} isLink />}</Cell>
+          </Column>
+          <Column flexGrow={1}>
+            <HeaderCell />
+            <Cell>
+              {(rowData) => (
+                <IconButton icon={cancelIcon} alt="Delete" isLink={false} onClick={() => handleRemove(rowData.id)} />
+              )}
+            </Cell>
+          </Column>
+        </Table>
         <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
           {numberOfPages > 1 && (
-            // <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
             <TablePagination
               page={page}
               count={total}
