@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
-import { Pagination } from "@mui/material";
+import { TablePagination } from "@mui/material";
 import ListItem from "./ListItem";
 
 function AccessoriesList({
@@ -87,7 +87,19 @@ function AccessoriesList({
           {accessories && <tbody>{listItems}</tbody>}
         </table>
         <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
-          <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
+          {numberOfPages > 1 && (
+            // <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
+            <TablePagination
+              page={page}
+              count={total}
+              rowsPerPage={10}
+              rowsPerPageOptions={[10]}
+              labelDisplayedRows={({ from, to, count }) =>
+                `${from}–${to} из ${count !== -1 ? count : `more than ${to}`}`
+              }
+              onPageChange={handlePageChange}
+            />
+          )}
         </div>
       </div>
     </div>

@@ -10,7 +10,7 @@ import SearchInput from "@/elements/searchInput/SearchInput";
 
 function Accessories() {
   const dispatch = useAppDispatch();
-  const [activePage, setActivePage] = useState(1);
+  const [activePage, setActivePage] = useState(0);
   const [limit, setLimit] = useState(10);
   const [offset, setOffset] = useState(0);
   const { accessories, total } = useAppSelector((state) => state.accessories);
@@ -45,7 +45,9 @@ function Accessories() {
   }, [searchQuery, filterQuery]);
 
   const handleChangePage = (event: React.ChangeEvent<unknown>, value: number) => {
-    const newOffset = (value - 1) * limit;
+    console.log(value);
+    // const newOffset = (value - 1) * limit;
+    const newOffset = value * limit;
     setActivePage(value);
     setOffset(newOffset);
     dispatch(getAll({ limit, offset: newOffset, searchQuery, filterQuery }));
