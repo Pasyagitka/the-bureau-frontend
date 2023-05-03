@@ -40,10 +40,10 @@ export default function Login() {
     <main>
       <section className="absolute w-full h-full">
         <div
-          className="absolute top-0 w-full h-full bg-gray-900"
+          className="absolute top-0 w-full h-full md:h-full bg-gray-900"
           style={{
             backgroundImage: `url(${bg})`,
-            backgroundSize: "100%",
+            backgroundSize: "cover",
             backgroundRepeat: "no-repeat",
           }}
         />

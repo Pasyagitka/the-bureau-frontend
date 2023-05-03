@@ -35,23 +35,23 @@ function RegisterClient() {
   };
 
   return (
-    <main>
-      <section className="absolute w-full h-full">
-        <div
-          className="absolute top-0 w-full h-full bg-gray-900"
-          style={{
-            backgroundImage: `url(${bg})`,
-            backgroundSize: "100%",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-        <div className="container mx-auto px-4 h-full">
-          <div className="flex content-center items-center justify-center h-full">
+    // <main>
+    <section className="absolute w-full h-full">
+      <div
+        className="absolute top-0 w-full h-max md:h-screen bg-gray-900"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="container mx-auto px-4 h-max">
+          <div className="flex content-center items-center justify-center my-12">
             <div className="w-full lg:w-4/12 px-4">
               <div className="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-lg bg-gray-300 border-0">
                 <div className="rounded-t mb-0 px-6 py-6">
                   <div className="text-center mb-3">
-                    <h6 className="text-gray-600 text-sm font-bold">Зарегистироваться</h6>
+                    <h6 className="text-gray-600 text-sm font-bold">Зарегистрироваться</h6>
                   </div>
                   <hr className="mt-3 border-b-1 border-gray-400" />
                 </div>
@@ -119,8 +119,9 @@ function RegisterClient() {
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+    // </main>
   );
 }
 

@@ -85,7 +85,7 @@ function ApproveInvoices() {
   // );
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-full container p-4">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Редактировать счет</p>
@@ -96,8 +96,8 @@ function ApproveInvoices() {
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие</h3>
       </div>
-      <div className="items-center w-full h-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
-        <Table data={invoiceItems}>
+      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
+        <Table data={invoiceItems} height={400}>
           <Column width={150}>
             <HeaderCell>Наименование</HeaderCell>
             <Cell style={{ padding: "6px" }}>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>

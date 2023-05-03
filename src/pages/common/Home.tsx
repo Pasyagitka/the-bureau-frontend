@@ -15,7 +15,7 @@ function Home() {
         </a> */}
       </div>
       <div className="absolute inset-0 h-auto z-10">
-        <img className="h-full w-full object-cover brightness-75" alt="" src={phHome} />
+        <img className="md:h-full h-screen w-full object-cover brightness-75" alt="" src={phHome} />
       </div>
     </section>
   );
