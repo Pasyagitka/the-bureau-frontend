@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import bg from "images/bg.jpg";
-import RegisterTextInput from "./RegisterTextInput";
+import RegisterTextInput from "../../elements/inputs/RegisterTextInput";
 
 function RegisterClient() {
   const dispatch = useDispatch();

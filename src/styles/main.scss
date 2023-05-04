@@ -5,7 +5,7 @@
 @import "react-dadata/dist/react-dadata.css";
 
 :root {
-  // @H100~@H900
+  //rsuite @H50~@H900
   --rs-primary-50: #ddecb9;
   --rs-primary-100: #d3e99f;
   --rs-primary-200: #cdea88;
@@ -22,6 +22,7 @@
   --rs-picker-value: #86b414;
   --rs-picker-count-bg: #86b414;
   --rs-picker-count-text: #fff;
+
   --rs-calendar-today-bg: #466f1b;
   --rs-calendar-today-text: #fff;
   --rs-calendar-range-bg: rgba(221, 236, 185, 0.5);
@@ -31,12 +32,14 @@
 
   --rs-listbox-option-hover-bg:rgba(221, 236, 185, 0.5);
   --rs-listbox-option-hover-text:#86b414;
+
   --rs-input-focus-border: #86b414;
 
   --rs-state-focus-shadow: 0 0 0 3px rgba(221, 236, 185, 0.25);
   --rs-state-focus-outline: 3px solid rgba(221, 236, 185, 0.25);
 
   --rs-btn-primary-hover-bg: #86b414;
+  
   --rs-state-hover-bg: rgba(221, 236, 185, 0.25);
 }
 

@@ -5,7 +5,7 @@ import bg from "images/bg.jpg";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
-import RegisterTextInput from "./RegisterTextInput";
+import RegisterTextInput from "../../elements/inputs/RegisterTextInput";
 
 function RegisterBrigadier() {
   const dispatch = useDispatch();

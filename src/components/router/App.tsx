@@ -3,43 +3,43 @@ import Login from "@/pages/common/Login";
 import NotFound from "@/pages/common/NotFound";
 import Home from "@/pages/common/Home";
 import RegisterClient from "@/pages/common/RegisterClient";
-import Dashboard from "@/pages/admin/Dashboard";
-import Storage from "@/pages/admin/storage/Storage";
-import Accessories from "@/pages/admin/storage/Accessories";
-import Equipment from "@/pages/admin/storage/Equipment";
-import Tools from "@/pages/admin/storage/Tools";
-import Brigadiers from "@/pages/admin/Brigadiers";
-import Clients from "@/pages/admin/Clients";
-import Requests from "@/pages/admin/Requests";
-import ClientHome from "@/pages/client/ClientHome";
-import BrigadierHome from "@/pages/brigadier/BrigadierHome";
+import DashboardPage from "@/pages/admin/DashboardPage";
+import StoragePage from "@/pages/admin/storage/StoragePage";
+import AccessoriesPage from "@/pages/admin/storage/AccessoriesPage";
+import EquipmentPage from "@/pages/admin/storage/EquipmentPage";
+import ToolsPage from "@/pages/admin/storage/ToolsPage";
+import BrigadiersPage from "@/pages/admin/BrigadiersPage";
+import ClientsPage from "@/pages/admin/ClientsPage";
+import RequestsPage from "@/pages/admin/RequestsPage";
+import ClientHomePage from "@/pages/client/ClientHomePage";
+import BrigadierHomePage from "@/pages/brigadier/BrigadierHomePage";
 import { useAppSelector } from "@/hooks";
 import BrigadierLayout from "@/layouts/BrigadierLayout";
 import RegisterBrigadier from "@/pages/common/RegisterBrigadier";
 import ProtectedRoute from "@/layouts/ProtectedRoute";
-import Invoices from "@/pages/admin/Invoices";
+import InvoicesPage from "@/pages/admin/InvoicesPage";
 import GatewayTimeout from "@/pages/common/GatewayTimeout";
-import CreateInvoiceForm from "@/elements/createInvoiceForm/CreateInvoiceForm";
-import Settings from "@/pages/admin/Settings";
-import ApproveInvoices from "@/pages/admin/ApproveInvoices";
-import HeaderLayout from "../../layouts/HeaderLayout";
-import AdminLayout from "../../layouts/AdminLayout";
-import ClientLayout from "../../layouts/ClientLayout";
-import LeaveRequestForm from "../client/leaveRequestForm/LeaveRequestForm";
-import RequestDetails from "../request/requestDetails/RequestDetails";
-import EditRequestAdmin from "../admin/editRequestAdmin/EditRequestAdmin";
-import ClientDetails from "../clientDetails/ClientDetails";
-import CreateToolForm from "../admin/storage/tools/CreateToolForm";
-import EditToolForm from "../admin/storage/tools/EditToolForm";
-import EditBrigadierDetails from "../brigadier/editBrigadierDetails/EditBrigadierDetails";
-import EditRequestBrigadier from "../brigadier/editRequestBrigadier/EditRequestBrigadier";
-import CreateEquipmentForm from "../admin/storage/equipment/CreateEquipmentForm";
-import CreateAccessoryForm from "../admin/storage/accessoriesList/CreateAccessoryForm";
-import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryForm";
-import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
-import EditClientDetails from "../client/editClientDetails/EditClientDetails";
-import ApproveRequestStatusAdmin from "../admin/editRequestAdmin/ApproveRequestStatusAdmin";
-import BrigadierDetails from "../brigadierDetails/BrigadierDetails";
+import CreateInvoicePage from "@/pages/brigadier/CreateInvoicePage";
+import SettingsPage from "@/pages/admin/SettingsPage";
+import ApproveInvoicePage from "@/pages/admin/ApproveInvoicePage";
+import CreateAccessoryPage from "@/pages/admin/storage/CreateAccessoryPage";
+import EditEquipmentPage from "@/pages/admin/storage/EditEquipmentPage";
+import CreateToolPage from "@/pages/admin/storage/CreateToolPage";
+import AdminLayout from "@/layouts/AdminLayout";
+import ClientLayout from "@/layouts/ClientLayout";
+import HeaderLayout from "@/layouts/HeaderLayout";
+import ApproveRequestStatusAdminPage from "@/pages/admin/ApproveRequestStatusPage";
+import BrigadierDetailsPage from "@/pages/admin/BrigadierDetailsPage";
+import ClientDetailsPage from "@/pages/admin/ClientDetailsPage";
+import EditRequestAdminPage from "@/pages/admin/EditRequestPage";
+import RequestDetailsPage from "@/pages/admin/RequestDetails";
+import CreateEquipmentPage from "@/pages/admin/storage/CreateEquipmentPage";
+import EditAccessoryPage from "@/pages/admin/storage/EditAccessoryPage";
+import EditToolPage from "@/pages/admin/storage/EditToolPage";
+import EditBrigadierDetailsPage from "@/pages/brigadier/EditBrigadierDetailsPage";
+import EditRequestByBrigadierPage from "@/pages/brigadier/EditRequestByBrigadierPage";
+import EditClientDetailsPage from "@/pages/client/EditClientDetailsPage";
+import LeaveRequestPage from "@/pages/client/LeaveRequestPage";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -66,32 +66,32 @@ function App() {
             }
           >
             <Route path="" element={<Navigate to="requests" />} />
-            <Route path="dashboard" element={<Dashboard />} />
-            <Route path="home" element={<Dashboard />} />
-            <Route path="brigadiers" element={<Brigadiers />} />
-            <Route path="brigadiers/:id" element={<BrigadierDetails />} />
-            <Route path="invoices" element={<Invoices />} />
-            <Route path="invoices/:id/approve" element={<ApproveInvoices />} />
-            <Route path="settings" element={<Settings />} />
+            <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="home" element={<DashboardPage />} />
+            <Route path="brigadiers" element={<BrigadiersPage />} />
+            <Route path="brigadiers/:id" element={<BrigadierDetailsPage />} />
+            <Route path="invoices" element={<InvoicesPage />} />
+            <Route path="invoices/:id/approve" element={<ApproveInvoicePage />} />
+            <Route path="settings" element={<SettingsPage />} />
             {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}
-            <Route path="clients" element={<Clients />} />
-            <Route path="clients/:id" element={<ClientDetails />} />
-            <Route path="requests" element={<Requests />} />
-            <Route path="requests/:id" element={<RequestDetails />} />
-            <Route path="requests/:id/edit" element={<EditRequestAdmin />} />
-            <Route path="requests/:id/approve" element={<ApproveRequestStatusAdmin />} />
+            <Route path="clients" element={<ClientsPage />} />
+            <Route path="clients/:id" element={<ClientDetailsPage />} />
+            <Route path="requests" element={<RequestsPage />} />
+            <Route path="requests/:id" element={<RequestDetailsPage />} />
+            <Route path="requests/:id/edit" element={<EditRequestAdminPage />} />
+            <Route path="requests/:id/approve" element={<ApproveRequestStatusAdminPage />} />
 
-            <Route path="storage" element={<Storage />}>
+            <Route path="storage" element={<StoragePage />}>
               <Route path="" element={<Navigate to="accessories" />} />
-              <Route path="accessories" element={<Accessories />} />
-              <Route path="accessories/create" element={<CreateAccessoryForm />} />
-              <Route path="accessories/update/:id" element={<EditAccessoryForm />} />
-              <Route path="tools" element={<Tools />} />
-              <Route path="tools/create" element={<CreateToolForm />} />
-              <Route path="tools/update/:id" element={<EditToolForm />} />
-              <Route path="equipment" element={<Equipment />} />
-              <Route path="equipment/create" element={<CreateEquipmentForm />} />
-              <Route path="equipment/update/:id" element={<EditEquipmentForm />} />
+              <Route path="accessories" element={<AccessoriesPage />} />
+              <Route path="accessories/create" element={<CreateAccessoryPage />} />
+              <Route path="accessories/update/:id" element={<EditAccessoryPage />} />
+              <Route path="tools" element={<ToolsPage />} />
+              <Route path="tools/create" element={<CreateToolPage />} />
+              <Route path="tools/update/:id" element={<EditToolPage />} />
+              <Route path="equipment" element={<EquipmentPage />} />
+              <Route path="equipment/create" element={<CreateEquipmentPage />} />
+              <Route path="equipment/update/:id" element={<EditEquipmentPage />} />
             </Route>
           </Route>
 
@@ -103,9 +103,9 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="" element={<ClientHome />} />
-            <Route path="update" element={<EditClientDetails />} />
-            <Route path="leave-request" element={<LeaveRequestForm />} />
+            <Route path="" element={<ClientHomePage />} />
+            <Route path="update" element={<EditClientDetailsPage />} />
+            <Route path="leave-request" element={<LeaveRequestPage />} />
           </Route>
 
           <Route
@@ -116,10 +116,10 @@ function App() {
               </ProtectedRoute>
             }
           >
-            <Route path="" element={<BrigadierHome />} />
-            <Route path="update" element={<EditBrigadierDetails />} />
-            <Route path="requests/:id/edit" element={<EditRequestBrigadier />} />
-            <Route path="invoice/create" element={<CreateInvoiceForm />} />
+            <Route path="" element={<BrigadierHomePage />} />
+            <Route path="update" element={<EditBrigadierDetailsPage />} />
+            <Route path="requests/:id/edit" element={<EditRequestByBrigadierPage />} />
+            <Route path="invoice/create" element={<CreateInvoicePage />} />
           </Route>
         </Route>
         <Route path="/gatewayTimeout" element={<GatewayTimeout />} />

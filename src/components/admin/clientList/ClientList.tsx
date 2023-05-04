@@ -1,5 +1,5 @@
 /* eslint-disable consistent-return */
-import SearchInput from "@/elements/searchInput/SearchInput";
+import SearchInput from "@/elements/inputs/SearchInput";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import ClientItem from "./ClientItem";
 

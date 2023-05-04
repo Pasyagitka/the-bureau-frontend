@@ -1,4 +1,4 @@
-import Button from "@/elements/button/Button";
+import NavLinkButton from "@/elements/buttons/NavLinkButton";
 import gatewayTimeoutImage from "images/gatewayTimeout.jpg";
 
 function GatewayTimeout() {
@@ -31,7 +31,7 @@ function GatewayTimeout() {
             <h1 className="font-light text-center lg:text-left text-5xl lg:text-8xl mt-12 md:mt-0 my-10 text-gray-700">
               Превышен лимит ожидания
             </h1>
-            <Button text="Вернуться" to="/" />
+            <NavLinkButton text="Вернуться" to="/" />
           </div>
           <div className="block w-full mx-auto md:mt-0 relative max-w-md lg:max-w-2xl">
             <img src={gatewayTimeoutImage} alt="" />

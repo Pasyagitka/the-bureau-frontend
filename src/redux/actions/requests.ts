@@ -1,10 +1,10 @@
 import { requestLinks, scheduleLinks } from "@/constants";
-import { CreateRequestDto } from "@/types/dto/createRequestDto";
-import { UpdateRequestByAdminDto } from "@/types/dto/updateRequestByAdminDto";
-import { UpdateRequestByBrigadierDto } from "@/types/dto/updateRequestByBrigadierDto";
+import { UpdateRequestByAdminDto } from "@/types/dto/request/updateRequestByAdminDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import fileDownload from "js-file-download";
+import { UpdateRequestByBrigadierDto } from "@/types/dto/request/updateRequestByBrigadierDto";
+import { CreateRequestDto } from "@/types/dto/request/createRequestDto";
 import {
   ADD_REQUESTS,
   GET_ALL_REQUESTS,

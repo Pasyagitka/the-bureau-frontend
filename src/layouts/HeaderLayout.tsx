@@ -8,7 +8,6 @@ function HeaderLayout() {
       <Header />
       <GradientBackground />
       <Outlet />
-      {/* <Footer /> */}
     </div>
   );
 }

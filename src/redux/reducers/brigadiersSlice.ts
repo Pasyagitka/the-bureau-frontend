@@ -1,7 +1,7 @@
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
-import { BrigadierRequestDto } from "@/types/dto/brigadierRequestDto";
+import { BrigadierRequestDto } from "@/types/dto/request/brigadierRequestDto";
 import { getAll, get, getRequests, remove, getRecommended } from "../actions/brigadiers";
 import { activate, deactivate } from "../actions/users";
 
