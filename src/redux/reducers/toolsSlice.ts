@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import { ToolsDto } from "@/types/dto/storage/tools/toolsDto";
 import { createReducer } from "@reduxjs/toolkit";

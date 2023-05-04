@@ -8,7 +8,7 @@ function ToolsPage() {
   const dispatch = useAppDispatch();
 
   const [activePage, setActivePage] = useState(1);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [offset, setOffset] = useState(0);
 
   const { tools, total } = useAppSelector((state) => state.tools);

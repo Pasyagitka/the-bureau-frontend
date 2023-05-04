@@ -1,5 +1,5 @@
 import { BrigadierDto } from "../brigadier/brigadierDto";
-import { RequestEquipmentDto } from "../requestEquipmentDto";
+import { RequestEquipmentDto } from "../request/requestEquipmentDto";
 import { StageDto } from "../stageDto";
 
 type AddressDto = {

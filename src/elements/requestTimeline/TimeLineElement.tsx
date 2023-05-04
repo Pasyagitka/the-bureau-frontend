@@ -43,6 +43,7 @@ function TimeLineElement({
 TimeLineElement.defaultProps = {
   isActive: false,
   isLast: false,
+  date: null,
 };
 
 export default TimeLineElement;

@@ -1,9 +1,9 @@
-import { BrigadierDto } from "./brigadier/brigadierDto";
-import { ClientDto } from "./client/clientDto";
+import { BrigadierDto } from "../brigadier/brigadierDto";
+import { ClientDto } from "../client/clientDto";
 import { RequestAccessoryDto } from "./requestAccessoriesDto";
 import { RequestEquipmentDto } from "./requestEquipmentDto";
 import { RequestToolDto } from "./requestToolsDto";
-import { StageDto } from "./stageDto";
+import { StageDto } from "../stageDto";
 
 type AddressDto = {
   city: string;

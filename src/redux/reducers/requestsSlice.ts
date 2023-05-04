@@ -1,8 +1,9 @@
 /* eslint-disable default-param-last */
-import { RequestAccessoryDto } from "@/types/dto/requestAccessoriesDto";
-import { RequestDto } from "@/types/dto/requestDto";
-import { RequestToolDto } from "@/types/dto/requestToolsDto";
+/* eslint-disable no-param-reassign */
 import { createReducer } from "@reduxjs/toolkit";
+import { RequestAccessoryDto } from "@/types/dto/request/requestAccessoriesDto";
+import { RequestDto } from "@/types/dto/request/requestDto";
+import { RequestToolDto } from "@/types/dto/request/requestToolsDto";
 import {
   create,
   get,

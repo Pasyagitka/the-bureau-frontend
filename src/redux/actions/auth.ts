@@ -7,18 +7,19 @@ import { CreateClientDto } from "@/types/dto/client/createClientDto";
 import { CreateBrigadierDto } from "@/types/dto/brigadier/createBrigadierDto";
 import { AUTHENTICATED, GET_USER, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
-const setToken = (token) => {
+const setToken = (token: string) => {
   localStorage.setItem("token", token);
-  localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime());
+  localStorage.setItem("lastLoginTime", new Date(Date.now()).getTime().toString());
 };
 
 export const getToken = () => {
   const now = new Date(Date.now()).getTime();
   const timeAllowed = 1000 * 60 * 30;
-  const timeSinceLastLogin = now - localStorage.getItem("lastLoginTime");
+  const timeSinceLastLogin = now - Number(localStorage.getItem("lastLoginTime"));
   if (timeSinceLastLogin < timeAllowed) {
     return localStorage.getItem("token");
   }
+  return null;
 };
 
 export const deleteToken = () => {

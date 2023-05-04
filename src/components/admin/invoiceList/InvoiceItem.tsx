@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";
 import invoiceIcon from "icons/invoice-outline.png";
 import downloadIcon from "icons/download.png";

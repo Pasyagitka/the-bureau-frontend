@@ -1,14 +1,15 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { signupClient } from "@/redux/actions/auth";
 import { CreateClientDto } from "@/types/dto/client/createClientDto";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import bg from "images/bg.jpg";
 import RegisterTextInput from "../../elements/inputs/RegisterTextInput";
 
 function RegisterClient() {
   const dispatch = useDispatch();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const [firstname, setFirstname] = useState("");
   const [surname, setSurname] = useState("");

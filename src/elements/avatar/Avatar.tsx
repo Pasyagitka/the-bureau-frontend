@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Uploader } from "rsuite";
 import AvatarIcon from "@rsuite/icons/legacy/Avatar";
 import { useState } from "react";
@@ -25,9 +26,9 @@ function Avatar({ fileInfo, setFileInfo }) {
         setFileInfo(file);
       }}
     >
-      <button style={{ width: 150, height: 150 }}>
+      <button style={{ width: 150, height: 150 }} type="button">
         {avatarPreview ? (
-          <img src={avatarPreview} width="100%" height="100%" />
+          <img src={avatarPreview} width="100%" height="100%" alt="" />
         ) : (
           <AvatarIcon style={{ fontSize: 80 }} />
         )}

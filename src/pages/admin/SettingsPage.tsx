@@ -14,8 +14,11 @@ function SettingsPage() {
 
   const mountingSettings = useAppSelector((state) => state.stages.stages);
 
+  const [clean, setClean] = useState();
+  const [rough, setRough] = useState();
+  const [both, setBoth] = useState();
+
   const handleSubmit = async () => {
-    console.log(mountingSettings[0].mountingPrice, clean);
     if (mountingSettings[0].mountingPrice !== clean)
       await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(clean) } }));
     if (mountingSettings[1].mountingPrice !== rough)
@@ -23,10 +26,6 @@ function SettingsPage() {
     if (mountingSettings[2].mountingPrice !== both)
       await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(both) } }));
   };
-
-  const [clean, setClean] = useState();
-  const [rough, setRough] = useState();
-  const [both, setBoth] = useState();
 
   useEffect(() => {
     setClean(mountingSettings[0]?.mountingPrice);

@@ -1,4 +1,4 @@
-import { RequestEquipmentDto } from "@/types/dto/requestEquipmentDto";
+import { RequestEquipmentDto } from "@/types/dto/request/requestEquipmentDto";
 
 function RequestEquipmentItem({ equipment }: { equipment: RequestEquipmentDto }) {
   return (

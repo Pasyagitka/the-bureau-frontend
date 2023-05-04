@@ -1,4 +1,4 @@
-import { RequestToolDto } from "@/types/dto/requestToolsDto";
+import { RequestToolDto } from "@/types/dto/request/requestToolsDto";
 
 function RequestToolsItem({ tool }: { tool: RequestToolDto }) {
   return (

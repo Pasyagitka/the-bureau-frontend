@@ -67,7 +67,7 @@ function EditAccessoryPage() {
               <InputWithLabel
                 placeholder="цена за единицу"
                 defaultValue={price}
-                onChange={(e) => setPrice(event.target.value)}
+                onChange={(e) => setPrice(e.target.value)}
               />
               <InputWithLabel
                 placeholder="количество"

@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { signupBrigadier } from "@/redux/actions/auth";
 import { CreateBrigadierDto } from "@/types/dto/brigadier/createBrigadierDto";
 import { Role } from "@/types/enum/role.enum";

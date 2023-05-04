@@ -4,14 +4,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, updateByBrigadier } from "@/redux/actions/requests";
 import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 import { getAll as getAllRequestReports, patch } from "@/redux/actions/requestReports";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 
 function EditRequestByBrigadierPage() {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
 
@@ -26,6 +26,7 @@ function EditRequestByBrigadierPage() {
       console.log(i, requestStatusesTitles[i]);
       return <option selected={statusId === i} value={i} label={requestStatusesTitles[i]} />;
     }
+    return null;
   });
 
   useEffect(() => {
@@ -132,7 +133,7 @@ function EditRequestByBrigadierPage() {
                   autoUpload={false}
                   draggable
                 >
-                  <button>
+                  <button type="button">
                     <CameraRetroIcon />
                   </button>
                 </Uploader>

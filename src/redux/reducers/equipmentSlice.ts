@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import { EquipmentDto } from "@/types/dto/storage/equipment/equipmentDto";
 import { createReducer } from "@reduxjs/toolkit";

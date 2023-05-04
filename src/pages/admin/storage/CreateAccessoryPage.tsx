@@ -57,10 +57,10 @@ function CreateAccessoryPage() {
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <InputWithLabel placeholder="артикул" onChange={(e) => setSku(event.target.value)} />
-              <InputWithLabel placeholder="наименование" onChange={(e) => setName(event.target.value)} />
-              <InputWithLabel placeholder="цена за единицу" onChange={(e) => setPrice(event.target.value)} />
-              <InputWithLabel placeholder="количество" onChange={(e) => setQuantity(event.target.value)} />
+              <InputWithLabel placeholder="артикул" onChange={(e) => setSku(e.target.value)} />
+              <InputWithLabel placeholder="наименование" onChange={(e) => setName(e.target.value)} />
+              <InputWithLabel placeholder="цена за единицу" onChange={(e) => setPrice(e.target.value)} />
+              <InputWithLabel placeholder="количество" onChange={(e) => setQuantity(e.target.value)} />
               <div>
                 <div className=" relative ">
                   <select

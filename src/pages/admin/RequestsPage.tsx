@@ -89,7 +89,7 @@ function RequestsPage() {
           <div className="fixed bottom-0 right-0 mx-12 my-6">
             <Fab variant="extended" onClick={() => setOpen(true)}>
               Показать карту с заявками
-              <img src={mapIcon} width="30px" />
+              <img src={mapIcon} width="30px" alt="" />
             </Fab>
           </div>
         </div>

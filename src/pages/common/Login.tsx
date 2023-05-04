@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/label-has-associated-control */
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";

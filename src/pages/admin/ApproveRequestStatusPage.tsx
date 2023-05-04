@@ -51,6 +51,7 @@ function ApproveRequestStatusAdminPage() {
     }
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const handleBrigadierSelectChange = (e: number) => {
     setBrigadier(Number(e));
     console.log(brigadierId);

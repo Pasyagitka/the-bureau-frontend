@@ -1,4 +1,4 @@
-import { RequestDto } from "@/types/dto/requestDto";
+import { RequestDto } from "@/types/dto/request/requestDto";
 import RequestCompact from "./RequestCompact";
 
 function RequestList({ requests = [], handleDownload }: { requests: RequestDto[]; handleDownload: () => void }) {

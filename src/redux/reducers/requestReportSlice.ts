@@ -1,4 +1,6 @@
 /* eslint-disable default-param-last */
+/* eslint-disable no-param-reassign */
+
 import { createReducer } from "@reduxjs/toolkit";
 import { getAll, patch } from "../actions/requestReports";
 

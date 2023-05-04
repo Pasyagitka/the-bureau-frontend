@@ -1,7 +1,6 @@
 import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { BrigadierRequestDto } from "@/types/dto/request/brigadierRequestDto";
-import { useState } from "react";
 import RequestEquipmentList from "@/elements/requestEquipmentList/RequestEquipmentList";
 import RequestAccessories from "@/elements/requestAccessoriesList/RequestAccessories";
 import editIcon from "icons/edit.png";
@@ -18,7 +17,6 @@ function BrigadierRequestItem({
   request: BrigadierRequestDto;
   handleDownload: () => void;
 }) {
-  const [visible, setVisible] = useState(false);
   const isExpired =
     dayjs(request.mountingDate).startOf("day") < dayjs().startOf("day") &&
     request.status !== RequestStatus.APPROVED &&

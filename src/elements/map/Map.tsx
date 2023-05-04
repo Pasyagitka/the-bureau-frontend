@@ -1,6 +1,6 @@
-import { RequestDto } from "@/types/dto/requestDto";
 import { FullscreenControl, Placemark, YMaps, Map as YandexMap, ZoomControl } from "@pbe/react-yandex-maps";
 import { requestStatusesColorsTable } from "@/types/enum/request-statuses.enum";
+import { RequestDto } from "@/types/dto/request/requestDto";
 
 function Map({ requests }: { requests: Array<RequestDto> }) {
   const placemarks = requests?.map((request) => (

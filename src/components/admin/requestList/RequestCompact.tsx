@@ -6,7 +6,7 @@ import approveIcon from "icons/approve.png";
 import { requestStatusesTitles, requestStatusesColors, RequestStatus } from "@/types/enum/request-statuses.enum";
 import dayjs from "dayjs";
 import DayJs from "react-dayjs";
-import { RequestDto } from "@/types/dto/requestDto";
+import { RequestDto } from "@/types/dto/request/requestDto";
 
 function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
   const isExpired =

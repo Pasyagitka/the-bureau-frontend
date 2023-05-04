@@ -1,4 +1,5 @@
 /* eslint-disable default-param-last */
+/* eslint-disable no-param-reassign */
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import { BrigadierRequestDto } from "@/types/dto/request/brigadierRequestDto";

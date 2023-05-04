@@ -2,12 +2,12 @@
 import CustomDatepicker from "@/elements/customDatepicker/CustomDatepicker";
 import { create } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
-import { CreateRequestDto } from "@/types/dto/createRequestDto";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/storage/equipment";
 import { useNavigate } from "react-router-dom";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { AddressSuggestions } from "react-dadata";
+import { CreateRequestDto } from "@/types/dto/request/createRequestDto";
 import LeaveRequestTextInput from "../../elements/inputs/LeaveRequestTextInput";
 
 function LeaveRequestPage() {

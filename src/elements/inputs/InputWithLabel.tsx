@@ -26,4 +26,8 @@ function InputWithLabel({
   );
 }
 
+InputWithLabel.defaultProps = {
+  defaultValue: "",
+};
+
 export default InputWithLabel;

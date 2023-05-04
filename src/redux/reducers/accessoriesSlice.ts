@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import { AccessoriesDto } from "@/types/dto/storage/accessories/accessoriesDto";
 import { createReducer } from "@reduxjs/toolkit";

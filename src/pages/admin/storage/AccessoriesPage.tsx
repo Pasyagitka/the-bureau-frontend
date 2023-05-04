@@ -11,12 +11,13 @@ import SearchInput from "@/elements/inputs/SearchInput";
 function AccessoriesPage() {
   const dispatch = useAppDispatch();
   const [activePage, setActivePage] = useState(0);
-  const [limit, setLimit] = useState(10);
+  const [limit] = useState(10);
   const [offset, setOffset] = useState(0);
   const { accessories, total } = useAppSelector((state) => state.accessories);
   const { equipment } = useAppSelector((state) => state.equipment);
 
   const equipmentIds = equipment.reduce((target, key) => {
+    // eslint-disable-next-line no-param-reassign
     target[key.type] = key.id;
     return target;
   }, {});

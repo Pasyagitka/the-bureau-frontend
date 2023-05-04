@@ -1,4 +1,4 @@
-import { RequestAccessoryDto } from "@/types/dto/requestAccessoriesDto";
+import { RequestAccessoryDto } from "@/types/dto/request/requestAccessoriesDto";
 import RequestAccessoriesItem from "./RequestAccessoriesItem";
 
 function RequestAccessories({ accessories = [] }: { accessories: Array<RequestAccessoryDto> }) {

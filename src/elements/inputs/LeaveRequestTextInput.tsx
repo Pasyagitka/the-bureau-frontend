@@ -26,4 +26,8 @@ function LeaveRequestTextInput({
   );
 }
 
+LeaveRequestTextInput.defaultProps = {
+  onChange: () => null,
+};
+
 export default LeaveRequestTextInput;

@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import { StageDto } from "@/types/dto/stageDto";
 import { createReducer } from "@reduxjs/toolkit";

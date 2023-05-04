@@ -50,9 +50,9 @@ function AccessoriesList({
     return accessories;
   };
 
-  const handleSortColumn = (sortColumn, sortType) => {
-    setSortColumn(sortColumn);
-    setSortType(sortType);
+  const handleSortColumn = (sColumn, sType) => {
+    setSortColumn(sColumn);
+    setSortType(sType);
   };
 
   return (

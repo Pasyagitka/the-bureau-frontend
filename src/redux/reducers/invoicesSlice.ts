@@ -1,3 +1,4 @@
+/* eslint-disable no-param-reassign */
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";

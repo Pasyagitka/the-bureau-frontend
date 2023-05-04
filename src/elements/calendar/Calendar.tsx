@@ -20,7 +20,7 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
             speaker={
               <Popover>
                 {list.map((item, index) => (
-                  <p key={index}>
+                  <p key={item.requestId}>
                     <b>Заявка №{item.requestId}</b> - {item.brigadier}
                   </p>
                 ))}
@@ -40,7 +40,7 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
               item.status !== RequestStatus.APPROVED &&
               item.status !== RequestStatus.COMPLETED;
             return compact ? (
-              <li key={index}>
+              <li key={item.requestId}>
                 <Whisper
                   trigger="click"
                   placement="topStart"
@@ -57,7 +57,7 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
                 </Whisper>
               </li>
             ) : (
-              <li key={index}>
+              <li key={item.requestId}>
                 <Whisper
                   trigger="click"
                   placement="top"
@@ -88,7 +88,7 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
 
   return (
     <CustomProvider locale={ruRU}>
-      <RSCalendar compact={compact} bordered renderCell={renderCell} className="text-sm" />
+      <RSCalendar compact={compact} bordered renderCell={(date) => renderCell(date)} className="text-sm" />
     </CustomProvider>
   );
 }
