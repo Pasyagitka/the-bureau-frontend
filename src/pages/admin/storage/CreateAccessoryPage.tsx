@@ -1,5 +1,6 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import InputWithLabel from "@/elements/inputs/InputWithLabel";
+import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { create } from "@/redux/actions/storage/accessories";
 import { getAll } from "@/redux/actions/storage/equipment";
@@ -11,10 +12,10 @@ function CreateAccessoryPage() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
-  const equipment = useAppSelector((state) => state.equipment.equipment);
+  const { equipment } = useAppSelector((state) => state.equipment);
 
   const [name, setName] = useState();
-  const [equipmentId, setEquipmentId] = useState();
+  const [equipmentId, setEquipmentId] = useState(null);
   const [sku, setSku] = useState();
   const [price, setPrice] = useState();
   const [quantity, setQuantity] = useState();
@@ -23,7 +24,7 @@ function CreateAccessoryPage() {
     dispatch(getAll());
   }, [dispatch]);
 
-  const equipmentList = equipment.map((i) => <option value={i.id} label={i.type} />);
+  const equipmentList = equipment.map((i) => ({ label: i.type, value: i.id }));
 
   const handleSubmit = async () => {
     const item: CreateAccessoryDto = {
@@ -37,11 +38,6 @@ function CreateAccessoryPage() {
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  const handleEquipmentSelectChange = (e: number) => {
-    setEquipmentId(Number(e));
-    console.log(equipmentId);
   };
 
   return (
@@ -63,14 +59,7 @@ function CreateAccessoryPage() {
               <InputWithLabel placeholder="количество" onChange={(e) => setQuantity(e.target.value)} />
               <div>
                 <div className=" relative ">
-                  <select
-                    name="equipment"
-                    defaultValue={equipmentId}
-                    className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                    onChange={(e) => handleEquipmentSelectChange(Number(e.currentTarget.value))}
-                  >
-                    {equipmentList}
-                  </select>
+                  <Select data={equipmentList} value={equipmentId} onChange={setEquipmentId} label="оборудование" />
                 </div>
               </div>
             </div>

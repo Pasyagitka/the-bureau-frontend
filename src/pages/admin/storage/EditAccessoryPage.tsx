@@ -1,7 +1,9 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import InputWithLabel from "@/elements/inputs/InputWithLabel";
+import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, update } from "@/redux/actions/storage/accessories";
+import { getAll as getAllEquipment } from "@/redux/actions/storage/equipment";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
@@ -11,6 +13,7 @@ function EditAccessoryPage() {
   const params = useParams();
 
   const accessory = useAppSelector((state) => state.accessories.accessory);
+  const { equipment } = useAppSelector((state) => state.equipment);
 
   const [name, setName] = useState();
   const [equipmentId, setEquipmentId] = useState();
@@ -18,8 +21,11 @@ function EditAccessoryPage() {
   const [sku, setSku] = useState();
   const [price, setPrice] = useState();
 
+  const equipmentList = equipment.map((i) => ({ label: i.type, value: i.id }));
+
   useEffect(() => {
     dispatch(get(params.id));
+    dispatch(getAllEquipment());
   }, [dispatch]);
 
   useEffect(() => {
@@ -74,13 +80,7 @@ function EditAccessoryPage() {
                 defaultValue={quantity}
                 onChange={(e) => setQuantity(e.target.value.replace(/\D/g, ""))}
               />
-              <InputWithLabel
-                placeholder="id оборудования"
-                defaultValue={equipmentId}
-                onChange={(e) => {
-                  setEquipmentId(e.target.value.replace(/\D/g, ""));
-                }}
-              />
+              <Select data={equipmentList} value={equipmentId} onChange={setEquipmentId} label="оборудование" />
             </div>
           </div>
           <hr />
