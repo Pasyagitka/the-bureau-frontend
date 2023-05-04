@@ -61,7 +61,7 @@ function ApproveRequestStatusAdmin() {
   };
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-[80vh] container p-4">
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">
           Контроль качества и подтверждение выполнения заявки

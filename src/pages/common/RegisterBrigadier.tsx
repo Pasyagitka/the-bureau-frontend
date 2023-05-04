@@ -32,18 +32,18 @@ function RegisterBrigadier() {
   };
 
   return (
-    <main>
-      <section className="absolute w-full h-full">
-        <div
-          className="absolute top-0 w-full h-full bg-gray-900"
-          style={{
-            backgroundImage: `url(${bg})`,
-            backgroundSize: "100%",
-            backgroundRepeat: "no-repeat",
-          }}
-        />
-        <div className="container mx-auto px-4 h-full">
-          <div className="flex content-center items-center justify-center h-full">
+    // <main className="h-screen">
+    <section className="absolute w-full h-full">
+      <div
+        className="absolute top-0 w-full h-max md:h-screen bg-gray-900"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+        }}
+      >
+        <div className="container mx-auto px-4 h-max">
+          <div className="flex content-center items-center justify-center my-12">
             <div className="w-full lg:w-4/12 px-4">
               <div className="relative flex flex-col min-w-0 break-words w-full shadow-lg rounded-lg bg-gray-300 border-0">
                 <div className="rounded-t mb-0 px-6 py-6">
@@ -109,7 +109,7 @@ function RegisterBrigadier() {
                         Создать аккаунт
                       </button>
                     </div>
-                    <div className="w-1/2 text-center">
+                    <div className="text-center">
                       <Link to="/login" className="text-gray-900">
                         <small>Уже есть аккаунт? Войдите</small>
                       </Link>
@@ -120,8 +120,9 @@ function RegisterBrigadier() {
             </div>
           </div>
         </div>
-      </section>
-    </main>
+      </div>
+    </section>
+    // </main>
   );
 }
 

@@ -51,7 +51,7 @@ function ApproveInvoices() {
   };
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 h-full container p-4">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
