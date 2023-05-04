@@ -39,6 +39,7 @@ import EditAccessoryForm from "../admin/storage/accessoriesList/EditAccessoryFor
 import EditEquipmentForm from "../admin/storage/equipment/EditEquipmentForm";
 import EditClientDetails from "../client/editClientDetails/EditClientDetails";
 import ApproveRequestStatusAdmin from "../admin/editRequestAdmin/ApproveRequestStatusAdmin";
+import BrigadierDetails from "../brigadierDetails/BrigadierDetails";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -68,6 +69,7 @@ function App() {
             <Route path="dashboard" element={<Dashboard />} />
             <Route path="home" element={<Dashboard />} />
             <Route path="brigadiers" element={<Brigadiers />} />
+            <Route path="brigadiers/:id" element={<BrigadierDetails />} />
             <Route path="invoices" element={<Invoices />} />
             <Route path="invoices/:id/approve" element={<ApproveInvoices />} />
             <Route path="settings" element={<Settings />} />

@@ -1,6 +1,6 @@
 import { PhotoProvider, PhotoView } from "react-photo-view";
 
-function PhotoReportItem({ src }: { src: string }) {
+function PhotoItem({ src }: { src: string }) {
   return (
     <PhotoProvider>
       <PhotoView src={src}>
@@ -10,4 +10,4 @@ function PhotoReportItem({ src }: { src: string }) {
   );
 }
 
-export default PhotoReportItem;
+export default PhotoItem;

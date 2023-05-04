@@ -1,3 +1,4 @@
+import AccentButton from "@/elements/buttons/AccentButton";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import noImage from "images/noImage.png";
 
@@ -30,6 +31,7 @@ function BrigadierItem({
             <button type="button" onClick={() => handleClick()}>
               {clickTitle}
             </button>
+            <AccentButton to={`${brigadier.id}`} title="Больше" />
           </div>
         </div>
       </div>

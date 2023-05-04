@@ -2,6 +2,7 @@ import { Calendar as RSCalendar, Whisper, Popover, Badge, CustomProvider } from 
 import { ruRU } from "rsuite/esm/locales";
 import dayjs from "dayjs";
 import { RequestStatus, requestStatusesColorsTable } from "@/types/enum/request-statuses.enum";
+import { Link } from "react-router-dom";
 
 function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unknown> }) {
   function renderCell(date) {
@@ -40,18 +41,40 @@ function Calendar({ compact, calendar }: { compact: boolean; calendar: Array<unk
               item.status !== RequestStatus.COMPLETED;
             return compact ? (
               <li key={index}>
-                <Badge
-                  color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
-                  content={`${item.requestId}`}
-                />
+                <Whisper
+                  trigger="click"
+                  placement="topStart"
+                  speaker={
+                    <Popover title={`Заявка №${item.requestId}`}>
+                      {/* <Link to={`brigadier/${item.brigadier}`}>{item.brigadier}</Link> */}
+                    </Popover>
+                  }
+                >
+                  <Badge
+                    color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
+                    content={`${item.requestId}`}
+                  />
+                </Whisper>
               </li>
             ) : (
               <li key={index}>
-                <Badge
-                  color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
-                  content={`№${item.requestId}`}
-                />{" "}
-                - {item.brigadier}
+                <Whisper
+                  trigger="click"
+                  placement="top"
+                  speaker={
+                    <Popover>
+                      <Link to={`/admin/requests/${item.requestId}`}>Заявка №{item.requestId}</Link>
+                    </Popover>
+                  }
+                >
+                  <p>
+                    <Badge
+                      color={isExpired ? "red" : requestStatusesColorsTable[item.status]}
+                      content={`№${item.requestId}`}
+                    />{" "}
+                    - {item.brigadier}
+                  </p>
+                </Whisper>
               </li>
             );
           })}
