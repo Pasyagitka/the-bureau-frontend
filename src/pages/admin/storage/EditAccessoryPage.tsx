@@ -15,16 +15,16 @@ function EditAccessoryPage() {
   const accessory = useAppSelector((state) => state.accessories.accessory);
   const { equipment } = useAppSelector((state) => state.equipment);
 
-  const [name, setName] = useState();
-  const [equipmentId, setEquipmentId] = useState();
-  const [quantity, setQuantity] = useState();
-  const [sku, setSku] = useState();
-  const [price, setPrice] = useState();
+  const [name, setName] = useState<string | null>();
+  const [equipmentId, setEquipmentId] = useState<number | null>();
+  const [quantity, setQuantity] = useState<number | null>();
+  const [sku, setSku] = useState<string | null>();
+  const [price, setPrice] = useState<number | null>();
 
   const equipmentList = equipment.map((i) => ({ label: i.type, value: i.id }));
 
   useEffect(() => {
-    dispatch(get(params.id));
+    dispatch(get(Number(params.id)));
     dispatch(getAllEquipment());
   }, [dispatch]);
 
@@ -39,7 +39,7 @@ function EditAccessoryPage() {
   const handleSubmit = async () => {
     const updateAccessoriesDto: UpdateAccessoryDto = {
       name,
-      equipmentId: +equipmentId,
+      equipmentId: Number(equipmentId),
       quantity: Number(quantity),
       sku: sku === "" ? null : sku,
       price,

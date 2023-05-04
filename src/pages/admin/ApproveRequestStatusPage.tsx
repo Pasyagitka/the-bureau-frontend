@@ -14,7 +14,7 @@ function ApproveRequestStatusAdminPage() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const [brigadierId, setBrigadier] = useState();
+  const [brigadierId, setBrigadier] = useState<number | null>();
   const [statusId, setStatus] = useState();
 
   const request = useAppSelector((state) => state.requests.request);
