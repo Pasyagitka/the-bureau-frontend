@@ -25,7 +25,7 @@ function InvoiceList({
   const numberOfPages = Math.ceil(total / pageSize);
   const listItems = invoices.map((invoice) => (
     <InvoiceItem
-      isAdmin
+      hasApproveButton
       key={invoice.id}
       invoice={invoice}
       handleClick={() => handleRemove(invoice.id)}

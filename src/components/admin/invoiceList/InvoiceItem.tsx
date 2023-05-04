@@ -5,13 +5,13 @@ import approveIcon from "icons/approve.png";
 import IconButton from "@/elements/buttons/IconButton";
 
 function InvoiceItem({
-  isAdmin = false,
+  hasApproveButton,
   invoice,
   clickTitle,
   handleClick,
   handleDownload,
 }: {
-  isAdmin: boolean;
+  hasApproveButton?: boolean;
   invoice: InvoiceDto;
   clickTitle: string;
   handleClick: () => void;
@@ -33,7 +33,7 @@ function InvoiceItem({
           <p className="mt-2 text-gray-600 text-sm">{invoice.total}</p>
           <div className="flex item-center justify-end gap-3 mt-3">
             {/* <IconButton icon={deleteIcon} alt="Delete" isLink={false} onClick={() => handleClick()} /> */}
-            {isAdmin && <IconButton icon={approveIcon} alt="Approve" isLink to={`${invoice.id}/approve`} />}
+            {hasApproveButton && <IconButton icon={approveIcon} alt="Approve" isLink to={`${invoice.id}/approve`} />}
             <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
           </div>
           {isApproved && (
@@ -44,5 +44,9 @@ function InvoiceItem({
     </div>
   );
 }
+
+InvoiceItem.defaultProps = {
+  hasApproveButton: false,
+};
 
 export default InvoiceItem;

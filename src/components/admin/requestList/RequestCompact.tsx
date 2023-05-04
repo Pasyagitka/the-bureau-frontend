@@ -1,5 +1,4 @@
 import IconButton from "@/elements/buttons/IconButton";
-import { RequestDto } from "@/types/dto/requestDto";
 import { Link } from "react-router-dom";
 import downloadIcon from "icons/download.png";
 import editIcon from "icons/edit.png";
@@ -7,8 +6,9 @@ import approveIcon from "icons/approve.png";
 import { requestStatusesTitles, requestStatusesColors, RequestStatus } from "@/types/enum/request-statuses.enum";
 import dayjs from "dayjs";
 import DayJs from "react-dayjs";
+import { RequestDto } from "@/types/dto/requestDto";
 
-function RequestCompact({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
+function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
   const isExpired =
     dayjs(request.mountingDate).startOf("day") < dayjs().startOf("day") &&
     request.status !== RequestStatus.APPROVED &&
@@ -77,4 +77,4 @@ function RequestCompact({ request, handleDownload }: { request: RequestDto; hand
   );
 }
 
-export default RequestCompact;
+export default RequestSmall;
