@@ -7,7 +7,12 @@ function RequestList({ requests = [], handleDownload }: { requests: RequestDto[]
       <p className="text-2xl font-bold text-gray-800 mb-4">Список заявок</p>
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">
         {requests.map((request) => (
-          <RequestSmall key={request.id} request={request} handleDownload={() => handleDownload(request.id)} />
+          <RequestSmall
+            key={request.id}
+            request={request}
+            detailsLink={`${request.id}`}
+            handleDownload={() => handleDownload(request.id)}
+          />
         ))}
       </div>
     </>

@@ -8,7 +8,19 @@ import { requestStatusesTitles, requestStatusesColors, RequestStatus } from "@/t
 import dayjs from "dayjs";
 import DayJs from "react-dayjs";
 
-function RequestSmall({ request, handleDownload }: { request: RequestDto; handleDownload: () => void }) {
+function RequestSmall({
+  detailsLink,
+  notClickable,
+  hideButtons,
+  request,
+  handleDownload,
+}: {
+  detailsLink: string;
+  notClickable?: boolean;
+  hideButtons?: boolean;
+  request: RequestDto;
+  handleDownload: () => void;
+}) {
   const isExpired =
     dayjs(request.mountingDate).startOf("day") < dayjs().startOf("day") &&
     request.status !== RequestStatus.APPROVED &&
@@ -20,7 +32,7 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
         {/* <div className="w-2/6 p-4">
           <RequestEquipment />
         </div> */}
-        <Link to={`${request.id}`} className="p-2 w-2/3">
+        <Link to={detailsLink} className="p-2 w-2/3">
           <h1 className="text-gray-900 font-bold text-2xl">Заявка №{request.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house}${
@@ -67,14 +79,23 @@ function RequestSmall({ request, handleDownload }: { request: RequestDto; handle
           </span>
 
           <div className="flex items-end justify-end gap-3 m-3 h-full">
-            <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
-            <IconButton icon={approveIcon} alt="Approve" isLink to={`${request.id}/approve`} />
-            <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
+            {!hideButtons && (
+              <>
+                <IconButton icon={editIcon} alt="Delete" isLink to={`${request.id}/edit`} />
+                <IconButton icon={approveIcon} alt="Approve" isLink to={`${request.id}/approve`} />
+                <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload()} />
+              </>
+            )}
           </div>
         </div>
       </div>
     </div>
   );
 }
+
+RequestSmall.defaultProps = {
+  hideButtons: false,
+  notClickable: false,
+};
 
 export default RequestSmall;

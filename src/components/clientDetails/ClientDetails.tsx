@@ -19,7 +19,9 @@ function ClientDetails() {
   }
   useEffect(load, [dispatch]);
 
-  const listItems = requests.map((item) => <RequestSmall key={item.id} request={item} />);
+  const listItems = requests.map((item) => (
+    <RequestSmall key={item.id} request={item} notClickable hideButtons detailsLink={`/admin/requests/${item.id}`} />
+  ));
 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4">
