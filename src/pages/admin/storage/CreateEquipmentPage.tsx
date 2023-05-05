@@ -14,7 +14,6 @@ function CreateEquipmentPage() {
 
   const [type, setType] = useState();
 
-  // const mountingsList = Object.values(Mounting).map((i) => <option value={i} label={i} />);
   const mountingsList = Object.values(Mounting).map((i) => ({ label: i, value: i }));
 
   const [mounting, setMounting] = useState(Mounting.FLOOR);

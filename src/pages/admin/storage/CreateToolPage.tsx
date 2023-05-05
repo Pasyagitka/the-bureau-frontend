@@ -14,10 +14,6 @@ function CreateToolPage() {
   const [name, setName] = useState();
   const [stageId, setStageId] = useState(1);
 
-  // const stages = useAppSelector((state) => state.stages.stages).map((i) => (
-  //   <option selected value={i.id} label={i.stage} />
-  // ));
-
   const { stages } = useAppSelector((state) => state.stages);
   const stagesList = stages.map((i) => ({
     value: i.id,
@@ -33,11 +29,6 @@ function CreateToolPage() {
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  const handleStageSelectChange = (e: number) => {
-    setStageId(Number(e));
-    console.log(stageId);
   };
 
   return (

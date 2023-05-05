@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, updateByBrigadier } from "@/redux/actions/requests";
 import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 import { getAll as getAllRequestReports, patch } from "@/redux/actions/requestReports";
@@ -12,7 +12,7 @@ import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 import Select from "@/elements/select/Select";
 
 function EditRequestByBrigadierPage() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
 
@@ -55,6 +55,7 @@ function EditRequestByBrigadierPage() {
 
   const handleSubmit = async () => {
     console.log("statusId", statusId);
+    let isSuccess = true;
     if (statusId !== RequestStatus.APPROVED) {
       const updateDto = {
         id: params.id,
@@ -62,7 +63,8 @@ function EditRequestByBrigadierPage() {
           status: statusId,
         },
       };
-      const statusRes = await dispatch(updateByBrigadier(updateDto));
+      const updateResponse = await dispatch(updateByBrigadier(updateDto));
+      isSuccess = isSuccess && !updateResponse.error;
     }
     console.log(files);
     if (files?.length > 0) {
@@ -71,10 +73,11 @@ function EditRequestByBrigadierPage() {
         formData.append(`files`, file.blobFile, file.name);
       });
       console.log(formData);
-      const statusRes2 = await dispatch(patch({ requestId: params.id, files: formData }));
-      // if (!statusRes.error) {
-      //   navigate(-1);
-      // }
+      const updateFiles = await dispatch(patch({ requestId: params.id, files: formData }));
+      isSuccess = isSuccess && !updateFiles.error;
+    }
+    if (isSuccess) {
+      navigate(-1);
     }
   };
 

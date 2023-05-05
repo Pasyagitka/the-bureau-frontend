@@ -96,8 +96,8 @@ function LeaveRequestPage() {
       requestEquipment,
     };
 
-    const res = await dispatch(create(request));
-    if (!res.error) {
+    const createResponse = await dispatch(create(request));
+    if (!createResponse.error) {
       navigate(-1);
     }
   };

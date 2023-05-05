@@ -11,16 +11,15 @@ function EditEquipmentPage() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const [type, setType] = useState();
-  const [mounting, setMounting] = useState();
+  const [type, setType] = useState<string | null>();
+  const [mounting, setMounting] = useState<string | null>();
 
   const equipment = useAppSelector((state) => state.equipment.equipmentItem);
 
-  // const mountingsList = Object.values(Mounting).map((i) => <option value={i} label={i} />);
   const mountingsList = Object.values(Mounting).map((i) => ({ label: i, value: i }));
 
   useEffect(() => {
-    dispatch(get(params.id));
+    dispatch(get(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -34,10 +33,6 @@ function EditEquipmentPage() {
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  const handleMountingSelectChange = (e: string) => {
-    setMounting(e);
   };
 
   return (

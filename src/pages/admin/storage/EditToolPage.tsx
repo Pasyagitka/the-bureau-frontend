@@ -11,14 +11,10 @@ function EditToolPage() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const [name, setName] = useState();
-  const [stageId, setStageId] = useState();
+  const [name, setName] = useState<string | null>();
+  const [stageId, setStageId] = useState<number | null>();
 
   const { tool } = useAppSelector((state) => state.tools);
-
-  // const stages = useAppSelector((state) => state.stages.stages).map((i) => (
-  //   <option selected value={i.id} label={i.stage} />
-  // ));
 
   const { stages } = useAppSelector((state) => state.stages);
   const stagesList = stages.map((i) => ({
@@ -28,7 +24,7 @@ function EditToolPage() {
 
   useEffect(() => {
     dispatch(getAll());
-    dispatch(get(params.id));
+    dispatch(get(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -41,10 +37,6 @@ function EditToolPage() {
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  const handleStageSelectChange = (e: number) => {
-    setStageId(Number(e));
   };
 
   return (

@@ -33,16 +33,16 @@ function EditBrigadierDetailsPage() {
   }, [brigadier]);
 
   const handleSubmit = async () => {
-    const res1 = await dispatch(
+    const updateProfileResult = await dispatch(
       update({ id: user?.brigadier?.id, updateBrigadierDto: { firstname, surname, patronymic, contactNumber } })
     );
-    const res2 = null;
+    const updateAvatarResult = null;
     if (fileInfo?.length > 0) {
       const formData = new FormData();
       formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);
-      res2 = await dispatch(uploadAvatar({ id: user?.brigadier?.id, file: formData }));
+      updateAvatarResult = await dispatch(uploadAvatar({ id: user?.brigadier?.id, file: formData }));
     }
-    if (!res1.error) {
+    if (!updateProfileResult.error && !updateAvatarResult?.error) {
       navigate(-1);
     }
   };

@@ -20,12 +20,10 @@ function EditRequestAdminPage() {
 
   const [isLoading, setLoading] = useState(true);
 
-  const [brigadierId, setBrigadier] = useState();
-  const [statusId, setStatus] = useState();
-  // const [dates, setValue] = useState({
-  //   startDate: new Date(),
-  // });
-  const [newMountingDate, setNewMountingDate] = useState(null);
+  const [brigadierId, setBrigadier] = useState<number | null>();
+  const [statusId, setStatus] = useState<string | null>();
+
+  const [newMountingDate, setNewMountingDate] = useState<Date | null>(null);
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
@@ -44,9 +42,9 @@ function EditRequestAdminPage() {
 
   useEffect(() => {
     async function fetchData() {
-      dispatch(get(params.id));
+      dispatch(get(Number(params.id)));
       dispatch(getAll());
-      dispatch(getScheduleForRequest(params.id));
+      dispatch(getScheduleForRequest(Number(params.id)));
       // await dispatch(getRecommended(request?.mountingDate));
       // setLoading(false);
     }
@@ -66,10 +64,6 @@ function EditRequestAdminPage() {
   }, [newMountingDate]);
 
   const handleSubmit = async () => {
-    // const updateRequestByAdminDto =
-    //   brigadierId === null || brigadierId === undefined
-    //     ? { status: statusId }
-    //     : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
     const updateRequestByAdminDto = { brigadier: brigadierId, status: statusId };
     console.log(updateRequestByAdminDto);
     const updateDto = {
@@ -82,25 +76,10 @@ function EditRequestAdminPage() {
             : newMountingDate,
       },
     };
-    console.log(
-      dayjs(newMountingDate).startOf("date"),
-      dayjs(request.mountingDate).startOf("date"),
-      dayjs(newMountingDate).startOf("date") === dayjs(request.mountingDate).startOf("date"),
-      updateDto.mountingDate
-    );
     const res = await dispatch(updateByAdmin(updateDto));
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  const handleBrigadierSelectChange = (e: number) => {
-    setBrigadier(Number(e));
-    console.log(brigadierId);
-  };
-
-  const handleStatusSelectChange = (e: string) => {
-    setStatus(e);
   };
 
   const availableBrigadiers = recommended?.map((item) => (

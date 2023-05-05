@@ -28,10 +28,10 @@ function EditClientDetailsPage() {
   }, [client]);
 
   const handleSubmit = async () => {
-    const res = await dispatch(
+    const updateResponse = await dispatch(
       update({ id: user.client.id, updateClientDto: { firstname, surname, patronymic, contactNumber } })
     );
-    if (!res.error) {
+    if (!updateResponse.error) {
       navigate(-1);
     }
   };

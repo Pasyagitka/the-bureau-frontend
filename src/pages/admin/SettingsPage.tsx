@@ -22,13 +22,13 @@ function SettingsPage() {
   const [oldPassword, setOldPassword] = useState();
   const [newPassword, setNewPassword] = useState();
 
-  const handleSubmit = async () => {
+  const handleSubmit = () => {
     if (mountingSettings[0].mountingPrice !== clean)
-      await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(clean) } }));
+      dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(clean) } }));
     if (mountingSettings[1].mountingPrice !== rough)
-      await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(rough) } }));
+      dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(rough) } }));
     if (mountingSettings[2].mountingPrice !== both)
-      await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(both) } }));
+      dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(both) } }));
     if (oldPassword && newPassword) {
       dispatch(changePassword({ changePasswordDto: { oldPassword, newPassword } }));
     }
