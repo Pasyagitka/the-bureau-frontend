@@ -19,7 +19,7 @@ function BrigadierDetailsPage() {
   }
   useEffect(load, [dispatch]);
 
-  const listItems = requests.map((item) => <RequestCompact key={item.id} request={item} />);
+  const listItems = requests.map((item) => <RequestCompact key={item.id} request={item} showButtons={false} />);
 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4">
