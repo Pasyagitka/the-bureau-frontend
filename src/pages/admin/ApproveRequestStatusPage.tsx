@@ -7,6 +7,7 @@ import { getAll as getAllReports } from "@/redux/actions/requestReports";
 import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import Select from "@/elements/select/Select";
 import BrigadierItem from "../../components/admin/brigadierList/BrigadierItem";
 
 function ApproveRequestStatusAdminPage() {
@@ -15,20 +16,19 @@ function ApproveRequestStatusAdminPage() {
   const params = useParams();
 
   const [brigadierId, setBrigadier] = useState<number | null>();
-  const [statusId, setStatus] = useState();
+  const [statusId, setStatus] = useState<string | null>();
 
   const request = useAppSelector((state) => state.requests.request);
   const { requestReports } = useAppSelector((state) => state.requestReports);
   const { brigadier } = request;
-  // const brigadier = useAppSelector((state) => state.brigadiers.brigadier);
-  const statuses = Object.values(RequestStatus).map((i) => (
-    <option selected={statusId === i} value={i} label={requestStatusesTitles[i]} />
-  ));
+
+  const statuses = Object.values(RequestStatus).map((i) => ({ value: i, label: requestStatusesTitles[i] }));
+  console.log(statuses);
 
   useEffect(() => {
-    dispatch(get(params.id));
+    dispatch(get(Number(params.id)));
     dispatch(getAll());
-    dispatch(getAllReports(params.id));
+    dispatch(getAllReports(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -49,16 +49,6 @@ function ApproveRequestStatusAdminPage() {
     if (!res.error) {
       navigate(-1);
     }
-  };
-
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const handleBrigadierSelectChange = (e: number) => {
-    setBrigadier(Number(e));
-    console.log(brigadierId);
-  };
-
-  const handleStatusSelectChange = (e: string) => {
-    setStatus(e);
   };
 
   return (
@@ -93,14 +83,7 @@ function ApproveRequestStatusAdminPage() {
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Статус</dt>
         <div className="col-span-6 sm:col-span-3">
-          <select
-            name="status"
-            defaultValue={statusId}
-            className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-            onChange={(e) => handleStatusSelectChange(e.currentTarget.value)}
-          >
-            {statuses}
-          </select>
+          <Select data={statuses} value={statusId} defaultValue={statusId} onChange={setStatus} searchable={false} />
         </div>
       </div>
       <div className="flex justify-evenly">
