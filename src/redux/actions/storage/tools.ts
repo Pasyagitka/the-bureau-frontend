@@ -4,18 +4,10 @@ import { CreateToolDto } from "@/types/dto/storage/tools/createToolDto";
 import { UpdateToolDto } from "@/types/dto/storage/tools/updateToolDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { ADD_TOOLS, DELETE_TOOLS, EDIT_TOOLS, GET_ALL_TOOLS, GET_TOOL } from "../../actionTypes/storage/tools";
 import { getToken } from "../auth";
 
-// eslint-disable-next-line import/prefer-default-export
-// export function fetchTools() {
-//   return async (dispatch: Dispatch) => {
-//     const request = await axios.get(toolsLinks.getTools);
-//     dispatch({ type: FETCH_TOOLS, payload: request.data.results });
-//   };
-// }
-
-// eslint-disable-next-line import/prefer-default-export
 export const create = createAsyncThunk(ADD_TOOLS, async (createToolDto: CreateToolDto, { rejectWithValue }) => {
   try {
     const response = await axios.post(toolsLinks.create, createToolDto, {
@@ -23,9 +15,10 @@ export const create = createAsyncThunk(ADD_TOOLS, async (createToolDto: CreateTo
         Authorization: `Bearer ${getToken()}`,
       },
     });
+    toast.success("Инструмент добавлен");
     return response.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -59,9 +52,10 @@ export const remove = createAsyncThunk(DELETE_TOOLS, async (id: number, { reject
         Authorization: `Bearer ${getToken()}`,
       },
     });
+    toast.success("Инструмент удален");
     return request.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -75,9 +69,10 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }

@@ -11,9 +11,9 @@ import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccess
 import { UpdateAccessoryDto } from "@/types/dto/storage/accessories/updateAccessoryDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios"; // TODO use axios custom instance or setup
+import { toast } from "react-toastify";
 import { getToken } from "../auth";
 
-// eslint-disable-next-line import/prefer-default-export
 export const create = createAsyncThunk(
   ADD_ACCESSORIES,
   async (createAccessoriesDto: CreateAccessoryDto, { rejectWithValue }) => {
@@ -23,9 +23,10 @@ export const create = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success(`Комплектующее добавлено`);
       return response.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -58,6 +59,7 @@ export const getAvailableForInvoice = createAsyncThunk(GET_AVAILABLE_FOR_INVOICE
   return request.data;
 });
 
+// TODO что-то не то с EDIT
 export const get = createAsyncThunk(EDIT_ACCESSORIES, async (id: number) => {
   const request = await axios.get(accessoriesLinks.get(id), {
     headers: {
@@ -74,9 +76,10 @@ export const remove = createAsyncThunk(DELETE_ACCESSORIES, async (id: number, { 
         Authorization: `Bearer ${getToken()}`,
       },
     });
+    toast.success(`Комплектующее удалено`);
     return request.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -93,9 +96,10 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success(`Изменения сохранены`);
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }

@@ -12,7 +12,6 @@ import {
   getCalendar,
   getTools,
   getWeeklyReport,
-  remove,
   updateByAdmin,
   updateByBrigadier,
   getCalendarForBrigadier,
@@ -80,9 +79,6 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
       ...state.requests[index],
       ...action.payload,
     };
-  });
-  builder.addCase(remove.fulfilled, (state, action) => {
-    state.requests = state.requests.filter((x) => x.id !== action.payload.id);
   });
 });
 

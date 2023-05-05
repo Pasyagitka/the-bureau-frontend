@@ -3,9 +3,9 @@ import { EDIT_CLIENTS, GET_ALL_CLIENTS, GET_CLIENT, GET_CLIENT_REQUESTS } from "
 import axios from "axios";
 import { clientLinks, requestLinks } from "@/constants";
 import { UpdateClientDto } from "@/types/dto/client/updateClientDto";
+import { toast } from "react-toastify";
 import { getToken } from "./auth";
 
-// eslint-disable-next-line import/prefer-default-export
 export const getAll = createAsyncThunk(GET_ALL_CLIENTS, async () => {
   const request = await axios.get(clientLinks.getAll, {
     headers: {
@@ -33,9 +33,10 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }

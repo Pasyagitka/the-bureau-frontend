@@ -2,6 +2,7 @@ import { brigadierLinks, requestLinks } from "@/constants";
 import { UpdateBrigadierDto } from "@/types/dto/brigadier/updateBrigadierDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import {
   GET_ALL_BRIGADIERS,
   GET_BRIGADIER,
@@ -38,9 +39,10 @@ export const remove = createAsyncThunk(DELETE_BRIGADIERS, async (id: number, { r
         Authorization: `Bearer ${getToken()}`,
       },
     });
+    toast.success(`Бригадир удален`);
     return request.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -54,9 +56,10 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success(`Изменения сохранены`);
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -72,9 +75,10 @@ export const uploadAvatar = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
+      toast.success(`Аватар загружен`);
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -89,7 +93,7 @@ export const getRequests = createAsyncThunk(GET_BRIGADIER_REQUESTS, async (id: n
     });
     return request.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });

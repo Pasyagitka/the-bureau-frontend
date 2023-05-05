@@ -1,6 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import { stageLinks } from "@/constants";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { getToken } from "./auth";
 import { GET_ALL_STAGES, UPDATE_STAGE_PRICE } from "../actionTypes/stages";
 
@@ -19,5 +20,6 @@ export const update = createAsyncThunk(UPDATE_STAGE_PRICE, async ({ id, data }: 
       Authorization: `Bearer ${getToken()}`,
     },
   });
+  toast.success("Изменения сохранены");
   return request.data;
 });

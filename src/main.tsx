@@ -6,6 +6,7 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import { CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
+import { ToastContainer } from "react-toastify";
 import store, { persistor } from "./redux/store";
 import App from "./components/router/App";
 
@@ -29,6 +30,7 @@ function AppContainer() {
     <CustomProvider locale={ruRU}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
+          <ToastContainer autoClose={1000} />
           <App />
         </PersistGate>
       </Provider>

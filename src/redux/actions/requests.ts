@@ -5,11 +5,11 @@ import axios from "axios";
 import fileDownload from "js-file-download";
 import { UpdateRequestByBrigadierDto } from "@/types/dto/request/updateRequestByBrigadierDto";
 import { CreateRequestDto } from "@/types/dto/request/createRequestDto";
+import { toast } from "react-toastify";
 import {
   ADD_REQUESTS,
   GET_ALL_REQUESTS,
   GET_REQUEST,
-  DELETE_REQUESTS,
   EDIT_REQUESTS_BY_ADMIN,
   EDIT_REQUESTS_BY_BRIGADIER,
   GET_WEEKLY_REPORT,
@@ -31,9 +31,10 @@ export const create = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Заявка создана");
       return response.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -111,20 +112,6 @@ export const get = createAsyncThunk(GET_REQUEST, async (id: number) => {
   return request.data;
 });
 
-export const remove = createAsyncThunk(DELETE_REQUESTS, async (id: number, { rejectWithValue }) => {
-  try {
-    const request = await axios.delete(requestLinks.delete(id), {
-      headers: {
-        Authorization: `Bearer ${getToken()}`,
-      },
-    });
-    return request.data;
-  } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
-    return rejectWithValue(error.response.data);
-  }
-});
-
 export const updateByAdmin = createAsyncThunk(
   EDIT_REQUESTS_BY_ADMIN,
   async (
@@ -137,9 +124,10 @@ export const updateByAdmin = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -157,20 +145,25 @@ export const updateByBrigadier = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
 );
 
 export const getFullReport = createAsyncThunk(GET_FULL_REPORT, async (id: number) => {
-  const request = await axios.get(requestLinks.getFullReport(id), {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-    responseType: "blob",
-  });
-  fileDownload(request.data, `request${id}.docx`);
+  try {
+    const request = await axios.get(requestLinks.getFullReport(id), {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+      responseType: "blob",
+    });
+    fileDownload(request.data, `request${id}.docx`);
+  } catch (error) {
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+  }
 });

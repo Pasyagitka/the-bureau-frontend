@@ -69,18 +69,21 @@ function SettingsPage() {
             placeholder={mountingSettings[0]?.stage}
             label={`${mountingSettings[0]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={clean}
+            value={clean}
             onChange={(e) => setClean(e.target.value)}
           />
           <InputWithLabel
             placeholder={mountingSettings[1]?.stage}
             label={`${mountingSettings[1]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={rough}
+            value={rough}
             onChange={(e) => setRough(e.target.value)}
           />
           <InputWithLabel
             placeholder={mountingSettings[2]?.stage}
             label={`${mountingSettings[2]?.stage} (цена за монтаж одного прибора)`}
             defaultValue={both}
+            value={both}
             onChange={(e) => setBoth(e.target.value)}
           />
         </div>

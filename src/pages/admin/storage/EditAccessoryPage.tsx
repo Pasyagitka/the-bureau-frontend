@@ -67,17 +67,25 @@ function EditAccessoryPage() {
               <InputWithLabel
                 placeholder="наименование"
                 defaultValue={name}
+                value={name}
                 onChange={(e) => setName(e.target.value)}
               />
-              <InputWithLabel placeholder="артикул" defaultValue={sku} onChange={(e) => setSku(e.target.value)} />
+              <InputWithLabel
+                placeholder="артикул"
+                defaultValue={sku}
+                value={sku}
+                onChange={(e) => setSku(e.target.value)}
+              />
               <InputWithLabel
                 placeholder="цена за единицу"
                 defaultValue={price}
+                value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
               <InputWithLabel
                 placeholder="количество"
                 defaultValue={quantity}
+                value={quantity}
                 onChange={(e) => setQuantity(e.target.value.replace(/\D/g, ""))}
               />
               <Select data={equipmentList} value={equipmentId} onChange={setEquipmentId} label="оборудование" />

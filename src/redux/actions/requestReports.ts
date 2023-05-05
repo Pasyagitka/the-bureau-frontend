@@ -1,6 +1,7 @@
 import { requestReportLinks } from "@/constants";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { GET_REQUEST_REPORTS, PATCH_REQUEST_REPORTS } from "../actionTypes/requestReports";
 import { getToken } from "./auth";
 
@@ -23,9 +24,10 @@ export const patch = createAsyncThunk(
           "Content-Type": "multipart/form-data",
         },
       });
+      toast.success(`Отчетность обновлена`);
       return response.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }

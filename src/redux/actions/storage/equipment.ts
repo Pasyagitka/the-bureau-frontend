@@ -9,6 +9,7 @@ import { CreateEquipmentDto } from "@/types/dto/storage/equipment/createEquipmen
 import { UpdateEquipmentDto } from "@/types/dto/storage/equipment/updateEquipmentDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import { toast } from "react-toastify";
 import { getToken } from "../auth";
 
 // eslint-disable-next-line import/prefer-default-export
@@ -21,9 +22,10 @@ export const create = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Оборудование добавлено");
       return response.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -54,9 +56,11 @@ export const remove = createAsyncThunk(DELETE_EQUIPMENT, async (id: number, { re
         Authorization: `Bearer ${getToken()}`,
       },
     });
+    toast.success("Оборудование удалено");
+
     return request.data;
   } catch (error) {
-    alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -70,9 +74,11 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
+      toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      alert(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+
       return rejectWithValue(error.response.data);
     }
   }

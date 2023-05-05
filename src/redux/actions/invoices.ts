@@ -3,6 +3,7 @@ import { PaginatedForBrigadierQueryDto, PaginatedQueryDto } from "@/types/dto/qu
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import fileDownload from "js-file-download";
+import { toast } from "react-toastify";
 import {
   CREATE_INVOICE,
   GET_ALL_INVOICES,
@@ -61,11 +62,17 @@ export const getItems = createAsyncThunk(GET_INVOICE_ITEMS, async (id: number) =
   return request.data;
 });
 
-export const create = createAsyncThunk(CREATE_INVOICE, async (data: unknown) => {
-  const request = await axios.post(invoiceLinks.create, data, {
-    headers: {
-      Authorization: `Bearer ${getToken()}`,
-    },
-  });
-  return request.data;
+export const create = createAsyncThunk(CREATE_INVOICE, async (data: unknown, { rejectWithValue }) => {
+  try {
+    const response = await axios.post(invoiceLinks.create, data, {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    toast.success(`Счет создан`);
+    return response.data;
+  } catch (error) {
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    return rejectWithValue(error.response.data);
+  }
 });

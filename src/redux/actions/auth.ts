@@ -5,6 +5,7 @@ import jwtDecode from "jwt-decode";
 import { Role } from "@/types/enum/role.enum";
 import { CreateClientDto } from "@/types/dto/client/createClientDto";
 import { CreateBrigadierDto } from "@/types/dto/brigadier/createBrigadierDto";
+import { toast } from "react-toastify";
 import { AUTHENTICATED, GET_USER, NOT_AUTHENTICATED } from "../actionTypes/auth";
 
 const setToken = (token: string) => {
@@ -32,14 +33,14 @@ export function signupClient(registerClientDto: CreateClientDto) {
     await axios
       .post(authLinks.registerClient, registerClientDto)
       .then((response) => {
-        alert("Аккаунт клиента создан");
+        toast.success("Аккаунт клиента создан");
         const token = response.data.access_token;
         setToken(token);
         const tokenPayload: { role: Role.Client; sub: number } = jwtDecode(token);
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        alert(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
+        toast.error(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };
@@ -50,7 +51,7 @@ export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
     await axios
       .post(authLinks.registerBrigadier, registerBrigadierDto)
       .then((response) => {
-        alert(
+        toast.success(
           "Аккаунт бригадира создан. Дождитесь подтверждения регистрации от администратора сервиса, а затем войдите"
         );
         const token = response.data.access_token;
@@ -59,7 +60,7 @@ export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        alert(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
+        toast.error(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };
@@ -79,7 +80,7 @@ export function loginUser({ username, password }: { username: string; password: 
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        alert(error.response.data.message || "Ошибка входа в аккаут. Попробуйте снова позже");
+        toast.error(error.response.data.message || "Ошибка входа в аккаунт. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };
