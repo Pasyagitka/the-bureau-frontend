@@ -76,22 +76,6 @@ function CreateInvoicePage() {
         </div>
         <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3" />
         <div className="space-y-6 bg-white">
-          {/* <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-              <div>
-                <div className=" relative ">
-                  <select
-                    name="equipment"
-                    defaultValue={equipmentId}
-                    className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                    onChange={(e) => handleEquipmentSelectChange(Number(e.currentTarget.value))}
-                  >
-                    {accessoryList}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div> */}
           <hr />
           <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
             <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />

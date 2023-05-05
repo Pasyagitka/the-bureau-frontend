@@ -9,6 +9,7 @@ import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 import { getAll as getAllRequestReports, patch } from "@/redux/actions/requestReports";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
+import Select from "@/elements/select/Select";
 
 function EditRequestByBrigadierPage() {
   // const navigate = useNavigate();
@@ -18,20 +19,19 @@ function EditRequestByBrigadierPage() {
   const request = useAppSelector((state) => state.requests.request);
   const existingRequestReports = useAppSelector((state) => state.requestReports.requestReports);
 
-  const [statusId, setStatus] = useState();
+  const [statusId, setStatus] = useState<string | null>();
   const [files, setFiles] = useState([]);
 
-  const statuses = Object.values(RequestStatus).map((i) => {
-    if (i !== RequestStatus.APPROVED && i !== RequestStatus.INPROCESSING) {
-      console.log(i, requestStatusesTitles[i]);
-      return <option selected={statusId === i} value={i} label={requestStatusesTitles[i]} />;
-    }
-    return null;
-  });
+  const statuses = Object.values(RequestStatus).flatMap((i) =>
+    i !== RequestStatus.APPROVED && i !== RequestStatus.INPROCESSING
+      ? [{ value: i, label: requestStatusesTitles[i] }]
+      : []
+  );
+  console.log(statuses);
 
   useEffect(() => {
-    dispatch(get(params.id));
-    dispatch(getAllRequestReports(params.id));
+    dispatch(get(Number(params.id)));
+    dispatch(getAllRequestReports(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -78,10 +78,6 @@ function EditRequestByBrigadierPage() {
     }
   };
 
-  const handleStatusSelectChange = (e: string) => {
-    setStatus(e.currentTarget.value);
-  };
-
   return (
     <section className="w-full">
       <div className="container max-w-2xl mx-auto shadow-md md:w-3/4">
@@ -98,14 +94,14 @@ function EditRequestByBrigadierPage() {
           ) : (
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
               <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-                <select
-                  name="status"
+                <Select
+                  data={statuses}
+                  value={statusId}
                   defaultValue={statusId}
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                  onChange={handleStatusSelectChange}
-                >
-                  {statuses}
-                </select>
+                  onChange={setStatus}
+                  searchable={false}
+                  label="статус заявки"
+                />
               </div>
             </div>
           )}

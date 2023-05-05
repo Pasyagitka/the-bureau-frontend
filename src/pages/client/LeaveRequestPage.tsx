@@ -8,6 +8,8 @@ import { useNavigate } from "react-router-dom";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { AddressSuggestions } from "react-dadata";
 import { CreateRequestDto } from "@/types/dto/request/createRequestDto";
+import Select from "@/elements/select/Select";
+import { getAll as getAllStages } from "@/redux/actions/stage";
 import LeaveRequestTextInput from "../../elements/inputs/LeaveRequestTextInput";
 
 function LeaveRequestPage() {
@@ -36,10 +38,17 @@ function LeaveRequestPage() {
   //   // endDate: new Date().setMonth(11),
   // });
 
+  const { stages } = useAppSelector((state) => state.stages);
+  const stagesList = stages.map((i) => ({
+    value: i.id,
+    label: i.stage,
+  }));
+
   const [dates, setValue] = useState(null);
 
   function loadAll() {
     dispatch(getAll());
+    dispatch(getAllStages());
   }
   useEffect(loadAll, [dispatch]);
 
@@ -197,16 +206,14 @@ function LeaveRequestPage() {
             <h2 className="max-w-sm mx-auto md:w-1/3">Стадия отделки</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div className="col-span-6 sm:col-span-3">
-                <select
-                  name="stage"
-                  className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
+                <Select
+                  data={stagesList}
                   value={stage}
-                  onChange={(e) => handleSelectChange(Number(e.currentTarget.value))}
-                >
-                  <option value={1}>Чистовая</option>
-                  <option value={2}>Черновя</option>
-                  <option value={3}>Чистовая + Черновая</option>
-                </select>
+                  defaultValue={stage}
+                  onChange={setStage}
+                  searchable={false}
+                  label="стадия отделки"
+                />
               </div>
             </div>
           </div>

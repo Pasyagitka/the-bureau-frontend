@@ -1,4 +1,5 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
+import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll } from "@/redux/actions/stage";
 import { update, get } from "@/redux/actions/storage/tools";
@@ -13,11 +14,18 @@ function EditToolPage() {
   const [name, setName] = useState();
   const [stageId, setStageId] = useState();
 
-  const tool = useAppSelector((state) => state.tools.tool);
+  const { tool } = useAppSelector((state) => state.tools);
 
-  const stages = useAppSelector((state) => state.stages.stages).map((i) => (
-    <option selected value={i.id} label={i.stage} />
-  ));
+  // const stages = useAppSelector((state) => state.stages.stages).map((i) => (
+  //   <option selected value={i.id} label={i.stage} />
+  // ));
+
+  const { stages } = useAppSelector((state) => state.stages);
+  const stagesList = stages.map((i) => ({
+    value: i.id,
+    label: i.stage,
+  }));
+
   useEffect(() => {
     dispatch(getAll());
     dispatch(get(params.id));
@@ -64,14 +72,14 @@ function EditToolPage() {
                   />
                 </div>
               </div>
-              <select
-                name="equipment"
+              <Select
+                data={stagesList}
+                value={stageId}
                 defaultValue={stageId}
-                className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
-                onChange={(e) => handleStageSelectChange(Number(e.currentTarget.value))}
-              >
-                {stages}
-              </select>
+                onChange={setStageId}
+                searchable={false}
+                label="стадия отделки"
+              />
             </div>
           </div>
           <hr />
