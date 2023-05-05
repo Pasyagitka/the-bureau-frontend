@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import Loader from "@/elements/loader/Loader";
 import useDidMountEffect from "@/hooks/useDidMountEffect";
 import CustomDatepicker from "@/elements/customDatepicker/CustomDatepicker";
+import Select from "@/elements/select/Select";
 import BrigadierHistory from "../../components/admin/requestWorkHistory/BrigadierHistory";
 
 function EditRequestAdminPage() {
@@ -28,13 +29,18 @@ function EditRequestAdminPage() {
 
   const history = useAppSelector((state) => state.requests.brigadierHistory);
   const { recommended } = useAppSelector((state) => state.brigadiers);
+  const { brigadiers } = useAppSelector((state) => state.brigadiers);
   // const brigadiersList = useAppSelector((state) => state.brigadiers.brigadiers).map((i) => (
   //   <option selected={brigadierId === i.id} value={i.id} label={`${i.surname} ${i.firstname} ${i.patronymic}`} />
   // ));
-  const brigadiersList = recommended.map((i) => (
-    <option selected={brigadierId === i.id} value={i.id} label={i.full_name} />
-  ));
-  brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
+  // const brigadiersList = recommended.map((i) => (
+  //   <option selected={brigadierId === i.id} value={i.id} label={i.full_name} />
+  // ));
+  // brigadiersList.push(<option value={-1} selected={!brigadierId} label="Не назначен" />);
+
+  const brigadiersList = brigadiers.map((i) => ({ label: `${i.surname} ${i.firstname} ${i.patronymic}`, value: i.id }));
+  const recommendesIds = recommended.map((i) => i.id);
+  const disabledList = brigadiers.filter((i) => !recommendesIds.includes(i.id)).map((i) => i.id);
 
   useEffect(() => {
     async function fetchData() {
@@ -55,15 +61,17 @@ function EditRequestAdminPage() {
     setLoading(false);
   }, [request]);
 
-  // useEffect(() => {
-  //   dispatch(getRecommended(dates || request?.mountingDate));
-  // }, [dates]);
+  useEffect(() => {
+    dispatch(getRecommended(newMountingDate || request?.mountingDate));
+  }, [newMountingDate]);
 
   const handleSubmit = async () => {
-    const updateRequestByAdminDto =
-      brigadierId === null || brigadierId === undefined
-        ? { status: statusId }
-        : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
+    // const updateRequestByAdminDto =
+    //   brigadierId === null || brigadierId === undefined
+    //     ? { status: statusId }
+    //     : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
+    const updateRequestByAdminDto = { brigadier: brigadierId, status: statusId };
+    console.log(updateRequestByAdminDto);
     const updateDto = {
       id: params.id,
       updateRequestByAdminDto: {
@@ -134,16 +142,25 @@ function EditRequestAdminPage() {
         </dt>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <dt className="text-sm font-medium text-gray-500">Бригадир</dt>
+        <dt className="text-sm font-medium text-gray-500">Бригадир-исполнитель</dt>
         <div className="col-span-6 sm:col-span-3">
-          <select
+          {/* <select
             name="brigadier"
             defaultValue={brigadierId}
             className="mt-1 block w-full rounded-md border border-gray-300 bg-white py-2 px-3 shadow-sm focus:border-lime-500 focus:outline-none focus:ring-lime-500 sm:text-sm text-gray-700 placeholder-gray-400"
             onChange={(e) => handleBrigadierSelectChange(Number(e.currentTarget.value))}
           >
             {brigadiersList}
-          </select>
+          </select> */}
+          <Select
+            data={brigadiersList}
+            value={brigadierId}
+            defaultValue={request.brigadier?.id}
+            onChange={setBrigadier}
+            searchable
+            cleanable
+            disabledItemValues={disabledList}
+          />
         </div>
       </div>
       {history && history.length > 0 && (
