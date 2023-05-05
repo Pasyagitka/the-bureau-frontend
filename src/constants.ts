@@ -5,6 +5,7 @@ export const authLinks = {
   activate: (link: string) => `api/auth/activate/${link}`,
   requestResetPassword: "/api/auth/reset-password",
   resetPassword: (login: string, link: string) => `api/auth/reset-password/${login}/${link}`,
+  changePassword: `/api/auth/change-password`,
   userinfo: "/api/auth/userinfo",
 };
 

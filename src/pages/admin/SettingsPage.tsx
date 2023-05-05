@@ -2,6 +2,7 @@ import SubmitButton from "@/elements/buttons/SubmitButton";
 import InputWithLabel from "@/elements/inputs/InputWithLabel";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { getAll, update } from "@/redux/actions/stage";
+import { changePassword } from "@/redux/actions/users";
 import { useEffect, useState } from "react";
 
 function SettingsPage() {
@@ -18,6 +19,9 @@ function SettingsPage() {
   const [rough, setRough] = useState();
   const [both, setBoth] = useState();
 
+  const [oldPassword, setOldPassword] = useState();
+  const [newPassword, setNewPassword] = useState();
+
   const handleSubmit = async () => {
     if (mountingSettings[0].mountingPrice !== clean)
       await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(clean) } }));
@@ -25,6 +29,9 @@ function SettingsPage() {
       await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(rough) } }));
     if (mountingSettings[2].mountingPrice !== both)
       await dispatch(update({ id: mountingSettings[0].id, data: { mountingPrice: Number(both) } }));
+    if (oldPassword && newPassword) {
+      dispatch(changePassword({ changePasswordDto: { oldPassword, newPassword } }));
+    }
   };
 
   useEffect(() => {
@@ -39,12 +46,21 @@ function SettingsPage() {
         <h3 className="text-lg font-medium leading-6 text-gray-900">Изменение настроек</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Изменение настроек приложения</p>
       </div>
-      {/* <div className="px-4 py-5 sm:px-6">
+      <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 pb-2">Данные для входа</h3>
         <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
-          <Input placeholder="Пароль администоратора" />
+          <InputWithLabel
+            placeholder="Старый пароль"
+            value={oldPassword}
+            onChange={(e) => setOldPassword(e.target.value)}
+          />
+          <InputWithLabel
+            placeholder="Новый пароль"
+            value={newPassword}
+            onChange={(e) => setNewPassword(e.target.value)}
+          />
         </div>
-      </div> */}
+      </div>
       <div className="px-4 py-5 sm:px-6 my-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 pb-2">Цены на монтажные работы</h3>
         {/* <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{mountingSettingsInputs}</div> */}

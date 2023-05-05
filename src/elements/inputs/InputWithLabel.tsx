@@ -4,11 +4,13 @@ function InputWithLabel({
   label,
   onChange,
   defaultValue,
+  value,
 }: {
   placeholder: string;
   label: string;
   onChange: () => void;
   defaultValue?: string;
+  value: string;
 }) {
   return (
     <div>
@@ -20,6 +22,7 @@ function InputWithLabel({
           placeholder={placeholder}
           onChange={onChange}
           defaultValue={defaultValue}
+          value={value}
         />
       </div>
     </div>
