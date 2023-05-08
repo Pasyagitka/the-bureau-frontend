@@ -10,6 +10,9 @@ import {
   GET_FOR_BRIGADIER,
   GET_INVOICE_ITEMS,
   GET_INVOICE_FILE,
+  DELETE_INVOICE,
+  EDIT_INVOICE,
+  GET_INVOICE,
 } from "../actionTypes/invoices";
 import { getToken } from "./auth";
 
@@ -53,6 +56,15 @@ export const getFile = createAsyncThunk(GET_INVOICE_FILE, async (id: number) => 
   fileDownload(request.data, `invoice${id}.docx`);
 });
 
+export const get = createAsyncThunk(GET_INVOICE, async (id: number) => {
+  const request = await axios.get(invoiceLinks.get(id), {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+  });
+  return request.data;
+});
+
 export const getItems = createAsyncThunk(GET_INVOICE_ITEMS, async (id: number) => {
   const request = await axios.get(invoiceLinks.getItems(id), {
     headers: {
@@ -76,3 +88,35 @@ export const create = createAsyncThunk(CREATE_INVOICE, async (data: unknown, { r
     return rejectWithValue(error.response.data);
   }
 });
+
+export const remove = createAsyncThunk(DELETE_INVOICE, async (id: number, { rejectWithValue }) => {
+  try {
+    const request = await axios.delete(invoiceLinks.delete(id), {
+      headers: {
+        Authorization: `Bearer ${getToken()}`,
+      },
+    });
+    toast.success(`Счет удален`);
+    return request.data;
+  } catch (error) {
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    return rejectWithValue(error.response.data);
+  }
+});
+export const update = createAsyncThunk(
+  EDIT_INVOICE,
+  async ({ id, updateInvoiceDto }: { id: number; updateInvoiceDto: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.patch(invoiceLinks.update(id), updateInvoiceDto, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      toast.success(`Изменения сохранены`);
+      return request.data;
+    } catch (error) {
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);

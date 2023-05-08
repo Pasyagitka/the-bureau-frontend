@@ -2,12 +2,13 @@
 /* eslint-disable default-param-last */
 import { createReducer } from "@reduxjs/toolkit";
 import { InvoiceDto } from "@/types/dto/invoice/invoiceDto";
-import { getAll, getItems, getForBrigadier } from "../actions/invoices";
+import { getAll, getItems, getForBrigadier, remove, get, update } from "../actions/invoices";
 
 type InvoicesStateProps = {
   invoices: InvoiceDto[];
   total: number;
   invoiceItems: Array<unknown>;
+  invoice: InvoiceDto;
 };
 
 const initialState = {
@@ -27,6 +28,19 @@ const invoicesReducer = createReducer<InvoicesStateProps>(initialState, (builder
   });
   builder.addCase(getItems.fulfilled, (state, action) => {
     state.invoiceItems = action.payload;
+  });
+  builder.addCase(get.fulfilled, (state, action) => {
+    state.invoice = action.payload;
+  });
+  builder.addCase(update.fulfilled, (state, action) => {
+    const index = state.invoices.findIndex((item) => item.id === action.payload.id);
+    state.invoices[index] = {
+      ...state.invoices[index],
+      ...action.payload,
+    };
+  });
+  builder.addCase(remove.fulfilled, (state, action) => {
+    state.invoices = state.invoices.filter((x) => x.id !== action.payload.id);
   });
 });
 

@@ -5,25 +5,29 @@ import { getFile, getItems } from "@/redux/actions/invoices";
 import { updateByAdmin } from "@/redux/actions/requests";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { InputNumber, Table } from "rsuite";
+import { InputNumber, Table, Uploader } from "rsuite";
 import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
+import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
+import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 
 const { Column, HeaderCell, Cell } = Table;
 
-function ApproveInvoicePage() {
+function EditInvoiceStatusPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const params = useParams();
 
   const [brigadierId, setBrigadier] = useState<number | null>();
-  const [statusId, setStatus] = useState();
+  const [statusId, setStatus] = useState<string | null>();
 
   const { invoiceItems } = useAppSelector((state) => state.invoices);
+  const [files, setFiles] = useState([]);
+  const existingRequestReports = [];
 
   useEffect(() => {
-    dispatch(getItems(params.id));
+    dispatch(getItems(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -57,7 +61,6 @@ function ApproveInvoicePage() {
           <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">Редактировать счет</p>
         </div>
-        <IconButton icon={downloadIcon} alt="Download" isLink={false} onClick={() => handleDownload(params.id)} />
       </div>
       {/* <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
         <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems?.length > 0 ? listItems : "Нет"}</div>
@@ -65,8 +68,8 @@ function ApproveInvoicePage() {
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие</h3>
       </div>
-      <div className="items-center w-full h-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
-        <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={500}>
+      <div className="items-center w-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
+        <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={200}>
           <Column width={150}>
             <HeaderCell>Наименование</HeaderCell>
             <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
@@ -126,6 +129,44 @@ function ApproveInvoicePage() {
             </Cell>
           </Column>
         </Table>
+        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
+          <h1 className="text-gray-600 w-full text-center">Скачать счет для печати </h1>
+          <IconButton
+            icon={downloadIcon}
+            alt="Download"
+            isLink={false}
+            onClick={() => handleDownload(Number(params.id))}
+          />
+        </div>
+        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
+          <h1 className="text-gray-600 w-full text-center">Текущий скан счета</h1>
+          {existingRequestReports && existingRequestReports.length > 0 ? (
+            <PhotoGallery images={existingRequestReports} />
+          ) : (
+            <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
+          )}
+        </div>
+        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
+          <h1 className="text-gray-600 w-full text-center">Загрузить скан счета</h1>
+          <div className="flex">
+            <div className="inline-flex items-center space-x-4">
+              <Uploader
+                multiple
+                listType="picture"
+                fileList={files}
+                onChange={setFiles}
+                action=""
+                defaultFileList={files}
+                autoUpload={false}
+                draggable
+              >
+                <button type="button">
+                  <CameraRetroIcon />
+                </button>
+              </Uploader>
+            </div>
+          </div>
+        </div>
       </div>
       <div className="flex justify-evenly">
         <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
@@ -134,4 +175,4 @@ function ApproveInvoicePage() {
   );
 }
 
-export default ApproveInvoicePage;
+export default EditInvoiceStatusPage;

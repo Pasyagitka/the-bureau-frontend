@@ -48,8 +48,11 @@ export const invoiceLinks = {
   getAll: "/api/invoice",
   getFile: (id: number) => `/api/invoice/${id}/file`,
   getItems: (id: number) => `/api/invoice/${id}/items`,
+  get: (id: number) => `/api/invoice/${id}`,
   create: "/api/invoice",
   getForBrigadier: (brigadierId: number) => `/api/invoice/brigadier/${brigadierId}`,
+  update: (id: number) => `/api/invoice/${id}`,
+  delete: (id: number) => `/api/invoice/${id}`,
 };
 
 export const requestLinks = {

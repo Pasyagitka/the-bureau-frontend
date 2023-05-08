@@ -26,26 +26,22 @@ function InvoiceList({
   const listItems = invoices.map((invoice) => (
     <InvoiceItem
       hasApproveButton
+      hasDetailsButton
       key={invoice.id}
       invoice={invoice}
       handleClick={() => handleRemove(invoice.id)}
       handleDownload={() => handleDownload(invoice.id)}
       clickTitle="удалить"
+      approveLink={`${invoice.id}/approve`}
+      detailsLink={`${invoice.id}`}
     />
   ));
   return (
-    <div className="w-full bg-white p-12 container rounded">
-      <div className="header flex items-end justify-between mb-12">
-        <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Выставленные cчета</p>
-          <p className="text-2xl font-light text-gray-400">Скачать счета в формате .docx</p>
-        </div>
-      </div>
-      <div className="my-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
-        <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
-          <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
-        </div>
+    <div className="my-10">
+      <p className="text-2xl font-light text-gray-400">Скачать счета в формате .docx</p>
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
+      <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
+        <Pagination page={page} onChange={handlePageChange} count={numberOfPages} className="my-12" />
       </div>
     </div>
   );

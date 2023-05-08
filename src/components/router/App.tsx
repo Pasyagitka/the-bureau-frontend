@@ -21,7 +21,7 @@ import InvoicesPage from "@/pages/admin/InvoicesPage";
 import GatewayTimeout from "@/pages/common/GatewayTimeout";
 import CreateInvoicePage from "@/pages/brigadier/CreateInvoicePage";
 import SettingsPage from "@/pages/admin/SettingsPage";
-import ApproveInvoicePage from "@/pages/admin/ApproveInvoicePage";
+import EditInvoiceStatusPage from "@/pages/admin/EditInvoicePage";
 import CreateAccessoryPage from "@/pages/admin/storage/CreateAccessoryPage";
 import EditEquipmentPage from "@/pages/admin/storage/EditEquipmentPage";
 import CreateToolPage from "@/pages/admin/storage/CreateToolPage";
@@ -40,6 +40,10 @@ import EditBrigadierDetailsPage from "@/pages/brigadier/EditBrigadierDetailsPage
 import EditRequestByBrigadierPage from "@/pages/brigadier/EditRequestByBrigadierPage";
 import EditClientDetailsPage from "@/pages/client/EditClientDetailsPage";
 import LeaveRequestPage from "@/pages/client/LeaveRequestPage";
+import EditInvoicePage from "@/pages/brigadier/EditInvoicePage";
+import InvoiceDetailsPage from "@/pages/brigadier/InvoiceDetailsPage";
+import CommitPaidInvoicePage from "@/pages/brigadier/CommitPaidInvoicePage";
+import ApproveInvoiceStatusPage from "@/pages/admin/ApproveInvoiceStatusPage";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -71,7 +75,9 @@ function App() {
             <Route path="brigadiers" element={<BrigadiersPage />} />
             <Route path="brigadiers/:id" element={<BrigadierDetailsPage />} />
             <Route path="invoices" element={<InvoicesPage />} />
-            <Route path="invoices/:id/approve" element={<ApproveInvoicePage />} />
+            <Route path="invoices/:id/approve" element={<ApproveInvoiceStatusPage />} />
+            <Route path="invoices/:id" element={<InvoiceDetailsPage />} />
+            <Route path="invoices/:id/update" element={<EditInvoiceStatusPage />} />
             <Route path="settings" element={<SettingsPage />} />
             {/* <Route path="brigadiers/:id" element={<BrigadierDetails />} /> */}
             <Route path="clients" element={<ClientsPage />} />
@@ -119,7 +125,10 @@ function App() {
             <Route path="" element={<BrigadierHomePage />} />
             <Route path="update" element={<EditBrigadierDetailsPage />} />
             <Route path="requests/:id/edit" element={<EditRequestByBrigadierPage />} />
-            <Route path="invoice/create" element={<CreateInvoicePage />} />
+            <Route path="invoices/create" element={<CreateInvoicePage />} />
+            <Route path="invoices/:id/update" element={<EditInvoicePage />} />
+            <Route path="invoices/:id" element={<InvoiceDetailsPage />} />
+            <Route path="invoices/:id/commit" element={<CommitPaidInvoicePage />} />
           </Route>
         </Route>
         <Route path="/gatewayTimeout" element={<GatewayTimeout />} />
