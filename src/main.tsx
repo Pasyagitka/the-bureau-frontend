@@ -30,7 +30,7 @@ function AppContainer() {
     <CustomProvider locale={ruRU}>
       <Provider store={store}>
         <PersistGate persistor={persistor}>
-          <ToastContainer autoClose={1000} />
+          <ToastContainer autoClose={3000} pauseOnHover pauseOnFocusLoss />
           <App />
         </PersistGate>
       </Provider>

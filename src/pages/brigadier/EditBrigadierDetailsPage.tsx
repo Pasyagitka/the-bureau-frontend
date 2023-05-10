@@ -36,7 +36,7 @@ function EditBrigadierDetailsPage() {
     const updateProfileResult = await dispatch(
       update({ id: user?.brigadier?.id, updateBrigadierDto: { firstname, surname, patronymic, contactNumber } })
     );
-    const updateAvatarResult = null;
+    let updateAvatarResult = null;
     if (fileInfo?.length > 0) {
       const formData = new FormData();
       formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);

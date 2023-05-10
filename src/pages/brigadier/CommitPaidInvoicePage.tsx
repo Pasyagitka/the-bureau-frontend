@@ -3,14 +3,17 @@ import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { getAll as getAllRequestReports } from "@/redux/actions/requestReports";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 import { Uploader } from "rsuite";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
+import { uploadReceipt } from "@/redux/actions/invoices";
+import { toast } from "react-toastify";
 
 function CommitPaidInvoicePage() {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   const params = useParams();
 
   useEffect(() => {
@@ -18,9 +21,23 @@ function CommitPaidInvoicePage() {
     dispatch(getAllRequestReports(Number(params.id)));
   }, [dispatch]);
 
-  const handleSubmit = async () => {};
   const existingRequestReports = useAppSelector((state) => state.requestReports.requestReports);
   const [files, setFiles] = useState([]);
+  const [fileInfo, setFileInfo] = useState(null);
+
+  const handleSubmit = async () => {
+    let updateReceiptResult = null;
+    if (fileInfo?.length > 0) {
+      const formData = new FormData();
+      formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);
+      updateReceiptResult = await dispatch(uploadReceipt({ id: Number(params.id), file: formData }));
+    } else {
+      toast.error("Загрузите чек");
+    }
+    if (updateReceiptResult && !updateReceiptResult.error) {
+      navigate(-1);
+    }
+  };
 
   return (
     <section className="w-full">

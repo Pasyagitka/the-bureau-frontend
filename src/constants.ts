@@ -52,6 +52,10 @@ export const invoiceLinks = {
   create: "/api/invoice",
   getForBrigadier: (brigadierId: number) => `/api/invoice/brigadier/${brigadierId}`,
   update: (id: number) => `/api/invoice/${id}`,
+  updateStatus: (id: number) => `/api/invoice/${id}/update-status`,
+  updateItems: (id: number) => `/api/invoice/${id}/items`,
+  uploadScan: (id: number) => `/api/invoice/${id}/upload-scan`,
+  uploadReceipt: (id: number) => `/api/invoice/${id}/upload-receipt`,
   delete: (id: number) => `/api/invoice/${id}`,
 };
 

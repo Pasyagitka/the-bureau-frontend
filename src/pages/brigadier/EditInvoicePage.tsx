@@ -1,13 +1,13 @@
 import IconButton from "@/elements/buttons/IconButton";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getItems } from "@/redux/actions/invoices";
-import { updateByAdmin } from "@/redux/actions/requests";
+import { getItems, updateItems } from "@/redux/actions/invoices";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputNumber, Table } from "rsuite";
 import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
+import { getAvailableForInvoice } from "@/redux/actions/storage/accessories";
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -16,34 +16,58 @@ function EditInvoicePage() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const [brigadierId, setBrigadier] = useState<number | null>();
-  const [statusId, setStatus] = useState();
-
   const { invoiceItems } = useAppSelector((state) => state.invoices);
+  const invoiceItemsAccessoriesIds = invoiceItems.map((x) => x.accessory.id);
+  const accessoryList = useAppSelector((state) => state.accessories.accessories);
 
+  const [invoiceAccessoryList, setInvoiceAccessoryList] = useState(new Map());
   useEffect(() => {
-    dispatch(getItems(params.id));
+    dispatch(getItems(Number(params.id)));
+    dispatch(getAvailableForInvoice());
   }, [dispatch]);
 
   useEffect(() => {
-    setBrigadier(invoiceItems?.brigadier?.id);
-    setStatus(invoiceItems?.status);
+    setInvoiceAccessoryList(new Map(invoiceItems.map((obj) => [obj.accessory.id, obj.quantity])));
   }, [invoiceItems]);
 
   const handleSubmit = async () => {
-    const updateRequestByAdminDto =
-      brigadierId === null || brigadierId === undefined
-        ? { status: statusId }
-        : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
-    const updateDto = {
-      id: params.id,
-      updateRequestByAdminDto,
-    };
-    const res = await dispatch(updateByAdmin(updateDto));
+    const newInvoiceItems = Array.from(invoiceAccessoryList, (item) => ({ accessoryId: item[0], quantity: +item[1] }));
+    const res = await dispatch(updateItems({ id: Number(params.id), updateInvoiceDto: { items: newInvoiceItems } }));
     if (!res.error) {
       navigate(-1);
     }
   };
+
+  const listItems = accessoryList
+    .filter((x) => !invoiceItemsAccessoriesIds.includes(x.id))
+    .map((item) => (
+      <>
+        <div className="flex justify-between">
+          <p className="block mb-2 text-sm font-medium text-gray-900">{`${item.name} ${
+            item.sku ? `(арт. ${item.sku})` : ""
+          }`}</p>
+          <p className="text-right text-sm font-medium text-gray-900">{item.price}р/ед</p>
+        </div>
+        <InputNumber
+          key={item.id}
+          placeholder={item.name}
+          defaultValue={0}
+          max={item.quantity_in_stock}
+          min={0}
+          onChange={(value) => {
+            console.log(value);
+            if (Number(value) === 0) invoiceAccessoryList.delete(item.id);
+            // if (!Number(e.target.value)) return;
+            else invoiceAccessoryList.set(item.id, value);
+            console.log(invoiceAccessoryList);
+          }}
+          style={{ marginTop: 0 }}
+        />
+        <p className="text-right text-sm" style={{ margin: 0 }}>
+          на складе {item.quantity_in_stock}ед
+        </p>
+      </>
+    ));
 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5 mx-auto">
@@ -54,10 +78,10 @@ function EditInvoicePage() {
         </div>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие по счету</h3>
       </div>
       <div className="items-center w-full h-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
-        <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={500}>
+        <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} autoHeight>
           <Column width={150}>
             <HeaderCell>Наименование</HeaderCell>
             <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
@@ -78,11 +102,11 @@ function EditInvoicePage() {
                   defaultValue={rowData.quantity}
                   max={rowData.accessory.quantity_in_stock}
                   min={0}
-                  // onChange={(value) => {
-                  //   if (Number(value) === 0) invoiceAccessoryList.delete(rowData.id);
-                  //   else invoiceAccessoryList.set(rowData.id, value);
-                  //   console.log(invoiceAccessoryList);
-                  // }}
+                  onChange={(value) => {
+                    if (Number(value) === 0) invoiceAccessoryList.delete(rowData.accessory.id);
+                    else invoiceAccessoryList.set(rowData.accessory.id, value);
+                    console.log(invoiceAccessoryList);
+                  }}
                 />
               )}
             </Cell>
@@ -118,6 +142,14 @@ function EditInvoicePage() {
           </Column>
         </Table>
       </div>
+      {listItems?.length > 0 ? (
+        <>
+          <div className="px-4 py-5 sm:px-6">
+            <h3 className="text-lg font-medium leading-6 text-gray-900">Добавить комплектующие в счет</h3>
+          </div>
+          <div className="max-w-sm mx-auto space-y-5 md:w-2/3 mb-4 text-gray-500">{listItems}</div>
+        </>
+      ) : null}
       <div className="flex justify-center gap-5">
         <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
         <SubmitButton title="Отменить" handleSubmit={() => navigate(-1)} />

@@ -1,8 +1,7 @@
 import IconButton from "@/elements/buttons/IconButton";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getFile, getItems } from "@/redux/actions/invoices";
-import { updateByAdmin } from "@/redux/actions/requests";
+import { getFile, getItems, uploadScan } from "@/redux/actions/invoices";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputNumber, Table, Uploader } from "rsuite";
@@ -11,6 +10,7 @@ import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
+import { toast } from "react-toastify";
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -26,6 +26,8 @@ function EditInvoiceStatusPage() {
   const [files, setFiles] = useState([]);
   const existingRequestReports = [];
 
+  const [fileInfo, setFileInfo] = useState(null);
+
   useEffect(() => {
     dispatch(getItems(Number(params.id)));
   }, [dispatch]);
@@ -36,16 +38,15 @@ function EditInvoiceStatusPage() {
   }, [invoiceItems]);
 
   const handleSubmit = async () => {
-    const updateRequestByAdminDto =
-      brigadierId === null || brigadierId === undefined
-        ? { status: statusId }
-        : { brigadier: brigadierId === -1 ? null : brigadierId, status: statusId };
-    const updateDto = {
-      id: params.id,
-      updateRequestByAdminDto,
-    };
-    const res = await dispatch(updateByAdmin(updateDto));
-    if (!res.error) {
+    let updateScanResult = null;
+    if (fileInfo?.length > 0) {
+      const formData = new FormData();
+      formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);
+      updateScanResult = await dispatch(uploadScan({ id: Number(params.id), file: formData }));
+    } else {
+      toast.error("Загрузите скан счета");
+    }
+    if (updateScanResult && !updateScanResult.error) {
       navigate(-1);
     }
   };

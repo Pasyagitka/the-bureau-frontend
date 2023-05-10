@@ -1,7 +1,7 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, getItems, update } from "@/redux/actions/invoices";
+import { get, getItems, updateStatus } from "@/redux/actions/invoices";
 import { InvoiceStatus, invoiceStatusesTitles } from "@/types/enum/invoice-statuses.enum";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -28,7 +28,7 @@ function ApproveInvoiceStatusPage() {
   }, [invoice]);
 
   const handleSubmit = async () => {
-    const res = await dispatch(update({ id: params.id, updateInvoiceDto: { status: statusId } }));
+    const res = await dispatch(updateStatus({ id: params.id, updateInvoiceDto: { status: statusId } }));
     if (!res.error) {
       navigate(-1);
     }

@@ -11,8 +11,11 @@ import {
   GET_INVOICE_ITEMS,
   GET_INVOICE_FILE,
   DELETE_INVOICE,
-  EDIT_INVOICE,
   GET_INVOICE,
+  EDIT_INVOICE_ITEMS,
+  UPLOAD_SCAN,
+  UPLOAD_RECEIPT,
+  UPDATE_STATUS,
 } from "../actionTypes/invoices";
 import { getToken } from "./auth";
 
@@ -103,16 +106,73 @@ export const remove = createAsyncThunk(DELETE_INVOICE, async (id: number, { reje
     return rejectWithValue(error.response.data);
   }
 });
-export const update = createAsyncThunk(
-  EDIT_INVOICE,
+
+export const updateItems = createAsyncThunk(
+  EDIT_INVOICE_ITEMS,
   async ({ id, updateInvoiceDto }: { id: number; updateInvoiceDto: unknown }, { rejectWithValue }) => {
     try {
-      const request = await axios.patch(invoiceLinks.update(id), updateInvoiceDto, {
+      const request = await axios.patch(invoiceLinks.updateItems(id), updateInvoiceDto, {
         headers: {
           Authorization: `Bearer ${getToken()}`,
         },
       });
       toast.success(`Изменения сохранены`);
+      return request.data;
+    } catch (error) {
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const updateStatus = createAsyncThunk(
+  UPDATE_STATUS,
+  async ({ id, updateInvoiceDto }: { id: number; updateInvoiceDto: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.patch(invoiceLinks.updateStatus(id), updateInvoiceDto, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+        },
+      });
+      toast.success(`Изменения сохранены`);
+      return request.data;
+    } catch (error) {
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const uploadScan = createAsyncThunk(
+  UPLOAD_SCAN,
+  async ({ id, file }: { id: number; file: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.patch(invoiceLinks.uploadScan(id), file, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success(`Скан счета загружен`);
+      return request.data;
+    } catch (error) {
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const uploadReceipt = createAsyncThunk(
+  UPLOAD_RECEIPT,
+  async ({ id, file }: { id: number; file: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.patch(invoiceLinks.uploadReceipt(id), file, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success(`Чек по счету загружен`);
       return request.data;
     } catch (error) {
       toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);

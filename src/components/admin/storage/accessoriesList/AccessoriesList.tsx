@@ -92,6 +92,11 @@ function AccessoriesList({
             <Cell dataKey="quantity_in_stock" />
           </Column>
 
+          <Column flexGrow={1} sortable>
+            <HeaderCell>Количество в счетах</HeaderCell>
+            <Cell dataKey="quantity_reserved" />
+          </Column>
+
           <Column flexGrow={2}>
             <HeaderCell>Оборудование</HeaderCell>
             <Cell style={{ padding: "6px" }}>
