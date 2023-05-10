@@ -70,7 +70,7 @@ function EditInvoicePage() {
     ));
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5 mx-auto">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg md:w-3/4 min-h-80vh container md:p-4 md:mb-5 mx-auto">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
@@ -80,7 +80,7 @@ function EditInvoicePage() {
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие по счету</h3>
       </div>
-      <div className="items-center w-full h-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
+      <div className="items-center w-full h-full md:p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} autoHeight>
           <Column width={150}>
             <HeaderCell>Наименование</HeaderCell>
