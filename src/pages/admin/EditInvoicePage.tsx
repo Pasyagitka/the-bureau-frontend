@@ -1,7 +1,7 @@
 import IconButton from "@/elements/buttons/IconButton";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getFile, getItems, uploadScan } from "@/redux/actions/invoices";
+import { get, getFile, getItems, uploadScan } from "@/redux/actions/invoices";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { InputNumber, Table, Uploader } from "rsuite";
@@ -9,7 +9,6 @@ import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
 import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
-import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 import { toast } from "react-toastify";
 
 const { Column, HeaderCell, Cell } = Table;
@@ -23,13 +22,14 @@ function EditInvoiceStatusPage() {
   const [statusId, setStatus] = useState<string | null>();
 
   const { invoiceItems } = useAppSelector((state) => state.invoices);
+  const { invoice } = useAppSelector((state) => state.invoices);
   const [files, setFiles] = useState([]);
-  const existingRequestReports = [];
 
   const [fileInfo, setFileInfo] = useState(null);
 
   useEffect(() => {
     dispatch(getItems(Number(params.id)));
+    dispatch(get(Number(params.id)));
   }, [dispatch]);
 
   useEffect(() => {
@@ -38,6 +38,7 @@ function EditInvoiceStatusPage() {
   }, [invoiceItems]);
 
   const handleSubmit = async () => {
+    // TODO toast loading promise
     let updateScanResult = null;
     if (fileInfo?.length > 0) {
       const formData = new FormData();
@@ -141,8 +142,8 @@ function EditInvoiceStatusPage() {
         </div>
         <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
           <h1 className="text-gray-600 w-full text-center">Текущий скан счета</h1>
-          {existingRequestReports && existingRequestReports.length > 0 ? (
-            <PhotoGallery images={existingRequestReports} />
+          {invoice.scanUrl ? (
+            <dt className="text-sm font-medium text-gray-500">Загружен</dt>
           ) : (
             <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
           )}
@@ -152,10 +153,9 @@ function EditInvoiceStatusPage() {
           <div className="flex">
             <div className="inline-flex items-center space-x-4">
               <Uploader
-                multiple
                 listType="picture"
                 fileList={files}
-                onChange={setFiles}
+                onChange={setFileInfo}
                 action=""
                 defaultFileList={files}
                 autoUpload={false}
