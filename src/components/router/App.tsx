@@ -44,6 +44,7 @@ import EditInvoicePage from "@/pages/brigadier/EditInvoicePage";
 import InvoiceDetailsPage from "@/pages/brigadier/InvoiceDetailsPage";
 import CommitPaidInvoicePage from "@/pages/brigadier/CommitPaidInvoicePage";
 import ApproveInvoiceStatusPage from "@/pages/admin/ApproveInvoiceStatusPage";
+import StatisticsPage from "@/pages/admin/StatisticsPage";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -71,6 +72,7 @@ function App() {
           >
             <Route path="" element={<Navigate to="requests" />} />
             <Route path="dashboard" element={<DashboardPage />} />
+            <Route path="statistics" element={<StatisticsPage />} />
             <Route path="home" element={<DashboardPage />} />
             <Route path="brigadiers" element={<BrigadiersPage />} />
             <Route path="brigadiers/:id" element={<BrigadierDetailsPage />} />
