@@ -5,7 +5,6 @@ function HeaderLayout() {
   return (
     <div className="min-h-screen h-max">
       <Header />
-      {/* <GradientBackground /> */}
       <Outlet />
     </div>
   );
