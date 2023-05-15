@@ -38,7 +38,7 @@ function BrigadierList({
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
           <p className="text-4xl font-bold text-gray-800 mb-4">Бригадир</p>
-          <p className="text-2xl font-light text-gray-400">Описание...</p>
+          <p className="text-2xl font-light text-gray-400">Общее количество бригадиров: {brigadiers.length}.</p>
         </div>
       </div>
       <div className="my-10">

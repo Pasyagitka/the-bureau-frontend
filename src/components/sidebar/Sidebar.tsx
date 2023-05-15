@@ -13,7 +13,6 @@ function Sidebar() {
       <div className="overflow-y-auto py-4 px-3 bg-white shadow-lg rounded">
         <ul className="space-y-2">
           <SidebarItem title="Главная" to="/admin/dashboard" icon={homeIcon} />
-          <SidebarItem title="Статистика" to="/admin/statistics" icon={homeIcon} />
           <SidebarItem title="Заявки" to="/admin/requests" icon={documentIcon} />
           <SidebarItem title="Склад" to="/admin/storage" icon={warehouseIcon} />
           <SidebarItem title="Клиенты" to="/admin/clients" icon={clientIcon} />

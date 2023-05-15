@@ -40,7 +40,7 @@ function ClientList({
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
           <p className="text-4xl font-bold text-gray-800 mb-4">Клиенты</p>
-          <p className="text-2xl font-light text-gray-400">Описание...</p>
+          <p className="text-2xl font-light text-gray-400">Общее количество клиетов: {clients.length}.</p>
         </div>
         <div className="text-end">
           <SearchInput />

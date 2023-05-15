@@ -14,6 +14,7 @@ function Schedule() {
 
   return (
     <div className="w-full">
+      <p className="text-4xl font-bold text-gray-800 mb-4">Расписание</p>
       <Calendar calendar={calendar} compact={false} />
     </div>
   );

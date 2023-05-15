@@ -112,4 +112,7 @@ export const statisticsLinks = {
   getClientsCount: "/api/statistics/client",
   getRequestsStat: "/api/statistics/request",
   getInvoicesStat: "/api/statistics/invoice",
+  getBrigadiersTop: "/api/statistics/brigadier/top",
+  getInstalledEquipment: "/api/statistics/equipment/installed",
+  getSoldAccessories: "/api/statistics/accessories/sold",
 };

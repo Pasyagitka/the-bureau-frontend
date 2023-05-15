@@ -4,27 +4,18 @@ import Pie from "@visx/shape/lib/shapes/Pie";
 import { Group } from "@visx/group";
 import { Text } from "@visx/text";
 
-const chartData = [
-  { name: "В обработке", miniTitle: 200, color: "rgba(93,30,91,1)", centerTitle: 1.48 },
-  { name: "Принята бригадиром", miniTitle: 5, color: "rgba(93,30,91,0.8)", centerTitle: 37.6 },
-  { name: "Выполнена", miniTitle: 0.005, color: "rgba(93,30,91,0.6)", centerTitle: 37363 },
-  { name: "Подтверждена", miniTitle: 0.005, color: "rgba(93,30,91,0.6)", centerTitle: 37363 },
-];
-
 const defaultMargin = { top: 20, right: 20, bottom: 20, left: 20 };
 
 export type PieProps = {
+  chartData: Array<unknown>;
   width: number;
   height: number;
   margin?: typeof defaultMargin;
   animate?: boolean;
 };
 
-export default function PieChart({ width, height, margin = defaultMargin }: PieProps) {
+export default function PieChart({ chartData, total, width, height, margin = defaultMargin }: PieProps) {
   if (width < 10) return null;
-
-  const innerWidth = width - margin.left - margin.right;
-  const innerHeight = height - margin.top - margin.bottom;
 
   const [active, setActive] = useState(null);
   const half = width / 2;
@@ -36,10 +27,10 @@ export default function PieChart({ width, height, margin = defaultMargin }: PieP
       <Group top={half} left={half}>
         <Pie
           data={chartData}
-          pieValue={(data) => data.miniTitle * data.centerTitle}
+          pieValue={(data) => data.count * data.centerTitle}
           outerRadius={half}
           innerRadius={({ data }) => {
-            const size = active && data.name === active.name ? 68 : 50;
+            const size = active && data.label === active.label ? 68 : 50;
             return half - size;
           }}
           cornerRadius={3}
@@ -50,22 +41,22 @@ export default function PieChart({ width, height, margin = defaultMargin }: PieP
               const [centroidX, centroidY] = pie.path.centroid(arc);
               return (
                 <g
-                  key={arc.data.name}
+                  key={arc.data.label}
                   onMouseEnter={() => setActive(arc.data)}
                   onMouseLeave={() => setActive(null)}
                   style={{ cursor: "pointer" }}
                 >
                   <path d={pie.path(arc)} fill={arc.data.color} />
                   <Text
+                    className="text-xs"
                     fill="white"
                     x={centroidX}
                     y={centroidY}
                     dy=".33em"
-                    fontSize={15}
                     textAnchor="middle"
                     pointerEvents="none"
                   >
-                    {arc.data.name}
+                    {arc.data.label}
                   </Text>
                 </g>
               );
@@ -75,23 +66,29 @@ export default function PieChart({ width, height, margin = defaultMargin }: PieP
 
         {active ? (
           <>
-            <Text textAnchor="middle" fill="#111" fontSize={40} dy={0}>
-              {`${Math.floor(active.miniTitle)}`}
+            <Text textAnchor="middle" fill="#111" className="text-lg" dy={0}>
+              {`${Math.floor(active.count)}`}
             </Text>
 
-            <Text textAnchor="middle" fill={active.color} fontSize={20} dy={40}>
-              {`${active.name}`}
+            <Text textAnchor="middle" fill={active.color} className="text-sm" dy={40}>
+              {`${active.label}`}
             </Text>
           </>
         ) : (
           <>
-            <Text textAnchor="middle" fill="#111" fontSize={40} dy={0}>
-              {`всего ${chartData.length}`}
-            </Text>
+            {total > 0 ? (
+              <Text textAnchor="middle" fill="#111" classlabel="text-lg" dy={0}>
+                {`всего ${total}`}
+              </Text>
+            ) : (
+              <Text textAnchor="middle" fill="#111" classlabel="text-lg" dy={0}>
+                Нет данных за период
+              </Text>
+            )}
 
-            <Text textAnchor="middle" fill="#888" fontSize={20} dy={40}>
+            {/* <Text textAnchor="middle" fill="#888" classlabel="text-md" dy={40}>
               количество заявок по статусам
-            </Text>
+            </Text> */}
           </>
         )}
       </Group>
