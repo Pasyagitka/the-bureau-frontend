@@ -8,6 +8,7 @@ import invoicesSlice from "./invoicesSlice";
 import requestReportSlice from "./requestReportSlice";
 import requestsSlice from "./requestsSlice";
 import stagesSlice from "./stagesSlice";
+import statisticsSlice from "./statisticsSlice";
 import toolsReducer from "./toolsSlice";
 // import appReducer from "./appSlice";
 
@@ -22,6 +23,7 @@ const rootReducer = combineReducers({
   requests: requestsSlice,
   requestReports: requestReportSlice,
   invoices: invoicesSlice,
+  statistics: statisticsSlice,
 });
 
 export default rootReducer;

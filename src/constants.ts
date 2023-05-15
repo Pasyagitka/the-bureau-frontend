@@ -106,3 +106,10 @@ export const userLinks = {
   activate: (id: number) => `/api/user/${id}/activate`,
   deactivate: (id: number) => `/api/user/${id}/deactivate`,
 };
+
+export const statisticsLinks = {
+  getBrigadiersCount: "/api/statistics/brigadier",
+  getClientsCount: "/api/statistics/client",
+  getRequestsStat: "/api/statistics/request",
+  getInvoicesStat: "/api/statistics/invoice",
+};
