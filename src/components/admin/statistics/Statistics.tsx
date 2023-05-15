@@ -86,25 +86,25 @@ function Statistics() {
                   {
                     label: requestsStat[1].label,
                     count: requestsStat[1].count,
-                    color: "rgba(93,30,91,0.8)",
+                    color: "rgba(132, 204, 22, 0.8)",
                     centerTitle: requestsStat[1].count,
                   },
                   {
                     label: requestsStat[2].label,
                     count: requestsStat[2].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(249, 115, 22, 0.8)",
                     centerTitle: requestsStat[2].count,
                   },
                   {
                     label: requestsStat[3].label,
                     count: requestsStat[3].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(234, 179, 8, 0.8)",
                     centerTitle: requestsStat[3].count,
                   },
                   {
                     label: requestsStat[4].label,
                     count: requestsStat[4].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(59, 130, 246, 0.8)",
                     centerTitle: requestsStat[4].count,
                   },
                 ]}
@@ -122,25 +122,25 @@ function Statistics() {
                   {
                     label: invoicesStat[1].label,
                     count: invoicesStat[1].count,
-                    color: "rgba(93,30,91,0.8)",
+                    color: "rgba(132, 204, 22, 0.8)",
                     centerTitle: invoicesStat[1].count,
                   },
                   {
                     label: invoicesStat[2].label,
                     count: invoicesStat[2].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(249, 115, 22, 0.8)",
                     centerTitle: invoicesStat[2].count,
                   },
                   {
                     label: invoicesStat[3].label,
                     count: invoicesStat[3].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(234, 179, 8, 0.8)",
                     centerTitle: invoicesStat[3].count,
                   },
                   {
                     label: invoicesStat[4].label,
                     count: invoicesStat[4].count,
-                    color: "rgba(93,30,91,0.6)",
+                    color: "rgba(59, 130, 246, 0.8)",
                     centerTitle: invoicesStat[4].count,
                   },
                   {
