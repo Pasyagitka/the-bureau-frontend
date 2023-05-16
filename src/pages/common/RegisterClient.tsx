@@ -106,7 +106,7 @@ function RegisterClient() {
                           handleSubmit();
                         }}
                       >
-                        Зарегистироваться
+                        Зарегистрироваться
                       </button>
                     </div>
                     <div className="w-1/2 text-center">

@@ -4,7 +4,7 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getFile, getItems, uploadScan } from "@/redux/actions/invoices";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { InputNumber, Table, Uploader } from "rsuite";
+import { Table, Uploader } from "rsuite";
 import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
@@ -84,22 +84,7 @@ function EditInvoiceStatusPage() {
 
           <Column flexGrow={1} align="center" fixed>
             <HeaderCell>Количество по счету</HeaderCell>
-            <Cell style={{ padding: "5px" }}>
-              {(rowData) => (
-                <InputNumber
-                  key={rowData.id}
-                  placeholder={rowData.accessory.name}
-                  defaultValue={rowData.quantity}
-                  max={rowData.accessory.quantity_in_stock}
-                  min={0}
-                  // onChange={(value) => {
-                  //   if (Number(value) === 0) invoiceAccessoryList.delete(rowData.id);
-                  //   else invoiceAccessoryList.set(rowData.id, value);
-                  //   console.log(invoiceAccessoryList);
-                  // }}
-                />
-              )}
-            </Cell>
+            <Cell>{(rowData) => <p>{rowData.quantity}</p>}</Cell>
           </Column>
 
           <Column flexGrow={1}>

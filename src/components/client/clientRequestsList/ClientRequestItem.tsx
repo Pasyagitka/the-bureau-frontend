@@ -3,6 +3,7 @@ import BrigadierCompact from "@/elements/brigadierCompact/BrigadierCompact";
 import RequestTimeline from "@/elements/requestTimeline/RequestTimeline";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { ClientRequestDto } from "@/types/dto/client/clientRequestDto";
+import DayJs from "react-dayjs";
 
 function ClientRequestItem({ request }: { request: ClientRequestDto }) {
   return (
@@ -16,6 +17,9 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
               request.address?.flat ?? ""
             }`}
+          </h1>
+          <h1 className="text-gray-900 font-bold md:text-2xl">
+            <DayJs format="DD.MM.YYYY">{request.mountingDate}</DayJs>
           </h1>
           <p className="mt-2 text-gray-600 text-sm">{request.comment}</p>
           <div className="flex flex-wrap items-center gap-2 my-5">
