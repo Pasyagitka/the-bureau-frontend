@@ -34,7 +34,7 @@ export const create = createAsyncThunk(
       toast.success("Заявка создана");
       return response.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -127,7 +127,7 @@ export const updateByAdmin = createAsyncThunk(
       toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -148,7 +148,7 @@ export const updateByBrigadier = createAsyncThunk(
       toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }

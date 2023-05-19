@@ -25,7 +25,7 @@ export const create = createAsyncThunk(
       toast.success("Оборудование добавлено");
       return response.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -60,7 +60,7 @@ export const remove = createAsyncThunk(DELETE_EQUIPMENT, async (id: number, { re
 
     return request.data;
   } catch (error) {
-    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -77,7 +77,7 @@ export const update = createAsyncThunk(
       toast.success("Изменения сохранены");
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
 
       return rejectWithValue(error.response.data);
     }

@@ -40,7 +40,9 @@ export function signupClient(registerClientDto: CreateClientDto) {
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        toast.error(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
+        debugger;
+        const errorMessage = error.response.data.message?.toString();
+        toast.error(errorMessage || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };
@@ -60,7 +62,9 @@ export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        toast.error(error.response.data.message || "Ошибка регистрации. Попробуйте снова позже");
+        debugger;
+        const errorMessage = error.response.data.message?.toString();
+        toast.error(errorMessage || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };
@@ -80,7 +84,8 @@ export function loginUser({ username, password }: { username: string; password: 
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        toast.error(error.response.data.message || "Ошибка входа в аккаунт. Попробуйте снова позже");
+        const errorMessage = error.response.data.message?.toString();
+        toast.error(errorMessage || "Ошибка входа в аккаунт. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
       });
   };

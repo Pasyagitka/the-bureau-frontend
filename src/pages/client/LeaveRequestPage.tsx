@@ -76,7 +76,7 @@ function LeaveRequestPage() {
     const requestEquipment = Array.from(requestEquipmentList, (item) => ({ equipment: item[0], quantity: +item[1] }));
     console.log(requestEquipment);
     const request: CreateRequestDto = {
-      mountingDate: dates.startDate,
+      mountingDate: dates,
       // clientDateStart: dates.startDate,
       // clientDateEnd: dates.endDate,
       comment: comment || null,

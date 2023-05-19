@@ -8,6 +8,8 @@ const path = require("path");
 const dev = require("./webpack.dev");
 const assets = require("./webpack.common").assetsPath;
 
+const protocol = process.env.HTTPS === "true" ? "https" : "http";
+
 module.exports = (env, argv) => {
   const devConfig = dev(env, argv);
   const { proxy } = env;
@@ -18,6 +20,8 @@ module.exports = (env, argv) => {
   // remove plugins because these aren't required for devServer
   remove((a) => a instanceof CopyWebpackPlugin);
   remove((a) => a instanceof MiniCssExtractPlugin);
+
+  console.log(protocol);
 
   /** @type {import('webpack').Configuration} */
   const extendedConfig = {
@@ -42,6 +46,7 @@ module.exports = (env, argv) => {
           modules: false,
         },
       },
+      https: true,
       onBeforeSetupMiddleware: (devServer) =>
         webpackMockServer.use(devServer.app, {
           entry: ["webpack.mock.ts"],

@@ -87,7 +87,7 @@ export const create = createAsyncThunk(CREATE_INVOICE, async (data: unknown, { r
     toast.success(`Счет создан`);
     return response.data;
   } catch (error) {
-    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -102,7 +102,7 @@ export const remove = createAsyncThunk(DELETE_INVOICE, async (id: number, { reje
     toast.success(`Счет удален`);
     return request.data;
   } catch (error) {
-    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -119,7 +119,7 @@ export const updateItems = createAsyncThunk(
       toast.success(`Изменения сохранены`);
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -137,7 +137,7 @@ export const updateStatus = createAsyncThunk(
       toast.success(`Изменения сохранены`);
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -156,7 +156,7 @@ export const uploadScan = createAsyncThunk(
       toast.success(`Скан счета загружен`);
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
@@ -175,7 +175,7 @@ export const uploadReceipt = createAsyncThunk(
       toast.success(`Чек по счету загружен`);
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }

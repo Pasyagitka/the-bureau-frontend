@@ -15,7 +15,7 @@ export const activate = createAsyncThunk(ACTIVATE_USER, async (id: number, { rej
     toast.success("Пользователь активирован");
     return request.data;
   } catch (error) {
-    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -30,7 +30,7 @@ export const deactivate = createAsyncThunk(DEACTIVATE_USER, async (id: number, {
     toast.success("Пользователь деактивирован");
     return request.data;
   } catch (error) {
-    toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+    toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
     return rejectWithValue(error.response.data);
   }
 });
@@ -47,7 +47,7 @@ export const changePassword = createAsyncThunk(
       toast.success("Пароль изменен");
       return request.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }

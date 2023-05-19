@@ -4,6 +4,7 @@ import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useAppDispatch();
@@ -34,7 +35,9 @@ export default function Login() {
   }, [user]);
 
   const handleSubmit = () => {
-    dispatch(loginUser({ username, password }));
+    if (!username || !password) {
+      toast.error("Укажите логин и пароль.");
+    } else dispatch(loginUser({ username, password }));
   };
 
   return (

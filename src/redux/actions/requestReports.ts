@@ -27,7 +27,7 @@ export const patch = createAsyncThunk(
       toast.success(`Отчетность обновлена`);
       return response.data;
     } catch (error) {
-      toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
       return rejectWithValue(error.response.data);
     }
   }
