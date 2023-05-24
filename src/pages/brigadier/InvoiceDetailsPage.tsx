@@ -1,10 +1,12 @@
 import { useEffect } from "react";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getItems } from "@/redux/actions/invoices";
+import { get, getItems } from "@/redux/actions/invoices";
 import { useNavigate, useParams } from "react-router-dom";
-import { Table } from "rsuite";
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
+import downloadIcon from "icons/download.png";
+import IconButton from "@/elements/buttons/IconButton";
+import { Table } from "rsuite";
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -13,12 +15,17 @@ function InvoiceDetailsPage() {
   const dispatch = useAppDispatch();
   const params = useParams();
 
-  const { invoiceItems } = useAppSelector((state) => state.invoices);
+  const { invoice, invoiceItems } = useAppSelector((state) => state.invoices);
   const existingRequestReports = [];
 
   useEffect(() => {
     dispatch(getItems(Number(params.id)));
+    dispatch(get(Number(params.id)));
   }, [dispatch]);
+
+  const handleInvoiceDownload = (url: string) => {
+    window.open(url);
+  };
 
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5 mx-auto flex flex-col">
@@ -53,6 +60,15 @@ function InvoiceDetailsPage() {
             <Cell>{(rowData) => <p>{rowData.price}р/ед</p>}</Cell>
           </Column>
         </Table>
+        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
+          <h1 className="text-gray-600 w-full text-center">Просмотреть скан счета</h1>
+          <IconButton
+            icon={downloadIcon}
+            alt="Download"
+            isLink={false}
+            onClick={() => handleInvoiceDownload(invoice.scanUrl)}
+          />
+        </div>
         <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
           <h1 className="text-gray-600 w-full text-center">Чек по счету</h1>
           {existingRequestReports && existingRequestReports.length > 0 ? (
