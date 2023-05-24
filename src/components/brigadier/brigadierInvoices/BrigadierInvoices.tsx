@@ -33,7 +33,7 @@ function BrigadierInvoices({
         key={invoice.id}
         invoice={invoice}
         handleClick={() => handleRemove(invoice.id)}
-        handleDownload={() => handleDownload(invoice.id)}
+        handleDownload={() => handleDownload(invoice.scanUrl)}
         clickTitle="удалить"
         hasApproveButton
         approveLink={`invoices/${invoice.id}/commit`}
@@ -52,7 +52,7 @@ function BrigadierInvoices({
         </div>
       </div>
       <p className="md:text-xl text-sm font-light text-gray-400">
-        Запрошенные мной счета. Пока не подтвердены администратором, можно редактировать содержимое
+        Запрошенные мной счета. Пока не подтверждены администратором, можно редактировать содержимое
       </p>
       <div className="grid grid-cols-1 gap-10">
         {listItems.length > 0 ? (
