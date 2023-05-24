@@ -8,7 +8,6 @@ import { Table, Uploader } from "rsuite";
 import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
-import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
 import { toast } from "react-toastify";
 
 const { Column, HeaderCell, Cell } = Table;
@@ -138,18 +137,15 @@ function EditInvoiceStatusPage() {
           <div className="flex">
             <div className="inline-flex items-center space-x-4">
               <Uploader
-                listType="picture"
+                listType="picture-text"
                 fileList={files}
+                accept="application/pdf"
                 onChange={setFileInfo}
                 action=""
                 defaultFileList={files}
                 autoUpload={false}
                 draggable
-              >
-                <button type="button">
-                  <CameraRetroIcon />
-                </button>
-              </Uploader>
+              />
             </div>
           </div>
         </div>
