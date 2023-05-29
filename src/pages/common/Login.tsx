@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useAppDispatch, useAppSelector } from "@/hooks";
+import useDidMountEffect from "@/hooks/useDidMountEffect";
 import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
@@ -16,7 +17,7 @@ export default function Login() {
 
   const user = useAppSelector((state) => state.auth.user);
 
-  useEffect(() => {
+  useDidMountEffect(() => {
     dispatch(getInfo());
   }, [loggedIn]);
 

@@ -7,23 +7,25 @@ import { PersistGate } from "redux-persist/integration/react";
 import { CustomProvider } from "rsuite";
 import { ruRU } from "rsuite/esm/locales";
 import { ToastContainer } from "react-toastify";
+import axios from "axios";
 import store, { persistor } from "./redux/store";
 import App from "./components/router/App";
+import { deleteToken } from "./redux/actions/auth";
 
-// axios.interceptors.response.use(
-//   (response) => response,
-//   async (error) => {
-//     if (error.response.status === 401) {
-//       await persistor.purge();
-//       deleteToken();
-//       (window as Window).location = "/login";
-//     } else if (error.response.status === 504) {
-//       (window as Window).location = "/gatewayTimeout";
-//     } else {
-//       return Promise.reject(error);
-//     }
-//   }
-// );
+axios.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    if (error.response.status === 401) {
+      await persistor.purge();
+      deleteToken();
+      (window as Window).location = "/login";
+    } else if (error.response.status === 504) {
+      (window as Window).location = "/gatewayTimeout";
+    } else {
+      return Promise.reject(error);
+    }
+  }
+);
 
 function AppContainer() {
   return (
