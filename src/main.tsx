@@ -12,6 +12,8 @@ import store, { persistor } from "./redux/store";
 import App from "./components/router/App";
 import { deleteToken } from "./redux/actions/auth";
 
+axios.defaults.baseURL = process.env.API_BASE_URL;
+
 axios.interceptors.response.use(
   (response) => response,
   async (error) => {
