@@ -2,11 +2,13 @@ function TimeLineElement({
   text,
   date,
   isActive,
+  isAnimated,
   isLast,
 }: {
   text: string;
   date?: string;
   isActive?: boolean;
+  isAnimated?: boolean;
   isLast?: boolean;
 }) {
   return (
@@ -15,7 +17,7 @@ function TimeLineElement({
         <div
           className={`flex z-10 justify-center items-center -translate-x-3 md:transfrom-none w-6 h-6 rounded-full ring-0 ring-white sm:ring-8 shrink-0 ${
             isActive ? "bg-lime-300" : "bg-gray-300"
-          }`}
+          } ${isAnimated ? "animate-bounce" : ""}`}
         >
           <svg
             aria-hidden="true"
@@ -42,6 +44,7 @@ function TimeLineElement({
 
 TimeLineElement.defaultProps = {
   isActive: false,
+  isAimated: false,
   isLast: false,
   date: null,
 };

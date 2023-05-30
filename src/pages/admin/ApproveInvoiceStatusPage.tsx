@@ -1,11 +1,11 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
+import PhotoItem from "@/elements/photoGallery/PhotoReportItem";
 import Select from "@/elements/select/Select";
 import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getItems, updateStatus } from "@/redux/actions/invoices";
 import { InvoiceStatus, invoiceStatusesTitles } from "@/types/enum/invoice-statuses.enum";
 import { useState, useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 
 function ApproveInvoiceStatusPage() {
   const navigate = useNavigate();
@@ -17,6 +17,7 @@ function ApproveInvoiceStatusPage() {
   const statuses = Object.values(InvoiceStatus).map((i) => ({ value: i, label: invoiceStatusesTitles[i] }));
   const { invoice } = useAppSelector((state) => state.invoices);
   const { requestReports } = useAppSelector((state) => state.requestReports);
+  const existingInvoiceReceipts = useAppSelector((state) => state.invoices.invoice);
 
   useEffect(() => {
     dispatch(getItems(Number(params.id)));
@@ -42,8 +43,8 @@ function ApproveInvoiceStatusPage() {
       </div>
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-900 pb-2">Чек для счета</h3>
-        {requestReports && requestReports.length > 0 ? (
-          <PhotoGallery images={requestReports} />
+        {existingInvoiceReceipts?.receiptUrl ? (
+          <PhotoItem src={existingInvoiceReceipts.receiptUrl} />
         ) : (
           <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
         )}

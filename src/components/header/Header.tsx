@@ -12,7 +12,7 @@ function Header() {
         </span>
         <span
           className="max-w-lg font-sans text-3xl font-bold tracking-tight sm:text-4xl sm:leading-none hidden md:block"
-          style={{ color: "#505e67", fontFamily: "Wix Madefor Text', sans-serif;" }}
+          style={{ color: "#505e67", fontFamily: "Wix Madefor Text', sans-serif" }}
         >
           LeBrama Mounting Bureau
         </span>

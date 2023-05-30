@@ -8,7 +8,7 @@ function RequestTimeline({ status }: { status: string }) {
     case RequestStatus.INPROCESSING: {
       elements = (
         <>
-          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive isAnimated />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
@@ -20,7 +20,7 @@ function RequestTimeline({ status }: { status: string }) {
       elements = (
         <>
           <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
-          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive isAnimated />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
         </>
@@ -32,7 +32,7 @@ function RequestTimeline({ status }: { status: string }) {
         <>
           <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
-          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} isActive />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} isActive isAnimated />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isLast />
         </>
       );
@@ -44,7 +44,7 @@ function RequestTimeline({ status }: { status: string }) {
           <TimeLineElement text={requestStatusesTitles[RequestStatus.INPROCESSING]} isActive />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.ACCEPTED]} isActive />
           <TimeLineElement text={requestStatusesTitles[RequestStatus.COMPLETED]} isActive />
-          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isActive isLast />
+          <TimeLineElement text={requestStatusesTitles[RequestStatus.APPROVED]} isActive isLast isAnimated />
         </>
       );
       break;

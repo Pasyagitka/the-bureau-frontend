@@ -42,22 +42,22 @@ function InvoiceDetailsPage() {
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }}>
           <Column width={150}>
             <HeaderCell>Наименование</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.accessory?.name}</p>}</Cell>
           </Column>
 
           <Column flexGrow={1}>
             <HeaderCell>Артикул</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.sku}</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.accessory?.sku}</p>}</Cell>
           </Column>
 
           <Column flexGrow={1} align="center" fixed>
             <HeaderCell>Количество</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.quantity}</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData?.quantity}</p>}</Cell>
           </Column>
 
           <Column flexGrow={1}>
             <HeaderCell>Цена</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData?.price}р/ед</p>}</Cell>
           </Column>
         </Table>
         <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
@@ -66,7 +66,7 @@ function InvoiceDetailsPage() {
             icon={downloadIcon}
             alt="Download"
             isLink={false}
-            onClick={() => handleInvoiceDownload(invoice.scanUrl)}
+            onClick={() => handleInvoiceDownload(invoice?.scanUrl)}
           />
         </div>
         <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">

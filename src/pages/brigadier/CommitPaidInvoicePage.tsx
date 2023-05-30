@@ -1,15 +1,12 @@
 /* eslint-disable consistent-return */
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { getAll as getAllRequestReports } from "@/redux/actions/requestReports";
-import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
-import { Uploader } from "rsuite";
-import CameraRetroIcon from "@rsuite/icons/legacy/CameraRetro";
-import { uploadReceipt } from "@/redux/actions/invoices";
+import { get, uploadReceipt } from "@/redux/actions/invoices";
 import { toast } from "react-toastify";
+import Avatar from "@/elements/avatar/Avatar";
+import PhotoItem from "@/elements/photoGallery/PhotoReportItem";
 
 function CommitPaidInvoicePage() {
   const dispatch = useAppDispatch();
@@ -18,11 +15,11 @@ function CommitPaidInvoicePage() {
 
   useEffect(() => {
     dispatch(get(Number(params.id)));
-    dispatch(getAllRequestReports(Number(params.id)));
+    // dispatch(getAllRequestReports(Number(params.id)));
   }, [dispatch]);
 
-  const existingRequestReports = useAppSelector((state) => state.requestReports.requestReports);
-  const [files, setFiles] = useState([]);
+  const existingInvoiceReceipts = useAppSelector((state) => state.invoices.invoice);
+  // const [files, setFiles] = useState([]);
   const [fileInfo, setFileInfo] = useState(null);
 
   const handleSubmit = async () => {
@@ -52,8 +49,8 @@ function CommitPaidInvoicePage() {
         <div className="space-y-6 bg-white">
           <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
             <h1 className="text-gray-600 w-full text-center">Чек по счету</h1>
-            {existingRequestReports && existingRequestReports.length > 0 ? (
-              <PhotoGallery images={existingRequestReports} />
+            {existingInvoiceReceipts?.receiptUrl ? (
+              <PhotoItem src={existingInvoiceReceipts.receiptUrl} />
             ) : (
               <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
             )}
@@ -63,7 +60,8 @@ function CommitPaidInvoicePage() {
             <h1 className="text-gray-600 w-full text-center">Обновить чек</h1>
             <div className="flex">
               <div className="inline-flex items-center space-x-4">
-                <Uploader
+                <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
+                {/* <Uploader
                   multiple
                   listType="picture"
                   fileList={files}
@@ -76,7 +74,7 @@ function CommitPaidInvoicePage() {
                   <button type="button">
                     <CameraRetroIcon />
                   </button>
-                </Uploader>
+                </Uploader> */}
               </div>
             </div>
           </div>

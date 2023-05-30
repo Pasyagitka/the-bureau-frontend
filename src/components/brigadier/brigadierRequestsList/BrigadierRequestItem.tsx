@@ -9,6 +9,7 @@ import IconButton from "@/elements/buttons/IconButton";
 import dayjs from "dayjs";
 import DayJs from "react-dayjs";
 import { RequestStatus } from "@/types/enum/request-statuses.enum";
+import { Panel } from "rsuite";
 
 function BrigadierRequestItem({
   request,
@@ -58,8 +59,11 @@ function BrigadierRequestItem({
                 <RequestEquipmentList equipmentList={request.requestEquipment} />
               </div>
               <div className="w-full md:w-2/3">
-                <p className="mt-2 text-gray-600 text-sm text-center mb-4">Комплектующие</p>
-                <RequestAccessories accessories={request.requestAccessories} />
+                <Panel header="Комплектующие" collapsible bordered>
+                  <RequestAccessories accessories={request.requestAccessories} />
+                </Panel>
+                {/* <p className="mt-2 text-gray-600 text-sm text-center mb-4">Комплектующие</p>
+                <RequestAccessories accessories={request.requestAccessories} /> */}
               </div>
             </div>
           </div>

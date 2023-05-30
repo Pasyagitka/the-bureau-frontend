@@ -58,68 +58,70 @@ function AccessoriesList({
   return (
     <div className="-mx-4 sm:-mx-8 px-4 sm:px-8 py-4 overflow-x-auto">
       <div className="inline-block min-w-full shadow rounded-lg overflow-hidden">
-        <Table
-          height={500}
-          data={getData()}
-          sortColumn={sortColumn}
-          sortType={sortType}
-          onSortColumn={handleSortColumn}
-          className="font-sm w-full"
-          style={{ fontSize: "0.875rem" }}
-        >
-          <Column width={70} align="center" fixed sortable>
-            <HeaderCell>Id</HeaderCell>
-            <Cell dataKey="id" />
-          </Column>
+        {accessories && (
+          <Table
+            height={500}
+            data={getData()}
+            sortColumn={sortColumn}
+            sortType={sortType}
+            onSortColumn={handleSortColumn}
+            className="font-sm w-full"
+            style={{ fontSize: "0.875rem" }}
+          >
+            <Column width={70} align="center" fixed sortable>
+              <HeaderCell>Id</HeaderCell>
+              <Cell dataKey="id" />
+            </Column>
 
-          <Column flexGrow={1} fixed sortable>
-            <HeaderCell>Артикул</HeaderCell>
-            <Cell dataKey="sku" />
-          </Column>
+            <Column flexGrow={1} fixed sortable>
+              <HeaderCell>Артикул</HeaderCell>
+              <Cell dataKey="sku" />
+            </Column>
 
-          <Column flexGrow={2} sortable>
-            <HeaderCell>Наименование</HeaderCell>
-            <Cell dataKey="name" />
-          </Column>
+            <Column flexGrow={2} sortable fullText style={{ background: "white" }}>
+              <HeaderCell>Наименование</HeaderCell>
+              <Cell dataKey="name" />
+            </Column>
 
-          <Column flexGrow={1} sortable>
-            <HeaderCell>Цена за штуку (р)</HeaderCell>
-            <Cell dataKey="price" />
-          </Column>
+            <Column flexGrow={1} sortable>
+              <HeaderCell>Цена за штуку (р)</HeaderCell>
+              <Cell dataKey="price" />
+            </Column>
 
-          <Column flexGrow={1} sortable>
-            <HeaderCell>Количество на складе</HeaderCell>
-            <Cell dataKey="quantity_in_stock" />
-          </Column>
+            <Column flexGrow={1} sortable>
+              <HeaderCell>Количество на складе</HeaderCell>
+              <Cell dataKey="quantity_in_stock" />
+            </Column>
 
-          <Column flexGrow={1} sortable>
-            <HeaderCell>Количество в счетах</HeaderCell>
-            <Cell dataKey="quantity_reserved" />
-          </Column>
+            <Column flexGrow={1} sortable>
+              <HeaderCell>Количество в счетах</HeaderCell>
+              <Cell dataKey="quantity_reserved" />
+            </Column>
 
-          <Column flexGrow={2}>
-            <HeaderCell>Оборудование</HeaderCell>
-            <Cell style={{ padding: "6px" }}>
-              {(rowData) => (
-                <p>
-                  {rowData.equipment?.type} (№{rowData.equipment.id})
-                </p>
-              )}
-            </Cell>
-          </Column>
-          <Column flexGrow={1}>
-            <HeaderCell />
-            <Cell>{(rowData) => <IconButton icon={editIcon} alt="Edit" to={`update/${rowData.id}`} isLink />}</Cell>
-          </Column>
-          <Column flexGrow={1}>
-            <HeaderCell />
-            <Cell>
-              {(rowData) => (
-                <IconButton icon={cancelIcon} alt="Delete" isLink={false} onClick={() => handleRemove(rowData.id)} />
-              )}
-            </Cell>
-          </Column>
-        </Table>
+            <Column flexGrow={2}>
+              <HeaderCell>Оборудование</HeaderCell>
+              <Cell style={{ padding: "6px" }}>
+                {(rowData) => (
+                  <p>
+                    {rowData.equipment?.type} (№{rowData.equipment.id})
+                  </p>
+                )}
+              </Cell>
+            </Column>
+            <Column flexGrow={1}>
+              <HeaderCell />
+              <Cell>{(rowData) => <IconButton icon={editIcon} alt="Edit" to={`update/${rowData.id}`} isLink />}</Cell>
+            </Column>
+            <Column flexGrow={1}>
+              <HeaderCell />
+              <Cell>
+                {(rowData) => (
+                  <IconButton icon={cancelIcon} alt="Delete" isLink={false} onClick={() => handleRemove(rowData.id)} />
+                )}
+              </Cell>
+            </Column>
+          </Table>
+        )}
         <div className="px-5 bg-white flex flex-col xs:flex-row items-center xs:justify-between">
           {numberOfPages > 1 && (
             <TablePagination
