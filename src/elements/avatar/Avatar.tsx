@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import { Uploader } from "rsuite";
-import AvatarIcon from "@rsuite/icons/legacy/Avatar";
 import { useState } from "react";
+import { FaFileInvoiceDollar, FaUser as AvatarIcon } from "react-icons/fa";
 
 function previewFile(file, callback) {
   const reader = new FileReader();
@@ -11,8 +11,11 @@ function previewFile(file, callback) {
   reader.readAsDataURL(file);
 }
 
-function Avatar({ fileInfo, setFileInfo }) {
+function Avatar({ fileInfo, setFileInfo, isInvoice }) {
   const [avatarPreview, setAvatarPreview] = useState(null);
+  const icon = (isInvoice && <FaFileInvoiceDollar style={{ fontSize: 50 }} />) ?? (
+    <AvatarIcon style={{ fontSize: 50 }} />
+  );
 
   return (
     <Uploader
@@ -27,11 +30,7 @@ function Avatar({ fileInfo, setFileInfo }) {
       }}
     >
       <button style={{ width: 150, height: 150 }} type="button">
-        {avatarPreview ? (
-          <img src={avatarPreview} width="100%" height="100%" alt="" />
-        ) : (
-          <AvatarIcon style={{ fontSize: 80 }} />
-        )}
+        {avatarPreview ? <img src={avatarPreview} width="100%" height="100%" alt="" /> : icon}
       </button>
     </Uploader>
   );

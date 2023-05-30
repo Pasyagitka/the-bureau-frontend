@@ -24,7 +24,9 @@ function BrigadierRequestList({
         {listItems.length > 0 ? (
           listItems
         ) : (
-          <p className="text-2xl font-light text-gray-400">Здесь будут отображаться назначенные вам заявки</p>
+          <p className="md:text-xl text-sm font-light text-gray-400 mt-12">
+            Здесь будут отображаться назначенные вам заявки
+          </p>
         )}
         {/* <BrigadierRequest
           address="Address"

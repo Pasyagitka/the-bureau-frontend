@@ -60,7 +60,7 @@ function CommitPaidInvoicePage() {
             <h1 className="text-gray-600 w-full text-center">Обновить чек</h1>
             <div className="flex">
               <div className="inline-flex items-center space-x-4">
-                <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
+                <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} isInvoice />
                 {/* <Uploader
                   multiple
                   listType="picture"
