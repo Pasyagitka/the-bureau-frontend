@@ -65,7 +65,7 @@ function RequestDetailsPage() {
           <DetailsItem title="Контактный номер" value={`+${request.client?.contactNumber}`} />
           <DetailsItem title="Комментарий к заявке" value={request.comment} isDark />
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
-            <dt className="text-sm font-medium text-gray-500">Стадия отделки</dt>
+            <dt className="text-sm md:text-lg font-medium text-gray-500">Стадия отделки</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
               <StageBadge stage={request.stage?.id} />
             </dd>

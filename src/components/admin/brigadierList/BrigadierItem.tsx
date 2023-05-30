@@ -31,7 +31,7 @@ function BrigadierItem({
             <button type="button" onClick={() => handleClick()}>
               {clickTitle}
             </button>
-            <AccentButton to={`${brigadier.id}`} title="Больше" />
+            <AccentButton to={`/admin/brigadiers/${brigadier.id}`} title="Больше" />
           </div>
         </div>
       </div>
