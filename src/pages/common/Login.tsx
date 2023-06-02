@@ -4,7 +4,7 @@ import useDidMountEffect from "@/hooks/useDidMountEffect";
 import { getInfo, loginUser } from "@/redux/actions/auth";
 import bg from "images/bg.jpg";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 
 export default function Login() {
@@ -62,7 +62,7 @@ export default function Login() {
                   </div>
                   <hr className="mt-6 border-b-1 border-gray-400" />
                 </div>
-                <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
+                <div className="flex-auto px-4 lg:px-10 py-6 pt-0">
                   <form>
                     <div className="relative w-full mb-3">
                       <label className="block uppercase text-gray-700 text-xs font-bold mb-2">Имя пользователя</label>
@@ -99,20 +99,25 @@ export default function Login() {
                       >
                         Вход
                       </button>
+                      <div className="flex flex-row text-sm w-full mt-4">
+                        <div className="text-left w-1/2 ">
+                          <Link to="/forgot-password" className="text-gray-900 underline ">
+                            Забыли пароль?
+                          </Link>
+                        </div>
+                        <div className="text-right w-1/2 ">
+                          <Link to="/register" className="text-gray-900 underline ">
+                            Зарегистрироваться{" "}
+                          </Link>
+                          или{" "}
+                          <Link to="/register/brigadier" className="text-gray-900 underline ">
+                            {" "}
+                            присоединиться к сервису
+                          </Link>
+                        </div>
+                      </div>
                     </div>
                   </form>
-                </div>
-              </div>
-              <div className="flex flex-wrap mt-6">
-                <div className="w-1/2">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()} className="text-gray-300">
-                    <small>Забыли пароль?</small>
-                  </a>
-                </div>
-                <div className="w-1/2 text-right">
-                  <a href="#pablo" onClick={(e) => e.preventDefault()} className="text-gray-300">
-                    <small>Зарегистрироваться</small>
-                  </a>
                 </div>
               </div>
             </div>
