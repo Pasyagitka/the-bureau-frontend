@@ -8,7 +8,12 @@ function Map({ requests }: { requests: Array<RequestDto> }) {
       key={request.id}
       geometry={[request.address.lat, request.address.lon]}
       properties={{ iconContent: `№${request.id}` }}
-      options={{ preset: `islands#${requestStatusesColorsTable[request.status]}StretchyIcon` }}
+      options={{
+        preset: `islands#${requestStatusesColorsTable[request.status]}StretchyIcon`,
+        hasHint: true,
+        openHintOnHover: true,
+      }}
+      onClick={() => window.open(`admin/requests/${Number(request.id)}`)}
     />
   ));
   return (
