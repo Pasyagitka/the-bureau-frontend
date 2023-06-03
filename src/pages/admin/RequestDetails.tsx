@@ -1,7 +1,7 @@
 import BrigadierCompact from "@/elements/brigadierCompact/BrigadierCompact";
 import StageBadge from "@/elements/stageBadge/StageBadge";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, getAccessories, getTools } from "@/redux/actions/requests";
+import { clearState as clearRequestState, get, getAccessories, getTools } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import RequestAccessories from "../../elements/requestAccessoriesList/RequestAccessories";
@@ -14,6 +14,7 @@ function RequestDetailsPage() {
 
   useEffect(() => {
     async function fetchData() {
+      await dispatch(clearRequestState());
       await dispatch(get(params.id));
       await dispatch(getAccessories(params.id));
       await dispatch(getTools(params.id));
@@ -67,7 +68,7 @@ function RequestDetailsPage() {
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm md:text-lg font-medium text-gray-500">Стадия отделки</dt>
             <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
-              <StageBadge stage={request.stage?.id} />
+              {request.stage && <StageBadge stage={request.stage?.id} />}
             </dd>
           </div>
           <DetailsItem title="Дата выполнения работ" value={request.mountingDate} />

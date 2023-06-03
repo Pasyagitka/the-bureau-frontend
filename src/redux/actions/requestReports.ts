@@ -1,7 +1,8 @@
 import { requestReportLinks } from "@/constants";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import { CLEAR_REQUEST_REPORTS_STATE } from "../actionTypes/clearStates";
 import { GET_REQUEST_REPORTS, PATCH_REQUEST_REPORTS } from "../actionTypes/requestReports";
 import { getToken } from "./auth";
 
@@ -32,3 +33,5 @@ export const patch = createAsyncThunk(
     }
   }
 );
+
+export const clearRequestReportsState = createAction(CLEAR_REQUEST_REPORTS_STATE);

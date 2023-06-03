@@ -2,7 +2,7 @@
 /* eslint-disable no-param-reassign */
 
 import { createReducer } from "@reduxjs/toolkit";
-import { getAll, patch } from "../actions/requestReports";
+import { clearRequestReportsState, getAll, patch } from "../actions/requestReports";
 
 type RequestReportsStateProps = {
   requestReports: Array<unknown>;
@@ -19,6 +19,7 @@ const requestReportsReducer = createReducer<RequestReportsStateProps>(initialSta
   builder.addCase(patch.fulfilled, (state, action) => {
     state.requestReports = action.payload;
   });
+  builder.addCase(clearRequestReportsState, () => initialState);
 });
 
 export default requestReportsReducer;

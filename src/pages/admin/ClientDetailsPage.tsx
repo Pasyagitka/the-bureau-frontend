@@ -1,5 +1,5 @@
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { get, getRequests } from "@/redux/actions/clients";
+import { clearState, get, getRequests } from "@/redux/actions/clients";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { useEffect } from "react";
 import { useParams } from "react-router-dom";
@@ -14,6 +14,7 @@ function ClientDetailsPage() {
   const requests = useAppSelector((state) => state.clients.requests);
 
   function load() {
+    dispatch(clearState());
     dispatch(get(id));
     dispatch(getRequests(id));
   }

@@ -3,7 +3,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { ClientDto } from "@/types/dto/client/clientDto";
 import { RequestDto } from "@/types/dto/request/requestDto";
-import { getAll, get, getRequests } from "../actions/clients";
+import { getAll, get, getRequests, clearState } from "../actions/clients";
 import { activate, deactivate } from "../actions/users";
 
 type ClientsStateProps = {
@@ -46,6 +46,7 @@ const clientsReducer = createReducer<ClientsStateProps>(initialState, (builder) 
       },
     };
   });
+  builder.addCase(clearState, () => initialState);
 });
 
 export default clientsReducer;

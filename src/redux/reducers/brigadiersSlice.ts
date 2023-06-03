@@ -3,7 +3,7 @@
 import { createReducer } from "@reduxjs/toolkit";
 import { BrigadierDto } from "@/types/dto/brigadier/brigadierDto";
 import { BrigadierRequestDto } from "@/types/dto/request/brigadierRequestDto";
-import { getAll, get, getRequests, remove, getRecommended } from "../actions/brigadiers";
+import { getAll, get, getRequests, remove, getRecommended, clearBrigadierState } from "../actions/brigadiers";
 import { activate, deactivate } from "../actions/users";
 
 type BrigadiersStateProps = {
@@ -55,6 +55,9 @@ const brigadiersReducer = createReducer<BrigadiersStateProps>(initialState, (bui
   });
   builder.addCase(getRecommended.fulfilled, (state, action) => {
     state.recommended = action.payload;
+  });
+  builder.addCase(clearBrigadierState, () => {
+    initialState;
   });
 });
 

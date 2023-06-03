@@ -73,7 +73,7 @@ function Statistics() {
         </div>
       </div>
 
-      <div className="py-5 flex">
+      <div className="py-5 flex w-full">
         <div className="flex justify-center flex-row gap-10">
           <div>
             <p className="text-2xl font-bold text-gray-800 mb-4 text-center">Заявки</p>

@@ -1,6 +1,6 @@
 import { brigadierLinks, requestLinks } from "@/constants";
 import { UpdateBrigadierDto } from "@/types/dto/brigadier/updateBrigadierDto";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
 import {
@@ -12,6 +12,7 @@ import {
   GET_RECOMMENDED_BRIGADIERS,
   UPLOAD_AVATAR,
 } from "../actionTypes/brigadiers";
+import { CLEAR_BRIGADIERS_STATE } from "../actionTypes/clearStates";
 import { getToken } from "./auth";
 
 export const getAll = createAsyncThunk(GET_ALL_BRIGADIERS, async () => {
@@ -56,7 +57,7 @@ export const update = createAsyncThunk(
           Authorization: `Bearer ${getToken()}`,
         },
       });
-      toast.success(`Изменения сохранены`);
+      toast.success(`Изменения профиля сохранены`);
       return request.data;
     } catch (error) {
       toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
@@ -107,3 +108,5 @@ export const getRecommended = createAsyncThunk(GET_RECOMMENDED_BRIGADIERS, async
   });
   return request.data;
 });
+
+export const clearBrigadierState = createAction(CLEAR_BRIGADIERS_STATE);

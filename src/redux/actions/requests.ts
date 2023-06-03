@@ -1,6 +1,6 @@
 import { requestLinks, scheduleLinks } from "@/constants";
 import { UpdateRequestByAdminDto } from "@/types/dto/request/updateRequestByAdminDto";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { UpdateRequestByBrigadierDto } from "@/types/dto/request/updateRequestByBrigadierDto";
@@ -21,6 +21,7 @@ import {
   GET_SCHEDULE_FOR_REQUEST,
 } from "../actionTypes/requests";
 import { getToken } from "./auth";
+import { CLEAR_REQUESTS_STATE } from "../actionTypes/clearStates";
 
 export const create = createAsyncThunk(
   ADD_REQUESTS,
@@ -167,3 +168,5 @@ export const getFullReport = createAsyncThunk(GET_FULL_REPORT, async (id: number
     toast.error(`${error.response.data.statusCode}: ${error.response.data.message}`);
   }
 });
+
+export const clearState = createAction(CLEAR_REQUESTS_STATE);

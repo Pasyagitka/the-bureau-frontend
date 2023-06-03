@@ -16,6 +16,7 @@ import {
   updateByBrigadier,
   getCalendarForBrigadier,
   getScheduleForRequest,
+  clearState,
 } from "../actions/requests";
 
 type RequestsStateProps = {
@@ -80,6 +81,7 @@ const requestsReducer = createReducer<RequestsStateProps>(initialState, (builder
       ...action.payload,
     };
   });
+  builder.addCase(clearState, () => initialState);
 });
 
 export default requestsReducer;

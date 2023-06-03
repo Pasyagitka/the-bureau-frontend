@@ -1,9 +1,9 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import PhotoGallery from "@/elements/photoGallery/PhotoGallery";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll } from "@/redux/actions/brigadiers";
-import { get, updateByAdmin } from "@/redux/actions/requests";
-import { getAll as getAllReports } from "@/redux/actions/requestReports";
+import { clearBrigadierState, getAll } from "@/redux/actions/brigadiers";
+import { clearState as clearRequestState, get, updateByAdmin } from "@/redux/actions/requests";
+import { clearRequestReportsState, getAll as getAllReports } from "@/redux/actions/requestReports";
 import { RequestStatus, requestStatusesTitles } from "@/types/enum/request-statuses.enum";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -26,6 +26,9 @@ function ApproveRequestStatusAdminPage() {
   console.log(statuses);
 
   useEffect(() => {
+    dispatch(clearRequestState());
+    dispatch(clearRequestReportsState());
+    dispatch(clearBrigadierState());
     dispatch(get(Number(params.id)));
     dispatch(getAll());
     dispatch(getAllReports(Number(params.id)));

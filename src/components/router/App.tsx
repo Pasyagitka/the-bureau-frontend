@@ -45,6 +45,7 @@ import InvoiceDetailsPage from "@/pages/brigadier/InvoiceDetailsPage";
 import CommitPaidInvoicePage from "@/pages/brigadier/CommitPaidInvoicePage";
 import ApproveInvoiceStatusPage from "@/pages/admin/ApproveInvoiceStatusPage";
 import Statistics from "@/components/admin/statistics/Statistics";
+import ForgotPassword from "@/pages/common/ForgotPassword";
 
 function App() {
   const user = useAppSelector((state) => state.auth.user);
@@ -55,6 +56,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/login" element={<Login />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
         <Route path="/register" element={<RegisterClient />} />
         <Route path="/register/brigadier" element={<RegisterBrigadier />} />
 

@@ -1,7 +1,7 @@
 import SubmitButton from "@/elements/buttons/SubmitButton";
 import { useAppDispatch, useAppSelector } from "@/hooks";
-import { getAll, getRecommended } from "@/redux/actions/brigadiers";
-import { get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
+import { clearBrigadierState, getAll, getRecommended } from "@/redux/actions/brigadiers";
+import { clearState, get, getScheduleForRequest, updateByAdmin } from "@/redux/actions/requests";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import dayjs from "dayjs";
@@ -42,9 +42,11 @@ function EditRequestAdminPage() {
 
   useEffect(() => {
     async function fetchData() {
-      dispatch(get(Number(params.id)));
-      dispatch(getAll());
-      dispatch(getScheduleForRequest(Number(params.id)));
+      await dispatch(clearState());
+      await dispatch(clearBrigadierState());
+      await dispatch(get(Number(params.id)));
+      await dispatch(getAll());
+      await dispatch(getScheduleForRequest(Number(params.id)));
       // await dispatch(getRecommended(request?.mountingDate));
       // setLoading(false);
     }
@@ -108,17 +110,21 @@ function EditRequestAdminPage() {
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Перенести дату монтажа</dt>
         <div className="px-10n w-1/4 my-4">
-          <CustomDatepicker
-            value={newMountingDate}
-            defaultValue={newMountingDate}
-            handleValueChange={handleDateChange}
-          />
+          {request?.mountingDate && (
+            <CustomDatepicker
+              value={newMountingDate}
+              defaultValue={newMountingDate}
+              handleValueChange={handleDateChange}
+            />
+          )}
           {/* <DatePicker style={{ width: 200 }} isoWeek value={dates} onChange={handleDateChange} /> */}
         </div>
-        <dt className="text-sm font-medium text-gray-500">
-          Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
-          {request?.client?.firstname} {request?.client?.patronymic} {request?.client?.surname}
-        </dt>
+        {request?.client && (
+          <dt className="text-sm font-medium text-gray-500">
+            Перед сохранением согласуйте новую дату с клиентом звонком: +{request?.client?.contactNumber},{" "}
+            {request?.client?.firstname} {request?.client?.patronymic} {request?.client?.surname}
+          </dt>
+        )}
       </div>
       <div className="px-4 py-5 sm:px-6">
         <dt className="text-sm font-medium text-gray-500">Бригадир-исполнитель</dt>
@@ -131,15 +137,17 @@ function EditRequestAdminPage() {
           >
             {brigadiersList}
           </select> */}
-          <Select
-            data={brigadiersList}
-            value={brigadierId}
-            defaultValue={request.brigadier?.id}
-            onChange={setBrigadier}
-            searchable
-            cleanable
-            disabledItemValues={disabledList}
-          />
+          {brigadiersList && brigadiersList.length > 0 && (
+            <Select
+              data={brigadiersList}
+              value={brigadierId}
+              defaultValue={request.brigadier?.id}
+              onChange={setBrigadier}
+              searchable
+              cleanable
+              disabledItemValues={disabledList}
+            />
+          )}
         </div>
       </div>
       {history && history.length > 0 && (
