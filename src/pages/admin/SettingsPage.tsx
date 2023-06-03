@@ -52,11 +52,13 @@ function SettingsPage() {
           <InputWithLabel
             placeholder="Старый пароль"
             value={oldPassword}
+            type="password"
             onChange={(e) => setOldPassword(e.target.value)}
           />
           <InputWithLabel
             placeholder="Новый пароль"
             value={newPassword}
+            type="password"
             onChange={(e) => setNewPassword(e.target.value)}
           />
         </div>
