@@ -91,6 +91,23 @@ export function loginUser({ username, password }: { username: string; password: 
   };
 }
 
+export function resetPassword({ email }: { email: string }) {
+  return async (dispatch: Dispatch) => {
+    await axios
+      .post(authLinks.requestResetPassword, {
+        email,
+      })
+      .then((response) => {
+        toast.success("Инструкция для сброса пароля отправлена на адрес электронной почты");
+      })
+      .catch((error) => {
+        const errorMessage = error.response.data.message?.toString();
+        toast.error(errorMessage || "Ошибка сброса пароля. Попробуйте снова позже");
+        dispatch({ type: NOT_AUTHENTICATED });
+      });
+  };
+}
+
 export function getInfo() {
   return async (dispatch: Dispatch) => {
     await axios
