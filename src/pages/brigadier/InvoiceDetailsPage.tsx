@@ -57,7 +57,7 @@ function InvoiceDetailsPage() {
 
           <Column flexGrow={1}>
             <HeaderCell>Цена</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData?.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData?.price} руб./ед.</p>}</Cell>
           </Column>
         </Table>
         <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">

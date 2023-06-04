@@ -46,7 +46,7 @@ function EditInvoicePage() {
           <p className="block mb-2 text-sm font-medium text-gray-700">{`${item.name} ${
             item.sku ? `(арт. ${item.sku})` : ""
           }`}</p>
-          <p className="text-right text-sm font-medium text-gray-700">{item.price}р/ед</p>
+          <p className="text-right text-sm font-medium text-gray-700">{item.price} руб./ед.</p>
         </div>
         <InputNumber
           key={item.id}
@@ -64,7 +64,7 @@ function EditInvoicePage() {
           style={{ marginTop: 0 }}
         />
         <p className="text-right text-sm" style={{ margin: 0 }}>
-          на складе {item.quantity_in_stock}ед
+          на складе {item.quantity_in_stock} ед.
         </p>
       </>
     ));
