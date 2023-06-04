@@ -22,7 +22,7 @@ function Select({
 }) {
   return (
     <>
-      <label className="block mb-2 text-sm font-medium text-gray-900 ">{label}</label>
+      <label className="block mb-2 text-sm">{label}</label>
       <SelectPicker
         value={value}
         searchable={searchable}

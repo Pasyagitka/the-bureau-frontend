@@ -46,7 +46,7 @@ function RequestDetailsPage() {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 mb-12">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Информация о заявке</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Информация о заявке</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="border-t border-gray-200">
@@ -67,7 +67,7 @@ function RequestDetailsPage() {
           <DetailsItem title="Комментарий к заявке" value={request.comment} isDark />
           <div className="bg-white px-4 py-5 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-6">
             <dt className="text-sm md:text-lg font-medium text-gray-500">Стадия отделки</dt>
-            <dd className="mt-1 text-sm text-gray-900 sm:col-span-2 sm:mt-0 flex gap-3">
+            <dd className="mt-1 text-sm text-gray-700 sm:col-span-2 sm:mt-0 flex gap-3">
               {request.stage && <StageBadge stage={request.stage?.id} />}
             </dd>
           </div>

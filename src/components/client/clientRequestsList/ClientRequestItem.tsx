@@ -12,13 +12,13 @@ function ClientRequestItem({ request }: { request: ClientRequestDto }) {
         <div className="w-full md:w-2/6 p-4">
           <RequestEquipmentList equipmentList={request.requestEquipment} />
         </div>
-        <div className="p-4">
-          <h1 className="text-gray-900 font-bold md:text-2xl">
+        <div className="p-4 flex-1">
+          <h1 className="text-gray-700 font-bold md:text-2xl">
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
               request.address?.flat ?? ""
             }`}
           </h1>
-          <h1 className="text-gray-900 font-bold md:text-2xl">
+          <h1 className="text-gray-700 font-bold md:text-2xl">
             <DayJs format="DD.MM.YYYY">{request.mountingDate}</DayJs>
           </h1>
           <p className="mt-2 text-gray-600 text-sm">{request.comment}</p>

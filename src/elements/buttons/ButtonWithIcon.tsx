@@ -11,7 +11,7 @@ function ButtonWithIcon({ to, alt, icon }: { to: string; alt: string; icon: stri
         width="30px"
         height="30px"
         alt={alt}
-        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-900 "
+        className="flex-shrink-0 w-6 h-6 text-gray-500 transition duration-75 group-hover:text-gray-700 "
       />
     </Link>
   );

@@ -52,17 +52,17 @@ function EditClientDetailsPage() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Редактировать личную информацию</h1>
+              <h1 className="text-gray-700 font-semibold">Редактировать личную информацию</h1>
             </div>
           </div>
         </div>
         <div className="space-y-6 bg-white">
           <div>
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-1/3">Личная информация</h2>
+              <h2 className="max-w-sm mx-auto text-center text-gray-500 font-semibold">Личная информация</h2>
               <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Имя</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Имя</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -74,7 +74,7 @@ function EditClientDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Фамилия</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Фамилия</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -86,7 +86,7 @@ function EditClientDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Отчество</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Отчество</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -98,7 +98,7 @@ function EditClientDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Контактный телефон</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Контактный телефон</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -113,7 +113,7 @@ function EditClientDetailsPage() {
                   </div>
                 </div>
                 {/* <div className="px-4 py-5 sm:px-6">
-                <h3 className="text-lg font-medium leading-6 text-gray-900 pb-2">Данные для входа</h3>
+                <h3 className="text-lg font-medium leading-6 text-gray-700 pb-2">Данные для входа</h3>
                 <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                   <InputWithLabel
                     placeholder="Старый пароль"
@@ -131,10 +131,10 @@ function EditClientDetailsPage() {
             </div>
             <hr />
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-1/3">Данные для входа</h2>
+              <h2 className="max-w-sm mx-auto text-center text-gray-500 font-semibold">Данные для входа</h2>
               <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Старый пароль</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Старый пароль</h2>
                   <div className=" relative ">
                     <input
                       type="password"
@@ -146,7 +146,7 @@ function EditClientDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Новый пароль</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Новый пароль</h2>
                   <div className=" relative ">
                     <input
                       type="password"

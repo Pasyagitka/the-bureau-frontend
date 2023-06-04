@@ -63,7 +63,7 @@ function EditBrigadierDetailsPage() {
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Редактировать профиль</h1>
+              <h1 className="text-gray-700 font-semibold">Редактировать профиль</h1>
             </div>
           </div>
         </div>
@@ -73,7 +73,7 @@ function EditBrigadierDetailsPage() {
               <Avatar fileInfo={fileInfo} setFileInfo={setFileInfo} />
               <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Имя</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Имя</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -85,7 +85,7 @@ function EditBrigadierDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Фамилия</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Фамилия</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -97,7 +97,7 @@ function EditBrigadierDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Отчество</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Отчество</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -109,7 +109,7 @@ function EditBrigadierDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Контактный номер</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Контактный номер</h2>
                   <div className=" relative ">
                     <input
                       type="text"
@@ -135,10 +135,10 @@ function EditBrigadierDetailsPage() {
             </div>
             <hr />
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <h2 className="max-w-sm mx-auto md:w-1/3">Данные для входа</h2>
+              <h2 className="max-w-sm mx-auto text-center text-gray-500 font-semibold">Данные для входа</h2>
               <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Старый пароль</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Старый пароль</h2>
                   <div className=" relative ">
                     <input
                       type="password"
@@ -150,7 +150,7 @@ function EditBrigadierDetailsPage() {
                   </div>
                 </div>
                 <div>
-                  <h2 className="max-w-sm mx-auto md:w-1/3">Новый пароль</h2>
+                  <h2 className="max-w-sm mx-auto text-center">Новый пароль</h2>
                   <div className=" relative ">
                     <input
                       type="password"

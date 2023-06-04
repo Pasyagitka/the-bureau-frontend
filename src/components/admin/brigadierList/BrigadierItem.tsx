@@ -21,7 +21,7 @@ function BrigadierItem({
           }}
         />
         <div className="w-2/3 p-4">
-          <h1 className="text-gray-900 font-bold text-2xl">
+          <h1 className="text-gray-700 font-bold text-2xl">
             {brigadier.surname} {brigadier.firstname} {brigadier.patronymic}
           </h1>
           <p className="mt-2 text-gray-600 text-sm">{brigadier?.user?.email}</p>

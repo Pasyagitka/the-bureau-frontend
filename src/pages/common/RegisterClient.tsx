@@ -39,7 +39,7 @@ function RegisterClient() {
     // <main>
     <section className="absolute w-full h-full">
       <div
-        className="absolute top-0 w-full h-max md:h-screen bg-gray-900"
+        className="absolute top-0 w-full h-max md:h-screen bg-gray-700"
         style={{
           backgroundImage: `url(${bg})`,
           backgroundSize: "cover",
@@ -100,7 +100,7 @@ function RegisterClient() {
                     />
                     <div className="text-center mt-6">
                       <button
-                        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        className="bg-gray-700 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                         type="button"
                         style={{ transition: "all .15s ease" }}
                         onClick={() => {
@@ -111,7 +111,7 @@ function RegisterClient() {
                       </button>
                     </div>
                     <div className="mx-auto text-center">
-                      <Link to="/login" className="text-gray-900 text-sm">
+                      <Link to="/login" className="text-gray-700 text-sm">
                         Уже есть аккаунт? <p className="underline text-sm">Войдите</p>
                       </Link>
                     </div>

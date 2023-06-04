@@ -21,10 +21,10 @@ function CreateInvoicePage() {
   const listItems = accessoryList.map((item) => (
     <>
       <div className="flex justify-between">
-        <p className="block mb-2 text-sm font-medium text-gray-900">{`${item.name} ${
+        <p className="block mb-2 text-sm font-medium text-gray-700">{`${item.name} ${
           item.sku ? `(арт. ${item.sku})` : ""
         }`}</p>
-        <p className="text-right text-sm font-medium text-gray-900 whitespace-nowrap">{item.price} руб/ед.</p>
+        <p className="text-right text-sm font-medium text-gray-700 whitespace-nowrap">{item.price} руб/ед.</p>
       </div>
       <InputNumber
         key={item.id}

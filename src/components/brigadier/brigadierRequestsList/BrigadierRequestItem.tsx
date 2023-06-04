@@ -25,9 +25,9 @@ function BrigadierRequestItem({
   return (
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full cursor-pointer m-auto">
       <div className="flex w-full bg-white shadow-lg rounded-lg flex-col md:flex-row overflow-hidden justify-between">
-        <h1 className="text-gray-900 font-bold md:text-2xl md:m-5 mx-5 my-1">{request.id}</h1>
-        <div className="p-4 w-full md:w-2/3">
-          <h1 className="text-gray-900 font-bold md:text-2xl">
+        <h1 className="text-gray-700 font-bold md:text-2xl md:m-5 mx-5 my-1">{request.id}</h1>
+        <div className="p-4 w-full md:w-3/4">
+          <h1 className="text-gray-700 font-bold md:text-2xl">
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house} ${
               request.address?.flat ?? ""
             } `}

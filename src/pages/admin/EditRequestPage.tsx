@@ -102,9 +102,9 @@ function EditRequestAdminPage() {
   return isLoading ? (
     <Loader />
   ) : (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-12 h-100vh">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg in-h-80vh container p-4 mb-12 h-100vh">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Редактировать заявку</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Редактировать заявку</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о заявке</p>
       </div>
       <div className="px-4 py-5 sm:px-6">

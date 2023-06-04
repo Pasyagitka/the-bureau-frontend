@@ -45,7 +45,7 @@ export default function Login() {
     <main>
       <section className="absolute w-full h-full">
         <div
-          className="absolute top-0 w-full h-full md:h-full bg-gray-900"
+          className="absolute top-0 w-full h-full md:h-full bg-gray-700"
           style={{
             backgroundImage: `url(${bg})`,
             backgroundSize: "cover",
@@ -90,7 +90,7 @@ export default function Login() {
                     </div>
                     <div className="text-center mt-6">
                       <button
-                        className="bg-gray-900 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
+                        className="bg-gray-700 text-white active:bg-gray-700 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full"
                         type="button"
                         style={{ transition: "all .15s ease" }}
                         onClick={() => {
@@ -100,17 +100,17 @@ export default function Login() {
                         Вход
                       </button>
                       <div className="flex flex-row text-sm w-full mt-4">
-                        <div className="text-left w-1/2 ">
-                          <Link to="/forgot-password" className="text-gray-900 underline ">
+                        <div className="text-left w-1/3">
+                          <Link to="/forgot-password" className="text-gray-700 underline ">
                             Забыли пароль?
                           </Link>
                         </div>
-                        <div className="text-right w-1/2 ">
-                          <Link to="/register" className="text-gray-900 underline ">
+                        <div className="text-right w-2/3">
+                          <Link to="/register" className="text-gray-700 underline ">
                             Зарегистрироваться{" "}
                           </Link>
                           или{" "}
-                          <Link to="/register/brigadier" className="text-gray-900 underline ">
+                          <Link to="/register/brigadier" className="text-gray-700 underline ">
                             {" "}
                             присоединиться к сервису
                           </Link>

@@ -3,8 +3,8 @@ import { useAppDispatch, useAppSelector } from "@/hooks";
 import { get, getRequests } from "@/redux/actions/brigadiers";
 import { useEffect } from "react";
 import AccentButton from "@/elements/buttons/AccentButton";
-import { getFullReport } from "@/redux/actions/requests";
-import { getForBrigadier, remove } from "@/redux/actions/invoices";
+import { clearState, getFullReport } from "@/redux/actions/requests";
+import { clearInvoicesState, getForBrigadier, remove } from "@/redux/actions/invoices";
 import BrigadierRequestList from "../../components/brigadier/brigadierRequestsList/BrigadierRequestList";
 import BrigadierSchedule from "../../components/brigadier/brigadierSchedule/BrigadierSchedule";
 import BrigadierInvoices from "../../components/brigadier/brigadierInvoices/BrigadierInvoices";
@@ -18,6 +18,8 @@ function BrigadierHomePage() {
   const invoices = useAppSelector((state) => state.invoices.invoices);
 
   function loadAll() {
+    dispatch(clearInvoicesState());
+    dispatch(clearState());
     dispatch(getRequests(user?.brigadier?.id));
     dispatch(get(user?.brigadier?.id));
     dispatch(getForBrigadier({ limit: 10, offset: 0, brigadierId: user?.brigadier?.id }));

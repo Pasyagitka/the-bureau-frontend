@@ -43,7 +43,7 @@ function RequestsPage() {
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800 mb-4">Заявки</p>
+          <p className="text-4xl font-bold text-gray-700 mb-4">Заявки</p>
           {/* <p className="text-2xl font-light text-gray-400">Описание...</p> */}
         </div>
       </div>

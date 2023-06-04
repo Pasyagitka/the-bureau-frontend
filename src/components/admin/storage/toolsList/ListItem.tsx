@@ -20,12 +20,12 @@ function ListItem({
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex items-center">
           <div className="flex-shrink-0">
-            <p className="text-gray-900 whitespace-no-wrap">{id}</p>
+            <p className="text-gray-700 whitespace-no-wrap">{id}</p>
           </div>
         </div>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
-        <p className="text-gray-900 whitespace-no-wrap">{name}</p>
+        <p className="text-gray-700 whitespace-no-wrap">{name}</p>
       </td>
       <td className="px-5 py-5 border-b border-gray-200 bg-white text-sm">
         <div className="flex flex-wrap items-center gap-2">

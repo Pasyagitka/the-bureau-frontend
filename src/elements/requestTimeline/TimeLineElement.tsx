@@ -12,7 +12,7 @@ function TimeLineElement({
   isLast?: boolean;
 }) {
   return (
-    <li className="relative flex flex-row md:block mb-6 sm:mb-0 w-full md:w-1/4">
+    <li className="relative flex flex-row md:block mb-6 sm:mb-0 w-full md:w-1/4 ml-4">
       <div className="flex md:items-center sm:flex-row ">
         <div
           className={`flex z-10 justify-center items-center -translate-x-3 md:transfrom-none w-6 h-6 rounded-full ring-0 ring-white sm:ring-8 shrink-0 ${
@@ -35,7 +35,7 @@ function TimeLineElement({
         />
       </div>
       <div className="md:mt-3 sm:pr-8">
-        <p className="md:text-base text-sm font-semibold text-gray-900">{text}</p>
+        <p className="md:text-base text-sm font-semibold text-gray-700">{text}</p>
         {date && <time className="block mb-2 text-sm font-normal leading-none text-gray-400">{date}</time>}
       </div>
     </li>

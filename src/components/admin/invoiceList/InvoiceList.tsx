@@ -34,6 +34,7 @@ function InvoiceList({
       clickTitle="удалить"
       approveLink={`${invoice.id}/approve`}
       detailsLink={`${invoice.id}`}
+      hasCreated
     />
   ));
   return (

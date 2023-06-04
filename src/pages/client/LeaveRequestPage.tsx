@@ -10,6 +10,8 @@ import { AddressSuggestions } from "react-dadata";
 import { CreateRequestDto } from "@/types/dto/request/createRequestDto";
 import Select from "@/elements/select/Select";
 import { getAll as getAllStages } from "@/redux/actions/stage";
+import { IconButton, InputNumber, Popover, Popover, Whisper } from "rsuite";
+import InfoOutlineIcon from "@rsuite/icons/InfoOutline";
 import LeaveRequestTextInput from "../../elements/inputs/LeaveRequestTextInput";
 
 function LeaveRequestPage() {
@@ -54,17 +56,33 @@ function LeaveRequestPage() {
 
   const equipmentList = useAppSelector((state) => state.equipment.equipment);
   const listItems = equipmentList.map((item) => (
-    <LeaveRequestTextInput
-      key={item.id}
-      placeholder={item.type}
-      defaultValue={0}
-      onChange={(e) => {
-        if (e.target.value === "") requestEquipmentList.delete(item.id);
-        if (!Number(e.target.value)) return;
-        requestEquipmentList.set(item.id, e.target.value); // TODO else
-        console.log(requestEquipmentList);
-      }}
-    />
+    <>
+      <label className="ml-4 text-sm">{item.type}, ед.</label>
+      <InputNumber
+        key={item.id}
+        placeholder={item.type}
+        defaultValue={0}
+        max={5}
+        min={0}
+        onChange={(value) => {
+          if (Number(value) === 0) requestEquipmentList.delete(item.id);
+          requestEquipmentList.set(item.id, value);
+          console.log(requestEquipmentList);
+        }}
+        style={{ marginBottom: 12, marginTop: 0, marginLeft: 12, width: "98%" }}
+      />
+    </>
+    // <LeaveRequestTextInput
+    //   key={item.id}
+    //   placeholder={item.type}
+    //   defaultValue={0}
+    //   onChange={(e) => {
+    //     if (e.target.value === "") requestEquipmentList.delete(item.id);
+    //     if (!Number(e.target.value)) return;
+    //     requestEquipmentList.set(item.id, e.target.value); // TODO else
+    //     console.log(requestEquipmentList);
+    //   }}
+    // />
   ));
 
   const handleDateChange = (newValue) => {
@@ -102,63 +120,22 @@ function LeaveRequestPage() {
     }
   };
 
-  const join = (arr) => {
-    const separator = arguments.length > 1 ? arguments[1] : ", ";
-    return arr.filter((n) => n).join(separator);
-  };
-
-  function geoQuality(qc_geo) {
-    const localization = {
-      "0": "точные",
-      "1": "ближайший дом",
-      "2": "улица",
-      "3": "населенный пункт",
-      "4": "город",
-    };
-    return localization[qc_geo] || qc_geo;
-  }
-
-  function geoLink(address) {
-    return join(
-      [
-        '<a target="_blank" href="',
-        "https://maps.yandex.ru/?text=",
-        address.geo_lat,
-        ",",
-        address.geo_lon,
-        '">',
-        address.geo_lat,
-        ", ",
-        address.geo_lon,
-        "</a>",
-      ],
-      ""
-    );
-  }
-
-  const handleSelectChange = (e: number) => {
-    // console.log(Number(e.currentTarget.value));
-    setStage(Number(e));
-    console.log(stage);
-  };
-
-  // console.log("address", addressSuggest);
-
   return (
     <section className="w-full">
       <div className="container max-w-2xl mx-auto shadow-md md:w-3/4">
         <div className="p-4 bg-gray-100 border-t-2 border-lime-400 rounded-lg bg-opacity-5">
           <div className="max-w-sm mx-auto md:w-full md:mx-0">
             <div className="inline-flex items-center space-x-4">
-              <h1 className="text-gray-600">Оставьте свою заявку</h1>
+              <h1 className="text-gray-500 font-semibold">Оставьте свою заявку</h1>
             </div>
           </div>
         </div>
-        <div className="space-y-6 bg-white">
+        <div className="space-y-2 bg-white">
           <hr />
           <div className="items-center w-full md:p-4 px-2 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Адрес</h2>
-            <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
+            <h2 className="max-w-sm mx-auto md:w-1/3 text-gray-500 font-semibold">Адрес*</h2>
+            <div className="max-w-sm mx-auto space-y-2 md:w-2/3">
+              <label className="block mb-2 text-sm">Введите адрес, включая номер дома</label>
               <AddressSuggestions
                 token={process.env.GEOCODER_API_KEY}
                 value={addressSuggest}
@@ -168,6 +145,7 @@ function LeaveRequestPage() {
                     city: "Минск",
                   },
                 ]}
+                hintText="Введите свой адрес, включая номер дома"
                 onChange={(e) => {
                   console.log(e.data);
                   setAddressSuggest(e.data);
@@ -178,9 +156,9 @@ function LeaveRequestPage() {
                   setLon(e?.data.geo_lon);
                 }}
               />
-              <LeaveRequestTextInput placeholder="Город" value={city} disabled />
-              <LeaveRequestTextInput placeholder="Улица" value={street} disabled />
-              <LeaveRequestTextInput placeholder="Дом" value={house || ""} disabled />
+              <LeaveRequestTextInput placeholder="Город*" value={city} disabled />
+              <LeaveRequestTextInput placeholder="Улица*" value={street} disabled />
+              <LeaveRequestTextInput placeholder="Дом*" value={house || ""} disabled />
               <LeaveRequestTextInput
                 placeholder="Квартира"
                 value={flat || ""}
@@ -192,7 +170,7 @@ function LeaveRequestPage() {
           </div>
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Дата монтажа</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3 text-gray-500 font-semibold">Дата монтажа*</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <CustomDatepicker value={dates} handleValueChange={handleDateChange} />
             </div>
@@ -203,31 +181,24 @@ function LeaveRequestPage() {
           </div> */}
           <hr />
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Стадия отделки</h2>
+            <h2 className="max-w-sm mx-auto md:w-1/3 text-gray-500 font-semibold">Стадия отделки*</h2>
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <div className="col-span-6 sm:col-span-3">
-                <Select
-                  data={stagesList}
-                  value={stage}
-                  defaultValue={stage}
-                  onChange={setStage}
-                  searchable={false}
-                  label="стадия отделки"
-                />
+                <Select data={stagesList} value={stage} defaultValue={stage} onChange={setStage} searchable={false} />
               </div>
             </div>
           </div>
           <hr />
-          <div className="items-center w-full p-2 md:p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-4/12">Комментарий к заявке</h2>
-            <label className="text-gray-700" htmlFor="name">
+          <div className="items-center w-full p-2 md:p-4 space-y-2 text-gray-500 md:inline-flex md:space-y-0">
+            <h2 className="max-w-sm mx-2 md:w-4/12 text-gray-500 font-semibold text-left">Комментарий к заявке</h2>
+            <label className="text-gray-700 text-right mx-auto" htmlFor="comment">
               <textarea
                 className="flex-1 appearance-none border border-gray-300 w-full py-2 px-4 bg-white text-gray-700 placeholder-gray-400 rounded-lg text-base focus:outline-none focus:ring-2 focus:ring-lime-600 focus:border-transparent"
                 id="comment"
                 placeholder="Введите комментарий"
                 name="comment"
-                rows="5"
-                cols="40"
+                rows="2"
+                cols="32"
                 onChange={(e) => {
                   setComment(e.target.value);
                 }}
@@ -235,17 +206,26 @@ function LeaveRequestPage() {
             </label>
           </div>
           <hr />
-          <div className="items-center w-full p-2 md:p-8 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-            <h2 className="max-w-sm mx-auto md:w-1/3">Монтируемое оборудование</h2>
-            <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems}</div>
+          <div className="items-center w-full p-2 md:px-4 space-y-2 text-gray-500 md:inline-flex md:space-y-0">
+            <div className="flex md:flex-col md:w-1/3 justify-start">
+              <span className="max-w-sm mx-auto px-2 text-gray-500 font-semibold">Монтируемое оборудование</span>
+
+              <Whisper
+                speaker={
+                  <Popover>
+                    Укажите количество монтируемого оборудования (минимум одна позиция), <br />
+                    например: конвектор внутрипольный - 2 ед.
+                  </Popover>
+                }
+              >
+                <div className="animate-pulse w-min">
+                  <IconButton icon={<InfoOutlineIcon />} circle size="sm" />
+                </div>
+              </Whisper>
+            </div>
+            <div className="max-w-sm mx-auto space-y-2 md:w-2/3 px-4 md:px-0">{listItems}</div>
           </div>
-          <div className="w-full px-4 pb-4 ml-auto text-gray-500 md:w-1/3">
-            {/* <button
-              type="submit"
-              className="py-2 px-4  bg-lime-600 hover:bg-lime-700 focus:ring-lime-500 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-            >
-              Save
-            </button> */}
+          <div className="w-full flex px-4 pb-4 mx-auto text-gray-500 justify-center">
             <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />
           </div>
         </div>

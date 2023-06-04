@@ -103,7 +103,7 @@ function AccessoriesList({
               <Cell style={{ padding: "6px" }}>
                 {(rowData) => (
                   <p>
-                    {rowData.equipment?.type} (№{rowData.equipment.id})
+                    {rowData.equipment?.type} (№{rowData.equipment?.id})
                   </p>
                 )}
               </Cell>

@@ -23,6 +23,7 @@ function BrigadierInvoices({
         editLink={`invoices/${invoice.id}/update`}
         hasStatus={false}
         hasDeleteButton
+        hasRequested
       />
     ) : null
   );
@@ -40,15 +41,22 @@ function BrigadierInvoices({
         detailsLink={`invoices/${invoice.id}`}
         hasDownloadButton
         hasDetailsButton
+        hasCreated
       />
     ) : null
+  );
+
+  console.log(
+    listItems,
+    approvedInvoicesItems,
+    approvedInvoicesItems?.length > 0 || approvedInvoicesItems?.[0] !== null
   );
 
   return (
     <div className="w-full bg-white p-2 md:p-12 rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="md:text-4xl text-xl font-bold text-gray-800 mb-2">Мои счета</p>
+          <p className="md:text-4xl text-xl font-bold text-gray-700 mb-2">Мои счета</p>
         </div>
       </div>
       <div className="flex gap-2 items-baseline my-2">
@@ -58,7 +66,7 @@ function BrigadierInvoices({
         </span>
       </div>
       <div className="grid grid-cols-1 gap-10">
-        {listItems.length > 0 ? (
+        {listItems?.[0] !== null || listItems?.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">
@@ -71,7 +79,7 @@ function BrigadierInvoices({
         <span className="flex font-light text-gray-400">(оплаченные или которые ждут оплаты)</span>
       </div>
       <div className="grid grid-cols-1 gap-10">
-        {approvedInvoicesItems.length > 0 ? (
+        {approvedInvoicesItems?.length > 0 && approvedInvoicesItems?.[0] !== null ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{approvedInvoicesItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">

@@ -8,7 +8,7 @@ function ClientRequests({ requests }: { requests: ClientRequestDto[] }) {
     <div className="w-full bg-white p-2 md:p-12 rounded">
       <div className="header flex items-end justify-between md:mb-12">
         <div className="title">
-          <p className="md:text-4xl text-xl font-bold text-gray-800 mb-4">Заявки</p>
+          <p className="md:text-4xl text-xl font-bold text-gray-700 mb-4">Заявки</p>
           {/* <p className="text-2xl font-light text-gray-400">Описание...</p> */}
         </div>
       </div>

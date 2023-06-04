@@ -8,6 +8,8 @@ import IconButton from "@/elements/buttons/IconButton";
 import { invoiceStatusesColors, invoiceStatusesTitles } from "@/types/enum/invoice-statuses.enum";
 import editIcon from "icons/edit.png";
 import deleteIcon from "icons/delete.png";
+import DayJs from "react-dayjs";
+import dayjs from "dayjs";
 
 function InvoiceItem({
   hasApproveButton,
@@ -21,6 +23,8 @@ function InvoiceItem({
   editLink,
   invoice,
   clickTitle,
+  hasCreated,
+  hasRequested,
   handleClick,
   handleDownload,
 }: {
@@ -35,6 +39,8 @@ function InvoiceItem({
   editLink: string;
   invoice: InvoiceDto;
   clickTitle: string;
+  hasCreated: boolean;
+  hasRequested: boolean;
   handleClick: () => void;
   handleDownload: () => void;
 }) {
@@ -48,9 +54,24 @@ function InvoiceItem({
           }}
         />
         <div className="w-2/3 p-4">
-          <h1 className="text-gray-900 font-bold md:text-2xl">Счет №{invoice.id}</h1>
+          <h1 className="text-gray-700 font-bold md:text-2xl">Счет №{invoice.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">{invoice.customer}</p>
           <p className="mt-2 text-gray-600 text-sm">{invoice.total} руб.</p>
+          {hasRequested && (
+            <p className="mt-2 text-gray-600 text-sm">
+              запрошен <DayJs format="DD.MM.YYYY">{invoice.createdAt}</DayJs>
+            </p>
+          )}
+          {hasCreated && (
+            <>
+              <p className="mt-2 text-gray-600 text-sm">
+                создан <DayJs format="DD.MM.YYYY">{invoice.updatedAt}</DayJs>
+              </p>
+              <p className=" text-gray-600 text-sm">
+                оплатить до <DayJs format="DD.MM.YYYY, 12:00">{dayjs(invoice.updatedAt).add(5, "d")}</DayJs>
+              </p>
+            </>
+          )}
           <div className="flex item-center justify-end gap-3 mt-3">
             {hasApproveButton && <IconButton icon={approveIcon} alt="Approve" isLink to={approveLink} />}
             {hasEditButton && <IconButton icon={editIcon} alt="Edit" isLink to={editLink} />}
@@ -84,6 +105,8 @@ InvoiceItem.defaultProps = {
   hasDeleteButton: false,
   hasDownloadButton: false,
   hasStatus: true,
+  hasCreated: false,
+  hasRequested: false,
 };
 
 export default InvoiceItem;

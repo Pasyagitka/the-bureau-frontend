@@ -24,7 +24,7 @@ function BrigadierDetailsPage() {
   return (
     <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4">
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Информация о бригадире</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Информация о бригадире</h3>
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Полная информация о бригадире</p>
       </div>
       <div className="border-t border-gray-200">

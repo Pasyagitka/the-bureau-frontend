@@ -1,9 +1,10 @@
 import { invoiceLinks } from "@/constants";
 import { PaginatedForBrigadierQueryDto, PaginatedQueryDto } from "@/types/dto/query/paginatedQuery.Dto";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createAction, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import fileDownload from "js-file-download";
 import { toast } from "react-toastify";
+import { CLEAR_INVOICES_STATE } from "../actionTypes/clearStates";
 import {
   CREATE_INVOICE,
   GET_ALL_INVOICES,
@@ -180,3 +181,5 @@ export const uploadReceipt = createAsyncThunk(
     }
   }
 );
+
+export const clearInvoicesState = createAction(CLEAR_INVOICES_STATE);

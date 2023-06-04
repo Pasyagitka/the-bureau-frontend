@@ -20,7 +20,7 @@ function Map({ requests }: { requests: Array<RequestDto> }) {
     <div className="container w-full my-6">
       <YMaps>
         <div className="my-6">
-          <p className="text-2xl font-bold text-gray-800 mb-4">Заявки на карте</p>
+          <p className="text-2xl font-bold text-gray-700 mb-4">Заявки на карте</p>
           <YandexMap
             defaultState={{ center: [53.902284, 27.561831], zoom: 12 }}
             width="100%"

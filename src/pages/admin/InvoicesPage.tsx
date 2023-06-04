@@ -46,6 +46,7 @@ function InvoicesPage() {
       editLink={`${invoice.id}/update`}
       hasEditButton
       hasStatus={false}
+      hasRequested
     />
   ));
 
@@ -54,7 +55,7 @@ function InvoicesPage() {
     <div className="w-full bg-white p-12 container rounded">
       <div className="header flex items-end justify-between mb-12">
         <div className="title">
-          <p className="text-4xl font-bold text-gray-800">Выставленные cчета</p>
+          <p className="text-4xl font-bold text-gray-700">Выставленные cчета</p>
         </div>
       </div>
       {notApprovedListItems.length > 0 && (

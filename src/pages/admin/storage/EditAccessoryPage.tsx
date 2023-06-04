@@ -65,30 +65,30 @@ function EditAccessoryPage() {
           <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
             <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
               <InputWithLabel
-                placeholder="наименование"
+                placeholder="Наименование"
                 defaultValue={name}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
               />
               <InputWithLabel
-                placeholder="артикул"
+                placeholder="Артикул"
                 defaultValue={sku}
                 value={sku}
                 onChange={(e) => setSku(e.target.value)}
               />
               <InputWithLabel
-                placeholder="цена за единицу"
+                placeholder="Цена за единицу"
                 defaultValue={price}
                 value={price}
                 onChange={(e) => setPrice(e.target.value)}
               />
               <InputWithLabel
-                placeholder="количество"
+                placeholder="Количество"
                 defaultValue={quantity}
                 value={quantity}
                 onChange={(e) => setQuantity(e.target.value.replace(/\D/g, ""))}
               />
-              <Select data={equipmentList} value={equipmentId} onChange={setEquipmentId} label="оборудование" />
+              <Select data={equipmentList} value={equipmentId} onChange={setEquipmentId} label="Оборудование" />
             </div>
           </div>
           <hr />

@@ -43,10 +43,10 @@ function EditInvoicePage() {
     .map((item) => (
       <>
         <div className="flex justify-between">
-          <p className="block mb-2 text-sm font-medium text-gray-900">{`${item.name} ${
+          <p className="block mb-2 text-sm font-medium text-gray-700">{`${item.name} ${
             item.sku ? `(арт. ${item.sku})` : ""
           }`}</p>
-          <p className="text-right text-sm font-medium text-gray-900">{item.price}р/ед</p>
+          <p className="text-right text-sm font-medium text-gray-700">{item.price}р/ед</p>
         </div>
         <InputNumber
           key={item.id}
@@ -73,12 +73,12 @@ function EditInvoicePage() {
     <div className="overflow-hidden bg-white shadow sm:rounded-lg md:w-3/4 min-h-80vh container md:p-4 md:mb-5 mx-auto">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
-          <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
+          <h3 className="text-lg font-medium leading-6 text-gray-700">Содержимое счета</h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">Редактировать счет</p>
         </div>
       </div>
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие по счету</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Комплектующие по счету</h3>
       </div>
       <div className="items-center w-full h-full md:p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} autoHeight>
@@ -119,12 +119,12 @@ function EditInvoicePage() {
 
           <Column flexGrow={1}>
             <HeaderCell>Цена по счету</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.price} руб./ед.</p>}</Cell>
           </Column>
 
           <Column flexGrow={1}>
             <HeaderCell>Цена сейчас</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.accessory.price} руб./ед.</p>}</Cell>
           </Column>
 
           <Column flexGrow={1} fixed="right">
@@ -145,7 +145,7 @@ function EditInvoicePage() {
       {listItems?.length > 0 ? (
         <>
           <div className="px-4 py-5 sm:px-6">
-            <h3 className="text-lg font-medium leading-6 text-gray-900">Добавить комплектующие в счет</h3>
+            <h3 className="text-lg font-medium leading-6 text-gray-700">Добавить комплектующие в счет</h3>
           </div>
           <div className="max-w-sm mx-auto space-y-5 md:w-2/3 mb-4 text-gray-500">{listItems}</div>
         </>

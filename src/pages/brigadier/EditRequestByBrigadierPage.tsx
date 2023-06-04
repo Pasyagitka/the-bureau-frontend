@@ -96,14 +96,14 @@ function EditRequestByBrigadierPage() {
             <h1 className="text-gray-600 w-full text-center">Нельзя сменить статус заявки</h1>
           ) : (
             <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-              <div className="max-w-sm mx-auto space-y-5 md:w-2/3">
+              <div className="max-w-sm mx-auto space-y-5 md:w-2/3 text-center">
                 <Select
                   data={statuses}
                   value={statusId}
                   defaultValue={statusId}
                   onChange={setStatus}
                   searchable={false}
-                  label="статус заявки"
+                  label="Cтатус заявки"
                 />
               </div>
             </div>

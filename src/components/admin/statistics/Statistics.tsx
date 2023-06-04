@@ -53,10 +53,26 @@ function Statistics() {
     </li>
   ));
 
+  const ordinalColorScaleRequest = {
+    domain: ["В обработке", "Принята бригадиром", "Выполнена", "Подтверждена"],
+    range: ["rgba(132, 204, 22, 0.8)", "rgba(249, 115, 22, 0.8)", "rgba(234, 179, 8, 0.8)", "rgba(59, 130, 246, 0.8)"],
+  };
+
+  const ordinalColorScaleInvoice = {
+    domain: ["В обработке", "Создан", "Оплачен", "Подтвержден", "Просрочен"],
+    range: [
+      "rgba(132, 204, 22, 0.8)",
+      "rgba(249, 115, 22, 0.8)",
+      "rgba(234, 179, 8, 0.8)",
+      "rgba(59, 130, 246, 0.8)",
+      "rgba(93,30,91,0.6)",
+    ],
+  };
+
   return (
     <div>
       <div className="header flex items-end justify-between">
-        <p className="text-4xl font-bold text-gray-800 mb-4">Статистика</p>
+        <p className="text-4xl font-bold text-gray-700 mb-4">Статистика</p>
         <div className="flex gap-5">
           <DatePicker
             appearance="default"
@@ -76,12 +92,13 @@ function Statistics() {
       <div className="py-5 flex w-full">
         <div className="flex justify-center flex-row gap-10">
           <div>
-            <p className="text-2xl font-bold text-gray-800 mb-4 text-center">Заявки</p>
+            <p className="text-2xl font-bold text-gray-700 mb-4 text-center">Заявки</p>
             {statistics.requestsStat && (
               <PieChart
                 width={250}
                 height={250}
                 total={requestsStat[0].count}
+                scale={ordinalColorScaleRequest}
                 chartData={[
                   {
                     label: requestsStat[1].label,
@@ -112,12 +129,13 @@ function Statistics() {
             )}
           </div>
           <div>
-            <p className="text-2xl font-bold text-gray-800 mb-4 text-center">Счета</p>
+            <p className="text-2xl font-bold text-gray-700 mb-4 text-center">Счета</p>
             {statistics.invoicesStat && (
               <PieChart
                 width={250}
                 height={250}
                 total={invoicesStat[0].count}
+                scale={ordinalColorScaleInvoice}
                 chartData={[
                   {
                     label: invoicesStat[1].label,
@@ -156,7 +174,7 @@ function Statistics() {
         </div>
         <div className="sm:px-6 flex">
           <div className="flex flex-col">
-            <p className="text-2xl font-bold text-gray-800 mb-4 text-center">Бригадиры</p>
+            <p className="text-2xl font-bold text-gray-700 mb-4 text-center">Бригадиры</p>
             <dt className="text-sm font-medium text-gray-500">
               Лидеры среди бригадиров по количеству выполненных заявок
             </dt>
@@ -167,7 +185,7 @@ function Statistics() {
         </div>
         <div className="sm:px-6 flex">
           <div className="flex flex-col">
-            <p className="text-2xl font-bold text-gray-800 mb-4 text-center">Общее</p>
+            <p className="text-2xl font-bold text-gray-700 mb-4 text-center">Общее</p>
             <dt className="text-sm font-medium text-gray-500">
               Оборудования смонтировано {statistics.installedEquipment?.count} штук(и)
             </dt>

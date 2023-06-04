@@ -10,7 +10,7 @@ function Home() {
           Зарегистрируйтесь и оставьте заявку на монтаж нашего оборудования. Если вы бригадир, можете присоединиться к
           сервису.
         </p>
-        {/* <a href="#" className="inline-block bg-blue-500 text-white no-underline hover:bg-blue-800 mt-4 p-4 rounded">
+        {/* <a href="#" className="inline-block bg-blue-500 text-white no-underline hover:bg-blue-700 mt-4 p-4 rounded">
           A Call to Action
         </a> */}
       </div>

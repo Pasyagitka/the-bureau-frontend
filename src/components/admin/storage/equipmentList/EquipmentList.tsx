@@ -21,29 +21,29 @@ function EquipmentList({ equipment = [], handleRemove }: { equipment: EquipmentD
             <tr className="h-12">
               <th
                 scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-700  text-left text-sm uppercase font-normal"
               >
                 ID
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-700  text-left text-sm uppercase font-normal"
               >
                 Тип
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-700  text-left text-sm uppercase font-normal"
               >
                 Монтаж
               </th>
               <th
                 scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-700  text-left text-sm uppercase font-normal"
               />
               <th
                 scope="col"
-                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-800  text-left text-sm uppercase font-normal"
+                className="px-5 py-3 bg-white  border-b border-gray-200 text-gray-700  text-left text-sm uppercase font-normal"
               />
             </tr>
           </thead>

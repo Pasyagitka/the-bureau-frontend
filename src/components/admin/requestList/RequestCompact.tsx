@@ -29,7 +29,7 @@ function RequestCompact({
           <RequestEquipment />
         </div> */}
         <Link to={`/admin/requests/${request.id}`} className="p-2 w-2/3">
-          <h1 className="text-gray-900 font-bold text-2xl">Заявка №{request.id}</h1>
+          <h1 className="text-gray-700 font-bold text-2xl">Заявка №{request.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">
             {`${request.address?.city}, ул.${request.address?.street}, дом ${request.address?.house}${
               request.address?.flat ? `, кв ${request.address?.flat}` : ""

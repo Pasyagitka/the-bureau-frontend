@@ -56,10 +56,10 @@ function EditInvoiceStatusPage() {
   };
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg w-3/4 min-h-80vh container p-4 mb-5">
+    <div className="w-full bg-white p-12 container rounded overflow-hidden  shadow sm:rounded-lg min-h-80vh mb-5">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
-          <h3 className="text-lg font-medium leading-6 text-gray-900">Содержимое счета</h3>
+          <h3 className="text-lg font-medium leading-6 text-gray-700">Содержимое счета</h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">Редактировать счет</p>
         </div>
       </div>
@@ -67,11 +67,11 @@ function EditInvoiceStatusPage() {
         <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems?.length > 0 ? listItems : "Нет"}</div>
       </div> */}
       <div className="px-4 py-5 sm:px-6">
-        <h3 className="text-lg font-medium leading-6 text-gray-900">Комплектующие</h3>
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Комплектующие</h3>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={200}>
-          <Column width={150}>
+          <Column width={470} fullText style={{ background: "white" }}>
             <HeaderCell>Наименование</HeaderCell>
             <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
           </Column>
@@ -93,12 +93,12 @@ function EditInvoiceStatusPage() {
 
           <Column flexGrow={1}>
             <HeaderCell>Цена по счету</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.price} руб./ед.</p>}</Cell>
           </Column>
 
           <Column flexGrow={1}>
             <HeaderCell>Цена сейчас</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.price}р/ед</p>}</Cell>
+            <Cell>{(rowData) => <p>{rowData.accessory.price} руб./ед.</p>}</Cell>
           </Column>
 
           <Column flexGrow={1} fixed="right">
