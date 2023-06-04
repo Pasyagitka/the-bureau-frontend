@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import Avatar from "@/elements/avatar/Avatar";
 import { signupBrigadier } from "@/redux/actions/auth";
-import { CreateBrigadierDto } from "@/types/dto/brigadier/createBrigadierDto";
 import { Role } from "@/types/enum/role.enum";
 import bg from "images/bg.jpg";
 import { useState } from "react";
@@ -22,17 +21,31 @@ function RegisterBrigadier() {
   const [fileInfo, setFileInfo] = useState(null);
 
   const handleSubmit = () => {
-    const brigadierUser: CreateBrigadierDto = {
-      firstname,
-      surname,
-      patronymic,
-      contactNumber,
-      email,
-      password,
-      login,
-      role: Role.Brigadier,
-    };
-    dispatch(signupBrigadier(brigadierUser));
+    if (fileInfo?.length > 0) {
+      const formData = new FormData();
+      formData.append(`file`, fileInfo[0].blobFile, fileInfo[0].name);
+      formData.append("firstname", firstname);
+      formData.append("surname", surname);
+      formData.append("patronymic", patronymic);
+      formData.append("contactNumber", contactNumber);
+      formData.append("email", email);
+      formData.append("password", password);
+      formData.append("login", login);
+      formData.append("role", Role.Brigadier);
+      dispatch(signupBrigadier(formData));
+    }
+    // const brigadierUser: CreateBrigadierDto = {
+    //   firstname,
+    //   surname,
+    //   patronymic,
+    //   contactNumber,
+    //   email,
+    //   password,
+    //   login,
+    //   role: Role.Brigadier,
+    //   file
+    // };
+    // dispatch(signupBrigadier(brigadierUser));
   };
 
   return (
@@ -97,6 +110,7 @@ function RegisterBrigadier() {
                       />
                       <RegisterTextInput
                         label="Контактный номер"
+                        placeholder="375XXYYYYYYY"
                         value={contactNumber}
                         onChange={(e) => {
                           setContactNumber(e.target.value.replace(/\D/g, ""));
@@ -122,8 +136,8 @@ function RegisterBrigadier() {
                     </button>
                   </div>
                   <div className="text-center mb-2">
-                    <Link to="/login" className="text-gray-900">
-                      <small>Уже есть аккаунт? Войдите</small>
+                    <Link to="/login" className="text-gray-900 text-sm">
+                      Уже есть аккаунт? <p className="underline text-sm">Войдите</p>
                     </Link>
                   </div>
                 </div>
