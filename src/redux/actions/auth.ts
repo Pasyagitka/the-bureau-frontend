@@ -40,7 +40,7 @@ export function signupClient(registerClientDto: CreateClientDto) {
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        debugger;
+        // debugger;
         const errorMessage = error.response.data.message?.toString();
         toast.error(errorMessage || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });
@@ -62,7 +62,7 @@ export function signupBrigadier(registerBrigadierDto: CreateBrigadierDto) {
         dispatch({ type: AUTHENTICATED, payload: { role: tokenPayload.role, id: tokenPayload.sub } });
       })
       .catch((error) => {
-        debugger;
+        // debugger;
         const errorMessage = error.response.data.message?.toString();
         toast.error(errorMessage || "Ошибка регистрации. Попробуйте снова позже");
         dispatch({ type: NOT_AUTHENTICATED });

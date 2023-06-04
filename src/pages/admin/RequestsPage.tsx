@@ -44,7 +44,7 @@ function RequestsPage() {
       <div className="header flex items-end justify-between">
         <div className="title">
           <p className="text-4xl font-bold text-gray-800 mb-4">Заявки</p>
-          <p className="text-2xl font-light text-gray-400">Описание...</p>
+          {/* <p className="text-2xl font-light text-gray-400">Описание...</p> */}
         </div>
       </div>
       <div className="flex items-end justify-between mb-12">

@@ -42,7 +42,7 @@ function InvoiceItem({
     <div className="overflow-hidden shadow-lg rounded-lg h-90 w-full md:w-100 m-auto">
       <div className="flex bg-white shadow-lg rounded-lg overflow-hidden">
         <div
-          className="w-1/3 bg-cover bg-center"
+          className="w-1/3 bg-cover bg-center scale-50"
           style={{
             backgroundImage: `url(${invoiceIcon})`,
           }}
@@ -50,7 +50,7 @@ function InvoiceItem({
         <div className="w-2/3 p-4">
           <h1 className="text-gray-900 font-bold md:text-2xl">Счет №{invoice.id}</h1>
           <p className="mt-2 text-gray-600 text-sm">{invoice.customer}</p>
-          <p className="mt-2 text-gray-600 text-sm">{invoice.total}</p>
+          <p className="mt-2 text-gray-600 text-sm">{invoice.total} руб.</p>
           <div className="flex item-center justify-end gap-3 mt-3">
             {hasApproveButton && <IconButton icon={approveIcon} alt="Approve" isLink to={approveLink} />}
             {hasEditButton && <IconButton icon={editIcon} alt="Edit" isLink to={editLink} />}

@@ -46,8 +46,8 @@ function Statistics() {
   const brigadiersRating = statistics.brigadiersTop?.map((item) => (
     <li className="flex flex-row h-full">
       <div className="flex justify-between p-2 gap-5 w-full">
-        <div className="text-sm">{item.id}</div>
-        <div className="text-sm">{item.full_name}</div>
+        <div className="text-sm">ID {item.id}</div>
+        <div className="text-sm w-4/5">{item.full_name}</div>
         <div className="text-gray-600 text-sm">заявок выполнено: {item.request_count}</div>
       </div>
     </li>

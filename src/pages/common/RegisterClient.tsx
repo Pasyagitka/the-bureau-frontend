@@ -92,6 +92,7 @@ function RegisterClient() {
                     />
                     <RegisterTextInput
                       label="Контактный номер"
+                      placeholder="375XXYYYYYYY"
                       value={contactNumber || ""}
                       onChange={(e) => {
                         setContactNumber(e.target.value.replace(/\D/g, ""));
@@ -109,9 +110,9 @@ function RegisterClient() {
                         Зарегистрироваться
                       </button>
                     </div>
-                    <div className="w-1/2 text-center">
-                      <Link to="/login" className="text-gray-900">
-                        <small>Уже есть аккаунт? Войдите</small>
+                    <div className="mx-auto text-center">
+                      <Link to="/login" className="text-gray-900 text-sm">
+                        Уже есть аккаунт? <p className="underline text-sm">Войдите</p>
                       </Link>
                     </div>
                   </div>

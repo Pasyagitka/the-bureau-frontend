@@ -51,27 +51,31 @@ function BrigadierInvoices({
           <p className="md:text-4xl text-xl font-bold text-gray-800 mb-2">Мои счета</p>
         </div>
       </div>
-      <p className="md:text-xl text-sm font-light text-gray-400">
-        Запрошенные мной счета. Пока не подтверждены администратором, можно редактировать содержимое
-      </p>
+      <div className="flex gap-2 items-baseline my-2">
+        <span className="md:text-2xl text-sm  text-gray-700 font-bold">Запрошенные мной счета</span>
+        <span className="text-base flex font-light text-gray-400">
+          До тех пор, пока счет не подтвержден администратором, вы можете редактировать его содержимое
+        </span>
+      </div>
       <div className="grid grid-cols-1 gap-10">
         {listItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">
-            Пока тут ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
+            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
           </p>
         )}
       </div>
-      <p className="md:text-xl text-sm font-light text-gray-400 mt-12">
-        Выставленные мне счета (оплаченные или ждут оплаты)
-      </p>
+      <div className="flex flex-row mt-12 gap-2 mb-2 items-end">
+        <span className="md:text-2xl text-sm font-bold text-gray-700 flex">Выставленные мне счета</span>
+        <span className="flex font-light text-gray-400">(оплаченные или которые ждут оплаты)</span>
+      </div>
       <div className="grid grid-cols-1 gap-10">
         {approvedInvoicesItems.length > 0 ? (
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{approvedInvoicesItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">
-            Пока тут ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
+            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
           </p>
         )}
       </div>

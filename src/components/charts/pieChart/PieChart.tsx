@@ -17,22 +17,29 @@ export type PieProps = {
 export default function PieChart({ chartData, total, width, height, margin = defaultMargin }: PieProps) {
   if (width < 10) return null;
 
+  const innerWidth = width - margin.left - margin.right;
+  const innerHeight = height - margin.top - margin.bottom;
   const [active, setActive] = useState(null);
-  const half = width / 2;
+  // const innerWidth = width / 2;
+  // const innerHeight = height / 2;
+  const centerY = innerHeight / 2;
+  const centerX = innerWidth / 2;
+  const radius = Math.min(innerWidth, innerHeight) / 2;
+  const donutThickness = 50;
 
   return (
     <svg width={width} height={width}>
       {/* <GradientBackground id="visx-pie-gradient" />
       <rect rx={14} width={width} height={height} fill="url('#visx-pie-gradient')" /> */}
-      <Group top={half} left={half}>
+      <Group top={centerY + margin.top} left={centerX + margin.left}>
         <Pie
           data={chartData}
           pieValue={(data) => data.count * data.centerTitle}
-          outerRadius={half}
-          innerRadius={({ data }) => {
-            const size = active && data.label === active.label ? 68 : 50;
-            return half - size;
-          }}
+          outerRadius={radius}
+          innerRadius={({ data }) =>
+            // const size = active && data.label === active.label ? 68 : 50;
+            radius - donutThickness
+          }
           cornerRadius={3}
           padAngle={0.05}
         >
@@ -49,12 +56,14 @@ export default function PieChart({ chartData, total, width, height, margin = def
                   <path d={pie.path(arc)} fill={arc.data.color} />
                   <Text
                     className="text-xs"
-                    fill="white"
+                    fill="black"
                     x={centroidX}
                     y={centroidY}
-                    dy=".33em"
+                    width={20}
+                    // dy=".33em"
                     textAnchor="middle"
                     pointerEvents="none"
+                    style={{ fontSize: "0.75rem" }}
                   >
                     {arc.data.label}
                   </Text>
