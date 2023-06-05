@@ -72,17 +72,6 @@ function LeaveRequestPage() {
         style={{ marginBottom: 12, marginTop: 0, marginLeft: 12, width: "98%" }}
       />
     </>
-    // <LeaveRequestTextInput
-    //   key={item.id}
-    //   placeholder={item.type}
-    //   defaultValue={0}
-    //   onChange={(e) => {
-    //     if (e.target.value === "") requestEquipmentList.delete(item.id);
-    //     if (!Number(e.target.value)) return;
-    //     requestEquipmentList.set(item.id, e.target.value); // TODO else
-    //     console.log(requestEquipmentList);
-    //   }}
-    // />
   ));
 
   const handleDateChange = (newValue) => {

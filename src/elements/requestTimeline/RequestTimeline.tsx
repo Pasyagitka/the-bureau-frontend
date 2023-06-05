@@ -3,7 +3,6 @@ import TimeLineElement from "./TimeLineElement";
 
 function RequestTimeline({ status }: { status: string }) {
   let elements;
-  // TODO request statuses hardcoded
   switch (status) {
     case RequestStatus.INPROCESSING: {
       elements = (

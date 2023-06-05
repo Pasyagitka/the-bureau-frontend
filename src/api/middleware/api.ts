@@ -2,7 +2,6 @@
 /* eslint-disable consistent-return */
 
 // const axiosInstance = axios.create({
-//   // TODO not used???
 //   baseURL: process.env.API_BASE_URL,
 // });
 
