@@ -82,7 +82,7 @@ function EditInvoicePage() {
       </div>
       <div className="items-center w-full h-full md:p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} autoHeight>
-          <Column width={150}>
+          <Column width={450}>
             <HeaderCell>Наименование</HeaderCell>
             <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
           </Column>

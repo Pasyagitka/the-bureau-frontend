@@ -77,14 +77,14 @@ function RequestDetailsPage() {
       <div />
       <hr />
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-        <h2 className="w-full md:w-1/3">Монтируемое оборудование</h2>
+        <h2 className="w-full md:w-1/3 text-gray-500 font-semibold">Монтируемое оборудование</h2>
         <div className="w-full md:w-2/3">
           {request?.requestEquipment && <RequestEquipmentList equipmentList={request?.requestEquipment} />}
           <div />
         </div>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-        <h2 className="w-full md:w-1/3">Необходимые комплектующие</h2>
+        <h2 className="w-full md:w-1/3 text-gray-500 font-semibold">Необходимые комплектующие</h2>
         <div className="w-full space-y-5 md:w-2/3">
           {requestAccessories && <RequestAccessories accessories={requestAccessories} />}
           <div />

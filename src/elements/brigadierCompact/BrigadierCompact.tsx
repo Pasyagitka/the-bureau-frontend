@@ -18,7 +18,9 @@ function BrigadierCompact({ brigadier }: { brigadier: BrigadierDto }) {
           <span className="text-gray-600 text-sm font-medium">
             {`${brigadier?.surname} ${brigadier?.firstname} ${brigadier?.patronymic}`}
           </span>
-          <span className="text-gray-400 text-xs">Ваш бригадир</span>
+          <span className="text-gray-400 text-xs">
+            {(brigadier?.contactNumber && `+${brigadier?.contactNumber}`) || ""}
+          </span>
         </div>
       </div>
     </div>

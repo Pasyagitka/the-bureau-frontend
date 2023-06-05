@@ -54,13 +54,13 @@ function BrigadierInvoices({
 
   return (
     <div className="w-full bg-white p-2 md:p-12 rounded">
-      <div className="header flex items-end justify-between mb-12">
+      <div className="header flex items-end justify-between mb-4">
         <div className="title">
           <p className="md:text-4xl text-xl font-bold text-gray-700 mb-2">Мои счета</p>
         </div>
       </div>
       <div className="flex gap-2 items-baseline my-2">
-        <span className="md:text-2xl text-sm  text-gray-700 font-bold">Запрошенные мной счета</span>
+        <span className="md:text-2xl text-sm text-gray-700 font-bold">Запрошенные мной счета</span>
         <span className="text-base flex font-light text-gray-400">
           До тех пор, пока счет не подтвержден администратором, вы можете редактировать его содержимое
         </span>
@@ -70,7 +70,7 @@ function BrigadierInvoices({
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{listItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">
-            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
+            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше.
           </p>
         )}
       </div>
@@ -83,7 +83,7 @@ function BrigadierInvoices({
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-10">{approvedInvoicesItems}</div>
         ) : (
           <p className="md:text-xl text-sm font-light text-gray-400">
-            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше
+            Пока в этом разделе ничего нет. Но вы можете запросить счет на комплектующие, нажав кнопку выше.
           </p>
         )}
       </div>

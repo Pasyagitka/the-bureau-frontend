@@ -16,7 +16,7 @@ function BrigadierSchedule() {
 
   return (
     <div className="w-full md:w-1/5">
-      <h4 className="text-xl font-bold text-gray-800 mb-4 md:text-right px-4">Расписание заявок</h4>
+      <h4 className="text-2xl font-bold text-gray-800 mb-4 md:text-right px-4">Расписание заявок</h4>
       <Calendar compact calendar={calendar} />
     </div>
   );

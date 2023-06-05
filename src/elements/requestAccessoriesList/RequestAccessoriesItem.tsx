@@ -8,7 +8,7 @@ function RequestAccessoriesItem({ accessory }: { accessory: RequestAccessoryDto 
           <div className="font-sm">{accessory.sku}</div>
           <div className="text-gray-600 text-sm">{accessory.name}</div>
         </div>
-        <div className="text-gray-600 text-xs">{accessory.quantity}p</div>
+        <div className="text-gray-600 text-xs">{accessory.quantity} ед.</div>
       </div>
     </li>
   );

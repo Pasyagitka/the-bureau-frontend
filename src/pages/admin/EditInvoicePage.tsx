@@ -9,6 +9,7 @@ import checkIcon from "icons/check.png";
 import deleteIcon from "icons/delete.png";
 import downloadIcon from "icons/download.png";
 import { toast } from "react-toastify";
+import SecondaryButton from "@/elements/buttons/SecondaryButton";
 
 const { Column, HeaderCell, Cell } = Table;
 
@@ -37,7 +38,6 @@ function EditInvoiceStatusPage() {
   }, [invoiceItems]);
 
   const handleSubmit = async () => {
-    // TODO toast loading promise
     let updateScanResult = null;
     if (fileInfo?.length > 0) {
       const formData = new FormData();
@@ -56,18 +56,16 @@ function EditInvoiceStatusPage() {
   };
 
   return (
-    <div className="w-full bg-white p-12 container rounded overflow-hidden  shadow sm:rounded-lg min-h-80vh mb-5">
+    <div className="w-full bg-white p-4 container rounded overflow-hidden  shadow sm:rounded-lg min-h-80vh mb-5">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-lg font-medium leading-6 text-gray-700">Содержимое счета</h3>
           <p className="mt-1 max-w-2xl text-sm text-gray-500">Редактировать счет</p>
         </div>
       </div>
-      {/* <div className="items-center w-full p-4 space-y-4 text-gray-500 md:inline-flex md:space-y-0">
-        <div className="max-w-sm mx-auto space-y-5 md:w-2/3">{listItems?.length > 0 ? listItems : "Нет"}</div>
-      </div> */}
       <div className="px-4 py-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-700">Комплектующие</h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">Список комплектующих, заказанных по счету</p>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
         <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={200}>
@@ -115,40 +113,51 @@ function EditInvoiceStatusPage() {
             </Cell>
           </Column>
         </Table>
-        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
-          <h1 className="text-gray-600 w-full text-center">Скачать счет для печати </h1>
-          <IconButton
-            icon={downloadIcon}
-            alt="Download"
-            isLink={false}
-            onClick={() => handleDownload(Number(params.id))}
-          />
-        </div>
-        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
-          <h1 className="text-gray-600 w-full text-center">Текущий скан счета</h1>
-          {invoice.scanUrl ? (
-            <dt className="text-sm font-medium text-gray-500">Загружен</dt>
-          ) : (
-            <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
-          )}
-        </div>
-        <div className="items-center w-full p-4 space-y-4 text-gray-500  md:space-y-0">
-          <h1 className="text-gray-600 w-full text-center">Загрузить скан счета</h1>
-          <div className="flex">
-            <div className="inline-flex items-center space-x-4">
-              <Uploader
-                listType="picture-text"
-                fileList={files}
-                accept="application/pdf"
-                onChange={setFileInfo}
-                action=""
-                defaultFileList={files}
-                autoUpload={false}
-                draggable
+      </div>
+      <div className="px-4 pb-5 sm:px-6">
+        <h3 className="text-lg font-medium leading-6 text-gray-700">Документы</h3>
+        <p className="mt-1 max-w-2xl text-sm text-gray-500">
+          Скачайте шаблон счета по кнопке ниже. Распечатайте его, заверьте необходимыми подписями и печатями. Затем
+          сделайте скан-копию и загрузите получившийся документ.
+        </p>
+      </div>
+      <div className="items-center w-full px-6 py-2 space-y-2 text-gray-500 md:space-y-0">
+        <SecondaryButton
+          icon={downloadIcon}
+          title="Скачать шаблон счета для печати"
+          onClick={() => handleDownload(Number(params.id))}
+        />
+      </div>
+      <div className="items-center w-full px-6 space-y-2 text-gray-500 md:space-y-0">
+        <h1 className="text-gray-600 w-full text-center" />
+        <div className="flex">
+          <div className="inline-flex items-center space-x-4">
+            <Uploader
+              listType="picture-text"
+              fileList={files}
+              accept="application/pdf"
+              onChange={setFileInfo}
+              action=""
+              defaultFileList={files}
+              autoUpload={false}
+              draggable
+            >
+              <SecondaryButton
+                icon={downloadIcon}
+                title="Загрузить скан-копию счета"
+                onClick={() => handleDownload(Number(params.id))}
               />
-            </div>
+            </Uploader>
           </div>
         </div>
+      </div>
+      <div className="items-center w-full px-6 py-4 space-y-4 text-gray-500  md:space-y-0">
+        <h1 className="text-gray-600 font-medium text-sm  w-full text-left text-gray-500">Текущий скан счета</h1>
+        {invoice.scanUrl ? (
+          <dt className="text-sm font-medium text-gray-500">Загружен</dt>
+        ) : (
+          <dt className="text-sm font-medium text-gray-500">Отсутствует</dt>
+        )}
       </div>
       <div className="flex justify-evenly">
         <SubmitButton title="Сохранить" handleSubmit={() => handleSubmit()} />

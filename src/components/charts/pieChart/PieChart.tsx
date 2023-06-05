@@ -30,7 +30,7 @@ export default function PieChart({ chartData, total, width, height, scale, margi
   const centerY = innerHeight / 2;
   const centerX = innerWidth / 2;
   const radius = Math.min(innerWidth, innerHeight) / 2;
-  const donutThickness = 50;
+  const donutThickness = 40;
 
   return (
     <>
@@ -47,7 +47,7 @@ export default function PieChart({ chartData, total, width, height, scale, margi
               radius - donutThickness
             }
             cornerRadius={3}
-            padAngle={0.05}
+            padAngle={0.06}
           >
             {(pie) =>
               pie.arcs.map((arc) => {

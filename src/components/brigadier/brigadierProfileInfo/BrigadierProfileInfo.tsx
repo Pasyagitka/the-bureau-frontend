@@ -5,7 +5,7 @@ import DetailsItem from "../../../elements/detailsItem/DetailsItem";
 
 function BrigadierProfileInfo({ brigadier }: { brigadier: BrigadierDto }) {
   return (
-    <div className="w-full bg-white md:p-12 p-2 rounded">
+    <div className="w-full bg-white md:px-12 p-2 rounded">
       <div className="header flex items-end justify-between mb-12" />
       <div className="title">
         <p className="md:text-4xl text-xl font-bold text-gray-700 mb-4">Личная информация</p>

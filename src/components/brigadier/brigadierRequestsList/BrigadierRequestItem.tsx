@@ -54,12 +54,13 @@ function BrigadierRequestItem({
         <div className="w-full">
           <div className="flex flex-col">
             <div className="flex h-fit flex-col md:flex-row">
-              <div className="w-full md:w-1/3">
-                <p className="mt-2 text-gray-600 text-sm text-center">Оборудование</p>
-                <RequestEquipmentList equipmentList={request.requestEquipment} />
+              <div className="w-full md:w-1/3 m-4">
+                <Panel header="Оборудование">
+                  <RequestEquipmentList equipmentList={request.requestEquipment} />
+                </Panel>
               </div>
-              <div className="w-full md:w-2/3">
-                <Panel header="Комплектующие" collapsible bordered>
+              <div className="w-full md:w-2/3 mx-4 mt-4 ">
+                <Panel header="Комплектующие, которые могут понадобиться" collapsible>
                   <RequestAccessories accessories={request.requestAccessories} />
                 </Panel>
                 {/* <p className="mt-2 text-gray-600 text-sm text-center mb-4">Комплектующие</p>
