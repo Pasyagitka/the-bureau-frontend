@@ -68,51 +68,53 @@ function EditInvoiceStatusPage() {
         <p className="mt-1 max-w-2xl text-sm text-gray-500">Список комплектующих, заказанных по счету</p>
       </div>
       <div className="items-center w-full p-4 space-y-4 text-gray-500 md:space-y-0 mx-2">
-        <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={200}>
-          <Column width={470} fullText style={{ background: "white" }}>
-            <HeaderCell>Наименование</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.name}</p>}</Cell>
-          </Column>
+        {invoiceItems && (
+          <Table data={invoiceItems} style={{ fontSize: "0.875rem" }} height={200}>
+            <Column width={470} fullText style={{ background: "white" }}>
+              <HeaderCell>Наименование</HeaderCell>
+              <Cell>{(rowData) => <p>{rowData.accessory?.name}</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1}>
-            <HeaderCell>Артикул</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.sku}</p>}</Cell>
-          </Column>
+            <Column flexGrow={1}>
+              <HeaderCell>Артикул</HeaderCell>
+              <Cell>{(rowData) => <p>{rowData.accessory?.sku}</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1} align="center" fixed>
-            <HeaderCell>Количество по счету</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.quantity}</p>}</Cell>
-          </Column>
+            <Column flexGrow={1} align="center" fixed>
+              <HeaderCell>Количество по счету</HeaderCell>
+              <Cell>{(rowData) => <p>{rowData.quantity}</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1}>
-            <HeaderCell>Количество на складе</HeaderCell>
-            <Cell align="center">{(rowData) => <p>{rowData.accessory.quantity_in_stock}</p>}</Cell>
-          </Column>
+            <Column flexGrow={1}>
+              <HeaderCell>Количество на складе</HeaderCell>
+              <Cell align="center">{(rowData) => <p>{rowData.accessory?.quantity_in_stock}</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1}>
-            <HeaderCell>Цена по счету</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.price} руб./ед.</p>}</Cell>
-          </Column>
+            <Column flexGrow={1}>
+              <HeaderCell>Цена по счету</HeaderCell>
+              <Cell>{(rowData) => <p>{rowData.price} руб./ед.</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1}>
-            <HeaderCell>Цена сейчас</HeaderCell>
-            <Cell>{(rowData) => <p>{rowData.accessory.price} руб./ед.</p>}</Cell>
-          </Column>
+            <Column flexGrow={1}>
+              <HeaderCell>Цена сейчас</HeaderCell>
+              <Cell>{(rowData) => <p>{rowData.accessory?.price} руб./ед.</p>}</Cell>
+            </Column>
 
-          <Column flexGrow={1} fixed="right">
-            <HeaderCell>Наличие</HeaderCell>
+            <Column flexGrow={1} fixed="right">
+              <HeaderCell>Наличие</HeaderCell>
 
-            <Cell>
-              {(rowData) =>
-                rowData.accessory.quantity_in_stock >= rowData.quantity ? (
-                  <IconButton icon={checkIcon} alt="Ok" isLink={false} />
-                ) : (
-                  <IconButton icon={deleteIcon} alt="Error" isLink={false} />
-                )
-              }
-            </Cell>
-          </Column>
-        </Table>
+              <Cell>
+                {(rowData) =>
+                  rowData.accessory?.quantity_in_stock >= rowData.quantity ? (
+                    <IconButton icon={checkIcon} alt="Ok" isLink={false} />
+                  ) : (
+                    <IconButton icon={deleteIcon} alt="Error" isLink={false} />
+                  )
+                }
+              </Cell>
+            </Column>
+          </Table>
+        )}
       </div>
       <div className="px-4 pb-5 sm:px-6">
         <h3 className="text-lg font-medium leading-6 text-gray-700">Документы</h3>
