@@ -4,14 +4,17 @@ import {
   ADD_ACCESSORIES,
   DELETE_ACCESSORIES,
   EDIT_ACCESSORIES,
+  EXPORT_ACCESSORIES,
   GET_ALL_ACCESSORIES,
   GET_AVAILABLE_FOR_INVOICE,
+  IMPORT_ACCESSORIES,
 } from "@/redux/actionTypes/storage/accessories";
 import { CreateAccessoryDto } from "@/types/dto/storage/accessories/createAccessoryDto";
 import { UpdateAccessoryDto } from "@/types/dto/storage/accessories/updateAccessoryDto";
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { toast } from "react-toastify";
+import fileDownload from "js-file-download";
 import { getToken } from "../auth";
 
 export const create = createAsyncThunk(
@@ -104,3 +107,32 @@ export const update = createAsyncThunk(
     }
   }
 );
+
+export const importAccessories = createAsyncThunk(
+  IMPORT_ACCESSORIES,
+  async ({ file }: { id: number; file: unknown }, { rejectWithValue }) => {
+    try {
+      const request = await axios.post(accessoriesLinks.import, file, {
+        headers: {
+          Authorization: `Bearer ${getToken()}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      toast.success(`Комплектующие обновлены (${request.data.total})`);
+      return request.data;
+    } catch (error) {
+      toast.error(`${error.response.data.statusCode}: ${error.response.data.message?.toString()}`);
+      return rejectWithValue(error.response.data);
+    }
+  }
+);
+
+export const exportAccessories = createAsyncThunk(EXPORT_ACCESSORIES, async () => {
+  const request = await axios.post(accessoriesLinks.export, null, {
+    headers: {
+      Authorization: `Bearer ${getToken()}`,
+    },
+    responseType: "blob",
+  });
+  fileDownload(request.data, `accessories.csv`);
+});

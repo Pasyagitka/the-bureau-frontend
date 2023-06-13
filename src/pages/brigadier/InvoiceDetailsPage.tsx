@@ -28,7 +28,7 @@ function InvoiceDetailsPage() {
   };
 
   return (
-    <div className="overflow-hidden bg-white shadow sm:rounded-lg md:w-3/4 min-h-80vh container p-4 mb-5 mx-auto flex flex-col">
+    <div className="overflow-hidden bg-white shadow sm:rounded-lg min-h-80vh container md:p-4 md:mb-5 mx-auto">
       <div className="px-4 py-5 sm:px-6 flex justify-between">
         <div>
           <h3 className="text-lg font-medium leading-6 text-gray-700">Содержимое счета</h3>

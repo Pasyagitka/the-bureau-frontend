@@ -15,6 +15,7 @@ export const accessoriesLinks = {
   getAvaliableForInvoice: "/api/accessory/available",
   create: "/api/accessory",
   import: "/api/accessory/import",
+  export: "/api/accessory/export",
   update: (id: number) => `/api/accessory/${id}`,
   delete: (id: number) => `/api/accessory/${id}`,
 };
