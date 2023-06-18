@@ -5,11 +5,12 @@
   "main": "main.tsx",
   "scripts": {
     "test": "exit 0",
-    "start": "npm run serve",
+    "start": "npm run serve-proxy-docker",
+    "dev": "npm run serve",
     "serve": ".\\node_modules\\.bin\\webpack serve --open --config webpack.devServer.js",
     "serve-docker": "./node_modules/.bin/webpack serve --open --config webpack.devServer.js",
     "serve-proxy": "npm run serve -- --env=proxy=http://localhost:5000",
-    "serve-proxy-docker": "npm run serve-docker -- --env=proxy=http://api:5000",
+    "serve-proxy-docker": "npm run serve-docker -- --env=proxy=https://https://squid-app-urq27.ondigitalocean.app/",
     "build-prod": ".\\node_modules\\.bin\\webpack --mode production --config webpack.prod.js",
     "build-prod-withMap": "npm run build-prod -- --sourceMap",
     "build-dev": ".\\node_modules\\.bin\\webpack --mode development --config webpack.dev.js",
@@ -39,7 +40,7 @@
   "bugs": {
     "url": "https://github.com/Yegorich555/webpack-must-have/issues"
   },
-  "homepage": "https://github.com/Yegorich555/webpack-must-have#readme",
+  "homepage": "",
   "devDependencies": {
     "@babel/core": "^7.18.2",
     "@babel/plugin-proposal-class-properties": "^7.17.12",
@@ -171,6 +172,7 @@
     "redux-thunk": "^2.4.1",
     "rsuite": "^5.30.0",
     "sass": "^1.56.2",
+    "serve": "^14.2.0",
     "three": "^0.145.0",
     "three-stdlib": "^2.17.2",
     "web-ui-pack": "^0.1.2"
